@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Default">
+      <UniqueIdentifier>{16ff3c47-b541-4624-a5db-bd9be62dec09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default\Source">
+      <UniqueIdentifier>{a70bec0e-8252-4f1a-9129-9f0ffd92d5f2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default\Header">
+      <UniqueIdentifier>{6fb01863-0a20-4c3a-b533-f86528f5affe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default\Resource">
+      <UniqueIdentifier>{0c4c32c0-6d1c-4a87-9898-0d02159cca59}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Default\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>Default\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Default\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Default\Header</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="small.ico">
+      <Filter>Default\Resource</Filter>
+    </Image>
+    <Image Include="The_Binding_Of_Isaac_Engine.ico">
+      <Filter>Default\Resource</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Default\Source</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="The_Binding_Of_Isaac_Engine.rc">
+      <Filter>Default\Resource</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>

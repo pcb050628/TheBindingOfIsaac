@@ -1,0 +1,28 @@
+#include "pch.h"
+#include "Room.h"
+
+Room::Room()
+	: m_Layers()
+{
+}
+
+Room::~Room()
+{
+}
+
+void Room::Update()
+{
+	for (Layer& layer : m_Layers)
+	{
+		layer.Update();
+	}
+}
+
+void Room::LateUpdate()
+{
+	for (Layer& layer : m_Layers)
+	{
+		layer.LateUpdate();
+	}
+}
+
