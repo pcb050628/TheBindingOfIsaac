@@ -3,3 +3,8 @@
 ################################################################################
 
 /.vs
+/Contents/x64/Debug
+/The_Binding_Of_Isaac_Engine/x64/Debug
+/Engine/x64/Debug
+/Tool/x64/Debug
+/x64/Debug
