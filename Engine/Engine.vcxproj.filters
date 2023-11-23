@@ -58,6 +58,9 @@
     <Filter Include="02_Derived\Actor">
       <UniqueIdentifier>{fd3952d4-e8db-4db4-9821-bf0708c210fe}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\RenderManager">
+      <UniqueIdentifier>{87d3064c-312f-475f-902f-549a2295aa9f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -117,6 +120,9 @@
     <ClInclude Include="ChapterManager.h">
       <Filter>01_Basic\ChpaterManager</Filter>
     </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>01_Basic\RenderManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -166,6 +172,9 @@
     </ClCompile>
     <ClCompile Include="ChapterManager.cpp">
       <Filter>01_Basic\ChpaterManager</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>01_Basic\RenderManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
