@@ -21,3 +21,8 @@ void Chapter::LateUpdate()
 {
 	m_CurRoom->LateUpdate();
 }
+
+void Chapter::Render()
+{
+	m_CurRoom->Render();
+}

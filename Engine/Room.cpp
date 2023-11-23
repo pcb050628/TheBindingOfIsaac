@@ -10,6 +10,10 @@ Room::~Room()
 {
 }
 
+void Room::Enter()
+{
+}
+
 void Room::Update()
 {
 	for (Layer& layer : m_Layers)
@@ -24,5 +28,17 @@ void Room::LateUpdate()
 	{
 		layer.LateUpdate();
 	}
+}
+
+void Room::Render()
+{
+	for (Layer& layer : m_Layers)
+	{
+		layer.Render();
+	}
+}
+
+void Room::Exit()
+{
 }
 

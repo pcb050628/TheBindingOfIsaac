@@ -33,3 +33,14 @@ void Actor::LateUpdate()
 		}
 	}
 }
+
+void Actor::Render()
+{
+	for (int i = 0; i < ComponentType::End; i++)
+	{
+		for (int comp = 0; comp < m_Components[i]->size(); comp++)
+		{
+			m_Components[i]->at(comp)->Render();
+		}
+	}
+}

@@ -13,6 +13,7 @@ private:
 public:
     virtual void Update();
     virtual void LateUpdate();
+    virtual void Render();
 
     virtual Room* GetCurRoom() { return m_CurRoom; }
 

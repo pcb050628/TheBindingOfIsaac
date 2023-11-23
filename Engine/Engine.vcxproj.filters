@@ -61,6 +61,15 @@
     <Filter Include="01_Basic\RenderManager">
       <UniqueIdentifier>{87d3064c-312f-475f-902f-549a2295aa9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\ResourceManager">
+      <UniqueIdentifier>{623d8b65-a4ce-4ee1-a1f9-b96f13044a83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\ResourceManager\Resource">
+      <UniqueIdentifier>{a1a59f4b-bb74-4c54-8a2e-2541b336acbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource">
+      <UniqueIdentifier>{7c6794c5-7b71-4f32-a7d4-70729ec96108}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -123,6 +132,24 @@
     <ClInclude Include="RenderManager.h">
       <Filter>01_Basic\RenderManager</Filter>
     </ClInclude>
+    <ClInclude Include="TextureRenderer.h">
+      <Filter>02_Derived\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator.h">
+      <Filter>02_Derived\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>01_Basic\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>01_Basic\ResourceManager\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>02_Derived\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim.h">
+      <Filter>02_Derived\Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -175,6 +202,24 @@
     </ClCompile>
     <ClCompile Include="RenderManager.cpp">
       <Filter>01_Basic\RenderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureRenderer.cpp">
+      <Filter>02_Derived\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator.cpp">
+      <Filter>02_Derived\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>01_Basic\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>01_Basic\ResourceManager\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>02_Derived\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim.cpp">
+      <Filter>02_Derived\Resource</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

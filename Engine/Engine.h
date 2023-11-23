@@ -23,5 +23,6 @@ public:
 
 	HWND GetHwnd() { return m_hWnd; }
 
+	RECT GetResolution() { return m_Resolution; }
 };
 

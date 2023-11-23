@@ -14,6 +14,7 @@ private:
 public:
 	void Init();
 	void Update();
+	void Render();
 	void LateUpdate();
 
 	Chapter* GetCurChapter() { return m_CurChapter; }

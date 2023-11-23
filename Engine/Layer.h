@@ -22,8 +22,9 @@ private:
 public:
     void Update();
     void LateUpdate();
+    void Render();
 
-    // ³ªÁß¿¡ ·»´õÇÒ¶§ »ç¿ëÇÒ°Í
+    // ï¿½ï¿½ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò¶ï¿½ ï¿½ï¿½ï¿½ï¿½Ò°ï¿½
     vector<Actor*> GetActorAboveTileY(int _y);
     vector<class Collider*> GetAllCollider();
 

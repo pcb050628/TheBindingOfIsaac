@@ -16,6 +16,7 @@ private:
 public:
     virtual void Update(); 
     virtual void LateUpdate();
+    virtual void Render();
 
     void SetPosition(Vec2 _pos) { m_Position = _pos; }
     void SetScale(Vec2 _scale) { m_Scale = _scale; }

@@ -1,6 +1,23 @@
 #include "pch.h"
 #include "RenderManager.h"
+#include "Engine.h"
 #include "assert.h"
+#pragma comment(lib, "d3d11.lib")
+
+RenderManager::RenderManager()
+	: mp_Device(nullptr)
+	, mp_Context(nullptr)
+	, mp_SwapChain(nullptr)
+	, mp_RenderTargetView(nullptr)
+	, mp_SpriteBatch(nullptr)
+{
+
+}
+
+RenderManager::~RenderManager()
+{
+
+}
 
 void RenderManager::Init(HWND _hwnd)
 {
@@ -14,10 +31,9 @@ void RenderManager::Init(HWND _hwnd)
 		};
 
 		UINT creationFlag = D3D11_CREATE_DEVICE_BGRA_SUPPORT;
-		#ifdef DEBUG
+		#if defined(DEBUG_BUILD)
 			creationFlag |= D3D11_CREATE_DEVICE_DEBUG
 		#endif // DEBUG
-
 
 		HRESULT hResult = D3D11CreateDevice(0, D3D_DRIVER_TYPE_HARDWARE, 0
 			, creationFlag, featureLevel, ARRAYSIZE(featureLevel)
@@ -95,12 +111,30 @@ void RenderManager::Init(HWND _hwnd)
 
 	// SprtieBatch
 	mp_SpriteBatch = std::make_unique<DirectX::SpriteBatch>(mp_Context.Get());
+	isDrawing = false;
 }
 
 void RenderManager::Update()
 {
 }
 
-void RenderManager::Render()
+void RenderManager::TextureRender(ID3D11ShaderResourceView* _srv, RECT& _iSection)
 {
+	if (!isDrawing)
+		StartDraw();
+	mp_SpriteBatch->Draw(_srv, _iSection);
 }
+
+void RenderManager::PrepareDraw()
+{
+	D3D11_VIEWPORT viewport;
+	viewport.TopLeftX = 0;
+	viewport.TopLeftY = 0;
+	viewport.Width = static_cast<float>(Engine::GetInst()->GetResolution().right);
+	viewport.Height = static_cast<float>(Engine::GetInst()->GetResolution().bottom);
+	viewport.MinDepth = 0.0f;
+	viewport.MaxDepth = 1.0f;
+
+	mp_Context->RSSetViewports(1, &viewport);
+}
+

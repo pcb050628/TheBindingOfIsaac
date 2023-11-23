@@ -34,6 +34,14 @@ void Layer::LateUpdate()
 	}
 }
 
+void Layer::Render()
+{
+	for (Actor* actor : m_Actors)
+	{
+		actor->Render();
+	}
+}
+
 vector<Actor*> Layer::GetActorAboveTileY(int _y)
 {
 	vector<Actor*> value = {};
