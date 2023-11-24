@@ -70,6 +70,9 @@
     <Filter Include="02_Derived\Resource">
       <UniqueIdentifier>{7c6794c5-7b71-4f32-a7d4-70729ec96108}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\LogManager">
+      <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

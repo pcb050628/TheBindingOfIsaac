@@ -22,7 +22,7 @@ public:
 	static ResourceType GetType() { return m_Type; }
 
 	virtual bool Load(std::wstring _FilePath) = 0;
-	virtual Resource* Create(std::wstring _ResourcePath) = 0;
+	virtual Resource* Create();
 	virtual bool Save() = 0;
 
 	virtual void SetResourcePath(std::wstring _path) { m_ResourcePath = _path; }

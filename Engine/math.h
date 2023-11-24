@@ -1,9 +1,5 @@
 #pragma once
-
-float Lerp(float a, float b, float t = 0.5f)
-{
-	return (1 - t) * a + t * b;
-}
+#include "DirectXMath.h"
 
 struct Vec2
 {
@@ -83,5 +79,10 @@ struct Vec2
 	{
 		x /= _other.x;
 		y /= _other.y;
+	}
+
+	operator DirectX::XMFLOAT2() const
+	{
+		return DirectX::XMFLOAT2(x, y);
 	}
 };

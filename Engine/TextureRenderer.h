@@ -7,7 +7,8 @@ class TextureRenderer :
 {
     typedef Component Super;
 private:
-    Texture* m_Texture;
+    Texture*    m_Texture;
+    Vec2        m_Offset;
 
 public:
     virtual void Update() override;
@@ -16,6 +17,9 @@ public:
 
 public:
     void SetTexture(Texture* _texture) { m_Texture = _texture; }
+
+    void SetOffset(Vec2 _offset) { m_Offset = _offset; }
+    Vec2 GetOffset() { return m_Offset; }
 
 public:
     TextureRenderer();

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "RenderManager.h"
 #include "Engine.h"
+#include "math.h"
 #include "assert.h"
 #pragma comment(lib, "d3d11.lib")
 
@@ -118,11 +119,21 @@ void RenderManager::Update()
 {
 }
 
-void RenderManager::TextureRender(ID3D11ShaderResourceView* _srv, RECT& _iSection)
+void RenderManager::TextureRender(ID3D11ShaderResourceView* _srv, Vec2 _pos, RECT& _iSection)
 {
 	if (!isDrawing)
 		StartDraw();
-	mp_SpriteBatch->Draw(_srv, _iSection);
+
+	RECT dPos = { _pos.x, _pos.y, _pos.x + 10, _pos.y + 10 };
+
+	DirectX::XMFLOAT2 position = DirectX::XMFLOAT2(_pos.x, _pos.y);
+	DirectX::FXMVECTOR positionVector = DirectX::XMLoadFloat2(&position);
+
+	//DirectX::XMFLOAT2 scale = DirectX::XMFLOAT2(1.0f, 1.0f); // 스케일 설정
+	//DirectX::FXMVECTOR scaleVector = DirectX::XMLoadFloat2(&scale);
+
+	mp_SpriteBatch->Draw(_srv, positionVector, &_iSection);
+		//, DirectX::Colors::White, 0.0f, DirectX::g_XMZero, scaleVector, DirectX::SpriteEffects_None, 0.0f);
 }
 
 void RenderManager::PrepareDraw()

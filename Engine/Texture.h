@@ -11,9 +11,9 @@ private:
     Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_TextureView;
     RECT m_ImageSection;
 
-private:
+public:
     bool Load(std::wstring _path) override;
-    Texture* Create(std::wstring _ResourcePath) override;
+    Texture* Create(std::wstring _ResourcePath);
     bool Save() override;
 
 public:
@@ -22,9 +22,9 @@ public:
         m_ImageSection.left = left;
         m_ImageSection.top = top;
         m_ImageSection.right = right;
-        m_ImageSection.bottom = bottom;
+        m_ImageSection.bottom = bottom; 
     }
-    void Render();
+    void Render(struct Vec2 _pos);
 
 public:
     Texture();

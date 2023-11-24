@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "RenderManager.h"
 #include "directxtk/WICTextureLoader.h"
+#include "math.h"
 
 Texture::Texture() : Super(ResourceType::Texture)
 	, m_TextureView(nullptr)
@@ -13,9 +14,9 @@ Texture::~Texture()
 {
 }
 
-void Texture::Render()
+void Texture::Render(Vec2 _pos)
 {
-	RenderManager::GetInst()->TextureRender(m_TextureView.Get(), m_ImageSection);
+	RenderManager::GetInst()->TextureRender(m_TextureView.Get(), _pos, m_ImageSection);
 }
 
 Texture* Texture::Create(std::wstring _ResourcePath)
@@ -109,14 +110,13 @@ bool Texture::Save()
 	fwprintf_s(pFile, strName.c_str());
 	fwprintf_s(pFile, L"\n\n");
 
-
 	// 경로
 	fwprintf_s(pFile, L"[TEXTURE_PATH]\n");
 
 	fwprintf_s(pFile, Super::GetResourcePath().c_str());
 	fwprintf_s(pFile, L"\n\n");
 
-	// 경로
+	// image section
 	fwprintf_s(pFile, L"[TEXTURE_SECTION]\n");
 
 	fwprintf_s(pFile, L"[LEFT]\n");

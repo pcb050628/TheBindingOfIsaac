@@ -18,6 +18,7 @@ public:
 	{
 		if (m_Resources.find(_name) != m_Resources.end())
 			return static_cast<T*>(m_Resources.find(_name)->second);
+		return nullptr;
 	}
 
 	template <typename T>
@@ -39,7 +40,21 @@ public:
 
 		fullpath += _name;
 
-		
+		T* tmp = new T();
+		tmp->Load(fullpath);
+		if (tmp != nullptr)
+			return tmp;
+
+		return nullptr;
+	}
+
+	template <typename T>
+	T* LoadByPath(std::wstring _path) // 폴더에서 찾기
+	{
+		T* tmp = new T();
+		tmp->Load(_path);
+		if (tmp != nullptr)
+			return tmp;
 
 		return nullptr;
 	}

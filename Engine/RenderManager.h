@@ -25,7 +25,7 @@ public:
 public:
 	void Init(HWND _hwnd);
 	void Update();
-	void TextureRender(ID3D11ShaderResourceView* _srv, RECT& _iSection);
+	void TextureRender(ID3D11ShaderResourceView* _srv, struct Vec2 _pos, RECT& _iSection);
 
 	void PrepareDraw();
 	void StartDraw() { isDrawing = true; mp_SpriteBatch->Begin(); }
