@@ -1,6 +1,7 @@
 #pragma once
 #include "Component.h"
 #include "Texture.h"
+#include "math.h"
 
 class TextureRenderer :
     public Component
