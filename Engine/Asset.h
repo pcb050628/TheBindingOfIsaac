@@ -15,7 +15,7 @@ class Asset :
 {
 private:
     AssetID m_ID;
-    std::wstring m_ResourcePath;
+    std::wstring m_Path;
     std::wstring m_ResourceName;
 
     static AssetType m_Type;
@@ -27,8 +27,8 @@ private:
     void SetID(AssetID _id) { m_ID = _id; }
 
 public:
-    virtual void SetResourcePath(std::wstring _path) { m_ResourcePath = _path; }
-    virtual std::wstring GetResourcePath() { return m_ResourcePath; }
+    virtual void SetResourcePath(std::wstring _path) { m_Path = _path; }
+    virtual std::wstring GetResourcePath() { return m_Path; }
 
     virtual void SetResourceName(std::wstring _name) { m_ResourceName = _name; }
     virtual std::wstring GetResourceName() { return m_ResourceName; }

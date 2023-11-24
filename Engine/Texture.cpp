@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Texture.h"
 #include "RenderManager.h"
+#include "ResourceManager.h"
 #include "directxtk/WICTextureLoader.h"
 #include "math.h"
 
@@ -19,16 +20,6 @@ void Texture::Render(Vec2 _pos)
 	RenderManager::GetInst()->TextureRender(m_TextureResource->GetTextureView().Get(), _pos, m_ImageSection);
 }
 
-Texture* Texture::Create(std::wstring _ResourcePath) // 수정해야함
-{
-	HRESULT hResult = DirectX::CreateWICTextureFromFile(static_cast<ID3D11Device*>(RenderManager::GetInst()->GetDevice().Get())
-		, _ResourcePath.c_str(), nullptr, m_TextureResource.GetAddressOf());
-	if (SUCCEEDED(hResult))
-		return this;
-	else
-		return nullptr;
-}
-
 bool Texture::Load(std::wstring _FilePath)
 {
 	FILE* pFile = nullptr;
@@ -40,23 +31,17 @@ bool Texture::Load(std::wstring _FilePath)
 		wchar_t szRead[256] = {};
 		if (EOF == fwscanf_s(pFile, L"%s", szRead, 256))
 		{
-			break;
+			return false;
 		}
-
-		if (!wcscmp(szRead, L"[TEXTURE_NAME]"))
+		
+		if (!wcscmp(szRead, L"[TEXTURE_PATH]"))
 		{
-			fwscanf_s(pFile, L"%s", szRead, 256);
-			Super::SetResourceName(szRead);
-		}
-		else if (!wcscmp(szRead, L"[TEXTURE_PATH]"))
-		{
-			std::wstring strRelativePath;
+			std::wstring path;
 
 			fwscanf_s(pFile, L"%s", szRead, 256);
-			strRelativePath = szRead;
+			path = szRead;
 
-			HRESULT hResult = DirectX::CreateWICTextureFromFile(static_cast<ID3D11Device*>(RenderManager::GetInst()->GetDevice().Get())
-				, strRelativePath.c_str(), nullptr, m_TextureResource.ReleaseAndGetAddressOf());
+			m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(path);
 		}
 		else if (!wcscmp(szRead, L"[LEFT]"))
 		{
@@ -93,7 +78,7 @@ bool Texture::Save()
 {
 	FILE* pFile = nullptr;
 
-	std::wstring _FilePath = Super::GetResourcePath();
+	std::wstring _FilePath = Super::GetResourcePath() + std::to_wstring((UINT)Super::GetID());
 
 	_wfopen_s(&pFile, _FilePath.c_str(), L"w");
 
@@ -102,13 +87,6 @@ bool Texture::Save()
 		LOG(ERR, L"파일 열기 실패");
 		return false;
 	}*/
-
-	// 리소스 이름 저장
-	fwprintf_s(pFile, L"[TEXTURE_NAME]\n");
-
-	std::wstring strName = Super::GetResourceName();
-	fwprintf_s(pFile, strName.c_str());
-	fwprintf_s(pFile, L"\n\n");
 
 	// 경로
 	fwprintf_s(pFile, L"[TEXTURE_PATH]\n");

@@ -24,7 +24,6 @@ private:
 
 private:
     virtual bool Load(std::wstring _FilePath) override;
-    Anim* Create(std::wstring _ResourcePath);
     virtual bool Save() override;
 
 public:

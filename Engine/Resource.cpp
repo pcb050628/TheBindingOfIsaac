@@ -18,8 +18,3 @@ Resource* Resource::Create()
 {
 	return nullptr;
 }
-
-bool Resource::Save()
-{
-	return false;
-}

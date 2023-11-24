@@ -12,7 +12,6 @@ private:
 
 private:
     bool Load(std::wstring _path) override;
-    Texture* Create(std::wstring _ResourcePath);
     bool Save() override;
 
 public:

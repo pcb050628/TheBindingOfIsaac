@@ -5,7 +5,7 @@
 #include "Texture.h"
 
 
-Anim::Anim() : Super(ResourceType::Anim)
+Anim::Anim() : Super(AssetType::ANIM)
     , m_Frames({})
     , m_Atlas(nullptr)
 {
@@ -37,21 +37,7 @@ bool Anim::Load(std::wstring _FilePath)
 			break;
 		}
 
-		if (!wcscmp(szRead, L"[ANIM_NAME]"))
-		{
-			fwscanf_s(pFile, L"%s", szRead, 256);
-			Super::SetResourceName(szRead);
-		}
-		else if (!wcscmp(szRead, L"[ATLAS_TEXTURE_NAME]"))
-		{
-			std::wstring strName;
-
-			fwscanf_s(pFile, L"%s", szRead, 256);
-			strName = szRead;
-
-			m_Atlas = ResourceManager::GetInst()->Load<Texture>(strName);
-		}
-		else if (!wcscmp(szRead, L"[ATLAS_TEXTURE_PATH]"))
+		if (!wcscmp(szRead, L"[ATLAS_TEXTURE_PATH]"))
 		{
 			std::wstring strPath;
 
@@ -108,18 +94,11 @@ bool Anim::Load(std::wstring _FilePath)
 	return true;
 }
 
-Anim* Anim::Create(std::wstring _ResourcePath)
-{
-
-
-	return this;
-}
-
 bool Anim::Save()
 {
 	FILE* pFile = nullptr;
 
-	std::wstring _FilePath = Super::GetResourcePath();
+	std::wstring _FilePath = Super::GetResourcePath() + std::to_wstring((UINT)Super::GetID());
 
 	_wfopen_s(&pFile, _FilePath.c_str(), L"w");
 
@@ -129,13 +108,6 @@ bool Anim::Save()
 		return false;
 	}*/
 
-	// 리소스 이름 저장
-	fwprintf_s(pFile, L"[ANIM_NAME]\n");
-
-	std::wstring strName = Super::GetResourceName();
-	fwprintf_s(pFile, strName.c_str());
-	fwprintf_s(pFile, L"\n\n");
-
 	// 경로
 	fwprintf_s(pFile, L"[ANIM_PATH]\n");
 
@@ -143,10 +115,6 @@ bool Anim::Save()
 	fwprintf_s(pFile, L"\n\n");
 
 	// atlas
-	fwprintf_s(pFile, L"[ATLAS_TEXTURE_NAME]\n");
-	fwprintf_s(pFile, m_Atlas->GetResourceName().c_str());
-	fwprintf_s(pFile, L"\n\n");
-
 	fwprintf_s(pFile, L"[ATLAS_TEXTURE_PATH]\n");
 	fwprintf_s(pFile, m_Atlas->GetResourcePath().c_str());
 	fwprintf_s(pFile, L"\n\n");

@@ -9,15 +9,23 @@ private:
 	std::map<UINT, Asset*> m_Assets;
 	std::map<UINT, std::wstring> m_AssetPaths;
 
+	AssetType m_TypeArray[(UINT)AssetType::END];
+
 public:
 	void Init();
 	
 	template <typename T>
 	T* Load(UINT _id)
 	{
-		Asset* asset = new T();
-		if (asset->Load())
-			return static_cast<T*>(asset);
+		auto iter = m_AssetPaths.find(_id);
+		if (iter != m_AssetPaths.end())
+		{
+			std::wstring path = iter->second;
+
+			Asset* asset = new T();
+			if (asset->Load(path))
+				return static_cast<T*>(asset);
+		}
 		return nullptr;
 	}
 

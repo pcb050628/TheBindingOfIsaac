@@ -6,7 +6,6 @@ enum class ResourceType
 {
 	Texture,
 	Sound,
-	Anim,
 	End
 };
 
@@ -18,7 +17,7 @@ private:
 	std::wstring m_ResourceName;
 
 public:
-	static ResourceType GetType() { return m_Type; }
+	//static ResourceType GetType() { return m_Type; }
 
 	virtual bool Load(std::wstring _FilePath) = 0;
 	virtual Resource* Create();

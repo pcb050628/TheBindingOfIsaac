@@ -21,62 +21,62 @@ public:
 		return nullptr;
 	}
 
-	template <typename T>
-	T* Load(std::wstring _name) // 폴더에서 찾기
-	{
-		std::wstring fullpath;
-		switch (T::GetType())
-		{
-		case ResourceType::Texture:
-			fullpath = L"..\\Resource\\Image\\";
-			break;
-		case ResourceType::Sound:
-			fullpath = L"..\\Resource\\Sound\\";
-			break;
-		case ResourceType::Anim:
-			fullpath = L"..\\Resource\\Anim\\";
-			break;
-		}
-
-		fullpath += _name;
-
-		T* tmp = new T();
-		tmp->Load(fullpath);
-		if (tmp != nullptr)
-			return tmp;
-
-		return nullptr;
-	}
+	//template <typename T>
+	//T* Load(std::wstring _name) // 폴더에서 찾기
+	//{
+	//	std::wstring fullpath = L"..\\Resource\\";
+	//	switch (T::GetType())
+	//	{
+	//	case ResourceType::Texture:
+	//		fullpath += L"Image\\";
+	//		break;
+	//	case ResourceType::Sound:
+	//		fullpath += L"Sound\\";
+	//		break;
+	//	case ResourceType::Anim:
+	//		fullpath += L"Anim\\";
+	//		break;
+	//	}
+	//
+	//	fullpath += _name;
+	//
+	//	Resource* tmp = new T();
+	//	tmp->Load(fullpath);
+	//	if (tmp != nullptr)
+	//		return static_cast<T*>(tmp);
+	//
+	//	return nullptr;
+	//}
 
 	template <typename T>
 	T* LoadByPath(std::wstring _path) // 폴더에서 찾기
 	{
-		T* tmp = new T();
+		Resource* tmp = new T();
 		tmp->Load(_path);
 		if (tmp != nullptr)
-			return tmp;
+			return static_cast<T*>(tmp);
 
 		return nullptr;
 	}
 
-	template <typename T>
-	T* Create(std::wstring _name) // 생성
-	{
-		std::wstring fullpath;
-		switch (T::GetType())
-		{
-		case ResourceType::Texture:
-			fullpath = L"..\\Resource\\Image\\";
-			break;
-		case ResourceType::Sound:
-			fullpath = L"..\\Resource\\Sound\\";
-			break;
-		case ResourceType::Anim:
-			fullpath = L"..\\Resource\\Anim\\";
-			break;
-		}
-
-		fullpath += _name;
-	}
+	//template <typename T>
+	//T* Create(std::wstring _name) // 생성
+	//{
+	//	std::wstring fullpath;
+	//	switch (T::GetType())
+	//	{
+	//	case ResourceType::Texture:
+	//		fullpath = L"..\\Resource\\Image\\";
+	//		break;
+	//	case ResourceType::Sound:
+	//		fullpath = L"..\\Resource\\Sound\\";
+	//		break;
+	//	case ResourceType::Anim:
+	//		fullpath = L"..\\Resource\\Anim\\";
+	//		break;
+	//	}
+	//
+	//	fullpath += _name;
+	//}
 };
 
