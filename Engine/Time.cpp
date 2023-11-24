@@ -35,7 +35,7 @@ void Time::Update()
 	{
 		wchar_t szText[50] = {};
 		swprintf_s(szText, 50, L"DeltaTime : %f, FPS : %d", m_DeltaTime, static_cast<int>((1 / m_DeltaTime)));
-		SetWindowText(Engine::GetInst()->GetHwnd(), szText);
+		SetWindowText(Engine::GetInst()->GetHwnd(), (const char*)szText);
 
 		count = 0;
 	}

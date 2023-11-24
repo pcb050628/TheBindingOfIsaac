@@ -1,6 +1,5 @@
 #include "pch.h"
 #include "AssetManager.h"
-#include <iostream>
 #include <filesystem>
 
 AssetManager::AssetManager()

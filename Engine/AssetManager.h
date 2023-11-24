@@ -24,7 +24,7 @@ public:
 
 			Asset* asset = new T();
 			if (asset->Load(path))
-				return static_cast<T*>(asset);
+				return dynamic_cast<T*>(asset);
 		}
 		return nullptr;
 	}

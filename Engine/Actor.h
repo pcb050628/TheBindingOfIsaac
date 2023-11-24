@@ -30,7 +30,7 @@ public:
         comp->SetName(_name);
         comp->m_Owner = this;
         m_Components[comp->GetType()]->push_back(comp);
-        return static_cast<T*>(comp);
+        return dynamic_cast<T*>(comp);
     }
 
     vector<Component*>* GetComponent(ComponentType _type)

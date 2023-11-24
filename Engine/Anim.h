@@ -10,17 +10,18 @@ struct Frame
     float Duration; // 해당 프레임 노출 시간
 };
 
-class Texture;
+class ShaderTextureResource;
 class Anim :
     public Asset
 {
     typedef Asset Super;
 private:
-    std::vector<Frame>  m_Frames;
-    Texture*            m_Atlas;
-    int                 m_iCurFrame;
-    float               m_AccTime;
-    bool                m_bFinish;
+    std::vector<Frame>      m_Frames;
+    ShaderTextureResource*  m_Atlas;
+
+    int                     m_iCurFrame;
+    float                   m_AccTime;
+    bool                    m_bFinish;
 
 private:
     virtual bool Load(std::wstring _FilePath) override;

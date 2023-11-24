@@ -37,7 +37,16 @@ bool Anim::Load(std::wstring _FilePath)
 			break;
 		}
 
-		if (!wcscmp(szRead, L"[ATLAS_TEXTURE_PATH]"))
+		if (!wcscmp(szRead, L"[ATLAS_TEXTURE_NAME]"))
+		{
+			std::wstring name;
+
+			fwscanf_s(pFile, L"%s", szRead, 256);
+
+			name = szRead;
+			Super::SetResourceName(name);
+		}
+		else if (!wcscmp(szRead, L"[ATLAS_TEXTURE_PATH]"))
 		{
 			std::wstring strPath;
 
@@ -46,7 +55,7 @@ bool Anim::Load(std::wstring _FilePath)
 			if (m_Atlas == nullptr)
 			{
 				strPath = szRead;
-				m_Atlas = ResourceManager::GetInst()->LoadByPath<Texture>(strPath);
+				m_Atlas = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(Super::GetResourceName(), strPath);
 			}
 		}
 		else if (!wcscmp(szRead, L"[FRAME_COUNT]"))

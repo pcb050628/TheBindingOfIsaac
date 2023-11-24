@@ -13,8 +13,3 @@ bool Resource::Load(std::wstring _FilePath)
 {
 	return false;
 }
-
-Resource* Resource::Create()
-{
-	return nullptr;
-}

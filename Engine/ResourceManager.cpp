@@ -10,7 +10,3 @@ ResourceManager::~ResourceManager()
 {
 
 }
-
-void ResourceManager::Init()
-{
-}

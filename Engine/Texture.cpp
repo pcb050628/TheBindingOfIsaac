@@ -2,7 +2,6 @@
 #include "Texture.h"
 #include "RenderManager.h"
 #include "ResourceManager.h"
-#include "directxtk/WICTextureLoader.h"
 #include "math.h"
 
 Texture::Texture() : Super(AssetType::TEXTURE)
@@ -34,14 +33,23 @@ bool Texture::Load(std::wstring _FilePath)
 			return false;
 		}
 		
-		if (!wcscmp(szRead, L"[TEXTURE_PATH]"))
+		if (!wcscmp(szRead, L"[TEXTURE_NAME]"))
+		{
+			std::wstring name;
+
+			fwscanf_s(pFile, L"%s", szRead, 256);
+			name = szRead;
+
+			Super::SetResourceName(name);
+		}
+		else if (!wcscmp(szRead, L"[TEXTURE_PATH]"))
 		{
 			std::wstring path;
 
 			fwscanf_s(pFile, L"%s", szRead, 256);
 			path = szRead;
 
-			m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(path);
+			m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(Super::GetResourceName(), path);
 		}
 		else if (!wcscmp(szRead, L"[LEFT]"))
 		{
@@ -87,6 +95,12 @@ bool Texture::Save()
 		LOG(ERR, L"파일 열기 실패");
 		return false;
 	}*/
+
+	// 이름
+	fwprintf_s(pFile, L"[TEXTURE_NAME]\n");
+
+	fwprintf_s(pFile, Super::GetResourceName().c_str());
+	fwprintf_s(pFile, L"\n\n");
 
 	// 경로
 	fwprintf_s(pFile, L"[TEXTURE_PATH]\n");

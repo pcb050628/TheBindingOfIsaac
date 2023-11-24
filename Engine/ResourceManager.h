@@ -11,72 +11,30 @@ private:
 	std::map<std::wstring, Resource*> m_Resources;
 
 public:
-	void Init();
-
 	template <typename T>
-	T* Find(ResourceType _type, std::wstring _name) // m_Reources 에서 찾기
+	T* Find(std::wstring _name) // m_Reources 에서 찾기
 	{
 		if (m_Resources.find(_name) != m_Resources.end())
-			return static_cast<T*>(m_Resources.find(_name)->second);
+			return dynamic_cast<T*>(m_Resources.find(_name)->second);
 		return nullptr;
 	}
 
-	//template <typename T>
-	//T* Load(std::wstring _name) // 폴더에서 찾기
-	//{
-	//	std::wstring fullpath = L"..\\Resource\\";
-	//	switch (T::GetType())
-	//	{
-	//	case ResourceType::Texture:
-	//		fullpath += L"Image\\";
-	//		break;
-	//	case ResourceType::Sound:
-	//		fullpath += L"Sound\\";
-	//		break;
-	//	case ResourceType::Anim:
-	//		fullpath += L"Anim\\";
-	//		break;
-	//	}
-	//
-	//	fullpath += _name;
-	//
-	//	Resource* tmp = new T();
-	//	tmp->Load(fullpath);
-	//	if (tmp != nullptr)
-	//		return static_cast<T*>(tmp);
-	//
-	//	return nullptr;
-	//}
-
 	template <typename T>
-	T* LoadByPath(std::wstring _path) // 폴더에서 찾기
+	T* LoadByPath(std::wstring _name, std::wstring _path) // 폴더에서 찾기
 	{
+		T* f = Find<T>(_name); 
+		if (f != nullptr) 
+			return f; 
+
 		Resource* tmp = new T();
 		tmp->Load(_path);
 		if (tmp != nullptr)
-			return static_cast<T*>(tmp);
+		{
+			m_Resources.insert(std::make_pair(_name, tmp));
+			return dynamic_cast<T*>(tmp);
+		}
 
 		return nullptr;
 	}
-
-	//template <typename T>
-	//T* Create(std::wstring _name) // 생성
-	//{
-	//	std::wstring fullpath;
-	//	switch (T::GetType())
-	//	{
-	//	case ResourceType::Texture:
-	//		fullpath = L"..\\Resource\\Image\\";
-	//		break;
-	//	case ResourceType::Sound:
-	//		fullpath = L"..\\Resource\\Sound\\";
-	//		break;
-	//	case ResourceType::Anim:
-	//		fullpath = L"..\\Resource\\Anim\\";
-	//		break;
-	//	}
-	//
-	//	fullpath += _name;
-	//}
 };
 

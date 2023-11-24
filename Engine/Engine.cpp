@@ -34,7 +34,6 @@ void Engine::Init(HWND _hWnd, const RECT& _Resolution)
 	Time::GetInst()->Init();
 	Input::GetInst()->Init();
 	RenderManager::GetInst()->Init(m_hWnd);
-	ResourceManager::GetInst()->Init();
 	//ChapterManager::GetInst()->Init();
 }
 
