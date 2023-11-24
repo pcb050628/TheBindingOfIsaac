@@ -133,7 +133,6 @@ void RenderManager::TextureRender(ID3D11ShaderResourceView* _srv, Vec2 _pos, REC
 	//DirectX::FXMVECTOR scaleVector = DirectX::XMLoadFloat2(&scale);
 
 	mp_SpriteBatch->Draw(_srv, positionVector, &_iSection);
-		//, DirectX::Colors::White, 0.0f, DirectX::g_XMZero, scaleVector, DirectX::SpriteEffects_None, 0.0f);
 }
 
 void RenderManager::PrepareDraw()

@@ -1,17 +1,16 @@
 #pragma once
-#include "Resource.h"
-#include "wrl.h"
-#include "directxtk/SpriteBatch.h"
+#include "Asset.h"
+#include "ShaderTextureResource.h"
 
 class Texture :
-    public Resource
+    public Asset
 {
-    typedef Resource Super;
+    typedef Asset Super;
 private:
-    Microsoft::WRL::ComPtr<ID3D11ShaderResourceView> m_TextureView;
+    ShaderTextureResource* m_TextureResource;
     RECT m_ImageSection;
 
-public:
+private:
     bool Load(std::wstring _path) override;
     Texture* Create(std::wstring _ResourcePath);
     bool Save() override;

@@ -4,8 +4,8 @@
 #include "directxtk/WICTextureLoader.h"
 #include "math.h"
 
-Texture::Texture() : Super(ResourceType::Texture)
-	, m_TextureView(nullptr)
+Texture::Texture() : Super(AssetType::TEXTURE)
+	, m_TextureResource(nullptr)
 	, m_ImageSection({})
 {
 }
@@ -16,13 +16,13 @@ Texture::~Texture()
 
 void Texture::Render(Vec2 _pos)
 {
-	RenderManager::GetInst()->TextureRender(m_TextureView.Get(), _pos, m_ImageSection);
+	RenderManager::GetInst()->TextureRender(m_TextureResource->GetTextureView().Get(), _pos, m_ImageSection);
 }
 
-Texture* Texture::Create(std::wstring _ResourcePath)
+Texture* Texture::Create(std::wstring _ResourcePath) // 수정해야함
 {
 	HRESULT hResult = DirectX::CreateWICTextureFromFile(static_cast<ID3D11Device*>(RenderManager::GetInst()->GetDevice().Get())
-		, _ResourcePath.c_str(), nullptr, m_TextureView.GetAddressOf());
+		, _ResourcePath.c_str(), nullptr, m_TextureResource.GetAddressOf());
 	if (SUCCEEDED(hResult))
 		return this;
 	else
@@ -56,7 +56,7 @@ bool Texture::Load(std::wstring _FilePath)
 			strRelativePath = szRead;
 
 			HRESULT hResult = DirectX::CreateWICTextureFromFile(static_cast<ID3D11Device*>(RenderManager::GetInst()->GetDevice().Get())
-				, strRelativePath.c_str(), nullptr, m_TextureView.ReleaseAndGetAddressOf());
+				, strRelativePath.c_str(), nullptr, m_TextureResource.ReleaseAndGetAddressOf());
 		}
 		else if (!wcscmp(szRead, L"[LEFT]"))
 		{

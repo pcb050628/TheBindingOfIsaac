@@ -1,5 +1,5 @@
 #pragma once
-#include "pch.h"
+#include "Entity.h"
 #include "define.h"
 
 enum class ResourceType
@@ -10,20 +10,18 @@ enum class ResourceType
 	End
 };
 
-class Resource
+class Resource : 
+	public Entity
 {
 private:
 	std::wstring m_ResourcePath;
 	std::wstring m_ResourceName;
-
-	static ResourceType m_Type;
 
 public:
 	static ResourceType GetType() { return m_Type; }
 
 	virtual bool Load(std::wstring _FilePath) = 0;
 	virtual Resource* Create();
-	virtual bool Save() = 0;
 
 	virtual void SetResourcePath(std::wstring _path) { m_ResourcePath = _path; }
 	virtual std::wstring GetResourcePath() { return m_ResourcePath; }
@@ -33,7 +31,7 @@ public:
 
 public:
 	Resource(ResourceType _type);
-	virtual ~Resource();
+	virtual ~Resource() override;
 
 	friend class ResouceManager;
 };

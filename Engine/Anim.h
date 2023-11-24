@@ -1,5 +1,5 @@
 #pragma once
-#include "Resource.h"
+#include "Asset.h"
 #include "math.h"
 
 struct Frame
@@ -12,17 +12,17 @@ struct Frame
 
 class Texture;
 class Anim :
-    public Resource
+    public Asset
 {
-    typedef Resource Super;
+    typedef Asset Super;
 private:
-    std::vector<Frame> m_Frames;
-    Texture* m_Atlas;
-    int m_CurFrame;
+    std::vector<Frame>  m_Frames;
+    Texture*            m_Atlas;
+    int                 m_iCurFrame;
+    float               m_AccTime;
+    bool                m_bFinish;
 
-    float m_AccTime;
-
-public:
+private:
     virtual bool Load(std::wstring _FilePath) override;
     Anim* Create(std::wstring _ResourcePath);
     virtual bool Save() override;

@@ -67,11 +67,26 @@
     <Filter Include="01_Basic\ResourceManager\Resource">
       <UniqueIdentifier>{a1a59f4b-bb74-4c54-8a2e-2541b336acbf}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Resource">
-      <UniqueIdentifier>{7c6794c5-7b71-4f32-a7d4-70729ec96108}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\LogManager">
       <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\StateMachine">
+      <UniqueIdentifier>{c62bd41e-a209-48c9-9ba0-d07e59661e17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\StateMachine\State">
+      <UniqueIdentifier>{1de22112-b1b8-4271-b3cd-d1cbcac1a83e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\AssetManager">
+      <UniqueIdentifier>{6a7751a8-c377-4179-b451-c68125c1f5f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\AssetManager\Asset">
+      <UniqueIdentifier>{b9157414-858c-461b-b8e3-21727493fb41}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Asset">
+      <UniqueIdentifier>{7c6794c5-7b71-4f32-a7d4-70729ec96108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource">
+      <UniqueIdentifier>{d95ef0a3-c4ec-41f7-a099-721fbe613a6c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -148,9 +163,24 @@
       <Filter>01_Basic\ResourceManager\Resource</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>02_Derived\Resource</Filter>
+      <Filter>02_Derived\Asset</Filter>
     </ClInclude>
     <ClInclude Include="Anim.h">
+      <Filter>02_Derived\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>01_Basic\StateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>01_Basic\StateMachine\State</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset.h">
+      <Filter>01_Basic\AssetManager\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>01_Basic\AssetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ShaderTextureResource.h">
       <Filter>02_Derived\Resource</Filter>
     </ClInclude>
   </ItemGroup>
@@ -219,9 +249,24 @@
       <Filter>01_Basic\ResourceManager\Resource</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>02_Derived\Resource</Filter>
+      <Filter>02_Derived\Asset</Filter>
     </ClCompile>
     <ClCompile Include="Anim.cpp">
+      <Filter>02_Derived\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>01_Basic\StateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>01_Basic\StateMachine\State</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset.cpp">
+      <Filter>01_Basic\AssetManager\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>01_Basic\AssetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ShaderTextureResource.cpp">
       <Filter>02_Derived\Resource</Filter>
     </ClCompile>
   </ItemGroup>

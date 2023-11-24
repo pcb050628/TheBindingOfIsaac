@@ -3,8 +3,10 @@
 
 enum ComponentType
 {
+    STATEMACHINE,
     COLLIDER,
     RENDERER,
+    ANIMATOR,
 
     End,
 };

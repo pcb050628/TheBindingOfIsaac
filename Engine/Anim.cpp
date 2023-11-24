@@ -1,7 +1,9 @@
 #include "pch.h"
 #include "Anim.h"
 #include "ResourceManager.h"
+#include "Time.h"
 #include "Texture.h"
+
 
 Anim::Anim() : Super(ResourceType::Anim)
     , m_Frames({})
@@ -173,6 +175,28 @@ bool Anim::Save()
 	fclose(pFile);
 
 	return true;
+}
+
+void Anim::LateUpdate()
+{
+	if (m_bFinish)
+		return;
+
+	m_AccTime += Time::GetInst()->GetDeltaTime();
+
+	if (m_Frames[m_iCurFrame].Duration < m_AccTime)
+	{
+		m_AccTime = 0.f;
+
+		if (m_Frames.size() - 1 <= m_iCurFrame)
+		{
+			m_bFinish = true;
+		}
+		else
+		{
+			++m_iCurFrame;
+		}
+	}
 }
 
 void Anim::Render(Vec2 _pos)

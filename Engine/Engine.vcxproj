@@ -147,6 +147,8 @@
     <ClInclude Include="Actor.h" />
     <ClInclude Include="Anim.h" />
     <ClInclude Include="Animator.h" />
+    <ClInclude Include="Asset.h" />
+    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Chapter.h" />
     <ClInclude Include="ChapterManager.h" />
@@ -167,6 +169,9 @@
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="ShaderTextureResource.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateMachine.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureRenderer.h" />
     <ClInclude Include="Time.h" />
@@ -175,6 +180,8 @@
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="Anim.cpp" />
     <ClCompile Include="Animator.cpp" />
+    <ClCompile Include="Asset.cpp" />
+    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Chapter.cpp" />
     <ClCompile Include="ChapterManager.cpp" />
@@ -197,6 +204,9 @@
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="ShaderTextureResource.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureRenderer.cpp" />
     <ClCompile Include="Time.cpp" />
