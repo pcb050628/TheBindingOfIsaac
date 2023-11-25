@@ -33,7 +33,7 @@ public:
     virtual void SetResourceName(std::wstring _name) { m_ResourceName = _name; }
     virtual std::wstring GetResourceName() { return m_ResourceName; }
 
-    AssetID GetID() { return m_ID; }
+    AssetID GetAssetID() { return m_ID; }
 
     static AssetType GetType() { return m_Type; }
 

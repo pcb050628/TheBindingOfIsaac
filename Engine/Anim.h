@@ -19,6 +19,8 @@ private:
     std::vector<Frame>      m_Frames;
     ShaderTextureResource*  m_Atlas;
 
+    bool                    mb_isPlaying;
+
     int                     m_iCurFrame;
     float                   m_AccTime;
     bool                    m_bFinish;
@@ -30,6 +32,11 @@ private:
 public:
     virtual void LateUpdate();
     virtual void Render(Vec2 _pos);
+
+public:
+    void Play() { mb_isPlaying = true; }
+    void Stop() { mb_isPlaying = false; }
+    bool GetIsPlay() { return mb_isPlaying; }
 
 public:
     Anim();

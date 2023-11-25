@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Anim.h"
 #include "ResourceManager.h"
+#include "RenderManager.h"
 #include "Time.h"
 #include "Texture.h"
 
@@ -107,7 +108,7 @@ bool Anim::Save()
 {
 	FILE* pFile = nullptr;
 
-	std::wstring _FilePath = Super::GetResourcePath() + std::to_wstring((UINT)Super::GetID());
+	std::wstring _FilePath = Super::GetResourcePath() + std::to_wstring((UINT)Super::GetAssetID());
 
 	_wfopen_s(&pFile, _FilePath.c_str(), L"w");
 
@@ -156,7 +157,7 @@ bool Anim::Save()
 
 void Anim::LateUpdate()
 {
-	if (m_bFinish)
+	if (m_bFinish || !mb_isPlaying)
 		return;
 
 	m_AccTime += Time::GetInst()->GetDeltaTime();
@@ -178,5 +179,14 @@ void Anim::LateUpdate()
 
 void Anim::Render(Vec2 _pos)
 {
+	if (m_bFinish || !mb_isPlaying)
+		return;
+	Vec2 Offset = m_Frames[m_iCurFrame].vOffset;
+	Vec2 LeftTop = m_Frames[m_iCurFrame].vLeftTop;
+	Vec2 RightBottom = m_Frames[m_iCurFrame].vLeftTop + m_Frames[m_iCurFrame].vCutSize;
 
+	RECT iSection = { LeftTop.x, LeftTop.y, RightBottom.x, RightBottom.y };
+
+	RenderManager::GetInst()->TextureRender(m_Atlas->GetTextureView().Get(), _pos + Offset, iSection);
 }
+ 

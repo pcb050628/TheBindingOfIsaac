@@ -54,25 +54,25 @@ bool Texture::Load(std::wstring _FilePath)
 		else if (!wcscmp(szRead, L"[LEFT]"))
 		{
 			int value = 0;
-			fwscanf_s(pFile, L"%d", value, 256);
+			fwscanf_s(pFile, L"%d", value);
 			m_ImageSection.left = value;
 		}
 		else if (!wcscmp(szRead, L"[TOP]"))
 		{
 			int value = 0;
-			fwscanf_s(pFile, L"%d", value, 256);
+			fwscanf_s(pFile, L"%d", value);
 			m_ImageSection.top = value;
 		}
 		else if (!wcscmp(szRead, L"[RIGHT]"))
 		{
 			int value = 0;
-			fwscanf_s(pFile, L"%d", value, 256);
+			fwscanf_s(pFile, L"%d", value);
 			m_ImageSection.right = value;
 		}
 		else if (!wcscmp(szRead, L"[BOTTOM]"))
 		{
 			int value = 0;
-			fwscanf_s(pFile, L"%d", value, 256);
+			fwscanf_s(pFile, L"%d", value);
 			m_ImageSection.bottom = value;
 
 			break;
@@ -86,7 +86,7 @@ bool Texture::Save()
 {
 	FILE* pFile = nullptr;
 
-	std::wstring _FilePath = Super::GetResourcePath() + std::to_wstring((UINT)Super::GetID());
+	std::wstring _FilePath = Super::GetResourcePath() + std::to_wstring((UINT)Super::GetAssetID());
 
 	_wfopen_s(&pFile, _FilePath.c_str(), L"w");
 
