@@ -112,6 +112,7 @@ void RenderManager::Init(HWND _hwnd)
 
 	// SprtieBatch
 	mp_SpriteBatch = std::make_unique<DirectX::SpriteBatch>(mp_Context.Get());
+	mp_SpriteFont = std::make_unique<DirectX::SpriteFont>(mp_Device.Get(), L"font file name");
 	isDrawing = false;
 }
 
@@ -122,7 +123,9 @@ void RenderManager::Update()
 void RenderManager::TextureRender(ID3D11ShaderResourceView* _srv, Vec2 _pos, RECT& _iSection)
 {
 	if (!isDrawing)
-		StartDraw();
+	{
+		return;
+	}
 
 	RECT dPos = { _pos.x, _pos.y, _pos.x + 10, _pos.y + 10 };
 
@@ -133,6 +136,16 @@ void RenderManager::TextureRender(ID3D11ShaderResourceView* _srv, Vec2 _pos, REC
 	//DirectX::FXMVECTOR scaleVector = DirectX::XMLoadFloat2(&scale);
 
 	mp_SpriteBatch->Draw(_srv, positionVector, &_iSection);
+}
+
+void RenderManager::FontRender(std::wstring _wstring, Vec2 _pos, DirectX::XMVECTORF32 _color = DirectX::Colors::White)
+{
+	if (!isDrawing)
+	{
+		return;
+	}
+	DirectX::XMFLOAT2 position = DirectX::XMFLOAT2(_pos.x, _pos.y);
+	mp_SpriteFont->DrawString(mp_SpriteBatch.get(), _wstring.c_str(), position, _color);
 }
 
 void RenderManager::PrepareDraw()

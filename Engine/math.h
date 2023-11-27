@@ -57,6 +57,16 @@ struct Vec2
 		return Vec2(x / _other.x, y / _other.y);
 	}
 
+	Vec2 operator * (const int& _other)
+	{
+		return Vec2(x * _other, y * _other);
+	}
+
+	Vec2 operator * (const float& _other)
+	{
+		return Vec2(x * _other, y * _other);
+	}
+
 	void operator += (const Vec2& _other)
 	{
 		x += _other.x;

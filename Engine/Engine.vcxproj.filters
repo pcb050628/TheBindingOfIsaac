@@ -183,6 +183,9 @@
     <ClInclude Include="ShaderTextureResource.h">
       <Filter>02_Derived\Resource</Filter>
     </ClInclude>
+    <ClInclude Include="LogManager.h">
+      <Filter>01_Basic\LogManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -268,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="ShaderTextureResource.cpp">
       <Filter>02_Derived\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="LogManager.cpp">
+      <Filter>01_Basic\LogManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
