@@ -138,7 +138,7 @@ void RenderManager::TextureRender(ID3D11ShaderResourceView* _srv, Vec2 _pos, REC
 	mp_SpriteBatch->Draw(_srv, positionVector, &_iSection);
 }
 
-void RenderManager::FontRender(std::wstring _wstring, Vec2 _pos, DirectX::XMVECTORF32 _color = DirectX::Colors::White)
+void RenderManager::FontRender(std::wstring _wstring, Vec2 _pos, DirectX::XMVECTORF32 _color)
 {
 	if (!isDrawing)
 	{
