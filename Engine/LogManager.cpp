@@ -2,7 +2,10 @@
 #include "LogManager.h"
 #include "RenderManager.h"
 #include "Time.h"
-#include "math.h"
+
+
+
+
 
 LogManager::LogManager()
 	: m_LogLifeTime(1.f)

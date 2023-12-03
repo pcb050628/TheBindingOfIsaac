@@ -1,8 +1,7 @@
 #pragma once
 #include "Entity.h"
+#include "Room.h"
 
-class Actor;
-class Room;
 class Chapter :
     public Entity
 {
@@ -21,5 +20,17 @@ public:
     Chapter();
     virtual ~Chapter() override;
 
+private:
+    void ChangeRoom(DIRECTION _dir)
+    {
+        Room* room = m_CurRoom->GetRoomByDir(_dir);
+
+        if (room != nullptr)
+            m_CurRoom = room;
+    }
+
+    friend class TaskManager;
 };
 
+
+void ChangeRoom(DIRECTION _dir);

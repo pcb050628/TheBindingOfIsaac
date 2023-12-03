@@ -1,14 +1,22 @@
 #pragma once
 #include "define.h"
+#include "Chapter.h"
 
-using namespace std;
+enum class CHAPTERLEVEL
+{
+	BASEMENT,
+	CAVES,
+	DEPTHS,
+	WOMB,
+	GMLEVEL,
+	END,
+};
 
-class Chapter;
 class ChapterManager
 {
 	SINGLETON(ChapterManager)
 private:
-	vector<Chapter*> m_Chapters;
+	Chapter* m_Chapters[(UINT)CHAPTERLEVEL::END];
 	Chapter* m_CurChapter;
 
 public:
@@ -18,5 +26,11 @@ public:
 	void LateUpdate();
 
 	Chapter* GetCurChapter() { return m_CurChapter; }
+
+private:
+	void ChangeChapter(CHAPTERLEVEL _level) { m_CurChapter = m_Chapters[(UINT)_level]; }
+
+	friend class TaskManager;
 };
 
+void ChangeChapter(CHAPTERLEVEL _level);

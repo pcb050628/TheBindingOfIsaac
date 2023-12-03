@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Chapter.h"
-#include "Room.h"
+#include "TaskManager.h"
 
 Chapter::Chapter()
 	: m_Rooms()
@@ -25,4 +25,13 @@ void Chapter::LateUpdate()
 void Chapter::Render()
 {
 	m_CurRoom->Render();
+}
+
+void ChangeRoom(DIRECTION _dir)
+{
+	Task task = {};
+	task.Type = TASKTYPE::CHANGE_ROOM;
+	task.Param_1 = (UINT_PTR)_dir;
+
+	TaskManager::GetInst()->AddTask(task);
 }

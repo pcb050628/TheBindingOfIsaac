@@ -1,6 +1,6 @@
 #pragma once
 #include "Entity.h"
-#include "math.h"
+
 #include "Component.h"
 
 class Actor :

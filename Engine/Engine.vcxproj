@@ -168,7 +168,6 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LogManager.h" />
-    <ClInclude Include="math.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
@@ -177,6 +176,7 @@
     <ClInclude Include="ShaderTextureResource.h" />
     <ClInclude Include="State.h" />
     <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="TaskManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureRenderer.h" />
     <ClInclude Include="Time.h" />
@@ -213,6 +213,7 @@
     <ClCompile Include="ShaderTextureResource.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateMachine.cpp" />
+    <ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureRenderer.cpp" />
     <ClCompile Include="Time.cpp" />

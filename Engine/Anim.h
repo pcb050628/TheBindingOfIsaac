@@ -1,6 +1,7 @@
 #pragma once
 #include "Asset.h"
-#include "math.h"
+
+
 
 struct Frame
 {

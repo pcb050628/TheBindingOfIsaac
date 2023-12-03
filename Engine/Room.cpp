@@ -3,6 +3,11 @@
 
 Room::Room()
 	: m_Layers()
+	, m_Type(RoomType::Common)
+	, Left(nullptr)
+	, Right(nullptr)
+	, Top(nullptr)
+	, Bottom(nullptr)
 {
 }
 

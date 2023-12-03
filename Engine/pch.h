@@ -11,7 +11,27 @@
 #include "framework.h"
 
 #include <vector>
+#include <queue>
 #include <map>
 #include <string>
+
+#include "wrl.h"
+#include <d3d11_1.h>
+#include <d3dcompiler.h>
+#include "directxtk/SpriteBatch.h"
+#include "directxtk/SpriteFont.h"
+
+#pragma comment(lib, "d3d11.lib")
+#pragma comment(lib, "d3dcompiler.lib")
+
+
+#include "directxtk/SimpleMath.h"
+using namespace DirectX::SimpleMath;
+
+typedef Vector2 Vec2;
+typedef Vector3 Vec3;
+typedef Vector4 Vec4;
+
+#include "define.h"
 
 #endif //PCH_H

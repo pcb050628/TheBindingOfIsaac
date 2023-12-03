@@ -22,7 +22,7 @@ public:
         m_ImageSection.right = right;
         m_ImageSection.bottom = bottom; 
     }
-    void Render(struct Vec2 _pos);
+    void Render(Vec2 _pos);
 
 public:
     Texture();

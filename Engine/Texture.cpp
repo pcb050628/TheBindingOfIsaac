@@ -2,7 +2,6 @@
 #include "Texture.h"
 #include "RenderManager.h"
 #include "ResourceManager.h"
-#include "math.h"
 
 Texture::Texture() : Super(AssetType::TEXTURE)
 	, m_TextureResource(nullptr)

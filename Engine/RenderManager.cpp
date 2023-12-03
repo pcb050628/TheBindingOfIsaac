@@ -1,15 +1,13 @@
 #include "pch.h"
 #include "RenderManager.h"
 #include "Engine.h"
-#include "math.h"
 #include "assert.h"
-#pragma comment(lib, "d3d11.lib")
 
 RenderManager::RenderManager()
 	: mp_Device(nullptr)
 	, mp_Context(nullptr)
 	, mp_SwapChain(nullptr)
-	, mp_RenderTargetView(nullptr)
+	, mp_RTView(nullptr)
 	, mp_SpriteBatch(nullptr)
 {
 
@@ -20,8 +18,10 @@ RenderManager::~RenderManager()
 
 }
 
-void RenderManager::Init(HWND _hwnd)
+void RenderManager::Init(HWND _hwnd, Vec2 _resolution)
 {
+	m_Resolution = _resolution;
+
 	{ // device initialize
 		ID3D11Device*			baseDevice;
 		ID3D11DeviceContext*	baseContext;
@@ -82,8 +82,8 @@ void RenderManager::Init(HWND _hwnd)
 		}
 
 		DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
-		swapChainDesc.Width = 0;
-		swapChainDesc.Height = 0;
+		swapChainDesc.Width = m_Resolution.x;
+		swapChainDesc.Height = m_Resolution.y;
 		swapChainDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM_SRGB;
 		swapChainDesc.SampleDesc.Count = 1;
 		swapChainDesc.SampleDesc.Quality = 0;
@@ -101,19 +101,45 @@ void RenderManager::Init(HWND _hwnd)
 	}
 
 	{ // Render Target View
-		ID3D11Texture2D* d3d11FrameBuffer;
-		HRESULT hResult = mp_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&d3d11FrameBuffer);
+		HRESULT hResult = mp_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&mp_RTTex);
 		assert(SUCCEEDED(hResult));
 
-		hResult = mp_Device->CreateRenderTargetView(d3d11FrameBuffer, 0, mp_RenderTargetView.GetAddressOf());
+		hResult = mp_Device->CreateRenderTargetView(mp_RTTex.Get(), 0, mp_RTView.GetAddressOf());
 		assert(SUCCEEDED(hResult));
-		d3d11FrameBuffer->Release();
+	}
+
+	{ // DepthStencilTex, DepthStencilView
+		D3D11_TEXTURE2D_DESC desc = {};
+		desc.Format = DXGI_FORMAT_D24_UNORM_S8_UINT;
+
+		desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
+
+		desc.Width = m_Resolution.x;
+		desc.Height = m_Resolution.y;
+
+		desc.CPUAccessFlags = 0;
+		desc.Usage = D3D11_USAGE_DEFAULT;
+
+		desc.SampleDesc.Count = 1;
+		desc.SampleDesc.Quality = 0;
+
+		desc.MipLevels = 1;
+		desc.MiscFlags = 0;
+
+		desc.ArraySize = 1;
+
+		mp_Device->CreateTexture2D(&desc, nullptr, mp_DSTex.GetAddressOf());
+		mp_Device->CreateDepthStencilView(mp_DSTex.Get(), nullptr, mp_DSView.GetAddressOf());
+
+		mp_Context->OMSetRenderTargets(1, mp_RTView.GetAddressOf(), mp_DSView.Get());
 	}
 
 	// SprtieBatch
 	mp_SpriteBatch = std::make_unique<DirectX::SpriteBatch>(mp_Context.Get());
-	mp_SpriteFont = std::make_unique<DirectX::SpriteFont>(mp_Device.Get(), L"font file name");
+	//mp_SpriteFont = std::make_unique<DirectX::SpriteFont>(mp_Device.Get(), L"font file name");
 	isDrawing = false;
+
+	m_ClearColor = Vec4(0.1f, 0.1f, 0.1f, 1.f);
 }
 
 void RenderManager::Update()
@@ -159,5 +185,9 @@ void RenderManager::PrepareDraw()
 	viewport.MaxDepth = 1.0f;
 
 	mp_Context->RSSetViewports(1, &viewport);
+
+	float CColor[4] = { m_ClearColor.x, m_ClearColor.y, m_ClearColor.z, m_ClearColor.w};
+
+	mp_Context->ClearRenderTargetView(mp_RTView.Get(), CColor);
 }
 

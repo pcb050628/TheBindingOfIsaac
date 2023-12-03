@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Engine.h"
-#include "math.h"
+
 
 #include "Time.h"
 #include "Input.h"
@@ -27,13 +27,11 @@ void Engine::Init(HWND _hWnd, const RECT& _Resolution)
 
 	m_DC = GetDC(m_hWnd);
 
-	Vec2 test1 = Vec2(10, 10);
-	Vec2 test2 = Vec2(20 , 10);
-	Vec2 test3 = test1 + test2;
+	Vec2 res(m_Resolution.right, m_Resolution.bottom);
 
 	Time::GetInst()->Init();
 	Input::GetInst()->Init();
-	RenderManager::GetInst()->Init(m_hWnd);
+	RenderManager::GetInst()->Init(m_hWnd, res);
 	//ChapterManager::GetInst()->Init();
 }
 
