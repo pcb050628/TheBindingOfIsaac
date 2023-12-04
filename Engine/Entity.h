@@ -26,6 +26,4 @@ public:
 	Entity();
 	virtual ~Entity();
 
-	friend class Actor;
 };
-

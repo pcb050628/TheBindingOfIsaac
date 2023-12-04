@@ -28,6 +28,11 @@ public:
     vector<Actor*> GetActorAboveTileY(int _y);
     vector<class Collider*> GetAllCollider();
 
+    void AddActor(Actor* _actr)
+    {
+        m_Actors.push_back(_actr);
+    }
+
 public:
     Layer();
     ~Layer() override;

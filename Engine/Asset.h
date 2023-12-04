@@ -5,6 +5,7 @@ enum class AssetType
 {
     TEXTURE,
     ANIM,
+    ROOM,
     END
 };
 
@@ -27,11 +28,11 @@ private:
     void SetID(AssetID _id) { m_ID = _id; }
 
 public:
-    virtual void SetResourcePath(std::wstring _path) { m_Path = _path; }
-    virtual std::wstring GetResourcePath() { return m_Path; }
+    virtual void SetAssetPath(std::wstring _path) { m_Path = _path; }
+    virtual std::wstring GetAssetPath() { return m_Path; }
 
-    virtual void SetResourceName(std::wstring _name) { m_ResourceName = _name; }
-    virtual std::wstring GetResourceName() { return m_ResourceName; }
+    virtual void SetAssetName(std::wstring _name) { m_ResourceName = _name; }
+    virtual std::wstring GetAssetName() { return m_ResourceName; }
 
     AssetID GetAssetID() { return m_ID; }
 
@@ -53,4 +54,20 @@ enum class AssetID
     TEXTURE_CHAPTER4_BACKGROUND,
     ANIM_PLAYER_WALK_HORIZONTAL,
     ANIM_PLAYER_WALK_VERTICAL,
+    CHAPTER1_1,
+    CHAPTER1_2,
+    CHAPTER1_3,
+    CHAPTER1_4,
+    CHAPTER2_1,
+    CHAPTER2_2,
+    CHAPTER2_3,
+    CHAPTER2_4,
+    CHAPTER3_1,
+    CHAPTER3_2,
+    CHAPTER3_3,
+    CHAPTER3_4,
+    CHAPTER4_1,
+    CHAPTER4_2,
+    CHAPTER4_3,
+    CHAPTER4_4,
 };

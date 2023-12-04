@@ -28,3 +28,11 @@ void ChangeChapter(CHAPTERLEVEL _level)
 	task.Type = TASKTYPE::CHANGE_CHAPTER;
 	task.Param_1 = (UINT_PTR)_level;
 }
+
+void AddActor(Actor* _actr, CHAPTERLEVEL _level)
+{
+	Task task;
+	task.Type = TASKTYPE::CREATE_ACTOR;
+	task.Param_1 = (UINT_PTR)_actr;
+	task.Param_2 = (UINT_PTR)_level;
+}

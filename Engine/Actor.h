@@ -49,8 +49,6 @@ public:
         return nullptr;
     }
 
-    void Destroy() { Super::mb_IsDead = true; }
-
 public:
     Actor();
     virtual ~Actor() override;

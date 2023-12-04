@@ -40,6 +40,15 @@ void Layer::Render()
 	{
 		actor->Render();
 	}
+
+	auto iter = m_Actors.begin();
+	for (; iter != m_Actors.end();)
+	{
+		if ((*iter)->GetIsDead())
+			iter = m_Actors.erase(iter);
+		else
+			iter++;
+	}
 }
 
 vector<Actor*> Layer::GetActorAboveTileY(int _y)

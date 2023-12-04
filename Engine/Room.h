@@ -1,5 +1,5 @@
 #pragma once
-#include "Entity.h"
+#include "Asset.h"
 #include "Layer.h"
 
 enum DIRECTION
@@ -19,8 +19,9 @@ enum class RoomType
 };
 
 class Room :
-    public Entity
+    public Asset
 {
+    typedef Asset Super;
 private:
     RoomType m_Type;
     Layer m_Layers[(int)LayerType::END];
@@ -31,6 +32,9 @@ private:
     Room* Bottom;
 
 public:
+    virtual bool Load(std::wstring _path) override;
+    virtual bool Save() override;
+
     virtual void Enter();
     virtual void Update();
     virtual void LateUpdate();
@@ -60,6 +64,11 @@ public:
         }
 
         return nullptr;
+    }
+
+    void AddActor(Actor* _actr, LayerType _layr)
+    {
+        m_Layers[(UINT)_layr].AddActor(_actr);
     }
 
 public:

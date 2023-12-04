@@ -7,9 +7,8 @@ class AssetManager
 	SINGLETON(AssetManager)
 private:
 	std::map<AssetID, Asset*> m_Assets;
+	std::vector<AssetID> m_AssetIDs[(UINT)AssetType::END];
 	std::map<AssetID, std::wstring> m_AssetPaths;
-
-	//AssetType m_TypeArray[(UINT)AssetType::END];
 
 public:
 	void Init();

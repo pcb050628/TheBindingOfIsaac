@@ -33,5 +33,6 @@ typedef Vector3 Vec3;
 typedef Vector4 Vec4;
 
 #include "define.h"
+#include "functions.h"
 
 #endif //PCH_H

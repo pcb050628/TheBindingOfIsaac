@@ -29,8 +29,11 @@ private:
             m_CurRoom = room;
     }
 
+    void AddActor(Actor* _actr, LayerType _layr)
+    {
+        m_CurRoom->AddActor(_actr, _layr);
+    }
+
     friend class TaskManager;
 };
 
-
-void ChangeRoom(DIRECTION _dir);

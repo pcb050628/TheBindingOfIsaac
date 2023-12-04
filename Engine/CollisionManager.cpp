@@ -5,6 +5,7 @@
 #include "Chapter.h"
 #include "Room.h"
 #include "Layer.h"
+#include "Actor.h"
 
 #include "Collider.h"
 #include "BoxCollider.h"
@@ -89,6 +90,9 @@ void CollisionManager::LayerCheck(int _layer1, int _layer2)
 
 bool CollisionManager::isCollision(Collider* col1, Collider* col2)
 {
+	if (!IsValid(col1->GetOwner()) || !IsValid(col2->GetOwner()))
+		return false;
+
 	if (col1->GetColliderType() == col2->GetColliderType())
 		if (col1->GetColliderType() == ColliderType::Box)
 			return isCollision(static_cast<BoxCollider*>(col1), static_cast<BoxCollider*>(col2));

@@ -192,6 +192,9 @@
     <ClInclude Include="TaskManager.h">
       <Filter>01_Basic\TaskManager</Filter>
     </ClInclude>
+    <ClInclude Include="functions.h">
+      <Filter>0_Default\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

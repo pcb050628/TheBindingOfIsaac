@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "Room.h"
 
-Room::Room()
-	: m_Layers()
+Room::Room() : Super(AssetType::ROOM)
+	, m_Layers()
 	, m_Type(RoomType::Common)
 	, Left(nullptr)
 	, Right(nullptr)
@@ -13,6 +13,16 @@ Room::Room()
 
 Room::~Room()
 {
+}
+
+bool Room::Load(std::wstring _path)
+{
+	return false;
+}
+
+bool Room::Save()
+{
+	return false;
 }
 
 void Room::Enter()

@@ -28,8 +28,6 @@ bool Anim::Load(std::wstring _FilePath)
 		return false;
 	}
 
-	// Animation 이름 로드
-
 	while (true)
 	{
 		wchar_t szRead[256] = {};
@@ -38,14 +36,32 @@ bool Anim::Load(std::wstring _FilePath)
 			break;
 		}
 
-		if (!wcscmp(szRead, L"[ATLAS_TEXTURE_NAME]"))
+		if (!wcscmp(szRead, L"[ANIM_NAME]"))
 		{
 			std::wstring name;
 
 			fwscanf_s(pFile, L"%s", szRead, 256);
 
 			name = szRead;
-			Super::SetResourceName(name);
+			Super::SetAssetName(name);
+		}
+		else if (!wcscmp(szRead, L"[ANIM_PATH]"))
+		{
+			std::wstring path;
+
+			fwscanf_s(pFile, L"%s", szRead, 256);
+
+			path = szRead; 
+			Super::SetAssetPath(path);
+		}
+		else if (!wcscmp(szRead, L"[ATLAS_TEXTURE_NAME]"))
+		{
+			std::wstring name;
+
+			fwscanf_s(pFile, L"%s", szRead, 256);
+
+			name = szRead;
+			Super::SetAssetName(name);
 		}
 		else if (!wcscmp(szRead, L"[ATLAS_TEXTURE_PATH]"))
 		{
@@ -56,7 +72,7 @@ bool Anim::Load(std::wstring _FilePath)
 			if (m_Atlas == nullptr)
 			{
 				strPath = szRead;
-				m_Atlas = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(Super::GetResourceName(), strPath);
+				m_Atlas = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(Super::GetAssetName(), strPath);
 			}
 		}
 		else if (!wcscmp(szRead, L"[FRAME_COUNT]"))
@@ -108,7 +124,7 @@ bool Anim::Save()
 {
 	FILE* pFile = nullptr;
 
-	std::wstring _FilePath = Super::GetResourcePath() + std::to_wstring((UINT)Super::GetAssetID());
+	std::wstring _FilePath = Super::GetAssetPath() + std::to_wstring((UINT)Super::GetAssetID());
 
 	_wfopen_s(&pFile, _FilePath.c_str(), L"w");
 
@@ -119,12 +135,21 @@ bool Anim::Save()
 	}*/
 
 	// 경로
+	fwprintf_s(pFile, L"[ANIM_NAME]\n");
+
+	fwprintf_s(pFile, Super::GetAssetName().c_str());
+	fwprintf_s(pFile, L"\n\n");
+
 	fwprintf_s(pFile, L"[ANIM_PATH]\n");
 
-	fwprintf_s(pFile, Super::GetResourcePath().c_str());
+	fwprintf_s(pFile, Super::GetAssetPath().c_str());
 	fwprintf_s(pFile, L"\n\n");
 
 	// atlas
+	fwprintf_s(pFile, L"[ATLAS_TEXTURE_NAME]\n");
+	fwprintf_s(pFile, m_Atlas->GetResourceName().c_str());
+	fwprintf_s(pFile, L"\n\n");
+
 	fwprintf_s(pFile, L"[ATLAS_TEXTURE_PATH]\n");
 	fwprintf_s(pFile, m_Atlas->GetResourcePath().c_str());
 	fwprintf_s(pFile, L"\n\n");
