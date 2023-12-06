@@ -20,7 +20,10 @@ bool ShaderTextureResource::Load(std::wstring _path)
 	//std::wstring name = string.substr(string.rfind(L"\\"), string.size());
 	//SetName(name);
 	if (SUCCEEDED(hResult))
+	{
+		SetResourcePath(_path);
 		return true;
+	}
 	else
 		return false;
 }

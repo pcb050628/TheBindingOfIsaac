@@ -2,6 +2,8 @@
 #include "TaskManager.h"
 #include "ChapterManager.h"
 
+#include "Actor.h"
+
 TaskManager::TaskManager()
 {
 

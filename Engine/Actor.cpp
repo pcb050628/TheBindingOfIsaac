@@ -6,6 +6,10 @@ Actor::Actor()
 	, m_Scale()
 	, m_Components()
 {
+	for (int i = 0; i < ComponentType::End; i++)
+	{
+		m_Components[i] = new std::vector<Component*>;
+	}
 }
 
 Actor::~Actor()

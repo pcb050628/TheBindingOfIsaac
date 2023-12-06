@@ -9,6 +9,8 @@
 #include "RenderManager.h"
 #include "ResourceManager.h"
 
+#include "Test.h"
+
 Engine::Engine()
 	: m_hWnd(nullptr)
 	, m_DC(nullptr)
@@ -28,13 +30,14 @@ void Engine::Init(HWND _hWnd, const RECT& _Resolution)
 
 	m_DC = GetDC(m_hWnd);
 
-	Vec2 res(m_Resolution.right, m_Resolution.bottom);
+	Vec2 res((float)m_Resolution.right, (float)m_Resolution.bottom);
 
 	Time::GetInst()->Init();
 	Input::GetInst()->Init();
 	RenderManager::GetInst()->Init(m_hWnd, res);
 	AssetManager::GetInst()->Init();
 	//ChapterManager::GetInst()->Init();
+	Test::GetInst()->Init();
 }
 
 void Engine::Run()
@@ -48,6 +51,7 @@ void Engine::Update()
 	Time::GetInst()->Update();
 	Input::GetInst()->Update();
 	//ChapterManager::GetInst()->Update();
+	Test::GetInst()->Update();
 }
 
 void Engine::Render()
@@ -56,6 +60,7 @@ void Engine::Render()
 
 	RenderManager::GetInst()->StartDraw();
 	//ChapterManager::GetInst()->Render();
+	Test::GetInst()->Render();
 	RenderManager::GetInst()->EndDraw();
 }
 

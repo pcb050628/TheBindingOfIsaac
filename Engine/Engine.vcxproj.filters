@@ -79,9 +79,6 @@
     <Filter Include="01_Basic\AssetManager">
       <UniqueIdentifier>{6a7751a8-c377-4179-b451-c68125c1f5f0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\AssetManager\Asset">
-      <UniqueIdentifier>{b9157414-858c-461b-b8e3-21727493fb41}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_Derived\Asset">
       <UniqueIdentifier>{7c6794c5-7b71-4f32-a7d4-70729ec96108}</UniqueIdentifier>
     </Filter>
@@ -177,9 +174,6 @@
     <ClInclude Include="State.h">
       <Filter>01_Basic\StateMachine\State</Filter>
     </ClInclude>
-    <ClInclude Include="Asset.h">
-      <Filter>01_Basic\AssetManager\Asset</Filter>
-    </ClInclude>
     <ClInclude Include="AssetManager.h">
       <Filter>01_Basic\AssetManager</Filter>
     </ClInclude>
@@ -194,6 +188,10 @@
     </ClInclude>
     <ClInclude Include="functions.h">
       <Filter>0_Default\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Test.h" />
+    <ClInclude Include="Asset.h">
+      <Filter>01_Basic\AssetManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -272,9 +270,6 @@
     <ClCompile Include="State.cpp">
       <Filter>01_Basic\StateMachine\State</Filter>
     </ClCompile>
-    <ClCompile Include="Asset.cpp">
-      <Filter>01_Basic\AssetManager\Asset</Filter>
-    </ClCompile>
     <ClCompile Include="AssetManager.cpp">
       <Filter>01_Basic\AssetManager</Filter>
     </ClCompile>
@@ -286,6 +281,10 @@
     </ClCompile>
     <ClCompile Include="TaskManager.cpp">
       <Filter>01_Basic\TaskManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Test.cpp" />
+    <ClCompile Include="Asset.cpp">
+      <Filter>01_Basic\AssetManager</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

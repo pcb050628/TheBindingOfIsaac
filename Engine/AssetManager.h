@@ -18,7 +18,7 @@ public:
 	{
 		auto asset = m_Assets.find(_id);
 		if (asset != m_Assets.end())
-			return asset;
+			return dynamic_cast<T*>(asset->second);
 
 		auto iter = m_AssetPaths.find(_id);
 		if (iter != m_AssetPaths.end())
@@ -33,5 +33,13 @@ public:
 	}
 
 	void Save(Asset* _asset) { _asset->Save(); }
+
+	template <typename T>
+	bool Create(AssetID _id, std::wstring _resourcePath, std::wstring _resourceName = L"resource")
+	{
+		Asset* asset = new T();
+		asset->SetAssetID(_id);
+		return asset->Create(_resourcePath, _resourceName);
+	}
 };
 

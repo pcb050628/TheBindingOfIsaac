@@ -30,9 +30,12 @@ public:
 		tmp->Load(_path);
 		if (tmp != nullptr)
 		{
+			tmp->SetResourceName(_name);
 			m_Resources.insert(std::make_pair(_name, tmp));
 			return dynamic_cast<T*>(tmp);
 		}
+		else
+			delete tmp;
 
 		return nullptr;
 	}

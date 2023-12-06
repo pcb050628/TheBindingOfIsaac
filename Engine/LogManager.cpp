@@ -51,6 +51,6 @@ void LogManager::Render()
 			break;
 		}
 
-		RenderManager::GetInst()->FontRender(iter->message, LT + (Vec2(0, 1) * i), color);
+		RenderManager::GetInst()->FontRender(iter->message, LT + (Vec2(0, 1) * (float)i), color);
 	}
 }

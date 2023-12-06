@@ -9,6 +9,7 @@ RenderManager::RenderManager()
 	, mp_SwapChain(nullptr)
 	, mp_RTView(nullptr)
 	, mp_SpriteBatch(nullptr)
+	, isDrawing(false)
 {
 
 }
@@ -82,8 +83,8 @@ void RenderManager::Init(HWND _hwnd, Vec2 _resolution)
 		}
 
 		DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
-		swapChainDesc.Width = m_Resolution.x;
-		swapChainDesc.Height = m_Resolution.y;
+		swapChainDesc.Width = (UINT)m_Resolution.x;
+		swapChainDesc.Height = (UINT)m_Resolution.y;
 		swapChainDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM_SRGB;
 		swapChainDesc.SampleDesc.Count = 1;
 		swapChainDesc.SampleDesc.Quality = 0;
@@ -114,8 +115,8 @@ void RenderManager::Init(HWND _hwnd, Vec2 _resolution)
 
 		desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 
-		desc.Width = m_Resolution.x;
-		desc.Height = m_Resolution.y;
+		desc.Width = (UINT)m_Resolution.x;
+		desc.Height = (UINT)m_Resolution.y;
 
 		desc.CPUAccessFlags = 0;
 		desc.Usage = D3D11_USAGE_DEFAULT;
@@ -153,15 +154,15 @@ void RenderManager::TextureRender(ID3D11ShaderResourceView* _srv, Vec2 _pos, REC
 		return;
 	}
 
-	RECT dPos = { _pos.x, _pos.y, _pos.x + 10, _pos.y + 10 };
+	//RECT dPos = { _pos.x, _pos.y, _pos.x + 10, _pos.y + 10 };
 
 	DirectX::XMFLOAT2 position = DirectX::XMFLOAT2(_pos.x, _pos.y);
 	DirectX::FXMVECTOR positionVector = DirectX::XMLoadFloat2(&position);
 
-	//DirectX::XMFLOAT2 scale = DirectX::XMFLOAT2(1.0f, 1.0f); // 스케일 설정
-	//DirectX::FXMVECTOR scaleVector = DirectX::XMLoadFloat2(&scale);
+	DirectX::XMFLOAT2 scale = DirectX::XMFLOAT2(5.0f, 2.0f); // 스케일 설정
+	DirectX::FXMVECTOR scaleVector = DirectX::XMLoadFloat2(&scale);
 
-	mp_SpriteBatch->Draw(_srv, positionVector, &_iSection);
+	mp_SpriteBatch->Draw(_srv, positionVector, &_iSection, DirectX::Colors::White, 0.0f, DirectX::g_XMZero, scaleVector);
 }
 
 void RenderManager::FontRender(std::wstring _wstring, Vec2 _pos, DirectX::XMVECTORF32 _color)

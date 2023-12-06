@@ -17,22 +17,23 @@ class Asset :
 private:
     AssetID m_ID;
     std::wstring m_Path;
-    std::wstring m_ResourceName;
+    std::wstring m_AssetName;
 
     static AssetType m_Type;
 
 private:
     virtual bool Load(std::wstring _path) = 0;
     virtual bool Save() = 0;
+    virtual bool Create(std::wstring _resourcePath, std::wstring _resourceName) = 0;
 
-    void SetID(AssetID _id) { m_ID = _id; }
+    void SetAssetID(AssetID _id) { m_ID = _id; }
 
 public:
     virtual void SetAssetPath(std::wstring _path) { m_Path = _path; }
     virtual std::wstring GetAssetPath() { return m_Path; }
 
-    virtual void SetAssetName(std::wstring _name) { m_ResourceName = _name; }
-    virtual std::wstring GetAssetName() { return m_ResourceName; }
+    virtual void SetAssetName(std::wstring _name) { m_AssetName = _name; }
+    virtual std::wstring GetAssetName() { return m_AssetName; }
 
     AssetID GetAssetID() { return m_ID; }
 

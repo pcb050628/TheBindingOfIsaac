@@ -9,6 +9,13 @@ struct Frame
     Vec2 vCutSize;  // 잘라낼 크기
     Vec2 vOffset;   // 오브젝트 중심에서 이동 값
     float Duration; // 해당 프레임 노출 시간
+
+    Frame()
+        : vLeftTop()
+        , vCutSize()
+        , vOffset()
+        , Duration(0.0f)
+    {}
 };
 
 class ShaderTextureResource;
@@ -20,7 +27,7 @@ private:
     std::vector<Frame>      m_Frames;
     ShaderTextureResource*  m_Atlas;
 
-    bool                    mb_isPlaying;
+    bool                    m_bIsPlaying;
 
     int                     m_iCurFrame;
     float                   m_AccTime;
@@ -29,15 +36,16 @@ private:
 private:
     virtual bool Load(std::wstring _FilePath) override;
     virtual bool Save() override;
+    virtual bool Create(std::wstring _resourcePath, std::wstring _resourceName) override;
 
 public:
     virtual void LateUpdate();
     virtual void Render(Vec2 _pos);
 
 public:
-    void Play() { mb_isPlaying = true; }
-    void Stop() { mb_isPlaying = false; }
-    bool GetIsPlay() { return mb_isPlaying; }
+    void Play() { m_bIsPlaying = true; }
+    void Stop() { m_bIsPlaying = false; }
+    bool GetIsPlay() { return m_bIsPlaying; }
 
 public:
     Anim();

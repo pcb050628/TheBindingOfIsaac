@@ -11,7 +11,7 @@ class Actor :
 private:
     Vec2 m_Position;
     Vec2 m_Scale;
-    vector<Component*>* m_Components[ComponentType::End];
+    vector<Component*>* m_Components[(UINT)ComponentType::End];
 
 public:
     virtual void Update(); 
@@ -29,21 +29,21 @@ public:
         Component* comp = new T();
         comp->SetName(_name);
         comp->m_Owner = this;
-        m_Components[comp->GetType()]->push_back(comp);
+        m_Components[(UINT)comp->GetType()]->push_back(comp);
         return dynamic_cast<T*>(comp);
     }
 
     vector<Component*>* GetComponent(ComponentType _type)
     {
-        return m_Components[_type];
+        return m_Components[(UINT)_type];
     }
 
     Component* GetComponent(ComponentType _type, const wstring& _name)
     {
-        for (int i = 0; i < m_Components[_type]->size(); i++)
+        for (int i = 0; i < m_Components[(UINT)_type]->size(); i++)
         {
-            if (m_Components[_type]->at(i)->GetName() == _name)
-                return m_Components[_type]->at(i);
+            if (m_Components[(UINT)_type]->at(i)->GetName() == _name)
+                return m_Components[(UINT)_type]->at(i);
         }
 
         return nullptr;

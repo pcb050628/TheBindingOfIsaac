@@ -9,6 +9,10 @@
 Anim::Anim() : Super(AssetType::ANIM)
     , m_Frames({})
     , m_Atlas(nullptr)
+	, m_bIsPlaying(false)
+	, m_iCurFrame(0)
+	, m_bFinish(false)
+	, m_AccTime(0.0f)
 {
 }
 
@@ -180,9 +184,16 @@ bool Anim::Save()
 	return true;
 }
 
+bool Anim::Create(std::wstring _resourcePath, std::wstring _resourceName)
+{
+
+
+	return false;
+}
+
 void Anim::LateUpdate()
 {
-	if (m_bFinish || !mb_isPlaying)
+	if (m_bFinish || !m_bIsPlaying)
 		return;
 
 	m_AccTime += Time::GetInst()->GetDeltaTime();
@@ -204,13 +215,13 @@ void Anim::LateUpdate()
 
 void Anim::Render(Vec2 _pos)
 {
-	if (m_bFinish || !mb_isPlaying)
+	if (m_bFinish || !m_bIsPlaying)
 		return;
 	Vec2 Offset = m_Frames[m_iCurFrame].vOffset;
 	Vec2 LeftTop = m_Frames[m_iCurFrame].vLeftTop;
 	Vec2 RightBottom = m_Frames[m_iCurFrame].vLeftTop + m_Frames[m_iCurFrame].vCutSize;
 
-	RECT iSection = { LeftTop.x, LeftTop.y, RightBottom.x, RightBottom.y };
+	RECT iSection = { (LONG)LeftTop.x, (LONG)LeftTop.y, (LONG)RightBottom.x, (LONG)RightBottom.y };
 
 	RenderManager::GetInst()->TextureRender(m_Atlas->GetTextureView().Get(), _pos + Offset, iSection);
 }

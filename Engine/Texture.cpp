@@ -24,6 +24,8 @@ bool Texture::Load(std::wstring _FilePath)
 
 	_wfopen_s(&pFile, _FilePath.c_str(), L"r");
 
+	std::wstring resourceName;
+
 	while (true)
 	{
 		wchar_t szRead[256] = {};
@@ -32,46 +34,42 @@ bool Texture::Load(std::wstring _FilePath)
 			return false;
 		}
 		
-		if (!wcscmp(szRead, L"[TEXTURE_NAME]"))
+		if (!wcscmp(szRead, L"[RESOURCE_NAME]"))
 		{
-			std::wstring name;
-
 			fwscanf_s(pFile, L"%s", szRead, 256);
-			name = szRead;
-
-			Super::SetAssetName(name);
+			resourceName = szRead;
 		}
-		else if (!wcscmp(szRead, L"[TEXTURE_PATH]"))
+		else if (!wcscmp(szRead, L"[RESOURCE_PATH]"))
 		{
 			std::wstring path;
 
 			fwscanf_s(pFile, L"%s", szRead, 256);
 			path = szRead;
 
-			m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(Super::GetAssetName(), path);
+			m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(resourceName, path);
 		}
 		else if (!wcscmp(szRead, L"[LEFT]"))
 		{
 			int value = 0;
-			fwscanf_s(pFile, L"%d", value);
+			fwscanf_s(pFile, L"%d", &value);
 			m_ImageSection.left = value;
 		}
 		else if (!wcscmp(szRead, L"[TOP]"))
 		{
 			int value = 0;
-			fwscanf_s(pFile, L"%d", value);
+			fwscanf_s(pFile, L"%d", &value);
 			m_ImageSection.top = value;
 		}
 		else if (!wcscmp(szRead, L"[RIGHT]"))
 		{
 			int value = 0;
-			fwscanf_s(pFile, L"%d", value);
+			fwscanf_s(pFile, L"%d", &value);
 			m_ImageSection.right = value;
 		}
 		else if (!wcscmp(szRead, L"[BOTTOM]"))
 		{
 			int value = 0;
-			fwscanf_s(pFile, L"%d", value);
+			fwscanf_s(pFile, L"%d", &value);
 			m_ImageSection.bottom = value;
 
 			break;
@@ -85,7 +83,7 @@ bool Texture::Save()
 {
 	FILE* pFile = nullptr;
 
-	std::wstring _FilePath = Super::GetAssetPath() + std::to_wstring((UINT)Super::GetAssetID());
+	std::wstring _FilePath = GetContentPath() + L"Asset\\" + std::to_wstring((UINT)Super::GetAssetID());
 
 	_wfopen_s(&pFile, _FilePath.c_str(), L"w");
 
@@ -96,19 +94,19 @@ bool Texture::Save()
 	}*/
 
 	// 이름
-	fwprintf_s(pFile, L"[TEXTURE_NAME]\n");
+	fwprintf_s(pFile, L"[RESOURCE_NAME]\n");
 
-	fwprintf_s(pFile, Super::GetAssetName().c_str());
+	fwprintf_s(pFile, m_TextureResource->GetResourceName().c_str());
 	fwprintf_s(pFile, L"\n\n");
 
 	// 경로
-	fwprintf_s(pFile, L"[TEXTURE_PATH]\n");
+	fwprintf_s(pFile, L"[RESOURCE_PATH]\n");
 
-	fwprintf_s(pFile, Super::GetAssetPath().c_str());
+	fwprintf_s(pFile, m_TextureResource->GetResourcePath().c_str());
 	fwprintf_s(pFile, L"\n\n");
 
 	// image section
-	fwprintf_s(pFile, L"[TEXTURE_SECTION]\n");
+	//fwprintf_s(pFile, L"[TEXTURE_SECTION]\n");
 
 	fwprintf_s(pFile, L"[LEFT]\n");
 	fwprintf_s(pFile, L"%d\n", m_ImageSection.left);
@@ -125,4 +123,17 @@ bool Texture::Save()
 	fclose(pFile);
 
 	return true;
+}
+
+bool Texture::Create(std::wstring _resourcePath, std::wstring _resourceName)
+{
+	m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(_resourceName, _resourcePath);
+
+	if (m_TextureResource != nullptr)
+	{
+		Save();
+		return true;
+	}
+
+	return false;
 }
