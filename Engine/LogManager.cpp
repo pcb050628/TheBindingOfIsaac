@@ -51,6 +51,7 @@ void LogManager::Render()
 			break;
 		}
 
-		RenderManager::GetInst()->FontRender(iter->message, LT + (Vec2(0, 1) * (float)i), color);
+		// text를 내보낼 방법 찾기
+		// SpriteFont or TextOut
 	}
 }

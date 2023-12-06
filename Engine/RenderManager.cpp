@@ -4,12 +4,11 @@
 #include "assert.h"
 
 RenderManager::RenderManager()
-	: mp_Device(nullptr)
-	, mp_Context(nullptr)
-	, mp_SwapChain(nullptr)
-	, mp_RTView(nullptr)
-	, mp_SpriteBatch(nullptr)
-	, isDrawing(false)
+	: m_pDevice(nullptr)
+	, m_pContext(nullptr)
+	, m_pSwapChain(nullptr)
+	, m_pRTView(nullptr)
+	, m_bIsDrawing(false)
 {
 
 }
@@ -21,7 +20,7 @@ RenderManager::~RenderManager()
 
 void RenderManager::Init(HWND _hwnd, Vec2 _resolution)
 {
-	m_Resolution = _resolution;
+	m_vResolution = _resolution;
 
 	{ // device initialize
 		ID3D11Device*			baseDevice;
@@ -47,11 +46,11 @@ void RenderManager::Init(HWND _hwnd, Vec2 _resolution)
 			return;
 		}
 
-		hResult = baseDevice->QueryInterface(__uuidof(ID3D11Device1), (void**)&mp_Device);
+		hResult = baseDevice->QueryInterface(__uuidof(ID3D11Device1), (void**)&m_pDevice);
 		assert(SUCCEEDED(hResult));
 		baseDevice->Release();
 
-		hResult = baseContext->QueryInterface(__uuidof(ID3D11DeviceContext1), (void**)&mp_Context);
+		hResult = baseContext->QueryInterface(__uuidof(ID3D11DeviceContext1), (void**)&m_pContext);
 		assert(SUCCEEDED(hResult));
 		baseContext->Release();
 	}
@@ -60,7 +59,7 @@ void RenderManager::Init(HWND _hwnd, Vec2 _resolution)
 		IDXGIFactory2* factory;
 		{
 			IDXGIDevice1* dxgiDevice;
-			HRESULT hResult = mp_Device->QueryInterface(__uuidof(IDXGIDevice1), (void**)&dxgiDevice);
+			HRESULT hResult = m_pDevice->QueryInterface(__uuidof(IDXGIDevice1), (void**)&dxgiDevice);
 			if (FAILED(hResult))
 			{
 				return;
@@ -83,8 +82,8 @@ void RenderManager::Init(HWND _hwnd, Vec2 _resolution)
 		}
 
 		DXGI_SWAP_CHAIN_DESC1 swapChainDesc = {};
-		swapChainDesc.Width = (UINT)m_Resolution.x;
-		swapChainDesc.Height = (UINT)m_Resolution.y;
+		swapChainDesc.Width = (UINT)m_vResolution.x;
+		swapChainDesc.Height = (UINT)m_vResolution.y;
 		swapChainDesc.Format = DXGI_FORMAT_B8G8R8A8_UNORM_SRGB;
 		swapChainDesc.SampleDesc.Count = 1;
 		swapChainDesc.SampleDesc.Quality = 0;
@@ -95,17 +94,17 @@ void RenderManager::Init(HWND _hwnd, Vec2 _resolution)
 		swapChainDesc.AlphaMode = DXGI_ALPHA_MODE_UNSPECIFIED;
 		swapChainDesc.Flags = 0;
 
-		HRESULT hResult = factory->CreateSwapChainForHwnd(mp_Device.Get(), _hwnd, &swapChainDesc, 0, 0, &mp_SwapChain);
+		HRESULT hResult = factory->CreateSwapChainForHwnd(m_pDevice.Get(), _hwnd, &swapChainDesc, 0, 0, &m_pSwapChain);
 		if (FAILED(hResult))
 			return;
 		factory->Release();
 	}
 
 	{ // Render Target View
-		HRESULT hResult = mp_SwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&mp_RTTex);
+		HRESULT hResult = m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&m_pRTTex);
 		assert(SUCCEEDED(hResult));
 
-		hResult = mp_Device->CreateRenderTargetView(mp_RTTex.Get(), 0, mp_RTView.GetAddressOf());
+		hResult = m_pDevice->CreateRenderTargetView(m_pRTTex.Get(), 0, m_pRTView.GetAddressOf());
 		assert(SUCCEEDED(hResult));
 	}
 
@@ -115,8 +114,8 @@ void RenderManager::Init(HWND _hwnd, Vec2 _resolution)
 
 		desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 
-		desc.Width = (UINT)m_Resolution.x;
-		desc.Height = (UINT)m_Resolution.y;
+		desc.Width = (UINT)m_vResolution.x;
+		desc.Height = (UINT)m_vResolution.y;
 
 		desc.CPUAccessFlags = 0;
 		desc.Usage = D3D11_USAGE_DEFAULT;
@@ -129,66 +128,34 @@ void RenderManager::Init(HWND _hwnd, Vec2 _resolution)
 
 		desc.ArraySize = 1;
 
-		mp_Device->CreateTexture2D(&desc, nullptr, mp_DSTex.GetAddressOf());
-		mp_Device->CreateDepthStencilView(mp_DSTex.Get(), nullptr, mp_DSView.GetAddressOf());
-
-		mp_Context->OMSetRenderTargets(1, mp_RTView.GetAddressOf(), mp_DSView.Get());
+		m_pDevice->CreateTexture2D(&desc, nullptr, m_pDSTex.GetAddressOf());
+		m_pDevice->CreateDepthStencilView(m_pDSTex.Get(), nullptr, m_pDSView.GetAddressOf());
 	}
 
-	// SprtieBatch
-	mp_SpriteBatch = std::make_unique<DirectX::SpriteBatch>(mp_Context.Get());
-	//mp_SpriteFont = std::make_unique<DirectX::SpriteFont>(mp_Device.Get(), L"font file name");
-	isDrawing = false;
+	D3D11_VIEWPORT viewport = {};
 
-	m_ClearColor = Vec4(0.1f, 0.1f, 0.1f, 1.f);
-}
-
-void RenderManager::Update()
-{
-}
-
-void RenderManager::TextureRender(ID3D11ShaderResourceView* _srv, Vec2 _pos, RECT& _iSection)
-{
-	if (!isDrawing)
-	{
-		return;
-	}
-
-	//RECT dPos = { _pos.x, _pos.y, _pos.x + 10, _pos.y + 10 };
-
-	DirectX::XMFLOAT2 position = DirectX::XMFLOAT2(_pos.x, _pos.y);
-	DirectX::FXMVECTOR positionVector = DirectX::XMLoadFloat2(&position);
-
-	DirectX::XMFLOAT2 scale = DirectX::XMFLOAT2(5.0f, 2.0f); // 스케일 설정
-	DirectX::FXMVECTOR scaleVector = DirectX::XMLoadFloat2(&scale);
-
-	mp_SpriteBatch->Draw(_srv, positionVector, &_iSection, DirectX::Colors::White, 0.0f, DirectX::g_XMZero, scaleVector);
-}
-
-void RenderManager::FontRender(std::wstring _wstring, Vec2 _pos, DirectX::XMVECTORF32 _color)
-{
-	if (!isDrawing)
-	{
-		return;
-	}
-	DirectX::XMFLOAT2 position = DirectX::XMFLOAT2(_pos.x, _pos.y);
-	mp_SpriteFont->DrawString(mp_SpriteBatch.get(), _wstring.c_str(), position, _color);
-}
-
-void RenderManager::PrepareDraw()
-{
-	D3D11_VIEWPORT viewport;
 	viewport.TopLeftX = 0;
 	viewport.TopLeftY = 0;
-	viewport.Width = static_cast<float>(Engine::GetInst()->GetResolution().right);
-	viewport.Height = static_cast<float>(Engine::GetInst()->GetResolution().bottom);
-	viewport.MinDepth = 0.0f;
-	viewport.MaxDepth = 1.0f;
+	viewport.Width = m_vResolution.x;
+	viewport.Height = m_vResolution.y;
+	viewport.MaxDepth = 1.f;
+	viewport.MinDepth = 0.f;
 
-	mp_Context->RSSetViewports(1, &viewport);
+	m_pContext->RSSetViewports(1, &viewport);
 
-	float CColor[4] = { m_ClearColor.x, m_ClearColor.y, m_ClearColor.z, m_ClearColor.w};
+	m_pContext->OMSetRenderTargets(1, m_pRTView.GetAddressOf(), m_pDSView.Get());
 
-	mp_Context->ClearRenderTargetView(mp_RTView.Get(), CColor);
+	m_vClearColor = Vec4(0.1f, 0.1f, 0.1f, 1.f);
 }
 
+void RenderManager::DrawStart()
+{
+	FLOAT color[4];
+	color[0] = m_vClearColor.x;
+	color[1] = m_vClearColor.y;
+	color[2] = m_vClearColor.z;
+	color[3] = m_vClearColor.w;
+
+	m_pContext->ClearRenderTargetView(m_pRTView.Get(), color);
+	m_pContext->ClearDepthStencilView(m_pDSView.Get(), 0, 1, 1);
+}

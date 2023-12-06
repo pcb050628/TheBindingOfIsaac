@@ -220,9 +220,5 @@ void Anim::Render(Vec2 _pos)
 	Vec2 Offset = m_Frames[m_iCurFrame].vOffset;
 	Vec2 LeftTop = m_Frames[m_iCurFrame].vLeftTop;
 	Vec2 RightBottom = m_Frames[m_iCurFrame].vLeftTop + m_Frames[m_iCurFrame].vCutSize;
-
-	RECT iSection = { (LONG)LeftTop.x, (LONG)LeftTop.y, (LONG)RightBottom.x, (LONG)RightBottom.y };
-
-	RenderManager::GetInst()->TextureRender(m_Atlas->GetTextureView().Get(), _pos + Offset, iSection);
 }
  

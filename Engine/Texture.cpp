@@ -4,7 +4,6 @@
 #include "ResourceManager.h"
 
 Texture::Texture() : Super(AssetType::TEXTURE)
-	, m_TextureResource(nullptr)
 	, m_ImageSection({})
 {
 }
@@ -15,7 +14,6 @@ Texture::~Texture()
 
 void Texture::Render(Vec2 _pos)
 {
-	RenderManager::GetInst()->TextureRender(m_TextureResource->GetTextureView().Get(), _pos, m_ImageSection);
 }
 
 bool Texture::Load(std::wstring _FilePath)
@@ -46,7 +44,7 @@ bool Texture::Load(std::wstring _FilePath)
 			fwscanf_s(pFile, L"%s", szRead, 256);
 			path = szRead;
 
-			m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(resourceName, path);
+			// 여기서 리소스 Load하기
 		}
 		else if (!wcscmp(szRead, L"[LEFT]"))
 		{
@@ -96,13 +94,13 @@ bool Texture::Save()
 	// 이름
 	fwprintf_s(pFile, L"[RESOURCE_NAME]\n");
 
-	fwprintf_s(pFile, m_TextureResource->GetResourceName().c_str());
+	//fwprintf_s(pFile, m_TextureResource->GetResourceName().c_str());
 	fwprintf_s(pFile, L"\n\n");
 
 	// 경로
 	fwprintf_s(pFile, L"[RESOURCE_PATH]\n");
 
-	fwprintf_s(pFile, m_TextureResource->GetResourcePath().c_str());
+	//fwprintf_s(pFile, m_TextureResource->GetResourcePath().c_str());
 	fwprintf_s(pFile, L"\n\n");
 
 	// image section
@@ -127,13 +125,14 @@ bool Texture::Save()
 
 bool Texture::Create(std::wstring _resourcePath, std::wstring _resourceName)
 {
-	m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(_resourceName, _resourcePath);
+	// 리소스 불러오기
+	//m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(_resourceName, _resourcePath);
 
-	if (m_TextureResource != nullptr)
+	/*if (m_TextureResource != nullptr)
 	{
 		Save();
 		return true;
-	}
+	}*/
 
 	return false;
 }

@@ -76,6 +76,9 @@
     <Filter Include="01_Basic\TaskManager">
       <UniqueIdentifier>{103698d5-9ebf-4913-8bb7-12d9f1d72022}</UniqueIdentifier>
     </Filter>
+    <Filter Include="0_Default\Shader">
+      <UniqueIdentifier>{2e8e88dc-8e6c-4f64-bddb-10b6e006409c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -259,5 +262,10 @@
     <ClCompile Include="Room.cpp">
       <Filter>01_Basic\Chapter</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="Std2d.fx">
+      <Filter>0_Default\Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

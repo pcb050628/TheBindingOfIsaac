@@ -51,17 +51,11 @@ void Engine::Update()
 	Time::GetInst()->Update();
 	Input::GetInst()->Update();
 	//ChapterManager::GetInst()->Update();
-	Test::GetInst()->Update();
+	//Test::GetInst()->Update();
 }
 
 void Engine::Render()
 {
-	RenderManager::GetInst()->PrepareDraw();
-
-	RenderManager::GetInst()->StartDraw();
-	//ChapterManager::GetInst()->Render();
-	Test::GetInst()->Render();
-	RenderManager::GetInst()->EndDraw();
 }
 
 void Engine::SetWindowSize(const RECT& _Resolution, bool _menu)
