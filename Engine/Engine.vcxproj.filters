@@ -31,12 +31,6 @@
     <Filter Include="01_Basic\Chapter">
       <UniqueIdentifier>{a610fea3-fc03-4907-8cac-7386f1499ee0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Chapter\Room">
-      <UniqueIdentifier>{f13cba26-4208-49a6-9cb9-850f1f74154a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\Chapter\Room\Layer">
-      <UniqueIdentifier>{97e22aa5-1be1-4805-8a99-59f9bcc15af3}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\Collision">
       <UniqueIdentifier>{8401d1bb-90ee-40da-875f-62aa4a71c683}</UniqueIdentifier>
     </Filter>
@@ -64,17 +58,8 @@
     <Filter Include="01_Basic\ResourceManager">
       <UniqueIdentifier>{623d8b65-a4ce-4ee1-a1f9-b96f13044a83}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\ResourceManager\Resource">
-      <UniqueIdentifier>{a1a59f4b-bb74-4c54-8a2e-2541b336acbf}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\LogManager">
       <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\StateMachine">
-      <UniqueIdentifier>{c62bd41e-a209-48c9-9ba0-d07e59661e17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\StateMachine\State">
-      <UniqueIdentifier>{1de22112-b1b8-4271-b3cd-d1cbcac1a83e}</UniqueIdentifier>
     </Filter>
     <Filter Include="01_Basic\AssetManager">
       <UniqueIdentifier>{6a7751a8-c377-4179-b451-c68125c1f5f0}</UniqueIdentifier>
@@ -135,12 +120,6 @@
     <ClInclude Include="Chapter.h">
       <Filter>01_Basic\Chapter</Filter>
     </ClInclude>
-    <ClInclude Include="Room.h">
-      <Filter>01_Basic\Chapter\Room</Filter>
-    </ClInclude>
-    <ClInclude Include="Layer.h">
-      <Filter>01_Basic\Chapter\Room\Layer</Filter>
-    </ClInclude>
     <ClInclude Include="Humanoid.h">
       <Filter>02_Derived\Actor</Filter>
     </ClInclude>
@@ -159,20 +138,11 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>01_Basic\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>01_Basic\ResourceManager\Resource</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>02_Derived\Asset</Filter>
     </ClInclude>
     <ClInclude Include="Anim.h">
       <Filter>02_Derived\Asset</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine.h">
-      <Filter>01_Basic\StateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>01_Basic\StateMachine\State</Filter>
     </ClInclude>
     <ClInclude Include="AssetManager.h">
       <Filter>01_Basic\AssetManager</Filter>
@@ -192,6 +162,15 @@
     <ClInclude Include="Test.h" />
     <ClInclude Include="Asset.h">
       <Filter>01_Basic\AssetManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>01_Basic\ResourceManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Layer.h">
+      <Filter>01_Basic\Chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>01_Basic\Chapter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -231,12 +210,6 @@
     <ClCompile Include="Chapter.cpp">
       <Filter>01_Basic\Chapter</Filter>
     </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>01_Basic\Chapter\Room</Filter>
-    </ClCompile>
-    <ClCompile Include="Layer.cpp">
-      <Filter>01_Basic\Chapter\Room\Layer</Filter>
-    </ClCompile>
     <ClCompile Include="Humanoid.cpp">
       <Filter>02_Derived\Actor</Filter>
     </ClCompile>
@@ -255,20 +228,11 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>01_Basic\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>01_Basic\ResourceManager\Resource</Filter>
-    </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>02_Derived\Asset</Filter>
     </ClCompile>
     <ClCompile Include="Anim.cpp">
       <Filter>02_Derived\Asset</Filter>
-    </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>01_Basic\StateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>01_Basic\StateMachine\State</Filter>
     </ClCompile>
     <ClCompile Include="AssetManager.cpp">
       <Filter>01_Basic\AssetManager</Filter>
@@ -285,6 +249,15 @@
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="Asset.cpp">
       <Filter>01_Basic\AssetManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>01_Basic\ResourceManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Layer.cpp">
+      <Filter>01_Basic\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>01_Basic\Chapter</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
