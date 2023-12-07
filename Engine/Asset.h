@@ -14,7 +14,7 @@ enum class AssetID;
 class Asset :
     public Entity
 {
-private:
+protected:
     AssetID m_ID;
     std::wstring m_Path;
     std::wstring m_AssetName;

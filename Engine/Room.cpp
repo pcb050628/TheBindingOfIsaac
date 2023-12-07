@@ -15,6 +15,11 @@ Room::~Room()
 {
 }
 
+void Room::Create(AssetID _id)
+{
+
+}
+
 bool Room::Load(std::wstring _path)
 {
 	return false;
@@ -22,6 +27,8 @@ bool Room::Load(std::wstring _path)
 
 bool Room::Save()
 {
+
+
 	return false;
 }
 

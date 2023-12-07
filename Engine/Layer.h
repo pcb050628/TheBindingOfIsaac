@@ -12,12 +12,12 @@ enum class LayerType
     END,
 };
 
-class Actor;
+class GameObject;
 class Layer :
     public Entity
 {
 private:
-    vector<Actor*> m_Actors;
+    vector<GameObject*> m_Actors;
 
 public:
     void Update();
@@ -25,10 +25,10 @@ public:
     void Render();
 
     // ���߿� �����Ҷ� ����Ұ�
-    vector<Actor*> GetActorAboveTileY(int _y);
+    vector<GameObject*> GetActorAboveTileY(int _y);
     vector<class Collider*> GetAllCollider();
 
-    void AddActor(Actor* _actr)
+    void AddActor(GameObject* _actr)
     {
         m_Actors.push_back(_actr);
     }

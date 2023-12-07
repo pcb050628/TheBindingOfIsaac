@@ -6,20 +6,24 @@ enum class ResourceType
 {
 	Texture,
 	Sound,
+	MESH,
+	GRAPHICS_SHADER,
+	COMPUTER_SHADER,
 	End
 };
 
 class Resource : 
 	public Entity
 {
-private:
+protected:
 	std::wstring m_ResourcePath;
 	std::wstring m_ResourceName;
 
-public:
-	//static ResourceType GetType() { return m_Type; }
+	const ResourceType	m_Type;
 
+public:
 	virtual bool Load(std::wstring _FilePath) = 0;
+	virtual bool Save();
 
 	virtual void SetResourcePath(std::wstring _path) { m_ResourcePath = _path; }
 	virtual std::wstring GetResourcePath() { return m_ResourcePath; }

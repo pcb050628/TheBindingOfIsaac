@@ -19,7 +19,7 @@ Test::~Test()
 
 void Test::Init()
 {
-	Actor* a = new Actor();
+	GameObject* a = new GameObject();
 	TextureRenderer* tr = a->AddComponent<TextureRenderer>();
 	Texture* t = nullptr;
 	//std::wstring path = GetContentPath();
@@ -32,12 +32,12 @@ void Test::Init()
 
 void Test::Update()
 {
-	for (Actor* actr : m_Actors)
+	for (GameObject* actr : m_Actors)
 		actr->Update();
 }
 
 void Test::Render()
 {
-	for (Actor* actr : m_Actors)
+	for (GameObject* actr : m_Actors)
 		actr->Render();
 }

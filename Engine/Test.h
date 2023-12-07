@@ -1,11 +1,11 @@
 #pragma once
-#include "Actor.h"
+#include "GameObject.h"
 
 class Test
 {
 	SINGLETON(Test)
 private:
-	std::vector<Actor*> m_Actors;
+	std::vector<GameObject*> m_Actors;
 
 public:
 	void Init();

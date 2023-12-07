@@ -172,7 +172,7 @@ call EngineCopy.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Actor.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Anim.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="Asset.h" />
@@ -189,16 +189,19 @@ call EngineCopy.bat</Command>
     <ClInclude Include="Entity.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="functions.h" />
+    <ClInclude Include="GraphicsShader.h" />
     <ClInclude Include="Humanoid.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="LogManager.h" />
+    <ClInclude Include="Mesh.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Room.h" />
-    <ClInclude Include="ShaderTextureResource.h" />
+    <ClInclude Include="Shader.h" />
+    <ClInclude Include="structs.h" />
     <ClInclude Include="TaskManager.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="Texture.h" />
@@ -206,7 +209,7 @@ call EngineCopy.bat</Command>
     <ClInclude Include="Time.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Anim.cpp" />
     <ClCompile Include="Animator.cpp" />
     <ClCompile Include="Asset.cpp" />
@@ -220,10 +223,12 @@ call EngineCopy.bat</Command>
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="GraphicsShader.cpp" />
     <ClCompile Include="Humanoid.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="LogManager.cpp" />
+    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
@@ -234,7 +239,8 @@ call EngineCopy.bat</Command>
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="ShaderTextureResource.cpp" />
+    <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="structs.cpp" />
     <ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="Texture.cpp" />

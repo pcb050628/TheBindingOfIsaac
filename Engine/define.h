@@ -12,3 +12,4 @@
 						return &Inst;\
 					}\
 					type* operator = (const type& _other) = delete;
+

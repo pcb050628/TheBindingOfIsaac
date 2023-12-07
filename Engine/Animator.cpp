@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Animator.h"
 
-#include "Actor.h"
+#include "GameObject.h"
 
 Animator::Animator() : Super(ComponentType::ANIMATOR)
 	, m_CurAnim(nullptr)
@@ -28,6 +28,6 @@ void Animator::Render()
 {
 	if (m_CurAnim != nullptr)
 	{
-		m_CurAnim->Render(GetOwner()->GetPosition());
+		//m_CurAnim->Render(GetOwner()->GetPosition());
 	}
 }

@@ -2,7 +2,7 @@
 #include "TaskManager.h"
 #include "ChapterManager.h"
 
-#include "Actor.h"
+#include "GameObject.h"
 
 TaskManager::TaskManager()
 {
@@ -34,11 +34,11 @@ void TaskManager::Update()
 			break;
 
 		case TASKTYPE::CREATE_ACTOR:
-			ChapterManager::GetInst()->GetCurChapter()->AddActor((Actor*)task.Param_1, (LayerType)task.Param_2);
+			ChapterManager::GetInst()->GetCurChapter()->AddActor((GameObject*)task.Param_1, (LayerType)task.Param_2);
 			break;
 
 		case TASKTYPE::DELETE_ACTOR:
-			delete (Actor*)task.Param_1;
+			delete (GameObject*)task.Param_1;
 			break;
 		}
 

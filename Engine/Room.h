@@ -32,6 +32,7 @@ private:
     Room* Bottom;
 
 public:
+    virtual void Create(AssetID _id);
     virtual bool Load(std::wstring _path) override;
     virtual bool Save() override;
 
@@ -66,7 +67,7 @@ public:
         return nullptr;
     }
 
-    void AddActor(Actor* _actr, LayerType _layr)
+    void AddActor(GameObject* _actr, LayerType _layr)
     {
         m_Layers[(UINT)_layr].AddActor(_actr);
     }

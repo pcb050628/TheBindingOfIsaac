@@ -14,6 +14,10 @@
 #include <queue>
 #include <map>
 #include <string>
+#include <filesystem>
+#include <iostream>
+#include <fstream>
+#include <iomanip>
 
 #include "wrl.h"
 #include <d3d11_1.h>
@@ -33,6 +37,7 @@ typedef Vector3 Vec3;
 typedef Vector4 Vec4;
 
 #include "define.h"
+#include "structs.h"
 #include "functions.h"
 
 #endif //PCH_H

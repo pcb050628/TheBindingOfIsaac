@@ -17,7 +17,7 @@ class Component :
     typedef Entity Super;
 
 private:
-    class Actor* m_Owner;
+    class GameObject* m_Owner;
     const ComponentType m_Type;
 
 public:
@@ -25,7 +25,7 @@ public:
     virtual void LateUpdate() = 0;
     virtual void Render();
 
-    Actor* GetOwner() { return m_Owner; }
+    GameObject* GetOwner() { return m_Owner; }
 
     virtual const ComponentType GetType() { return m_Type; }
 
@@ -33,6 +33,6 @@ public:
     Component(ComponentType _type);
     virtual ~Component();
 
-    friend Actor;
+    friend GameObject;
 };
 

@@ -5,7 +5,7 @@
 #include "Chapter.h"
 #include "Room.h"
 #include "Layer.h"
-#include "Actor.h"
+#include "GameObject.h"
 
 #include "Collider.h"
 #include "BoxCollider.h"

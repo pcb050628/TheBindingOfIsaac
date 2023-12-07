@@ -76,7 +76,7 @@ bool Anim::Load(std::wstring _FilePath)
 			if (m_Atlas == nullptr)
 			{
 				strPath = szRead;
-				m_Atlas = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(Super::GetAssetName(), strPath);
+				//m_Atlas = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(Super::GetAssetName(), strPath);
 			}
 		}
 		else if (!wcscmp(szRead, L"[FRAME_COUNT]"))
@@ -150,16 +150,16 @@ bool Anim::Save()
 	fwprintf_s(pFile, L"\n\n");
 
 	// atlas
-	fwprintf_s(pFile, L"[ATLAS_TEXTURE_NAME]\n");
-	fwprintf_s(pFile, m_Atlas->GetResourceName().c_str());
-	fwprintf_s(pFile, L"\n\n");
-
-	fwprintf_s(pFile, L"[ATLAS_TEXTURE_PATH]\n");
-	fwprintf_s(pFile, m_Atlas->GetResourcePath().c_str());
-	fwprintf_s(pFile, L"\n\n");
-
-	fwprintf_s(pFile, L"[FRAME_COUNT]\n");
-	fwprintf_s(pFile, L"%d\n\n", (int)m_Frames.size());
+	//fwprintf_s(pFile, L"[ATLAS_TEXTURE_NAME]\n");
+	//fwprintf_s(pFile, m_Atlas->GetResourceName().c_str());
+	//fwprintf_s(pFile, L"\n\n");
+	//
+	//fwprintf_s(pFile, L"[ATLAS_TEXTURE_PATH]\n");
+	//fwprintf_s(pFile, m_Atlas->GetResourcePath().c_str());
+	//fwprintf_s(pFile, L"\n\n");
+	//
+	//fwprintf_s(pFile, L"[FRAME_COUNT]\n");
+	//fwprintf_s(pFile, L"%d\n\n", (int)m_Frames.size());
 
 	for (int i = 0; i < (int)m_Frames.size(); ++i) 
 	{

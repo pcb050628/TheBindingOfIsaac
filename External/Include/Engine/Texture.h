@@ -1,13 +1,11 @@
 #pragma once
 #include "Asset.h"
-#include "ShaderTextureResource.h"
 
 class Texture :
     public Asset
 {
     typedef Asset Super;
 private:
-    //ShaderTextureResource* m_TextureResource;
     RECT m_ImageSection;
 
 private:

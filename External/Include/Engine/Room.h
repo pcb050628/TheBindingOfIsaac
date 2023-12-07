@@ -66,7 +66,7 @@ public:
         return nullptr;
     }
 
-    void AddActor(Actor* _actr, LayerType _layr)
+    void AddActor(GameObject* _actr, LayerType _layr)
     {
         m_Layers[(UINT)_layr].AddActor(_actr);
     }

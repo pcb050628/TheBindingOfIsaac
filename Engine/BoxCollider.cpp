@@ -1,9 +1,9 @@
 #include "pch.h"
 #include "BoxCollider.h"
-#include "Actor.h"
+#include "GameObject.h"
 
 BoxCollider::BoxCollider() : Collider(ColliderType::Box)
-	, m_Scale(GetOwner()->GetScale())
+	//, m_Scale(GetOwner()->GetScale())
 {
 }
 

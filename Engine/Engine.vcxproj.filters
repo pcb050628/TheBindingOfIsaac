@@ -46,12 +46,6 @@
     <Filter Include="02_Derived\Chapter">
       <UniqueIdentifier>{385b2696-b616-4af1-9e34-2a0c901e09d2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Room">
-      <UniqueIdentifier>{8c25dd5c-9546-4865-a3e1-e89da898c909}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Actor">
-      <UniqueIdentifier>{fd3952d4-e8db-4db4-9821-bf0708c210fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\RenderManager">
       <UniqueIdentifier>{87d3064c-312f-475f-902f-549a2295aa9f}</UniqueIdentifier>
     </Filter>
@@ -79,6 +73,21 @@
     <Filter Include="0_Default\Shader">
       <UniqueIdentifier>{2e8e88dc-8e6c-4f64-bddb-10b6e006409c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Derived\GameObject">
+      <UniqueIdentifier>{fd3952d4-e8db-4db4-9821-bf0708c210fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_Default\Cpp">
+      <UniqueIdentifier>{8a325902-a467-4192-886a-f302050a56cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader">
+      <UniqueIdentifier>{82b62f05-edb6-4eb4-9e10-b9bcadbd364a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader\GraphicsShader">
+      <UniqueIdentifier>{e73a9598-c32f-4322-b529-2426f9327153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader\ComputerShader">
+      <UniqueIdentifier>{75779e23-2aea-4d1c-bffa-ae30978887f5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -96,7 +105,7 @@
     <ClInclude Include="define.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Actor.h">
+    <ClInclude Include="GameObject.h">
       <Filter>01_Basic\Actor</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
@@ -124,7 +133,7 @@
       <Filter>01_Basic\Chapter</Filter>
     </ClInclude>
     <ClInclude Include="Humanoid.h">
-      <Filter>02_Derived\Actor</Filter>
+      <Filter>02_Derived\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="ChapterManager.h">
       <Filter>01_Basic\ChpaterManager</Filter>
@@ -150,9 +159,6 @@
     <ClInclude Include="AssetManager.h">
       <Filter>01_Basic\AssetManager</Filter>
     </ClInclude>
-    <ClInclude Include="ShaderTextureResource.h">
-      <Filter>02_Derived\Resource</Filter>
-    </ClInclude>
     <ClInclude Include="LogManager.h">
       <Filter>01_Basic\LogManager</Filter>
     </ClInclude>
@@ -175,6 +181,18 @@
     <ClInclude Include="Room.h">
       <Filter>01_Basic\Chapter</Filter>
     </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>02_Derived\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.h">
+      <Filter>0_Default\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>02_Derived\Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsShader.h">
+      <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -186,7 +204,7 @@
     <ClCompile Include="Time.cpp">
       <Filter>01_Basic\Time</Filter>
     </ClCompile>
-    <ClCompile Include="Actor.cpp">
+    <ClCompile Include="GameObject.cpp">
       <Filter>01_Basic\Actor</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
@@ -214,7 +232,7 @@
       <Filter>01_Basic\Chapter</Filter>
     </ClCompile>
     <ClCompile Include="Humanoid.cpp">
-      <Filter>02_Derived\Actor</Filter>
+      <Filter>02_Derived\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ChapterManager.cpp">
       <Filter>01_Basic\ChpaterManager</Filter>
@@ -240,9 +258,6 @@
     <ClCompile Include="AssetManager.cpp">
       <Filter>01_Basic\AssetManager</Filter>
     </ClCompile>
-    <ClCompile Include="ShaderTextureResource.cpp">
-      <Filter>02_Derived\Resource</Filter>
-    </ClCompile>
     <ClCompile Include="LogManager.cpp">
       <Filter>01_Basic\LogManager</Filter>
     </ClCompile>
@@ -261,6 +276,18 @@
     </ClCompile>
     <ClCompile Include="Room.cpp">
       <Filter>01_Basic\Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>02_Derived\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="structs.cpp">
+      <Filter>0_Default\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>02_Derived\Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsShader.cpp">
+      <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

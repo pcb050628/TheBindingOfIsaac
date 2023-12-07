@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Collider.h"
-#include "Actor.h"
+#include "GameObject.h"
 
 Collider::Collider(ColliderType _type) : Component(ComponentType::COLLIDER)
 	, m_Type(_type)
@@ -22,17 +22,18 @@ void Collider::LateUpdate()
 
 Vec2 Collider::GetFinalPos()
 {
-	return m_PosOffset + GetOwner()->GetPosition();
+	//return m_PosOffset + GetOwner()->GetPosition();
+	return m_PosOffset + Vec2();
 }
 
-void Collider::BeginOverlap(Collider* _myCol, Actor* _otherActor, Collider* _otherCol)
+void Collider::BeginOverlap(Collider* _myCol, GameObject* _otherActor, Collider* _otherCol)
 {
 }
 
-void Collider::Overlap(Collider* _myCol, Actor* _otherActor, Collider* _otherCol)
+void Collider::Overlap(Collider* _myCol, GameObject* _otherActor, Collider* _otherCol)
 {
 }
 
-void Collider::EndOverlap(Collider* _myCol, Actor* _otherActor, Collider* _otherCol)
+void Collider::EndOverlap(Collider* _myCol, GameObject* _otherActor, Collider* _otherCol)
 {
 }

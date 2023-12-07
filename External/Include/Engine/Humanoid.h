@@ -1,10 +1,10 @@
 #pragma once
-#include "Actor.h"
+#include "GameObject.h"
 
 class Humanoid :
-    public Actor
+    public GameObject
 {
-    typedef Actor Super;
+    typedef GameObject Super;
 protected:
     enum Direction
     {

@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Layer.h"
-#include "Actor.h"
+#include "GameObject.h"
 #include "Collider.h"
 
 Layer::Layer()
@@ -20,7 +20,7 @@ Layer::~Layer()
 
 void Layer::Update()
 {
-	for (Actor* actor : m_Actors)
+	for (GameObject* actor : m_Actors)
 	{
 		actor->Update();
 	}
@@ -28,7 +28,7 @@ void Layer::Update()
 
 void Layer::LateUpdate()
 {
-	for (Actor* actor : m_Actors)
+	for (GameObject* actor : m_Actors)
 	{
 		actor->LateUpdate();
 	}
@@ -36,7 +36,7 @@ void Layer::LateUpdate()
 
 void Layer::Render()
 {
-	for (Actor* actor : m_Actors)
+	for (GameObject* actor : m_Actors)
 	{
 		actor->Render();
 	}
@@ -51,14 +51,12 @@ void Layer::Render()
 	}
 }
 
-vector<Actor*> Layer::GetActorAboveTileY(int _y)
+vector<GameObject*> Layer::GetActorAboveTileY(int _y) // 사용할 일 없을듯
 {
-	vector<Actor*> value = {};
+	vector<GameObject*> value = {};
 
-	for (Actor* actor : m_Actors)
+	for (GameObject* actor : m_Actors)
 	{
-		if (static_cast<int>(actor->GetPosition().y) == _y)
-			value.push_back(actor);
 	}
 
 	return value;
@@ -68,12 +66,9 @@ vector<Collider*> Layer::GetAllCollider()
 {
 	vector<Collider*> vec = {};
 
-	for (Actor* act : m_Actors)
+	for (GameObject* act : m_Actors)
 	{
-		for (int i = 0; i < act->GetComponent(COLLIDER)->size(); i++)
-		{
-			vec.push_back(static_cast<Collider*>(act->GetComponent(COLLIDER)->at(i)));
-		}
+
 	}
 
 	return vec;

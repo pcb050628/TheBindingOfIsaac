@@ -29,7 +29,7 @@ private:
             m_CurRoom = room;
     }
 
-    void AddActor(Actor* _actr, LayerType _layr)
+    void AddActor(GameObject* _actr, LayerType _layr)
     {
         m_CurRoom->AddActor(_actr, _layr);
     }
