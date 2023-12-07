@@ -17,7 +17,9 @@ Room::~Room()
 
 void Room::Create(AssetID _id)
 {
-
+	// layer 기준으로 작성하기
+	// GOBJ_TYPE 으로 GameObject 분류
+	// Transform 저장
 }
 
 bool Room::Load(std::wstring _path)
