@@ -32,6 +32,7 @@ private:
     Room* Bottom;
 
 public:
+    virtual void Create(AssetID _id);
     virtual bool Load(std::wstring _path) override;
     virtual bool Save() override;
 

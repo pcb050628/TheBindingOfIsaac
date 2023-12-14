@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Anim.h"
 #include "ResourceManager.h"
-#include "RenderManager.h"
+#include "Device.h"
 #include "Time.h"
 #include "Texture.h"
 

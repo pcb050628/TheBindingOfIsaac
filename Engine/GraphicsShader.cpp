@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "GraphicsShader.h"
 
-#include "RenderManager.h"
+#include "Device.h"
 
 GraphicsShader::GraphicsShader() : Shader(ResourceType::GRAPHICS_SHADER)
 	, m_pVSBlob(nullptr)
@@ -49,7 +49,7 @@ int GraphicsShader::CreateVertexShader(const std::wstring& _strRelativePath, con
 		return E_FAIL;
 	}
 
-	RenderManager::GetInst()->GetDevice()->CreateVertexShader(
+	Device::GetInst()->GetDevice()->CreateVertexShader(
 		m_pVSBlob.Get(), m_pVSBlob->GetBufferSize(), nullptr, m_pVertexShader.GetAddressOf());
 
 	D3D11_INPUT_ELEMENT_DESC desc[3] = {};
@@ -78,7 +78,7 @@ int GraphicsShader::CreateVertexShader(const std::wstring& _strRelativePath, con
 	desc[2].AlignedByteOffset = 28;
 	desc[2].Format = DXGI_FORMAT_R32G32_FLOAT;
 
-	RenderManager::GetInst()->GetDevice()->CreateInputLayout(
+	Device::GetInst()->GetDevice()->CreateInputLayout(
 		desc, 3, m_pVSBlob->GetBufferPointer(), m_pVSBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
 
 	return S_OK;
@@ -116,7 +116,7 @@ int GraphicsShader::CreatePixelShader(const std::wstring& _strRelativePath, cons
 		return E_FAIL;
 	}
 
-	RenderManager::GetInst()->GetDevice()->CreatePixelShader(
+	Device::GetInst()->GetDevice()->CreatePixelShader(
 		m_pPSBlob.Get(), m_pPSBlob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf());
 
 	return S_OK;
@@ -216,12 +216,12 @@ bool GraphicsShader::Save()
 
 void GraphicsShader::UpdateData()
 {
-	RenderManager::GetInst()->GetContext()->IASetInputLayout(m_pInputLayout.Get());
-	RenderManager::GetInst()->GetContext()->IASetPrimitiveTopology(m_Topology);
+	Device::GetInst()->GetContext()->IASetInputLayout(m_pInputLayout.Get());
+	Device::GetInst()->GetContext()->IASetPrimitiveTopology(m_Topology);
 
-	RenderManager::GetInst()->GetContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
-	RenderManager::GetInst()->GetContext()->HSSetShader(m_pHullShader.Get(), nullptr, 0);
-	RenderManager::GetInst()->GetContext()->DSSetShader(m_pDomainShader.Get(), nullptr, 0);
-	RenderManager::GetInst()->GetContext()->GSSetShader(m_pGeometryShader.Get(), nullptr, 0);
-	RenderManager::GetInst()->GetContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
+	Device::GetInst()->GetContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
+	Device::GetInst()->GetContext()->HSSetShader(m_pHullShader.Get(), nullptr, 0);
+	Device::GetInst()->GetContext()->DSSetShader(m_pDomainShader.Get(), nullptr, 0);
+	Device::GetInst()->GetContext()->GSSetShader(m_pGeometryShader.Get(), nullptr, 0);
+	Device::GetInst()->GetContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
 }

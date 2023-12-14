@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "Texture.h"
-#include "RenderManager.h"
+#include "Device.h"
 #include "ResourceManager.h"
 
 Texture::Texture() : Super(AssetType::TEXTURE)

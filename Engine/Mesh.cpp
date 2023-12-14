@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Mesh.h"
 
-#include "RenderManager.h"
+#include "Device.h"
 
 Mesh::Mesh() : Resource(ResourceType::MESH)
 	, m_pVtxBuffer(nullptr)
@@ -33,7 +33,7 @@ int Mesh::Create(void* _vtx, UINT _vtxCount, void* _idx, UINT _idxCount)
 		D3D11_SUBRESOURCE_DATA data = { };
 		data.pSysMem = _vtx;
 
-		if (FAILED(RenderManager::GetInst()->GetDevice()->CreateBuffer(&m_VBDesc, &data, m_pVtxBuffer.GetAddressOf())))
+		if (FAILED(Device::GetInst()->GetDevice()->CreateBuffer(&m_VBDesc, &data, m_pVtxBuffer.GetAddressOf())))
 		{
 			MessageBox(nullptr, "Failed Vertex Buffer Create", "Mesh Create Fail", MB_OK);
 			return E_FAIL;
@@ -52,7 +52,7 @@ int Mesh::Create(void* _vtx, UINT _vtxCount, void* _idx, UINT _idxCount)
 		D3D11_SUBRESOURCE_DATA data = { };
 		data.pSysMem = _vtx;
 
-		if (FAILED(RenderManager::GetInst()->GetDevice()->CreateBuffer(&m_IBDesc, &data, m_pIdxBuffer.GetAddressOf())))
+		if (FAILED(Device::GetInst()->GetDevice()->CreateBuffer(&m_IBDesc, &data, m_pIdxBuffer.GetAddressOf())))
 		{
 			MessageBox(nullptr, "Failed Index Buffer Create", "Mesh Create Fail", MB_OK);
 			return E_FAIL;
@@ -73,12 +73,12 @@ void Mesh::UpdateData()
 	UINT iStride = sizeof(Vtx);
 	UINT iOffset = 0;
 
-	RenderManager::GetInst()->GetContext()->IASetVertexBuffers(0, m_iVtxCount, m_pVtxBuffer.GetAddressOf(), &iStride, &iOffset);
-	RenderManager::GetInst()->GetContext()->IASetIndexBuffer(m_pIdxBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
+	Device::GetInst()->GetContext()->IASetVertexBuffers(0, m_iVtxCount, m_pVtxBuffer.GetAddressOf(), &iStride, &iOffset);
+	Device::GetInst()->GetContext()->IASetIndexBuffer(m_pIdxBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 }
 
 void Mesh::Render()
 {
 	UpdateData();
-	RenderManager::GetInst()->GetContext()->DrawIndexed(m_iIdxCount, 0, 0);
+	Device::GetInst()->GetContext()->DrawIndexed(m_iIdxCount, 0, 0);
 }

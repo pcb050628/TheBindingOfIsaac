@@ -8,7 +8,6 @@ cbuffer TRANSFORM : register(b0)
     float4 g_vWorldScale;
 }
 
-
 struct VS_IN
 {
     float3 vPos : POSITION; // Sementic

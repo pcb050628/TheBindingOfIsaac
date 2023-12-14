@@ -1,6 +1,6 @@
 #include "pch.h"
 #include "LogManager.h"
-#include "RenderManager.h"
+#include "Device.h"
 #include "Time.h"
 
 

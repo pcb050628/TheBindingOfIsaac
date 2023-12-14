@@ -7,6 +7,12 @@ struct Vtx
 	Vec2 vUV;			// texcoord
 };
 
+struct tTransform
+{
+	Vec4	vWorldPos;  
+	Vec4    vWorldScale; 
+};
+
 enum class GOBJ_TYPE
 {
 	GOBJ,
