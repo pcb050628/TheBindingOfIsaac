@@ -4,7 +4,6 @@
 #include "AssetManager.h"
 #include "ResourceManager.h"
 #include "Texture.h"
-#include "TextureRenderer.h"
 
 Test::Test()
 	: m_Actors()

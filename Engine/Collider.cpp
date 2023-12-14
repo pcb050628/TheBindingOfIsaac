@@ -2,7 +2,7 @@
 #include "Collider.h"
 #include "GameObject.h"
 
-Collider::Collider(ColliderType _type) : Component(ComponentType::COLLIDER)
+Collider::Collider(ColliderType _type) : Component(COMPONENT_TYPE::COLLIDER2D)
 	, m_Type(_type)
 	, m_PosOffset()
 {

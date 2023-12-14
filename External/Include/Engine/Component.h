@@ -1,16 +1,6 @@
 #pragma once
 #include "Entity.h"
 
-enum ComponentType
-{
-    STATEMACHINE,
-    COLLIDER,
-    RENDERER,
-    ANIMATOR,
-
-    End,
-};
-
 class Component :
     public Entity
 {
@@ -18,19 +8,20 @@ class Component :
 
 private:
     class GameObject* m_Owner;
-    const ComponentType m_Type;
+    const COMPONENT_TYPE m_Type;
 
 public:
     virtual void Update() = 0;
     virtual void LateUpdate() = 0;
-    virtual void Render();
+    virtual void Render() {}
+    virtual void UpdateData() {}
 
     GameObject* GetOwner() { return m_Owner; }
 
-    virtual const ComponentType GetType() { return m_Type; }
+    virtual const COMPONENT_TYPE GetType() { return m_Type; }
 
 public:
-    Component(ComponentType _type);
+    Component(COMPONENT_TYPE _type);
     virtual ~Component();
 
     friend GameObject;

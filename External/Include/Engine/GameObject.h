@@ -9,7 +9,7 @@ class GameObject :
     typedef Entity Super;
 
 private:
-    Component* m_Components[(UINT)ComponentType::End];
+    Component* m_Components[(UINT)COMPONENT_TYPE::END];
 
 public:
     virtual void Update(); 
@@ -26,7 +26,7 @@ public:
         return dynamic_cast<T*>(comp);
     }
 
-    Component* GetComponent(ComponentType _type)
+    Component* GetComponent(COMPONENT_TYPE _type)
     {
         return m_Components[(UINT)_type];
     }

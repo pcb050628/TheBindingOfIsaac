@@ -12,7 +12,7 @@ GameObject::~GameObject()
 
 void GameObject::Update()
 {
-	for (int i = 0; i < ComponentType::End; i++)
+	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
 	{
 		m_Components[i]->Update();
 	}
@@ -20,7 +20,7 @@ void GameObject::Update()
 
 void GameObject::LateUpdate()
 {
-	for (int i = 0; i < ComponentType::End; i++)
+	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
 	{
 		m_Components[i]->LateUpdate();
 	}
@@ -28,7 +28,7 @@ void GameObject::LateUpdate()
 
 void GameObject::Render()
 {
-	for (int i = 0; i < ComponentType::End; i++)
+	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
 	{
 		m_Components[i]->Render();
 	}
