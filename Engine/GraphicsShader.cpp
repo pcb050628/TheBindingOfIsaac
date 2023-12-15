@@ -3,7 +3,7 @@
 
 #include "Device.h"
 
-GraphicsShader::GraphicsShader() : Shader(ResourceType::GRAPHICS_SHADER)
+GraphicsShader::GraphicsShader() : Shader(RESOURCE_TYPE::GRAPHICS_SHADER)
 	, m_pVSBlob(nullptr)
 	, m_pHSBlob(nullptr)
 	, m_pDSBlob(nullptr)

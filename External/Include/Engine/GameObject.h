@@ -3,37 +3,46 @@
 
 #include "Component.h"
 
+class Script;
+class RenderComponent;
+
 class GameObject :
     public Entity
 {
     typedef Entity Super;
 
 private:
-    Component* m_Components[(UINT)COMPONENT_TYPE::END];
+    Component*              m_Components[(UINT)COMPONENT_TYPE::END];
+    RenderComponent*        m_RenderComponent;
+    std::vector<Script*>    m_Scripts;
 
 public:
     virtual void Update(); 
     virtual void LateUpdate();
     virtual void Render();
 
+    void AddComponent(Component* _comp);
+    
     template <typename T>
-    T* AddComponent(const wstring& _name = L"")
+    T* GetComponent()
     {
-        Component* comp = new T();
-        comp->SetName(_name);
-        comp->m_Owner = this;
-        m_Components[(UINT)comp->GetType()] = comp;
-        return dynamic_cast<T*>(comp);
-    }
-
-    Component* GetComponent(COMPONENT_TYPE _type)
-    {
-        return m_Components[(UINT)_type];
+        return (T*)m_Components[(UINT)GetCompType<T>()];
     }
 
 public:
     GameObject();
     virtual ~GameObject() override;
-
 };
 
+template <typename T>
+COMPONENT_TYPE GetCompType()
+{
+    const type_info& info = typeid(T);
+
+    if (&info == &typeid(class Transform))
+        return COMPONENT_TYPE::TRANSFORM;
+    else if (&info == &typeid(class MeshRenderer))
+        return COMPONENT_TYPE::MESHRENDERER;
+    /*else if (&info == &typeid(class Camera))
+        return COMPONENT_TYPE::CAMERA;*/
+}

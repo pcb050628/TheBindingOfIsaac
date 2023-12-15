@@ -15,7 +15,7 @@ Room::~Room()
 {
 }
 
-void Room::Create(AssetID _id)
+void Room::Create(const std::wstring& _name)
 {
 	// layer 기준으로 작성하기
 	// GOBJ_TYPE 으로 GameObject 분류

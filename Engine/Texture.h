@@ -4,7 +4,6 @@
 class Texture :
     public Asset
 {
-    typedef Asset Super;
 private:
     RECT m_ImageSection;
 

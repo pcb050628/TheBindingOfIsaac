@@ -16,13 +16,12 @@ MeshRenderer::~MeshRenderer()
 {
 }
 
-
 void MeshRenderer::UpdateData()
 {
 	if(GetShader() != nullptr)
 		GetShader()->UpdateData();
 
-	GetOwner()->GetComponent(COMPONENT_TYPE::TRANSFORM)->UpdateData();
+	GetOwner()->GetComponent<Transform>()->UpdateData();
 }
 
 void MeshRenderer::Render()

@@ -2,14 +2,14 @@
 #include "Entity.h"
 #include "define.h"
 
-enum class ResourceType
+enum class RESOURCE_TYPE
 {
-	Texture,
-	Sound,
+	TEXTURE,
+	SOUND,
 	MESH,
 	GRAPHICS_SHADER,
 	COMPUTER_SHADER,
-	End
+	END
 };
 
 class Resource : 
@@ -19,7 +19,7 @@ protected:
 	std::wstring m_ResourcePath;
 	std::wstring m_ResourceName;
 
-	const ResourceType	m_Type;
+	const RESOURCE_TYPE	m_Type;
 
 public:
 	virtual bool Load(std::wstring _FilePath) = 0;
@@ -32,7 +32,7 @@ public:
 	virtual std::wstring GetResourceName() { return m_ResourceName; }
 
 public:
-	Resource(ResourceType _type);
+	Resource(RESOURCE_TYPE _type);
 	virtual ~Resource() override;
 
 	friend class ResouceManager;

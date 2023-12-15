@@ -172,17 +172,15 @@ call EngineCopy.bat</Command>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Camera.h" />
+    <ClInclude Include="components.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="Anim.h" />
     <ClInclude Include="Asset.h" />
     <ClInclude Include="AssetManager.h" />
-    <ClInclude Include="BoxCollider.h" />
     <ClInclude Include="Chapter.h" />
     <ClInclude Include="ChapterManager.h" />
-    <ClInclude Include="CircleCollider.h" />
-    <ClInclude Include="Collider.h" />
-    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="define.h" />
     <ClInclude Include="Engine.h" />
@@ -202,6 +200,7 @@ call EngineCopy.bat</Command>
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="Script.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="TaskManager.h" />
@@ -211,17 +210,14 @@ call EngineCopy.bat</Command>
     <ClInclude Include="Transform.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Anim.cpp" />
     <ClCompile Include="Asset.cpp" />
     <ClCompile Include="AssetManager.cpp" />
-    <ClCompile Include="BoxCollider.cpp" />
     <ClCompile Include="Chapter.cpp" />
     <ClCompile Include="ChapterManager.cpp" />
-    <ClCompile Include="CircleCollider.cpp" />
-    <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="Entity.cpp" />
@@ -243,6 +239,7 @@ call EngineCopy.bat</Command>
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Script.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="structs.cpp" />
     <ClCompile Include="TaskManager.cpp" />

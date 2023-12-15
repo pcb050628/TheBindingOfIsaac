@@ -8,14 +8,19 @@ class ResourceManager
 {
 	SINGLETON(ResourceManager);
 private:
-	std::map<std::wstring, Resource*> m_Resources;
+	std::map<std::wstring, Resource*> m_Resources[(UINT)RESOURCE_TYPE::END];
+	
+public:
+	void Init();
 
 public:
 	template <typename T>
 	T* Find(std::wstring _name) // m_Reources 에서 찾기
 	{
-		if (m_Resources.find(_name) != m_Resources.end())
-			return dynamic_cast<T*>(m_Resources.find(_name)->second);
+		RESOURCE_TYPE type = GetResourceType<T>();
+
+		if (m_Resources[(UINT)type].find(_name) != m_Resources[(UINT)type].end())
+			return dynamic_cast<T*>(m_Resources[(UINT)type].find(_name)->second);
 		return nullptr;
 	}
 
@@ -31,7 +36,7 @@ public:
 		if (tmp != nullptr)
 		{
 			tmp->SetResourceName(_name);
-			m_Resources.insert(std::make_pair(_name, tmp));
+			m_Resources[(UINT)tmp->m_Type].insert(std::make_pair(_name, tmp));
 			return dynamic_cast<T*>(tmp);
 		}
 		else
@@ -39,5 +44,22 @@ public:
 
 		return nullptr;
 	}
+
+	template <typename T>
+	void AddAsset(const std::wstring& _strKey, T* _asset)
+	{
+		RESOURCE_TYPE type = GetResourceType<T>();
+		m_Resources[(UINT)type].insert(std::make_pair(_strKey, _asset));
+	}
 };
 
+template <typename T>
+RESOURCE_TYPE GetResourceType()
+{
+	const type_info& type = typeid(T);
+
+	if (&type == &typeid(class Mesh))
+		return RESOURCE_TYPE::MESH;
+	else if (&type == &typeid(class GraphicsShader))
+		return RESOURCE_TYPE::GRAPHICS_SHADER;
+}

@@ -22,12 +22,12 @@ void Test::Init()
 
 void Test::Update()
 {
-	for (GameObject* actr : m_Actors)
-		actr->Update();
+	for (GameObject* gobj : m_Actors)
+		gobj->Update();
 }
 
 void Test::Render()
 {
-	for (GameObject* actr : m_Actors)
-		actr->Render();
+	for (GameObject* gobj : m_Actors)
+		gobj->Render();
 }

@@ -2,8 +2,8 @@
 #include "Asset.h"
 
 Asset::Asset(AssetType _type)
-	: m_ID()
-	, m_AssetName(L"name")
+	: m_AssetName(L"name")
+	, m_Type(_type)
 {
 }
 

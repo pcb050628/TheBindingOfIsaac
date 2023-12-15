@@ -24,10 +24,6 @@ public:
     void LateUpdate();
     void Render();
 
-    // ���߿� �����Ҷ� ����Ұ�
-    vector<GameObject*> GetActorAboveTileY(int _y);
-    vector<class Collider*> GetAllCollider();
-
     void AddActor(GameObject* _actr)
     {
         m_Actors.push_back(_actr);

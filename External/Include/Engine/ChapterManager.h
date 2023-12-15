@@ -34,7 +34,7 @@ public:
 private:
 	void ChangeChapter(CHAPTERLEVEL _level) { m_CurChapter = m_Chapters[(UINT)_level]; }
 
-	void LoadChpaterFromAsset(AssetID _id);
+	//void LoadChpaterFromAsset(AssetID _id);
 
 	friend class TaskManager;
 };

@@ -3,7 +3,7 @@
 
 #include "Device.h"
 
-Mesh::Mesh() : Resource(ResourceType::MESH)
+Mesh::Mesh() : Resource(RESOURCE_TYPE::MESH)
 	, m_pVtxBuffer(nullptr)
 	, m_pIdxBuffer(nullptr)
 	, m_VBDesc()

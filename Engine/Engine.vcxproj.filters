@@ -13,44 +13,11 @@
     <Filter Include="01_Basic">
       <UniqueIdentifier>{617f5d94-e7e2-4f3e-9310-0ab2ab7b7c8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Time">
-      <UniqueIdentifier>{e2de632d-9ecf-43c5-a5e5-b37715126cc3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\Input">
-      <UniqueIdentifier>{3002f376-0cdf-4a02-a532-f84a4eee8483}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\Component">
-      <UniqueIdentifier>{52071b8b-fe31-47fb-8c56-4c8bf86f09b1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\Engine">
-      <UniqueIdentifier>{af015e03-e944-425a-b2d8-06789f014dfe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\Chapter">
-      <UniqueIdentifier>{a610fea3-fc03-4907-8cac-7386f1499ee0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\Collision">
-      <UniqueIdentifier>{8401d1bb-90ee-40da-875f-62aa4a71c683}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\ChpaterManager">
-      <UniqueIdentifier>{937263d6-8374-4e70-8ba3-7b874945b305}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_Derived">
       <UniqueIdentifier>{21418021-1b47-4377-b907-85c8162c10eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Component">
-      <UniqueIdentifier>{c4a9f9dd-bdc3-474f-9613-8f70fe12a258}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_Derived\Chapter">
       <UniqueIdentifier>{385b2696-b616-4af1-9e34-2a0c901e09d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\ResourceManager">
-      <UniqueIdentifier>{623d8b65-a4ce-4ee1-a1f9-b96f13044a83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\LogManager">
-      <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\AssetManager">
-      <UniqueIdentifier>{6a7751a8-c377-4179-b451-c68125c1f5f0}</UniqueIdentifier>
     </Filter>
     <Filter Include="02_Derived\Asset">
       <UniqueIdentifier>{7c6794c5-7b71-4f32-a7d4-70729ec96108}</UniqueIdentifier>
@@ -58,38 +25,92 @@
     <Filter Include="02_Derived\Resource">
       <UniqueIdentifier>{d95ef0a3-c4ec-41f7-a099-721fbe613a6c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\GameManagerWindow">
-      <UniqueIdentifier>{96f86393-ec81-4269-8a04-02cee5cd4a27}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\TaskManager">
-      <UniqueIdentifier>{103698d5-9ebf-4913-8bb7-12d9f1d72022}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="0_Default\Shader">
-      <UniqueIdentifier>{2e8e88dc-8e6c-4f64-bddb-10b6e006409c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_Derived\GameObject">
       <UniqueIdentifier>{fd3952d4-e8db-4db4-9821-bf0708c210fe}</UniqueIdentifier>
     </Filter>
     <Filter Include="0_Default\Cpp">
       <UniqueIdentifier>{8a325902-a467-4192-886a-f302050a56cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Resource\Shader">
-      <UniqueIdentifier>{82b62f05-edb6-4eb4-9e10-b9bcadbd364a}</UniqueIdentifier>
+    <Filter Include="01_Basic\01_Manager">
+      <UniqueIdentifier>{ba5a6859-296a-4bb7-a7d4-3f52267484b5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Resource\Shader\GraphicsShader">
-      <UniqueIdentifier>{e73a9598-c32f-4322-b529-2426f9327153}</UniqueIdentifier>
+    <Filter Include="01_Basic\01_Manager\ResourceManager">
+      <UniqueIdentifier>{623d8b65-a4ce-4ee1-a1f9-b96f13044a83}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Resource\Shader\ComputerShader">
-      <UniqueIdentifier>{75779e23-2aea-4d1c-bffa-ae30978887f5}</UniqueIdentifier>
+    <Filter Include="01_Basic\01_Manager\LogManager">
+      <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Device">
+    <Filter Include="01_Basic\01_Manager\TaskManager">
+      <UniqueIdentifier>{103698d5-9ebf-4913-8bb7-12d9f1d72022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Manager\Time">
+      <UniqueIdentifier>{e2de632d-9ecf-43c5-a5e5-b37715126cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Manager\Input">
+      <UniqueIdentifier>{3002f376-0cdf-4a02-a532-f84a4eee8483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Manager\ChpaterManager">
+      <UniqueIdentifier>{937263d6-8374-4e70-8ba3-7b874945b305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Manager\AssetManager">
+      <UniqueIdentifier>{6a7751a8-c377-4179-b451-c68125c1f5f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Device">
       <UniqueIdentifier>{87d3064c-312f-475f-902f-549a2295aa9f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\GameObject">
+    <Filter Include="01_Basic\02_Device\ConstantBuffer">
+      <UniqueIdentifier>{be9362fe-4ac7-44e2-8ebc-149f959a8bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ">
+      <UniqueIdentifier>{5aaf40f6-0afe-4b69-b2e5-fdca117409aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\GameObject">
       <UniqueIdentifier>{ab4ef27e-0623-4472-b652-8e27f2ca6a13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Device\ConstantBuffer">
-      <UniqueIdentifier>{be9362fe-4ac7-44e2-8ebc-149f959a8bb4}</UniqueIdentifier>
+    <Filter Include="01_Basic\03_OBJ\Component">
+      <UniqueIdentifier>{52071b8b-fe31-47fb-8c56-4c8bf86f09b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\MeshRenderer">
+      <UniqueIdentifier>{ab8962f3-58cb-4390-b435-b655455611af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Transform">
+      <UniqueIdentifier>{7112f7fd-07fc-4684-8a8d-ffb375edf28a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Camera">
+      <UniqueIdentifier>{9e1d0302-9ee0-4a53-8c97-73babea338a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\00_Engine">
+      <UniqueIdentifier>{af015e03-e944-425a-b2d8-06789f014dfe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\04_Chapter">
+      <UniqueIdentifier>{a610fea3-fc03-4907-8cac-7386f1499ee0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Manager\AssetManager\Asset">
+      <UniqueIdentifier>{f4dc2568-a603-47b3-9c9b-b17bcea629fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Manager\AssetManager\Asset\Mesh">
+      <UniqueIdentifier>{95ee1ca8-b3a6-413e-b020-106336bb7adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Manager\ResourceManager\Resource">
+      <UniqueIdentifier>{21aaa8c3-5ce9-4710-854f-edd385ed5d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Manager\ResourceManager\Resource\Shader">
+      <UniqueIdentifier>{82b62f05-edb6-4eb4-9e10-b9bcadbd364a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Manager\ResourceManager\Resource\Shader\GraphicsShader">
+      <UniqueIdentifier>{e73a9598-c32f-4322-b529-2426f9327153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Manager\ResourceManager\Resource\Shader\ComputerShader">
+      <UniqueIdentifier>{75779e23-2aea-4d1c-bffa-ae30978887f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Script">
+      <UniqueIdentifier>{dd356d35-b90d-4edf-a58d-e7ea355eccb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Scripts">
+      <UniqueIdentifier>{8381ddc0-5642-4e03-9e11-b0bf2983a155}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_Default\ShaderCode">
+      <UniqueIdentifier>{2e8e88dc-8e6c-4f64-bddb-10b6e006409c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,52 +121,40 @@
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>01_Basic\Engine</Filter>
+      <Filter>01_Basic\00_Engine</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
-      <Filter>01_Basic\Time</Filter>
+      <Filter>01_Basic\01_Manager\Time</Filter>
     </ClInclude>
     <ClInclude Include="define.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.h">
-      <Filter>01_Basic\GameObject</Filter>
+      <Filter>01_Basic\03_OBJ\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>01_Basic\Component</Filter>
+      <Filter>01_Basic\03_OBJ\Component</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>01_Basic\Input</Filter>
+      <Filter>01_Basic\01_Manager\Input</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>01_Basic</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionManager.h">
-      <Filter>01_Basic\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>01_Basic\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>02_Derived\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleCollider.h">
-      <Filter>02_Derived\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Chapter.h">
-      <Filter>01_Basic\Chapter</Filter>
+      <Filter>01_Basic\04_Chapter</Filter>
     </ClInclude>
     <ClInclude Include="Humanoid.h">
       <Filter>02_Derived\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="ChapterManager.h">
-      <Filter>01_Basic\ChpaterManager</Filter>
+      <Filter>01_Basic\01_Manager\ChpaterManager</Filter>
     </ClInclude>
     <ClInclude Include="Device.h">
-      <Filter>01_Basic\Device</Filter>
+      <Filter>01_Basic\02_Device</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>01_Basic\ResourceManager</Filter>
+      <Filter>01_Basic\01_Manager\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>02_Derived\Asset</Filter>
@@ -154,53 +163,62 @@
       <Filter>02_Derived\Asset</Filter>
     </ClInclude>
     <ClInclude Include="AssetManager.h">
-      <Filter>01_Basic\AssetManager</Filter>
+      <Filter>01_Basic\01_Manager\AssetManager</Filter>
     </ClInclude>
     <ClInclude Include="LogManager.h">
-      <Filter>01_Basic\LogManager</Filter>
+      <Filter>01_Basic\01_Manager\LogManager</Filter>
     </ClInclude>
     <ClInclude Include="TaskManager.h">
-      <Filter>01_Basic\TaskManager</Filter>
+      <Filter>01_Basic\01_Manager\TaskManager</Filter>
     </ClInclude>
     <ClInclude Include="functions.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Test.h" />
-    <ClInclude Include="Asset.h">
-      <Filter>01_Basic\AssetManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>01_Basic\ResourceManager</Filter>
-    </ClInclude>
     <ClInclude Include="Layer.h">
-      <Filter>01_Basic\Chapter</Filter>
+      <Filter>01_Basic\04_Chapter</Filter>
     </ClInclude>
     <ClInclude Include="Room.h">
-      <Filter>01_Basic\Chapter</Filter>
-    </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>02_Derived\Resource</Filter>
+      <Filter>01_Basic\04_Chapter</Filter>
     </ClInclude>
     <ClInclude Include="structs.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>02_Derived\Resource\Shader</Filter>
+      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Shader</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsShader.h">
-      <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
-    </ClInclude>
-    <ClInclude Include="Transform.h">
-      <Filter>02_Derived\Component</Filter>
+      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Shader\GraphicsShader</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
-      <Filter>01_Basic\Device\ConstantBuffer</Filter>
+      <Filter>01_Basic\02_Device\ConstantBuffer</Filter>
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
-      <Filter>01_Basic\Component</Filter>
+      <Filter>01_Basic\03_OBJ\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>01_Basic\03_OBJ\Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="MeshRenderer.h">
-      <Filter>02_Derived\Component</Filter>
+      <Filter>01_Basic\03_OBJ\Component\MeshRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>01_Basic\03_OBJ\Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>01_Basic\03_OBJ\Component\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="components.h">
+      <Filter>0_Default\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>01_Basic\01_Manager\AssetManager\Asset\Mesh</Filter>
+    </ClInclude>
+    <ClInclude Include="Asset.h">
+      <Filter>01_Basic\01_Manager\AssetManager\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>01_Basic\01_Manager\ResourceManager\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -208,49 +226,37 @@
       <Filter>0_Default\pch</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
-      <Filter>01_Basic\Engine</Filter>
+      <Filter>01_Basic\00_Engine</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
-      <Filter>01_Basic\Time</Filter>
+      <Filter>01_Basic\01_Manager\Time</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
-      <Filter>01_Basic\GameObject</Filter>
+      <Filter>01_Basic\03_OBJ\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
-      <Filter>01_Basic\Component</Filter>
+      <Filter>01_Basic\03_OBJ\Component</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>01_Basic\Input</Filter>
+      <Filter>01_Basic\01_Manager\Input</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>01_Basic</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionManager.cpp">
-      <Filter>01_Basic\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>01_Basic\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxCollider.cpp">
-      <Filter>02_Derived\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleCollider.cpp">
-      <Filter>02_Derived\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Chapter.cpp">
-      <Filter>01_Basic\Chapter</Filter>
+      <Filter>01_Basic\04_Chapter</Filter>
     </ClCompile>
     <ClCompile Include="Humanoid.cpp">
       <Filter>02_Derived\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ChapterManager.cpp">
-      <Filter>01_Basic\ChpaterManager</Filter>
+      <Filter>01_Basic\01_Manager\ChpaterManager</Filter>
     </ClCompile>
     <ClCompile Include="Device.cpp">
-      <Filter>01_Basic\Device</Filter>
+      <Filter>01_Basic\02_Device</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>01_Basic\ResourceManager</Filter>
+      <Filter>01_Basic\01_Manager\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>02_Derived\Asset</Filter>
@@ -259,55 +265,61 @@
       <Filter>02_Derived\Asset</Filter>
     </ClCompile>
     <ClCompile Include="AssetManager.cpp">
-      <Filter>01_Basic\AssetManager</Filter>
+      <Filter>01_Basic\01_Manager\AssetManager</Filter>
     </ClCompile>
     <ClCompile Include="LogManager.cpp">
-      <Filter>01_Basic\LogManager</Filter>
+      <Filter>01_Basic\01_Manager\LogManager</Filter>
     </ClCompile>
     <ClCompile Include="TaskManager.cpp">
-      <Filter>01_Basic\TaskManager</Filter>
+      <Filter>01_Basic\01_Manager\TaskManager</Filter>
     </ClCompile>
     <ClCompile Include="Test.cpp" />
-    <ClCompile Include="Asset.cpp">
-      <Filter>01_Basic\AssetManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>01_Basic\ResourceManager</Filter>
-    </ClCompile>
     <ClCompile Include="Layer.cpp">
-      <Filter>01_Basic\Chapter</Filter>
+      <Filter>01_Basic\04_Chapter</Filter>
     </ClCompile>
     <ClCompile Include="Room.cpp">
-      <Filter>01_Basic\Chapter</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>02_Derived\Resource</Filter>
+      <Filter>01_Basic\04_Chapter</Filter>
     </ClCompile>
     <ClCompile Include="structs.cpp">
       <Filter>0_Default\Cpp</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>02_Derived\Resource\Shader</Filter>
+      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Shader</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsShader.cpp">
-      <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
-    </ClCompile>
-    <ClCompile Include="Transform.cpp">
-      <Filter>02_Derived\Component</Filter>
+      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Shader\GraphicsShader</Filter>
     </ClCompile>
     <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>01_Basic\Device\ConstantBuffer</Filter>
+      <Filter>01_Basic\02_Device\ConstantBuffer</Filter>
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
-      <Filter>01_Basic\Component</Filter>
+      <Filter>01_Basic\03_OBJ\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="MeshRenderer.cpp">
-      <Filter>02_Derived\Component</Filter>
+      <Filter>01_Basic\03_OBJ\Component\MeshRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Script.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>01_Basic\01_Manager\AssetManager\Asset\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset.cpp">
+      <Filter>01_Basic\01_Manager\AssetManager\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>01_Basic\01_Manager\ResourceManager\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Std2d.fx">
-      <Filter>0_Default\Shader</Filter>
+      <Filter>0_Default\ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>

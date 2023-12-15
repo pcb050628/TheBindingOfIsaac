@@ -5,6 +5,9 @@
 
 ConstantBuffer::ConstantBuffer(CB_TYPE _type)
 	: m_Type(_type)
+	, m_ElementCount()
+	, m_ElementSize()
+	, m_Desc()
 {
 }
 

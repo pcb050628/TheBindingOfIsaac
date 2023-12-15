@@ -28,7 +28,7 @@ void AssetManager::Init()
         //    m_AssetPaths.insert(std::make_pair((AssetID)std::stoi(files.path().filename()), files.path()));
         //}
 
-        m_AssetPaths.insert(std::make_pair((AssetID)std::stoi(entry.path().filename()), entry.path()));
+        //m_AssetPaths.insert(std::make_pair((AssetID)std::stoi(entry.path().filename()), entry.path()));
     }
 }
 

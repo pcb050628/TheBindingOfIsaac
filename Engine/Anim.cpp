@@ -128,7 +128,7 @@ bool Anim::Save()
 {
 	FILE* pFile = nullptr;
 
-	std::wstring _FilePath = Super::GetAssetPath() + std::to_wstring((UINT)Super::GetAssetID());
+	std::wstring _FilePath = GetContentPath() + L"Asset\\" + std::to_wstring((UINT)GetAssetType()) + L"\\" + GetAssetName();
 
 	_wfopen_s(&pFile, _FilePath.c_str(), L"w");
 

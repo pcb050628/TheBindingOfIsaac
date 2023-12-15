@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Layer.h"
 #include "GameObject.h"
-#include "Collider.h"
 
 Layer::Layer()
 	: m_Actors()
@@ -49,27 +48,4 @@ void Layer::Render()
 		else
 			iter++;
 	}
-}
-
-vector<GameObject*> Layer::GetActorAboveTileY(int _y) // 사용할 일 없을듯
-{
-	vector<GameObject*> value = {};
-
-	for (GameObject* actor : m_Actors)
-	{
-	}
-
-	return value;
-}
-
-vector<Collider*> Layer::GetAllCollider()
-{
-	vector<Collider*> vec = {};
-
-	for (GameObject* act : m_Actors)
-	{
-
-	}
-
-	return vec;
 }
