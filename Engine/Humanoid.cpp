@@ -11,10 +11,10 @@ Humanoid::~Humanoid()
 
 void Humanoid::Update()
 {
-	Super::Update();
+	GameObject::Update();
 }
 
 void Humanoid::LateUpdate()
 {
-	Super::LateUpdate();
+	GameObject::LateUpdate();
 }
