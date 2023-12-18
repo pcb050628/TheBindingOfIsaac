@@ -53,3 +53,11 @@ enum class CB_TYPE
 
 	END,
 };
+
+enum class DIR_TYPE
+{
+	RIGHT,
+	UP,
+	FRONT,
+	END,
+};

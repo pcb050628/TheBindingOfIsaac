@@ -220,6 +220,9 @@
     <ClInclude Include="Resource.h">
       <Filter>01_Basic\01_Manager\ResourceManager\Resource</Filter>
     </ClInclude>
+    <ClInclude Include="resources.h">
+      <Filter>0_Default\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -315,6 +318,9 @@
     </ClCompile>
     <ClCompile Include="Resource.cpp">
       <Filter>01_Basic\01_Manager\ResourceManager\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="externs.cpp">
+      <Filter>0_Default\Header</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

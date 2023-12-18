@@ -2,7 +2,8 @@
 #include "pch.h"
 #include "define.h"
 #include "Resource.h"
-#include "directxtk/SpriteBatch.h"
+
+#include "resources.h"
 
 class ResourceManager
 {

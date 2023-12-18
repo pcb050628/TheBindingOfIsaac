@@ -21,6 +21,9 @@ private:
     Matrix  m_matProj;
 
 public:
+    virtual void LateUpdate() override;
+
+public:
     Camera();
     ~Camera();
 };

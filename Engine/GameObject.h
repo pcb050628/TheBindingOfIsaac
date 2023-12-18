@@ -3,6 +3,8 @@
 
 #include "Component.h"
 
+#include "components.h"
+
 class Script;
 class RenderComponent;
 
@@ -39,10 +41,10 @@ COMPONENT_TYPE GetCompType()
 {
     const type_info& info = typeid(T);
 
-    if (&info == &typeid(class Transform))
+    if (&info == &typeid(Transform))
         return COMPONENT_TYPE::TRANSFORM;
-    else if (&info == &typeid(class MeshRenderer))
+    else if (&info == &typeid(MeshRenderer))
         return COMPONENT_TYPE::MESHRENDERER;
-    /*else if (&info == &typeid(class Camera))
-        return COMPONENT_TYPE::CAMERA;*/
+    else if (&info == &typeid(class Camera))
+        return COMPONENT_TYPE::CAMERA;
 }

@@ -4,7 +4,6 @@
 class Humanoid :
     public GameObject
 {
-    typedef GameObject Super;
 protected:
     enum Direction
     {
@@ -13,11 +12,9 @@ protected:
         left,
         right,
     };
-
 private:
-    // �Ӹ��� ���� �ִϸ����� �Ǵ� ���͸� ���� ������ �ֱ�
-    // �Ӹ��� ������ �̷���� ���͵��� �� Ŭ������ ��ӹ�����
-
+    // 머리
+    // 몸
 
 public:
     virtual void Update() override;

@@ -199,6 +199,7 @@ call EngineCopy.bat</Command>
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="resources.h" />
     <ClInclude Include="Room.h" />
     <ClInclude Include="Script.h" />
     <ClInclude Include="Shader.h" />
@@ -212,6 +213,7 @@ call EngineCopy.bat</Command>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="externs.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Anim.cpp" />
     <ClCompile Include="Asset.cpp" />
