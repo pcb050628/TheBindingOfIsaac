@@ -37,6 +37,8 @@ public:
 
 	void SetClearColor(Vec4 norm_color) { m_vClearColor = norm_color; }
 
+	Vec2 GetResolution() { return m_vResolution; }
+
 private:
 	int CreateConstBuffer();
 };

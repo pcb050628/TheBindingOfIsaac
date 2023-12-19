@@ -10,6 +10,7 @@ Device::Device()
 	, m_pContext(nullptr)
 	, m_pSwapChain(nullptr)
 	, m_pRTView(nullptr)
+	, m_ConstantBuffer()
 {
 
 }

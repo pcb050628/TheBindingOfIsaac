@@ -22,6 +22,7 @@ public:
     Vec3 GetPos() { return m_vPosition; }
     Vec3 GetScale() { return m_vScale; }
     Vec3 GetRotation() { return m_vRotation; }
+    Vec3 GetDir(DIR_TYPE _type) { return m_vDir[(UINT)_type]; }
 
     void SetPos(Vec3 _pos) { m_vPosition = _pos; }
     void SetScale(Vec3 _scale) { m_vScale = _scale; }

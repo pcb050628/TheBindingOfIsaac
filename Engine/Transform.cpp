@@ -1,6 +1,9 @@
 #include "pch.h"
 #include "Transform.h"
 
+#include "Device.h"
+#include "ConstantBuffer.h"
+
 Transform::Transform() : Component(COMPONENT_TYPE::TRANSFORM)
 {
 }
@@ -40,4 +43,9 @@ void Transform::LateUpdate()
 
 void Transform::UpdateData()
 {
+	g_Transform.matWorld = m_matWorld;
+
+	ConstantBuffer* constBuffer = Device::GetInst()->GetConstBuffer(CB_TYPE::TRANSFORM);
+	constBuffer->SetData(&g_Transform);
+	constBuffer->UpdateData();
 }
