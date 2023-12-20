@@ -52,7 +52,7 @@ void ResourceManager::Init()
 
 	pMesh = new Mesh;
 	pMesh->Create(arrVtx, 4, arrIdx, 6);
-	//AddAsset(L"RectMesh", pMesh);
+	AddResource(L"RectMesh", pMesh);
 
 
 	// =================
@@ -92,7 +92,7 @@ void ResourceManager::Init()
 
 	pMesh = new Mesh;
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
-	//AddAsset(L"CircleMesh", pMesh);
+	AddResource(L"CircleMesh", pMesh);
 
 
 	// Shader ����
