@@ -52,7 +52,7 @@ void ResourceManager::Init()
 
 	pMesh = new Mesh;
 	pMesh->Create(arrVtx, 4, arrIdx, 6);
-	AddAsset(L"RectMesh", pMesh);
+	//AddAsset(L"RectMesh", pMesh);
 
 
 	// =================
@@ -92,15 +92,18 @@ void ResourceManager::Init()
 
 	pMesh = new Mesh;
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
-	AddAsset(L"CircleMesh", pMesh);
+	//AddAsset(L"CircleMesh", pMesh);
 
 
 	// Shader ����
 	GraphicsShader* pShader = nullptr;
 
 	pShader = new GraphicsShader;
-	pShader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
-	pShader->CreatePixelShader(L"shader\\std2d.fx", "PS_Std2D");
+	ResourceManager::GetInst()->LoadByPath<GraphicsShader>(L"test_Shader", GetContentPath() + L"Resource\\Shader\\Graphics\\test_Shader.txt");
 
-	AddAsset(L"Std2DShader", pShader);
+	//pShader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
+	//pShader->CreatePixelShader(L"shader\\std2d.fx", "PS_Std2D");
+	//
+	//pShader->SetResourceName(L"test_Shader");
+	//pShader->Save();
 }

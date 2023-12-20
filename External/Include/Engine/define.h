@@ -59,5 +59,39 @@ enum class DIR_TYPE
 	RIGHT,
 	UP,
 	FRONT,
+
+	END,
+};
+
+enum class RS_TYPE
+{
+	CULL_BACK,
+	CULL_FRONT,
+	CULL_NONE,
+	WIRE_FRAME,
+
+	END,
+};
+
+enum class DSS_TYPE
+{
+	LESS,
+	LESS_EQUAL,
+	GRATER,
+	GRATER_EQUAL,
+
+	NO_TEST,
+	NO_WRITE,
+	NO_TEST_NO_WRITE,
+
+	END,
+};
+
+enum class BS_TYPE
+{
+	DEFAULT,
+	ALPHABLEND,
+	ONE_ONE,
+
 	END,
 };

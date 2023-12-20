@@ -5,12 +5,13 @@ class Device
 {
 	SINGLETON(Device)
 private:
-	Microsoft::WRL::ComPtr<ID3D11Device1>			m_pDevice;
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext1>	m_pContext;
+	Microsoft::WRL::ComPtr<ID3D11Device>			m_pDevice;
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext>		m_pContext;
 	//Microsoft::WRL::ComPtr<D3D11_VIEWPORT> m_pViewPort;
-	//std::vector<Microsoft::WRL::ComPtr<D3D11_VIEWPORT>> m_pViewPort; // 뷰포트 여러개 필요할 것으로 생각됨
+	// 뷰포트 하나만 있으면 될듯, 미니맵 띄울 다른 방법 못찾으면 뷰포트 두개 쓸듯
 
-	Microsoft::WRL::ComPtr<IDXGISwapChain1>			m_pSwapChain;
+	HWND											m_hRenderWnd;
+	Microsoft::WRL::ComPtr<IDXGISwapChain>			m_pSwapChain;
 
 	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>	m_pRTView;
 	Microsoft::WRL::ComPtr<ID3D11Texture2D>			m_pRTTex;
@@ -18,19 +19,27 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilView>	m_pDSView;
 	Microsoft::WRL::ComPtr<ID3D11Texture2D>			m_pDSTex;
 
-	ConstantBuffer*									m_ConstantBuffer[(UINT)CB_TYPE::END];
+	ConstantBuffer*									m_arrConstantBuffer[(UINT)CB_TYPE::END];
+
+	Microsoft::WRL::ComPtr<ID3D11RasterizerState>	m_arrRS[(UINT)RS_TYPE::END];
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_arrDSS[(UINT)DSS_TYPE::END];
+	Microsoft::WRL::ComPtr<ID3D11BlendState>		m_arrBS[(UINT)BS_TYPE::END];
 
 	Vec2											m_vResolution;
 	Vec4											m_vClearColor;
 	
 public:
-	Microsoft::WRL::ComPtr<ID3D11Device1> GetDevice() { return m_pDevice; }
-	Microsoft::WRL::ComPtr<ID3D11DeviceContext1> GetContext() { return m_pContext; }
+	Microsoft::WRL::ComPtr<ID3D11Device> GetDevice() { return m_pDevice; }
+	Microsoft::WRL::ComPtr<ID3D11DeviceContext> GetContext() { return m_pContext; }
 
-	ConstantBuffer* GetConstBuffer(CB_TYPE _type) { return m_ConstantBuffer[(UINT)_type]; }
+	ConstantBuffer* GetConstBuffer(CB_TYPE _type) { return m_arrConstantBuffer[(UINT)_type]; }
+
+	Microsoft::WRL::ComPtr<ID3D11RasterizerState> GetRasterizerState(RS_TYPE _type) { return m_arrRS[(UINT)_type]; }
+	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> GetDepthStencilState(DSS_TYPE _type) { return m_arrDSS[(UINT)_type]; }
+	Microsoft::WRL::ComPtr<ID3D11BlendState> GetBlendState(BS_TYPE _type) { return m_arrBS[(UINT)_type]; }
 
 public:
-	void Init(HWND _hwnd, Vec2 _resolution);
+	int Init(HWND _hwnd, Vec2 _resolution);
 	
 	void DrawStart();
 	void DrawEnd() { m_pSwapChain->Present(0, 0); }
@@ -40,6 +49,12 @@ public:
 	Vec2 GetResolution() { return m_vResolution; }
 
 private:
+	int CreateSwapChain();
+	int CreateRenderTargetView();
+	int CreateDepthStencilView();
 	int CreateConstBuffer();
+	int CreateRasterizerState();
+	int CreateDepthStencilState();
+	int CreateBlendState();
 };
 

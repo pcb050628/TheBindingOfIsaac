@@ -20,6 +20,10 @@ private:
 
     D3D11_PRIMITIVE_TOPOLOGY                        m_Topology;
 
+    RS_TYPE                                         m_RSType;
+    DSS_TYPE                                        m_DSSType;
+    BS_TYPE                                         m_BSType;
+
     std::wstring                                    m_VSPath;
     std::string                                     m_VSFuncName;
 

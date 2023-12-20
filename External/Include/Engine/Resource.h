@@ -31,6 +31,8 @@ public:
 	virtual void SetResourceName(std::wstring _name) { m_ResourceName = _name; }
 	virtual std::wstring GetResourceName() { return m_ResourceName; }
 
+	virtual RESOURCE_TYPE GetResourceType() { return m_Type; }
+
 public:
 	Resource(RESOURCE_TYPE _type);
 	virtual ~Resource() override;

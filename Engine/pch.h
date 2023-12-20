@@ -20,7 +20,7 @@
 #include <iomanip>
 
 #include "wrl.h"
-#include <d3d11_1.h>
+#include <d3d11.h>
 #include <d3dcompiler.h>
 #include "directxtk/SpriteBatch.h"
 #include "directxtk/SpriteFont.h"

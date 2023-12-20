@@ -37,20 +37,13 @@ public:
 		if (tmp != nullptr)
 		{
 			tmp->SetResourceName(_name);
-			m_Resources[(UINT)tmp->m_Type].insert(std::make_pair(_name, tmp));
+			m_Resources[(UINT)tmp->GetResourceType()].insert(std::make_pair(_name, tmp));
 			return dynamic_cast<T*>(tmp);
 		}
 		else
 			delete tmp;
 
 		return nullptr;
-	}
-
-	template <typename T>
-	void AddAsset(const std::wstring& _strKey, T* _asset)
-	{
-		RESOURCE_TYPE type = GetResourceType<T>();
-		m_Resources[(UINT)type].insert(std::make_pair(_strKey, _asset));
 	}
 };
 

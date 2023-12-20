@@ -14,6 +14,10 @@ GraphicsShader::GraphicsShader() : Shader(RESOURCE_TYPE::GRAPHICS_SHADER)
 	, m_pDomainShader(nullptr)
 	, m_pGeometryShader(nullptr)
 	, m_pPixelShader(nullptr)
+	, m_Topology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
+	, m_RSType(RS_TYPE::CULL_NONE)
+	, m_DSSType(DSS_TYPE::LESS)
+	, m_BSType(BS_TYPE::DEFAULT)
 	, m_VSPath(L"NULL")
 	, m_HSPath(L"NULL")
 	, m_DSPath(L"NULL")
@@ -24,7 +28,6 @@ GraphicsShader::GraphicsShader() : Shader(RESOURCE_TYPE::GRAPHICS_SHADER)
 	, m_DSFuncName("NULL")
 	, m_GSFuncName("NULL")
 	, m_PSFuncName("NULL")
-	, m_Topology(D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 {
 }
 
@@ -81,6 +84,9 @@ int GraphicsShader::CreateVertexShader(const std::wstring& _strRelativePath, con
 	Device::GetInst()->GetDevice()->CreateInputLayout(
 		desc, 3, m_pVSBlob->GetBufferPointer(), m_pVSBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
 
+	m_VSPath = _strRelativePath;
+	m_VSFuncName = _strFuncName;
+
 	return S_OK;
 }
 
@@ -119,6 +125,9 @@ int GraphicsShader::CreatePixelShader(const std::wstring& _strRelativePath, cons
 	Device::GetInst()->GetDevice()->CreatePixelShader(
 		m_pPSBlob.Get(), m_pPSBlob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf());
 
+	m_PSPath = _strRelativePath;
+	m_PSFuncName = _strFuncName;
+
 	return S_OK;
 }
 
@@ -142,27 +151,68 @@ bool GraphicsShader::Load(std::wstring _path)
 				if (line == L"[VS_PATH]")
 				{
 					std::getline(fileStream, line);
-					m_VSPath = line;
+					m_VSPath = line; 
+				}
+				else if (line == L"[VS_FuncName]")
+				{
+					std::getline(fileStream, line);
+					m_VSFuncName = std::string().assign(line.begin(), line.end());
 				}
 				else if(line == L"[HS_PATH]")
 				{
 					std::getline(fileStream, line);
 					m_HSPath = line;
 				}
+				else if (line == L"[HS_FuncName]")
+				{
+					std::getline(fileStream, line);
+					m_HSFuncName = std::string().assign(line.begin(), line.end());
+				}
 				else if (line == L"[DS_PATH]")
 				{
 					std::getline(fileStream, line);
 					m_DSPath = line;
+				}
+				else if (line == L"[DS_FuncName]")
+				{
+					std::getline(fileStream, line);
+					m_DSFuncName = std::string().assign(line.begin(), line.end());
 				}
 				else if (line == L"[GS_PATH]")
 				{
 					std::getline(fileStream, line);
 					m_GSPath = line;
 				}
+				else if (line == L"[GS_FuncName]")
+				{
+					std::getline(fileStream, line);
+					m_GSFuncName = std::string().assign(line.begin(), line.end());
+				}
 				else if (line == L"[PS_PATH]")
 				{
 					std::getline(fileStream, line);
 					m_PSPath = line;
+				}
+				else if (line == L"[PS_FuncName]")
+				{
+					std::getline(fileStream, line);
+					m_PSFuncName = std::string().assign(line.begin(), line.end());
+				}
+
+				else if (line == L"[RS_TYPE]")
+				{
+					std::getline(fileStream, line);
+					m_RSType = (RS_TYPE)std::stoi(line);
+				}
+				else if (line == L"[DSS_TYPE]")
+				{
+					std::getline(fileStream, line);
+					m_DSSType = (DSS_TYPE)std::stoi(line);
+				}
+				else if (line == L"[BS_TYPE]")
+				{
+					std::getline(fileStream, line);
+					m_BSType = (BS_TYPE)std::stoi(line);
 				}
 			}
 		}
@@ -204,6 +254,10 @@ bool GraphicsShader::Save()
 		fileStream << L"[PS_PATH]\n" << m_PSPath.c_str() << std::endl;
 		fileStream << L"[PS_FuncName]\n" << m_PSFuncName.c_str() << std::endl;
 
+		fileStream << L"[RS_TYPE]\n" << (UINT)m_RSType << std::endl;
+		fileStream << L"[DSS_TYPE]\n" << (UINT)m_DSSType << std::endl;
+		fileStream << L"[BS_TYPE]\n" << (UINT)m_BSType << std::endl;
+
 		fileStream << L"END";
 
 		fileStream.close();
@@ -218,6 +272,9 @@ void GraphicsShader::UpdateData()
 {
 	Device::GetInst()->GetContext()->IASetInputLayout(m_pInputLayout.Get());
 	Device::GetInst()->GetContext()->IASetPrimitiveTopology(m_Topology);
+	Device::GetInst()->GetContext()->RSSetState(Device::GetInst()->GetRasterizerState(m_RSType).Get());
+	Device::GetInst()->GetContext()->OMSetDepthStencilState(Device::GetInst()->GetDepthStencilState(m_DSSType).Get(), 0);
+	Device::GetInst()->GetContext()->OMSetBlendState(Device::GetInst()->GetBlendState(m_BSType).Get(), nullptr, 0xffffffff);
 
 	Device::GetInst()->GetContext()->VSSetShader(m_pVertexShader.Get(), nullptr, 0);
 	Device::GetInst()->GetContext()->HSSetShader(m_pHullShader.Get(), nullptr, 0);
