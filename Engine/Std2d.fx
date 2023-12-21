@@ -5,9 +5,21 @@
 cbuffer TRANSFORM : register(b0)
 {
     row_major matrix g_matWorld;
+    row_major matrix g_matWorldInv;
+
     row_major matrix g_matView;
+    row_major matrix g_matViewinv;
+
     row_major matrix g_matProj;
+    row_major matrix g_matProjInv;
+    
+    row_major matrix g_matWV;
+    row_major matrix g_matWVP;
 }
+
+Texture2D g_tex_0 : register(t0);
+
+SamplerState g_sam_0 : register(s0);
 
 struct VS_IN
 {
@@ -27,11 +39,7 @@ VS_OUT VS_Std2D(VS_IN _in)
 {
     VS_OUT output = (VS_OUT) 0.f;
     
-    float4 world = mul(float4(_in.vPos, 1.f), g_matWorld);
-    float4 view = mul(world, g_matView);
-    float4 proj = mul(view, g_matProj);
-    
-    output.vPosition = proj;
+    output.vPosition = mul(float4(_in.vPos, 1.f), g_matWVP);
     output.vColor = _in.vColor;
     output.vUV = _in.vUV;
     
@@ -40,6 +48,8 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
+    // Texture Mapping
+    // float4 color = g_tex_0.Sample(g_sam_0, _in.vUV);
     return _in.vColor;
 }
 

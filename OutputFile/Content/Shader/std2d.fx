@@ -5,9 +5,21 @@
 cbuffer TRANSFORM : register(b0)
 {
     row_major matrix g_matWorld;
+    row_major matrix g_matWorldInv;
+
     row_major matrix g_matView;
+    row_major matrix g_matViewinv;
+
     row_major matrix g_matProj;
+    row_major matrix g_matProjInv;
+    
+    row_major matrix g_matWV;
+    row_major matrix g_matWVP;
 }
+
+Texture2D g_tex_0 : register(t0);
+
+SamplerState g_sam_0 : register(s0);
 
 struct VS_IN
 {

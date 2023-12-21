@@ -46,7 +46,7 @@ public:
     int CreateGeometryShader(const std::wstring& _strRelativePath, const std::string& _strFuncName); 
     int CreatePixelShader(const std::wstring& _strRelativePath, const std::string& _strFuncName);
 
-    bool Load(std::wstring _path) override;
+    bool Load(const std::wstring& _path) override;
     bool Save() override;
 
 public:

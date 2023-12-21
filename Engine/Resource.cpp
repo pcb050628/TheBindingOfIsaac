@@ -9,13 +9,3 @@ Resource::Resource(RESOURCE_TYPE _type)
 Resource::~Resource()
 {
 }
-
-bool Resource::Load(std::wstring _FilePath)
-{
-	return false;
-}
-
-bool Resource::Save()
-{
-	return false;
-}

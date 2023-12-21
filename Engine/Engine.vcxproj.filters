@@ -16,15 +16,6 @@
     <Filter Include="02_Derived">
       <UniqueIdentifier>{21418021-1b47-4377-b907-85c8162c10eb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Chapter">
-      <UniqueIdentifier>{385b2696-b616-4af1-9e34-2a0c901e09d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Asset">
-      <UniqueIdentifier>{7c6794c5-7b71-4f32-a7d4-70729ec96108}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Resource">
-      <UniqueIdentifier>{d95ef0a3-c4ec-41f7-a099-721fbe613a6c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_Derived\GameObject">
       <UniqueIdentifier>{fd3952d4-e8db-4db4-9821-bf0708c210fe}</UniqueIdentifier>
     </Filter>
@@ -112,6 +103,9 @@
     <Filter Include="0_Default\ShaderCode">
       <UniqueIdentifier>{2e8e88dc-8e6c-4f64-bddb-10b6e006409c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\01_Manager\ResourceManager\Resource\Texture">
+      <UniqueIdentifier>{62893589-68fd-4f68-bbe8-8cc05bb484b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -155,12 +149,6 @@
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
       <Filter>01_Basic\01_Manager\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>02_Derived\Asset</Filter>
-    </ClInclude>
-    <ClInclude Include="Anim.h">
-      <Filter>02_Derived\Asset</Filter>
     </ClInclude>
     <ClInclude Include="AssetManager.h">
       <Filter>01_Basic\01_Manager\AssetManager</Filter>
@@ -223,6 +211,9 @@
     <ClInclude Include="resources.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -260,12 +251,6 @@
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>01_Basic\01_Manager\ResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>02_Derived\Asset</Filter>
-    </ClCompile>
-    <ClCompile Include="Anim.cpp">
-      <Filter>02_Derived\Asset</Filter>
     </ClCompile>
     <ClCompile Include="AssetManager.cpp">
       <Filter>01_Basic\01_Manager\AssetManager</Filter>
@@ -321,6 +306,9 @@
     </ClCompile>
     <ClCompile Include="externs.cpp">
       <Filter>0_Default\Header</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

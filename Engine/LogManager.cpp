@@ -38,20 +38,17 @@ void LogManager::Update()
 
 void LogManager::Render()
 {
-	auto iter = m_LogList.begin();
-	Vec2 LT(10, 10);
+	//auto iter = m_LogList.begin();
+	//Vec2 LT(10, 10);
 	
-	for (int i = 0; iter != m_LogList.end(); i++)
-	{
-		DirectX::XMVECTORF32 color = DirectX::Colors::White;
-		switch (iter->level) // text 색상 정하기
-		{
-		case LOG_LEVEL::ERR:
-			color = DirectX::Colors::Red;
-			break;
-		}
-
-		// text를 내보낼 방법 찾기
-		// SpriteFont or TextOut
-	}
+	//for (int i = 0; iter != m_LogList.end(); i++)
+	//{
+	//	DirectX::XMVECTORF32 color = DirectX::Colors::White;
+	//	switch (iter->level)
+	//	{
+	//	case LOG_LEVEL::ERR:
+	//		color = DirectX::Colors::Red;
+	//		break;
+	//	}
+	//}
 }

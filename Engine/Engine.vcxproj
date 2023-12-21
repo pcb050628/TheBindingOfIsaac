@@ -75,17 +75,21 @@
     <OutDir>$(SolutionDir)External\Include\Engine\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+    <ExternalIncludePath>$(SolutionDir)External\Library\</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <OutDir>$(SolutionDir)External\Include\Engine\</OutDir>
+    <ExternalIncludePath>$(SolutionDir)External\Library\</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)External\Include\Engine\</OutDir>
     <TargetName>$(ProjectName)_d</TargetName>
     <PreBuildEventUseInBuild>true</PreBuildEventUseInBuild>
+    <ExternalIncludePath>$(SolutionDir)External\Library\</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)External\Include\Engine\</OutDir>
+    <ExternalIncludePath>$(SolutionDir)External\Library\</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -176,7 +180,6 @@ call EngineCopy.bat</Command>
     <ClInclude Include="components.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Anim.h" />
     <ClInclude Include="Asset.h" />
     <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Chapter.h" />
@@ -215,7 +218,6 @@ call EngineCopy.bat</Command>
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="externs.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Anim.cpp" />
     <ClCompile Include="Asset.cpp" />
     <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Chapter.cpp" />

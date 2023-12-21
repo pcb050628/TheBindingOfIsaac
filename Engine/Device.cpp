@@ -8,6 +8,7 @@
 Device::Device()
 	: m_pDevice(nullptr)
 	, m_pContext(nullptr)
+	, m_hRenderWnd(nullptr)
 	, m_pSwapChain(nullptr)
 	, m_pRTView(nullptr)
 	, m_arrConstantBuffer()
@@ -45,41 +46,41 @@ int Device::Init(HWND _hwnd, Vec2 _resolution)
 
 	if(FAILED(CreateSwapChain()))
 	{
-		MessageBoxW(nullptr, L"SwapChain ìƒì„± ì‹¤íŒ¨", L"Device ì´ˆê¸°í™” ì‹¤íŒ¨", MB_OK);
+		MessageBoxW(nullptr, L"SwapChain »ı¼º ½ÇÆĞ", L"Device ÃÊ±âÈ­ ½ÇÆĞ", MB_OK);
 		return E_FAIL;
 	}
 
 	if (FAILED(CreateRenderTargetView()))
 	{
-		MessageBoxW(nullptr, L"Render Target View ìƒì„± ì‹¤íŒ¨", L"Device ì´ˆê¸°í™” ì‹¤íŒ¨", MB_OK);
+		MessageBoxW(nullptr, L"Render Target View »ı¼º ½ÇÆĞ", L"Device ÃÊ±âÈ­ ½ÇÆĞ", MB_OK);
 		return E_FAIL;
 	}
 
 	if (FAILED(CreateDepthStencilView()))
 	{
-		MessageBoxW(nullptr, L"Depth Stencil View ìƒì„± ì‹¤íŒ¨", L"Device ì´ˆê¸°í™” ì‹¤íŒ¨", MB_OK);
+		MessageBoxW(nullptr, L"Depth Stencil View »ı¼º ½ÇÆĞ", L"Device ÃÊ±âÈ­ ½ÇÆĞ", MB_OK);
 		return E_FAIL;
 	}
 
 	if (FAILED(CreateRasterizerState()))
 	{
-		MessageBoxW(nullptr, L"Rasterizer State ìƒì„± ì‹¤íŒ¨", L"Device ì´ˆê¸°í™” ì‹¤íŒ¨", MB_OK);
+		MessageBoxW(nullptr, L"Rasterizer State »ı¼º ½ÇÆĞ", L"Device ÃÊ±âÈ­ ½ÇÆĞ", MB_OK);
 		return E_FAIL;
 	}
 
 	if (FAILED(CreateDepthStencilState()))
 	{
-		MessageBoxW(nullptr, L"Depth Stencil State ìƒì„± ì‹¤íŒ¨", L"Device ì´ˆê¸°í™” ì‹¤íŒ¨", MB_OK);
+		MessageBoxW(nullptr, L"Depth Stencil State »ı¼º ½ÇÆĞ", L"Device ÃÊ±âÈ­ ½ÇÆĞ", MB_OK);
 		return E_FAIL;
 	}
 
 	if (FAILED(CreateBlendState()))
 	{
-		MessageBoxW(nullptr, L"Blend State ìƒì„± ì‹¤íŒ¨", L"Device ì´ˆê¸°í™” ì‹¤íŒ¨", MB_OK);
+		MessageBoxW(nullptr, L"Blend State »ı¼º ½ÇÆĞ", L"Device ÃÊ±âÈ­ ½ÇÆĞ", MB_OK);
 		return E_FAIL;
 	}
 
-	{ // ë·°í¬íŠ¸ ì„¤ì •
+	{ // ë·°í¬???¤ì •
 		D3D11_VIEWPORT viewport = {};
 
 		viewport.TopLeftX = 0;
@@ -95,6 +96,8 @@ int Device::Init(HWND _hwnd, Vec2 _resolution)
 	m_pContext->OMSetRenderTargets(1, m_pRTView.GetAddressOf(), m_pDSView.Get());
 
 	m_vClearColor = Vec4(0.1f, 0.1f, 0.1f, 1.f);
+
+	return S_OK;
 }
 
 void Device::DrawStart()
@@ -202,7 +205,7 @@ int Device::CreateConstBuffer()
 int Device::CreateRasterizerState()
 {
 	// CULL_BACK
-	m_arrRS[(UINT)RS_TYPE::CULL_BACK] = nullptr; // ê¸°ë³¸ ì„¤ì •ì´ cull_back ì´ê¸° ë•Œë¬¸ì— nullptr(ë§Œë“¤ì§€ ì•Šì•„ë„)ë¡œ í•´ë„ ëœë‹¤
+	m_arrRS[(UINT)RS_TYPE::CULL_BACK] = nullptr; // ê¸°ë³¸ ?¤ì •??cull_back ?´ê¸° ?Œë¬¸??nullptr(ë§Œë“¤ì§€ ?Šì•„??ë¡??´ë„ ?œë‹¤
 
 	D3D11_RASTERIZER_DESC desc = {};
 	HRESULT hResult = S_OK;
@@ -239,7 +242,7 @@ int Device::CreateRasterizerState()
 
 int Device::CreateDepthStencilState()
 {
-	m_arrDSS[(UINT)DSS_TYPE::LESS] = nullptr; // ê¸°ë³¸ ì„¤ì •ì´ LESS ì´ê¸° ë•Œë¬¸ì— nullptr(ë§Œë“¤ì§€ ì•Šì•„ë„)ë¡œ í•´ë„ ëœë‹¤
+	m_arrDSS[(UINT)DSS_TYPE::LESS] = nullptr; // ê¸°ë³¸ ?¤ì •??LESS ?´ê¸° ?Œë¬¸??nullptr(ë§Œë“¤ì§€ ?Šì•„??ë¡??´ë„ ?œë‹¤
 
 	D3D11_DEPTH_STENCIL_DESC desc = {};
 	HRESULT hResult = S_OK;
@@ -309,7 +312,7 @@ int Device::CreateDepthStencilState()
 
 int Device::CreateBlendState()
 {
-	m_arrBS[(UINT)BS_TYPE::DEFAULT] = nullptr; // ê¸°ë³¸ ì„¤ì •ê³¼ ê°™ê¸° ë–„ë¬¸ì— nullptr(ë§Œë“¤ì§€ ì•Šì•„ë„)ë¡œ í•´ë„ ëœë‹¤.
+	m_arrBS[(UINT)BS_TYPE::DEFAULT] = nullptr; // ê¸°ë³¸ ?¤ì •ê³?ê°™ê¸° ?„ë¬¸??nullptr(ë§Œë“¤ì§€ ?Šì•„??ë¡??´ë„ ?œë‹¤.
 
 	D3D11_BLEND_DESC desc = {};
 	HRESULT hResult = S_OK;

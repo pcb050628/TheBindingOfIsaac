@@ -16,7 +16,7 @@ public:
 
 public:
 	template <typename T>
-	T* Find(std::wstring _strKey) // m_Reources 에서 찾기
+	T* Find(std::wstring _strKey)
 	{
 		RESOURCE_TYPE type = GetResourceType<T>();
 
@@ -34,7 +34,7 @@ public:
 	}
 
 	template <typename T>
-	T* LoadByPath(std::wstring _strName, std::wstring _path) // 폴더에서 찾기
+	T* LoadByPath(std::wstring _strName, std::wstring _path) // ?�더?�서 찾기
 	{
 		T* f = Find<T>(_strName); 
 		if (f != nullptr) 

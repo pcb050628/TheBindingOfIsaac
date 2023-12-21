@@ -44,6 +44,8 @@ void Transform::LateUpdate()
 void Transform::UpdateData()
 {
 	g_Transform.matWorld = m_matWorld;
+	g_Transform.matWV = m_matWorld * g_Transform.matView;
+	g_Transform.matWVP = g_Transform.matWV * g_Transform.matProj;
 
 	ConstantBuffer* constBuffer = Device::GetInst()->GetConstBuffer(CB_TYPE::TRANSFORM);
 	constBuffer->SetData(&g_Transform);

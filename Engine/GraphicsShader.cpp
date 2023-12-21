@@ -131,7 +131,7 @@ int GraphicsShader::CreatePixelShader(const std::wstring& _strRelativePath, cons
 	return S_OK;
 }
 
-bool GraphicsShader::Load(std::wstring _path)
+bool GraphicsShader::Load(const std::wstring& _path)
 {
 	filesystem::path filePath = _path;
 	std::wifstream fileStream(filePath);

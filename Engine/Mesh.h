@@ -18,7 +18,6 @@ private:
     void*                                   m_pIdxSysMem;
 
 public:
-    virtual bool Load(std::wstring _FilePath) override { return false; }
     int Create(void* _vtx, UINT _vtxCount, void* _idx, UINT _idxCount);
 
 public:

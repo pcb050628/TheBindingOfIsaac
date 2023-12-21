@@ -22,8 +22,8 @@ protected:
 	const RESOURCE_TYPE	m_Type;
 
 public:
-	virtual bool Load(std::wstring _FilePath) = 0;
-	virtual bool Save();
+	virtual bool Load(const std::wstring& _strFilePath) { return false; }
+	virtual bool Save() { return false; }
 
 	virtual void SetResourcePath(std::wstring _path) { m_ResourcePath = _path; }
 	virtual std::wstring GetResourcePath() { return m_ResourcePath; }

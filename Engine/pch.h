@@ -22,12 +22,16 @@
 #include "wrl.h"
 #include <d3d11.h>
 #include <d3dcompiler.h>
-#include "directxtk/SpriteBatch.h"
-#include "directxtk/SpriteFont.h"
+#include "DirectXTex.h"
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
 
+#ifdef _DEBUG
+#pragma comment(lib, "..\\External\\Library\\DirectXTex\\DirectXTex_debug")
+#else
+#pragma comment(lib, "..\\External\\Library\\DirectXTex\\DirectXTex")
+#endif
 
 #include "directxtk/SimpleMath.h"
 using namespace DirectX::SimpleMath;

@@ -41,10 +41,14 @@ COMPONENT_TYPE GetCompType()
 {
     const type_info& info = typeid(T);
 
+    COMPONENT_TYPE type = COMPONENT_TYPE::END;
+
     if (&info == &typeid(Transform))
-        return COMPONENT_TYPE::TRANSFORM;
+        type = COMPONENT_TYPE::TRANSFORM;
     else if (&info == &typeid(MeshRenderer))
-        return COMPONENT_TYPE::MESHRENDERER;
+        type = COMPONENT_TYPE::MESHRENDERER;
     else if (&info == &typeid(class Camera))
-        return COMPONENT_TYPE::CAMERA;
+        type = COMPONENT_TYPE::CAMERA;
+
+    return type;
 }
