@@ -115,6 +115,15 @@
     <Filter Include="02_Derived\GameObject\Humanoid">
       <UniqueIdentifier>{f7d20c5e-5c8c-4a5c-81f5-d3a530dab4d0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Derived\Script">
+      <UniqueIdentifier>{ab2f9c1d-8665-4289-9dfd-89a9f28f034b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Script\PlayerController">
+      <UniqueIdentifier>{28302243-023a-4c10-b10c-5ef064c47120}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Script\CameraController">
+      <UniqueIdentifier>{0c5a28a0-3bf2-40e6-9796-5d58a09027d7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -220,6 +229,12 @@
     <ClInclude Include="Texture.h">
       <Filter>02_Derived\Resource\Shader\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="PlayerController.h">
+      <Filter>02_Derived\Script\PlayerController</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraController.h">
+      <Filter>02_Derived\Script\CameraController</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -312,6 +327,12 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>02_Derived\Resource\Shader\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerController.cpp">
+      <Filter>02_Derived\Script\PlayerController</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraController.cpp">
+      <Filter>02_Derived\Script\CameraController</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

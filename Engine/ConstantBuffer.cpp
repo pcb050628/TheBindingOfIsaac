@@ -29,7 +29,7 @@ int ConstantBuffer::Create(UINT _Size, UINT _Count)
 
 	if (FAILED(Device::GetInst()->GetDevice()->CreateBuffer(&m_Desc, nullptr, m_CB.GetAddressOf())))
 	{
-		MessageBoxW(nullptr, L"ConstBuffer 생성 실패", L"실패", MB_OK);
+		MessageBoxW(nullptr, L"ConstBuffer ?�성 ?�패", L"?�패", MB_OK);
 		return E_FAIL;
 	}
 

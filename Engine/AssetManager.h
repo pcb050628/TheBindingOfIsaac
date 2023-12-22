@@ -10,7 +10,7 @@ private:
 	//std::vector<std::wstring> m_AssetIDs[(UINT)AssetType::END];
 	std::map<std::wstring, std::wstring> m_AssetPaths;
 
-public:	// 방식을 Id 를 가지는게 아니라 wstring이나 int 타입으로 키값을 가지고 그걸 파일 이름으로 저장하게 될듯, 현재 방식은 사용하지 않을 것
+public:	// 방식??Id �?가지?�게 ?�니??wstring?�나 int ?�?�으�??�값??가지�?그걸 ?�일 ?�름?�로 ?�?�하�??�듯, ?�재 방식?� ?�용?��? ?�을 �?
 	void Init();
 	
 	template <typename T>

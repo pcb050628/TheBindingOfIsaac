@@ -24,11 +24,12 @@ private:
     float   m_AspectRatio;  
     float   m_Far;          
 
-    // ë³€í™˜ í–‰ë ¬
+    // º¯È¯ Çà·Ä
     Matrix  m_matView;
     Matrix  m_matProj;
 
 public:
+    virtual void Update() override;
     virtual void LateUpdate() override;
 
 public:

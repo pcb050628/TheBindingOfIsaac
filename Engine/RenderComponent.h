@@ -10,7 +10,7 @@ private:
 
 public:
     virtual void Update() {}
-    virtual void LateUpate() {}
+    virtual void LateUpdate() final {}
     virtual void Render() = 0;
     virtual void UpdateData() {}
 

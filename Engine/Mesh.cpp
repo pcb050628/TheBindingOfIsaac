@@ -21,6 +21,9 @@ Mesh::~Mesh()
 
 int Mesh::Create(void* _vtx, UINT _vtxCount, void* _idx, UINT _idxCount)
 {
+	m_iVtxCount = _vtxCount;
+	m_iIdxCount = _idxCount;
+
 	{
 		m_VBDesc = {};
 		m_VBDesc.ByteWidth = sizeof(Vtx) * _vtxCount;
@@ -50,7 +53,7 @@ int Mesh::Create(void* _vtx, UINT _vtxCount, void* _idx, UINT _idxCount)
 		m_IBDesc.Usage = D3D11_USAGE_DEFAULT;
 
 		D3D11_SUBRESOURCE_DATA data = { };
-		data.pSysMem = _vtx;
+		data.pSysMem = _idx;
 
 		if (FAILED(Device::GetInst()->GetDevice()->CreateBuffer(&m_IBDesc, &data, m_pIdxBuffer.GetAddressOf())))
 		{
@@ -73,7 +76,7 @@ void Mesh::UpdateData()
 	UINT iStride = sizeof(Vtx);
 	UINT iOffset = 0;
 
-	Device::GetInst()->GetContext()->IASetVertexBuffers(0, m_iVtxCount, m_pVtxBuffer.GetAddressOf(), &iStride, &iOffset);
+	Device::GetInst()->GetContext()->IASetVertexBuffers(0, 1, m_pVtxBuffer.GetAddressOf(), &iStride, &iOffset);
 	Device::GetInst()->GetContext()->IASetIndexBuffer(m_pIdxBuffer.Get(), DXGI_FORMAT_R32_UINT, 0);
 }
 

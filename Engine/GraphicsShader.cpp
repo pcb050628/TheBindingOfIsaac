@@ -52,8 +52,9 @@ int GraphicsShader::CreateVertexShader(const std::wstring& _strRelativePath, con
 		return E_FAIL;
 	}
 
-	Device::GetInst()->GetDevice()->CreateVertexShader(
-		m_pVSBlob.Get(), m_pVSBlob->GetBufferSize(), nullptr, m_pVertexShader.GetAddressOf());
+	if (FAILED(Device::GetInst()->GetDevice()->CreateVertexShader(
+		m_pVSBlob->GetBufferPointer(), m_pVSBlob->GetBufferSize(), nullptr, m_pVertexShader.GetAddressOf())))
+		return E_FAIL;
 
 	D3D11_INPUT_ELEMENT_DESC desc[3] = {};
 
@@ -81,8 +82,9 @@ int GraphicsShader::CreateVertexShader(const std::wstring& _strRelativePath, con
 	desc[2].AlignedByteOffset = 28;
 	desc[2].Format = DXGI_FORMAT_R32G32_FLOAT;
 
-	Device::GetInst()->GetDevice()->CreateInputLayout(
-		desc, 3, m_pVSBlob->GetBufferPointer(), m_pVSBlob->GetBufferSize(), m_pInputLayout.GetAddressOf());
+	if (FAILED(Device::GetInst()->GetDevice()->CreateInputLayout(
+		desc, 3, m_pVSBlob->GetBufferPointer(), m_pVSBlob->GetBufferSize(), m_pInputLayout.GetAddressOf())))
+		return E_FAIL;
 
 	m_VSPath = _strRelativePath;
 	m_VSFuncName = _strFuncName;
@@ -122,8 +124,9 @@ int GraphicsShader::CreatePixelShader(const std::wstring& _strRelativePath, cons
 		return E_FAIL;
 	}
 
-	Device::GetInst()->GetDevice()->CreatePixelShader(
-		m_pPSBlob.Get(), m_pPSBlob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf());
+	if (FAILED(Device::GetInst()->GetDevice()->CreatePixelShader(
+		m_pPSBlob->GetBufferPointer(), m_pPSBlob->GetBufferSize(), nullptr, m_pPixelShader.GetAddressOf())))
+		return E_FAIL;
 
 	m_PSPath = _strRelativePath;
 	m_PSFuncName = _strFuncName;
@@ -135,6 +138,12 @@ bool GraphicsShader::Load(const std::wstring& _path)
 {
 	filesystem::path filePath = _path;
 	std::wifstream fileStream(filePath);
+
+	wchar_t szName[20] = {};
+	_wsplitpath_s(_path.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+
+	m_ResourceName = szName;
+	m_ResourcePath = _path;
 
 	if (fileStream.is_open())
 	{
@@ -272,6 +281,7 @@ void GraphicsShader::UpdateData()
 {
 	Device::GetInst()->GetContext()->IASetInputLayout(m_pInputLayout.Get());
 	Device::GetInst()->GetContext()->IASetPrimitiveTopology(m_Topology);
+
 	Device::GetInst()->GetContext()->RSSetState(Device::GetInst()->GetRasterizerState(m_RSType).Get());
 	Device::GetInst()->GetContext()->OMSetDepthStencilState(Device::GetInst()->GetDepthStencilState(m_DSSType).Get(), 0);
 	Device::GetInst()->GetContext()->OMSetBlendState(Device::GetInst()->GetBlendState(m_BSType).Get(), nullptr, 0xffffffff);

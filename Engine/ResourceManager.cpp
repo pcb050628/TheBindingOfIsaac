@@ -1,8 +1,8 @@
 #include "pch.h"
 #include "ResourceManager.h"
 
-#include "GraphicsShader.h"
 #include "Mesh.h"
+#include "GraphicsShader.h"
 
 ResourceManager::ResourceManager()
 {
@@ -18,29 +18,29 @@ void ResourceManager::Init()
 {
 	Mesh* pMesh = nullptr;
 
-	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï°¢ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½
+	// Àü¿ªº¯¼ö¿¡ »ï°¢Çü À§Ä¡ ¼³Á¤
 	//   0(Red)-- 1(Blue)	     
 	//    |   \   |	     
 	//   3(G)---- 2(Magenta)  
 	Vtx arrVtx[4] = {};
-
+	
 	arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
 	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
 	arrVtx[0].vUV = Vec2(0.f, 0.f);
 
 	arrVtx[1].vPos = Vec3(0.5f, 0.5f, 0.f);
-	arrVtx[1].vColor = Vec4(0.f, 0.f, 1.f, 1.f);
-	arrVtx[1].vUV = Vec2(0.f, 0.f);
+	arrVtx[1].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	arrVtx[1].vUV = Vec2(1.f, 0.f);
 
 	arrVtx[2].vPos = Vec3(0.5f, -0.5f, 0.f);
-	arrVtx[2].vColor = Vec4(1.f, 0.f, 1.f, 1.f);
-	arrVtx[2].vUV = Vec2(0.f, 0.f);
+	arrVtx[2].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	arrVtx[2].vUV = Vec2(1.f, 1.f);
 
 	arrVtx[3].vPos = Vec3(-0.5f, -0.5f, 0.f);
-	arrVtx[3].vColor = Vec4(0.f, 1.f, 0.f, 1.f);
-	arrVtx[3].vUV = Vec2(0.f, 0.f);
+	arrVtx[3].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
+	arrVtx[3].vUV = Vec2(0.f, 1.f);
 
-	// ï¿½Îµï¿½ï¿½ï¿½
+	// ÀÎµ¦½º
 	UINT arrIdx[6] = {};
 	arrIdx[0] = 0;
 	arrIdx[1] = 1;
@@ -56,13 +56,13 @@ void ResourceManager::Init()
 
 
 	// =================
-	// CircleMesh ï¿½ï¿½ï¿½ï¿½ï¿½
+	// CircleMesh ¸¸µé±â
 	// =================
 	vector<Vtx> vecVtx;
 	vector<UINT> vecIdx;
 	Vtx v;
 
-	// ï¿½ß½ï¿½ ï¿½ï¿½
+	// Áß½É Á¡
 	v.vPos = Vec3(0.f, 0.f, 0.f);
 	v.vColor = Vec4(1.f, 1.f, 1.f, 1.f);
 	v.vUV = Vec2(0.5f, 0.5f);
@@ -72,7 +72,7 @@ void ResourceManager::Init()
 	float fTheta = 0.f;
 	float fRadius = 0.5f;
 
-	for (unsigned int i = 0; i <= iSlice; ++i)
+	for (UINT i = 0; i <= iSlice; ++i)
 	{
 		fTheta = (DirectX::XM_2PI / iSlice) * i;
 
@@ -83,7 +83,7 @@ void ResourceManager::Init()
 		vecVtx.push_back(v);
 	}
 
-	for (unsigned int i = 0; i < iSlice; ++i)
+	for (UINT i = 0; i < iSlice; ++i)
 	{
 		vecIdx.push_back(0);
 		vecIdx.push_back(i + 2);
@@ -95,15 +95,9 @@ void ResourceManager::Init()
 	AddResource(L"CircleMesh", pMesh);
 
 
-	// Shader ï¿½ï¿½ï¿½ï¿½
+
 	GraphicsShader* pShader = nullptr;
 
 	pShader = new GraphicsShader;
 	ResourceManager::GetInst()->LoadByPath<GraphicsShader>(L"test_Shader", GetContentPath() + L"Resource\\Shader\\Graphics\\test_Shader.txt");
-
-	//pShader->CreateVertexShader(L"shader\\std2d.fx", "VS_Std2D");
-	//pShader->CreatePixelShader(L"shader\\std2d.fx", "PS_Std2D");
-	//
-	//pShader->SetResourceName(L"test_Shader");
-	//pShader->Save();
 }

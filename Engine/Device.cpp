@@ -80,6 +80,12 @@ int Device::Init(HWND _hwnd, Vec2 _resolution)
 		return E_FAIL;
 	}
 
+	if (FAILED(CreateConstBuffer()))
+	{
+		MessageBoxW(nullptr, L"상수 버퍼 생성 실패", L"Device 초기화 실패", MB_OK);
+		return E_FAIL;
+	}
+
 	{ // 酉고룷???ㅼ젙
 		D3D11_VIEWPORT viewport = {};
 
@@ -95,7 +101,7 @@ int Device::Init(HWND _hwnd, Vec2 _resolution)
 
 	m_pContext->OMSetRenderTargets(1, m_pRTView.GetAddressOf(), m_pDSView.Get());
 
-	m_vClearColor = Vec4(0.1f, 0.1f, 0.1f, 1.f);
+	m_vClearColor = Vec4(0.3f, 0.3f, 0.3f, 1.f);
 
 	return S_OK;
 }
@@ -109,7 +115,7 @@ void Device::DrawStart()
 	color[3] = m_vClearColor.w;
 
 	m_pContext->ClearRenderTargetView(m_pRTView.Get(), color);
-	m_pContext->ClearDepthStencilView(m_pDSView.Get(), 0, 1, 1);
+	m_pContext->ClearDepthStencilView(m_pDSView.Get(), D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH | D3D11_CLEAR_FLAG::D3D11_CLEAR_STENCIL, 1, 1);
 }
 
 int Device::CreateSwapChain()

@@ -1,5 +1,5 @@
 [VS_PATH]
-shader\std2d.fx
+Shader\std2d.fx
 [VS_FuncName]
 VS_Std2D
 [HS_PATH]
@@ -15,7 +15,7 @@ NULL
 [GS_FuncName]
 NULL
 [PS_PATH]
-shader\std2d.fx
+Shader\std2d.fx
 [PS_FuncName]
 PS_Std2D
 [RS_TYPE]
@@ -23,5 +23,5 @@ PS_Std2D
 [DSS_TYPE]
 0
 [BS_TYPE]
-0
+1
 END

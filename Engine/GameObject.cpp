@@ -19,7 +19,8 @@ void GameObject::Update()
 {
 	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
 	{
-		m_Components[i]->Update();
+		if(m_Components[i] != nullptr)
+			m_Components[i]->Update();
 	}
 
 	for (Script* scrpt : m_Scripts)
@@ -37,7 +38,8 @@ void GameObject::LateUpdate()
 {
 	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
 	{
-		m_Components[i]->LateUpdate();
+		if (m_Components[i] != nullptr)
+			m_Components[i]->LateUpdate();
 	}
 
 	for (GameObject* child : m_ChildObjs)
@@ -48,10 +50,8 @@ void GameObject::LateUpdate()
 
 void GameObject::Render()
 {
-	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
-	{
+	if(m_RenderComponent != nullptr)
 		m_RenderComponent->Render();
-	}
 
 	for (GameObject* child : m_ChildObjs)
 	{

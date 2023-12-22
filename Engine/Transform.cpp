@@ -7,6 +7,9 @@
 #include "GameObject.h"
 
 Transform::Transform() : Component(COMPONENT_TYPE::TRANSFORM)
+	, m_vRelativePos(Vec3(0, 0, 0))
+	, m_vRelativeScale(Vec3(100, 100, 0))
+	, m_vRelativeRot(Vec3(0, 0, 0))
 	, m_bAbsolute(true)
 {
 }
@@ -71,7 +74,7 @@ void Transform::LateUpdate()
 void Transform::UpdateData()
 {
 	g_Transform.matWorld = m_matWorld;
-	g_Transform.matWV = m_matWorld * g_Transform.matView;
+	g_Transform.matWV = g_Transform.matWorld * g_Transform.matView;
 	g_Transform.matWVP = g_Transform.matWV * g_Transform.matProj;
 
 	ConstantBuffer* constBuffer = Device::GetInst()->GetConstBuffer(CB_TYPE::TRANSFORM);

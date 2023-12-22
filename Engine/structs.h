@@ -2,7 +2,7 @@
 
 struct Vtx
 {
-	Vec3 vPos;	// transform
+	Vec3 vPos;			// transform
 	Vec4 vColor;		// color
 	Vec2 vUV;			// texcoord
 };
