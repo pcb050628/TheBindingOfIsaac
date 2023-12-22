@@ -115,7 +115,7 @@ void Device::DrawStart()
 	color[3] = m_vClearColor.w;
 
 	m_pContext->ClearRenderTargetView(m_pRTView.Get(), color);
-	m_pContext->ClearDepthStencilView(m_pDSView.Get(), D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH | D3D11_CLEAR_FLAG::D3D11_CLEAR_STENCIL, 1, 1);
+	m_pContext->ClearDepthStencilView(m_pDSView.Get(), D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH | D3D11_CLEAR_FLAG::D3D11_CLEAR_STENCIL, 1.f, 0);
 }
 
 int Device::CreateSwapChain()
