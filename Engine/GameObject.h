@@ -14,9 +14,13 @@ class GameObject :
     typedef Entity Super;
 
 private:
-    Component*              m_Components[(UINT)COMPONENT_TYPE::END];
-    RenderComponent*        m_RenderComponent;
-    std::vector<Script*>    m_Scripts;
+    Component*                  m_Components[(UINT)COMPONENT_TYPE::END];
+    RenderComponent*            m_RenderComponent;
+    std::vector<Script*>        m_Scripts;
+
+    std::vector<GameObject*>    m_ChildObjs;
+
+    GameObject*                 m_Parent;
 
 public:
     virtual void Update(); 
@@ -30,6 +34,10 @@ public:
     {
         return (T*)m_Components[(UINT)GetCompType<T>()];
     }
+
+    GameObject* GetParent() { return m_Parent; }
+    void AttachChild(GameObject* _objChild);
+    void DisconnectWithParent();
 
 public:
     GameObject();

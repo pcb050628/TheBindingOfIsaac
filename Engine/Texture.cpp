@@ -20,7 +20,6 @@ Texture::~Texture()
 
 bool Texture::Load(const std::wstring& _strFilePath)
 {
-
 	wchar_t szExt[20] = {};
 	_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 20);
 

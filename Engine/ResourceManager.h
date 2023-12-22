@@ -69,8 +69,12 @@ RESOURCE_TYPE GetResourceType()
 {
 	const type_info& type = typeid(T);
 
+	RESOURCE_TYPE value = RESOURCE_TYPE::END;
+
 	if (&type == &typeid(class Mesh))
 		return RESOURCE_TYPE::MESH;
 	else if (&type == &typeid(class GraphicsShader))
 		return RESOURCE_TYPE::GRAPHICS_SHADER;
+
+	return value;
 }

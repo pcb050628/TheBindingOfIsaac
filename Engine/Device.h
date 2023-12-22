@@ -7,8 +7,6 @@ class Device
 private:
 	Microsoft::WRL::ComPtr<ID3D11Device>			m_pDevice;
 	Microsoft::WRL::ComPtr<ID3D11DeviceContext>		m_pContext;
-	//Microsoft::WRL::ComPtr<D3D11_VIEWPORT> m_pViewPort;
-	// 뷰포트 하나만 있으면 될듯, 미니맵 띄울 다른 방법 못찾으면 뷰포트 두개 쓸듯
 
 	HWND											m_hRenderWnd;
 	Microsoft::WRL::ComPtr<IDXGISwapChain>			m_pSwapChain;

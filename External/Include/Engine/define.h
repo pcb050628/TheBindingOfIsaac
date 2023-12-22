@@ -16,18 +16,18 @@
 
 enum class COMPONENT_TYPE
 {
-	TRANSFORM,	// ������Ʈ�� ��ġ,ũ��,ȸ��
+	TRANSFORM,	
 
-	COLLIDER2D,	// 2���� �浹ü
-	COLLIDER3D, // 3���� �浹ü
+	COLLIDER2D,	
+	COLLIDER3D, 
 
-	ANIMATOR2D,	// ��������Ʈ Animation
-	ANIMATOR3D,	// Bone Skinning Animation
+	ANIMATOR2D,	
+	ANIMATOR3D,	
 
-	LIGHT2D,	// 2���� ����
-	LIGHT3D,	// 3���� ����
+	LIGHT2D,	
+	LIGHT3D,	
 
-	CAMERA,		// ī�޶� ���
+	CAMERA,		
 
 	// Render Component
 	MESHRENDERER,
@@ -42,8 +42,6 @@ enum class COMPONENT_TYPE
 	SCRIPT,
 };
 
-
-// ������� ����
 enum class CB_TYPE
 {
 	TRANSFORM,

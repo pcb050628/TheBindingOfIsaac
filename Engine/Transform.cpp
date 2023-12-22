@@ -4,7 +4,10 @@
 #include "Device.h"
 #include "ConstantBuffer.h"
 
+#include "GameObject.h"
+
 Transform::Transform() : Component(COMPONENT_TYPE::TRANSFORM)
+	, m_bAbsolute(true)
 {
 }
 
@@ -20,24 +23,48 @@ void Transform::LateUpdate()
 {
 	m_matWorld = DirectX::XMMatrixIdentity();
 
-	Matrix matPosition = DirectX::XMMatrixTranslation(m_vPosition.x, m_vPosition.y, m_vPosition.z);
+	Matrix matPosition = DirectX::XMMatrixTranslation(m_vRelativePos.x, m_vRelativePos.y, m_vRelativePos.z);
 
-	Matrix matScale = DirectX::XMMatrixScaling(m_vScale.x, m_vScale.y, m_vScale.z);
+	Matrix matScale = DirectX::XMMatrixScaling(m_vRelativeScale.x, m_vRelativeScale.y, m_vRelativeScale.z);
 
-	Matrix matRotateX = DirectX::XMMatrixRotationX(m_vRotation.x);
-	Matrix matRotateY = DirectX::XMMatrixRotationX(m_vRotation.y);
-	Matrix matRotateZ = DirectX::XMMatrixRotationX(m_vRotation.z);
+	Matrix matRotateX = DirectX::XMMatrixRotationX(m_vRelativeRot.x);
+	Matrix matRotateY = DirectX::XMMatrixRotationX(m_vRelativeRot.y);
+	Matrix matRotateZ = DirectX::XMMatrixRotationX(m_vRelativeRot.z);
 
 	m_matWorld = matScale * matRotateX * matRotateY * matRotateZ * matPosition;
 
-	m_vDir[(UINT)DIR_TYPE::RIGHT] = Vec3(1.f, 0.f, 0.f);
-	m_vDir[(UINT)DIR_TYPE::UP]	  = Vec3(0.f, 1.f, 0.f);
-	m_vDir[(UINT)DIR_TYPE::FRONT] = Vec3(0.f, 0.f, 1.f);
+	m_vLocalDir[(UINT)DIR_TYPE::RIGHT] = Vec3(1.f, 0.f, 0.f);
+	m_vLocalDir[(UINT)DIR_TYPE::UP]	  = Vec3(0.f, 1.f, 0.f);
+	m_vLocalDir[(UINT)DIR_TYPE::FRONT] = Vec3(0.f, 0.f, 1.f);
 
 	for (int i = 0; i < (UINT)DIR_TYPE::END; i++)
 	{
-		m_vDir[i] = DirectX::XMVector3TransformNormal(m_vDir[i], m_matWorld);
-		m_vDir[i].Normalize();
+		m_vLocalDir[i] = DirectX::XMVector3TransformNormal(m_vLocalDir[i], m_matWorld);
+		m_vLocalDir[i].Normalize();
+		m_vWorldDir[i] = m_vLocalDir[i];
+	}
+
+	if (GetOwner()->GetParent())
+	{
+		const Matrix& parentWorldMat = GetOwner()->GetParent()->GetComponent<Transform>()->GetWorldMat();
+
+		if (m_bAbsolute)
+		{
+			Vec3 parentScale = GetOwner()->GetParent()->GetComponent<Transform>()->GetRelativeScale();
+			Matrix parentScaleMatInv = DirectX::XMMatrixScaling(1.f / parentScale.x, 1.f / parentScale.y, 1.f / parentScale.z);
+
+			m_matWorld = m_matWorld * parentScaleMatInv * parentWorldMat;
+		}
+		else
+		{
+			m_matWorld *= parentWorldMat;
+		}
+
+		for (int i = 0; i < (UINT)DIR_TYPE::END; i++)
+		{
+			m_vWorldDir[i] = DirectX::XMVector3TransformNormal(m_vWorldDir[i], m_matWorld);
+			m_vWorldDir[i].Normalize();
+		}
 	}
 }
 

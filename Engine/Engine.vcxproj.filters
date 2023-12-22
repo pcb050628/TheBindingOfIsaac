@@ -13,12 +13,6 @@
     <Filter Include="01_Basic">
       <UniqueIdentifier>{617f5d94-e7e2-4f3e-9310-0ab2ab7b7c8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived">
-      <UniqueIdentifier>{21418021-1b47-4377-b907-85c8162c10eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\GameObject">
-      <UniqueIdentifier>{fd3952d4-e8db-4db4-9821-bf0708c210fe}</UniqueIdentifier>
-    </Filter>
     <Filter Include="0_Default\Cpp">
       <UniqueIdentifier>{8a325902-a467-4192-886a-f302050a56cc}</UniqueIdentifier>
     </Filter>
@@ -79,20 +73,11 @@
     <Filter Include="01_Basic\01_Manager\AssetManager\Asset">
       <UniqueIdentifier>{f4dc2568-a603-47b3-9c9b-b17bcea629fc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\01_Manager\AssetManager\Asset\Mesh">
-      <UniqueIdentifier>{95ee1ca8-b3a6-413e-b020-106336bb7adc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\01_Manager\ResourceManager\Resource">
       <UniqueIdentifier>{21aaa8c3-5ce9-4710-854f-edd385ed5d16}</UniqueIdentifier>
     </Filter>
     <Filter Include="01_Basic\01_Manager\ResourceManager\Resource\Shader">
       <UniqueIdentifier>{82b62f05-edb6-4eb4-9e10-b9bcadbd364a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\ResourceManager\Resource\Shader\GraphicsShader">
-      <UniqueIdentifier>{e73a9598-c32f-4322-b529-2426f9327153}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\ResourceManager\Resource\Shader\ComputerShader">
-      <UniqueIdentifier>{75779e23-2aea-4d1c-bffa-ae30978887f5}</UniqueIdentifier>
     </Filter>
     <Filter Include="01_Basic\03_OBJ\Component\Script">
       <UniqueIdentifier>{dd356d35-b90d-4edf-a58d-e7ea355eccb7}</UniqueIdentifier>
@@ -103,8 +88,32 @@
     <Filter Include="0_Default\ShaderCode">
       <UniqueIdentifier>{2e8e88dc-8e6c-4f64-bddb-10b6e006409c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\01_Manager\ResourceManager\Resource\Texture">
+    <Filter Include="02_Derived">
+      <UniqueIdentifier>{b4a4a2a9-4f4c-47cf-a796-bd3530fd3474}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource">
+      <UniqueIdentifier>{cafe09bd-827c-4918-82c2-8c020c536f48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Mesh">
+      <UniqueIdentifier>{95ee1ca8-b3a6-413e-b020-106336bb7adc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader">
+      <UniqueIdentifier>{c7faa404-689d-4407-b3fb-0e107a781eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader\GraphicsShader">
+      <UniqueIdentifier>{e73a9598-c32f-4322-b529-2426f9327153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader\ComputerShader">
+      <UniqueIdentifier>{75779e23-2aea-4d1c-bffa-ae30978887f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader\Texture">
       <UniqueIdentifier>{62893589-68fd-4f68-bbe8-8cc05bb484b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\GameObject">
+      <UniqueIdentifier>{f56fcdea-c783-43cc-9b26-8062767feeb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\GameObject\Humanoid">
+      <UniqueIdentifier>{f7d20c5e-5c8c-4a5c-81f5-d3a530dab4d0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +146,6 @@
     </ClInclude>
     <ClInclude Include="Chapter.h">
       <Filter>01_Basic\04_Chapter</Filter>
-    </ClInclude>
-    <ClInclude Include="Humanoid.h">
-      <Filter>02_Derived\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="ChapterManager.h">
       <Filter>01_Basic\01_Manager\ChpaterManager</Filter>
@@ -176,7 +182,7 @@
       <Filter>01_Basic\01_Manager\ResourceManager\Resource\Shader</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsShader.h">
-      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Shader\GraphicsShader</Filter>
+      <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
       <Filter>01_Basic\02_Device\ConstantBuffer</Filter>
@@ -200,7 +206,7 @@
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
-      <Filter>01_Basic\01_Manager\AssetManager\Asset\Mesh</Filter>
+      <Filter>02_Derived\Resource\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Asset.h">
       <Filter>01_Basic\01_Manager\AssetManager\Asset</Filter>
@@ -212,7 +218,7 @@
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Texture</Filter>
+      <Filter>02_Derived\Resource\Shader\Texture</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -239,9 +245,6 @@
     </ClCompile>
     <ClCompile Include="Chapter.cpp">
       <Filter>01_Basic\04_Chapter</Filter>
-    </ClCompile>
-    <ClCompile Include="Humanoid.cpp">
-      <Filter>02_Derived\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="ChapterManager.cpp">
       <Filter>01_Basic\01_Manager\ChpaterManager</Filter>
@@ -275,7 +278,7 @@
       <Filter>01_Basic\01_Manager\ResourceManager\Resource\Shader</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsShader.cpp">
-      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Shader\GraphicsShader</Filter>
+      <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
     </ClCompile>
     <ClCompile Include="ConstantBuffer.cpp">
       <Filter>01_Basic\02_Device\ConstantBuffer</Filter>
@@ -296,7 +299,7 @@
       <Filter>01_Basic\03_OBJ\Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
-      <Filter>01_Basic\01_Manager\AssetManager\Asset\Mesh</Filter>
+      <Filter>02_Derived\Resource\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Asset.cpp">
       <Filter>01_Basic\01_Manager\AssetManager\Asset</Filter>
@@ -308,7 +311,7 @@
       <Filter>0_Default\Header</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Texture</Filter>
+      <Filter>02_Derived\Resource\Shader\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

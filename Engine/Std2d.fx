@@ -48,7 +48,7 @@ VS_OUT VS_Std2D(VS_IN _in)
 
 float4 PS_Std2D(VS_OUT _in) : SV_Target
 {
-    // Texture Mapping
+    // Texture Sampling, Mapping
     // float4 color = g_tex_0.Sample(g_sam_0, _in.vUV);
     return _in.vColor;
 }

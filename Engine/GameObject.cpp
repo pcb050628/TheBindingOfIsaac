@@ -26,6 +26,11 @@ void GameObject::Update()
 	{
 		scrpt->Update();
 	}
+
+	for (GameObject* child : m_ChildObjs)
+	{
+		child->Update();
+	}
 }
 
 void GameObject::LateUpdate()
@@ -34,6 +39,11 @@ void GameObject::LateUpdate()
 	{
 		m_Components[i]->LateUpdate();
 	}
+
+	for (GameObject* child : m_ChildObjs)
+	{
+		child->LateUpdate();
+	}
 }
 
 void GameObject::Render()
@@ -41,6 +51,11 @@ void GameObject::Render()
 	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
 	{
 		m_RenderComponent->Render();
+	}
+
+	for (GameObject* child : m_ChildObjs)
+	{
+		child->Render();
 	}
 }
 
@@ -68,4 +83,31 @@ void GameObject::AddComponent(Component* _comp)
 	}
 
 	_comp->m_Owner = this;
+}
+
+void GameObject::AttachChild(GameObject* _objChild)
+{
+	if (_objChild->GetParent())
+	{
+		_objChild->DisconnectWithParent();
+	}
+
+	_objChild->m_Parent = this;
+	m_ChildObjs.push_back(_objChild);
+}
+
+void GameObject::DisconnectWithParent()
+{
+	std::vector<GameObject*>::iterator iter = m_Parent->m_ChildObjs.begin();
+	for (; iter != m_ChildObjs.end(); iter++)
+	{
+		if (*iter == this)
+		{
+			m_Parent->m_ChildObjs.erase(iter);
+			m_Parent = nullptr;
+			return;
+		}
+	}
+
+	assert(nullptr); // 부모 객체가 존재하는데 그 객체의 자식 벡터에 내가 없음
 }

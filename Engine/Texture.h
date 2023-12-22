@@ -15,7 +15,7 @@ private:
     Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView>   m_UAView; // GPGPU(General Purpose GPU) - ComputeShader, 읽기 쓰기 동시가능, (Unordered Register(u) 에 바인딩 가능)
 
 private:
-    virtual bool Load(const std::wstring& _strFilePath) override;
+    bool Load(const std::wstring& _path) override;
 
 public:
     void UpdateData(int _regiNum);

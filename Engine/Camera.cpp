@@ -27,15 +27,15 @@ void Camera::LateUpdate()
 	m_matProj = DirectX::XMMatrixIdentity();
 
 	{ // view matrix
-		// 위치 행렬
-		Vec3 vPos = GetOwner()->GetComponent<Transform>()->GetPos();
+		// ?�치 ?�렬
+		Vec3 vPos = GetOwner()->GetComponent<Transform>()->GetRelativePos();
 		Matrix matPos = DirectX::XMMatrixTranslation(-vPos.x, -vPos.y, -vPos.z);
 
-		Vec3 vRight = GetOwner()->GetComponent<Transform>()->GetDir(DIR_TYPE::RIGHT);
-		Vec3 vUp = GetOwner()->GetComponent<Transform>()->GetDir(DIR_TYPE::UP);
-		Vec3 vFront = GetOwner()->GetComponent<Transform>()->GetDir(DIR_TYPE::FRONT);
+		Vec3 vRight = GetOwner()->GetComponent<Transform>()->GetLocalDir(DIR_TYPE::RIGHT);
+		Vec3 vUp = GetOwner()->GetComponent<Transform>()->GetLocalDir(DIR_TYPE::UP);
+		Vec3 vFront = GetOwner()->GetComponent<Transform>()->GetLocalDir(DIR_TYPE::FRONT);
 
-		// 회전 행렬
+		// ?�전 ?�렬
 		Matrix matRot = DirectX::XMMatrixIdentity();
 
 		matRot._11 = vRight.x; matRot._12 = vUp.x; matRot._13 = vFront.x;
