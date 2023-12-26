@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Room.h"
 
+#include "GameObject.h"
+
 Room::Room() : Super(AssetType::ROOM)
 	, m_Layers()
 	, m_Type(RoomType::Common)
@@ -17,9 +19,6 @@ Room::~Room()
 
 void Room::Create(const std::wstring& _name)
 {
-	// layer 기준으로 작성하기
-	// GOBJ_TYPE 으로 GameObject 분류
-	// Transform 저장
 }
 
 bool Room::Load(std::wstring _path)
@@ -32,6 +31,14 @@ bool Room::Save()
 
 
 	return false;
+}
+
+void Room::Clear()
+{
+	for (Layer& layer : m_Layers)
+	{
+		layer.Clear();
+	}
 }
 
 void Room::Enter()
@@ -66,3 +73,8 @@ void Room::Exit()
 {
 }
 
+
+void Room::DetachGameObject(GameObject* _obj)
+{
+	m_Layers[_obj->m_iLayerIdx].DetachGameObject(_obj);
+}

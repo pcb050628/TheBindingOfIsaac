@@ -14,6 +14,8 @@ Chapter::~Chapter()
 
 void Chapter::Update()
 {
+	m_CurRoom->Clear();
+
 	m_CurRoom->Update();
 }
 
@@ -27,11 +29,7 @@ void Chapter::Render()
 	m_CurRoom->Render();
 }
 
-void ChangeRoom(DIRECTION _dir)
+void Chapter::DetachGameObject(GameObject* _obj)
 {
-	Task task = {};
-	task.Type = TASKTYPE::CHANGE_ROOM;
-	task.Param_1 = (UINT_PTR)_dir;
-
-	TaskManager::GetInst()->AddTask(task);
+	m_CurRoom->DetachGameObject(_obj);
 }

@@ -9,8 +9,6 @@
 
 #include "GraphicsShader.h"
 
-#include "PlayerController.h"
-
 Test::Test()
 	: m_Gobjs()
 {
@@ -28,7 +26,6 @@ void Test::Init()
 
 	obj->AddComponent(new Transform);
 	obj->AddComponent(new MeshRenderer);
-	obj->AddComponent(new PlayerController);
 
 	MeshRenderer* mr = obj->GetComponent<MeshRenderer>();
 	mr->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));

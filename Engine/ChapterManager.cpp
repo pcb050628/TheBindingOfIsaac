@@ -2,9 +2,25 @@
 #include "ChapterManager.h"
 #include "TaskManager.h"
 
-void ChapterManager::Init()
+ChapterManager::ChapterManager()
 {
 
+}
+
+ChapterManager::~ChapterManager()
+{
+	for (Chapter* chptr : m_Chapters)
+	{
+		delete chptr;
+	}
+}
+
+void ChapterManager::Init()
+{
+	for (Chapter* chptr : m_Chapters)
+	{
+		// chptr = new Chapter();
+	}
 }
 
 void ChapterManager::Update()
@@ -22,17 +38,8 @@ void ChapterManager::LateUpdate()
 	m_CurChapter->LateUpdate();
 }
 
-void ChangeChapter(CHAPTERLEVEL _level)
+void ChapterManager::DetachGameObject(GameObject* _obj)
 {
-	Task task;
-	task.Type = TASKTYPE::CHANGE_CHAPTER;
-	task.Param_1 = (UINT_PTR)_level;
+	m_CurChapter->DetachGameObject(_obj);
 }
 
-void AddActor(GameObject* _actr, CHAPTERLEVEL _level)
-{
-	Task task;
-	task.Type = TASKTYPE::CREATE_ACTOR;
-	task.Param_1 = (UINT_PTR)_actr;
-	task.Param_2 = (UINT_PTR)_level;
-}

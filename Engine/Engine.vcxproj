@@ -177,7 +177,6 @@ call EngineCopy.bat</Command>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="CameraController.h" />
     <ClInclude Include="components.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="GameObject.h" />
@@ -199,13 +198,11 @@ call EngineCopy.bat</Command>
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Device.h" />
-    <ClInclude Include="PlayerController.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="resources.h" />
     <ClInclude Include="Room.h" />
-    <ClInclude Include="Script.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="TaskManager.h" />
@@ -216,9 +213,9 @@ call EngineCopy.bat</Command>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="CameraController.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="externs.cpp" />
+    <ClCompile Include="functions.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Asset.cpp" />
     <ClCompile Include="AssetManager.cpp" />
@@ -240,12 +237,10 @@ call EngineCopy.bat</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Device.cpp" />
-    <ClCompile Include="PlayerController.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Room.cpp" />
-    <ClCompile Include="Script.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="structs.cpp" />
     <ClCompile Include="TaskManager.cpp" />

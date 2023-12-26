@@ -79,12 +79,6 @@
     <Filter Include="01_Basic\01_Manager\ResourceManager\Resource\Shader">
       <UniqueIdentifier>{82b62f05-edb6-4eb4-9e10-b9bcadbd364a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\03_OBJ\Component\Script">
-      <UniqueIdentifier>{dd356d35-b90d-4edf-a58d-e7ea355eccb7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\03_OBJ\Scripts">
-      <UniqueIdentifier>{8381ddc0-5642-4e03-9e11-b0bf2983a155}</UniqueIdentifier>
-    </Filter>
     <Filter Include="0_Default\ShaderCode">
       <UniqueIdentifier>{2e8e88dc-8e6c-4f64-bddb-10b6e006409c}</UniqueIdentifier>
     </Filter>
@@ -115,14 +109,11 @@
     <Filter Include="02_Derived\GameObject\Humanoid">
       <UniqueIdentifier>{f7d20c5e-5c8c-4a5c-81f5-d3a530dab4d0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Script">
-      <UniqueIdentifier>{ab2f9c1d-8665-4289-9dfd-89a9f28f034b}</UniqueIdentifier>
+    <Filter Include="02_Derived\GameObject\Player">
+      <UniqueIdentifier>{256dc24e-6336-442e-ad87-8680ec8bde20}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Script\PlayerController">
-      <UniqueIdentifier>{28302243-023a-4c10-b10c-5ef064c47120}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Script\CameraController">
-      <UniqueIdentifier>{0c5a28a0-3bf2-40e6-9796-5d58a09027d7}</UniqueIdentifier>
+    <Filter Include="02_Derived\GameObject\Monster">
+      <UniqueIdentifier>{9bb63a6b-2439-4307-80f8-4c28b5720d9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -208,9 +199,6 @@
     <ClInclude Include="Camera.h">
       <Filter>01_Basic\03_OBJ\Component\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="Script.h">
-      <Filter>01_Basic\03_OBJ\Component\Script</Filter>
-    </ClInclude>
     <ClInclude Include="components.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
@@ -228,12 +216,6 @@
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>02_Derived\Resource\Shader\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerController.h">
-      <Filter>02_Derived\Script\PlayerController</Filter>
-    </ClInclude>
-    <ClInclude Include="CameraController.h">
-      <Filter>02_Derived\Script\CameraController</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -310,9 +292,6 @@
     <ClCompile Include="Camera.cpp">
       <Filter>01_Basic\03_OBJ\Component\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="Script.cpp">
-      <Filter>01_Basic\03_OBJ\Component\Script</Filter>
-    </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>02_Derived\Resource\Mesh</Filter>
     </ClCompile>
@@ -328,11 +307,8 @@
     <ClCompile Include="Texture.cpp">
       <Filter>02_Derived\Resource\Shader\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerController.cpp">
-      <Filter>02_Derived\Script\PlayerController</Filter>
-    </ClCompile>
-    <ClCompile Include="CameraController.cpp">
-      <Filter>02_Derived\Script\CameraController</Filter>
+    <ClCompile Include="functions.cpp">
+      <Filter>0_Default\Header</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

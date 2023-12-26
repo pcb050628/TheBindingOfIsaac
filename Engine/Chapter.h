@@ -16,6 +16,8 @@ public:
 
     virtual Room* GetCurRoom() { return m_CurRoom; }
 
+    void DetachGameObject(GameObject* _obj);
+
 public:
     Chapter();
     virtual ~Chapter() override;
@@ -29,7 +31,7 @@ private:
             m_CurRoom = room;
     }
 
-    void AddActor(GameObject* _actr, LayerType _layr)
+    void AddActor(GameObject* _actr, LAYER_TYPE _layr)
     {
         m_CurRoom->AddActor(_actr, _layr);
     }

@@ -13,11 +13,3 @@ Entity::Entity()
 Entity::~Entity()
 {
 }
-
-bool IsValid(Entity* _entity)
-{
-	if (_entity != nullptr && !_entity->GetIsDead())
-		return true;
-	else
-		return false;
-}

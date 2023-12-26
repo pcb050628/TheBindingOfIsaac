@@ -31,19 +31,3 @@ void AssetManager::Init()
         //m_AssetPaths.insert(std::make_pair((AssetID)std::stoi(entry.path().filename()), entry.path()));
     }
 }
-
-std::wstring GetContentPath()
-{
-    wchar_t path[500];
-    GetModuleFileNameW(nullptr, path, 500);
-    std::wstring directoryPath(path);
-
-    for (int i = 0; i < 2; i++)
-    {
-        size_t point = directoryPath.find_last_of(L"\\");
-
-        directoryPath = directoryPath.substr(0, point);
-    }
-
-    return directoryPath + L"\\Content\\";
-}

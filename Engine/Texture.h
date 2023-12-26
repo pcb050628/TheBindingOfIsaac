@@ -15,6 +15,7 @@ private:
     Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView>   m_UAView; // GPGPU(General Purpose GPU) - ComputeShader, 읽기 쓰기 동시가능, (Unordered Register(u) 에 바인딩 가능)
 
 private:
+    // 파일에서 이미지를 가져옴, Texture 클래스를 불러오는게 아님
     bool Load(const std::wstring& _path) override;
 
 public:

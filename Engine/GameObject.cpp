@@ -2,17 +2,28 @@
 #include "GameObject.h"
 
 #include "RenderComponent.h"
-#include "Script.h"
+
+#include "ChapterManager.h"
+#include "Layer.h"
 
 GameObject::GameObject()
-	: m_Components()
-	, m_Scripts()
+	: m_Components{}
 	, m_RenderComponent(nullptr)
+	, m_Parent(nullptr)
+	, m_iLayerIdx(-1)
 {
 }
 
 GameObject::~GameObject()
 {
+	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+	{
+		if (m_Components[i] != nullptr)
+		{
+			delete m_Components[i];
+			m_Components[i] = nullptr;
+		}
+	}
 }
 
 void GameObject::Update()
@@ -21,11 +32,6 @@ void GameObject::Update()
 	{
 		if(m_Components[i] != nullptr)
 			m_Components[i]->Update();
-	}
-
-	for (Script* scrpt : m_Scripts)
-	{
-		scrpt->Update();
 	}
 
 	for (GameObject* child : m_ChildObjs)
@@ -52,11 +58,6 @@ void GameObject::Render()
 {
 	if(m_RenderComponent != nullptr)
 		m_RenderComponent->Render();
-
-	for (GameObject* child : m_ChildObjs)
-	{
-		child->Render();
-	}
 }
 
 void GameObject::AddComponent(Component* _comp)
@@ -65,21 +66,14 @@ void GameObject::AddComponent(Component* _comp)
 
 	COMPONENT_TYPE type = _comp->GetType();
 
-	if (type == COMPONENT_TYPE::SCRIPT)
-	{
-		m_Scripts.push_back((Script*)_comp);
-	}
-	else
-	{
-		assert(!m_Components[(UINT)type]);
+	assert(!m_Components[(UINT)type]);
 
-		m_Components[(UINT)type] = _comp;
+	m_Components[(UINT)type] = _comp;
 
-		if (nullptr != dynamic_cast<RenderComponent*>(_comp))
-		{
-			assert(!m_RenderComponent);
-			m_RenderComponent = (RenderComponent*)_comp;
-		}
+	if (nullptr != dynamic_cast<RenderComponent*>(_comp))
+	{
+		assert(!m_RenderComponent);
+		m_RenderComponent = (RenderComponent*)_comp;
 	}
 
 	_comp->m_Owner = this;
@@ -110,4 +104,12 @@ void GameObject::DisconnectWithParent()
 	}
 
 	assert(nullptr); // 부모 객체가 존재하는데 그 객체의 자식 벡터에 내가 없음
+}
+
+void GameObject::DisconnectWithLayer()
+{
+	if (m_iLayerIdx == -1)
+		return;
+
+
 }

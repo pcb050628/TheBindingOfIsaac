@@ -23,6 +23,7 @@ void TaskManager::Update()
 	{
 		Task& task = m_TaskQueue.front();
 
+		// 모두 수정 필요함
 		switch (task.Type)
 		{
 		case TASKTYPE::CHANGE_ROOM:
@@ -33,11 +34,11 @@ void TaskManager::Update()
 			ChapterManager::GetInst()->ChangeChapter((CHAPTERLEVEL)task.Param_1);
 			break;
 
-		case TASKTYPE::CREATE_ACTOR:
-			ChapterManager::GetInst()->GetCurChapter()->AddActor((GameObject*)task.Param_1, (LayerType)task.Param_2);
+		case TASKTYPE::CREATE_OBJECT:
+			ChapterManager::GetInst()->GetCurChapter()->AddActor((GameObject*)task.Param_1, (LAYER_TYPE)task.Param_2);
 			break;
 
-		case TASKTYPE::DELETE_ACTOR:
+		case TASKTYPE::DELETE_OBJECT:
 			delete (GameObject*)task.Param_1;
 			break;
 		}

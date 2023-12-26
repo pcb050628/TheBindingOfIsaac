@@ -5,7 +5,6 @@
 
 #include "components.h"
 
-class Script;
 class RenderComponent;
 
 class GameObject :
@@ -16,11 +15,12 @@ class GameObject :
 private:
     Component*                  m_Components[(UINT)COMPONENT_TYPE::END];
     RenderComponent*            m_RenderComponent;
-    std::vector<Script*>        m_Scripts;
 
     std::vector<GameObject*>    m_ChildObjs;
 
     GameObject*                 m_Parent;
+
+    int                         m_iLayerIdx;
 
 public:
     virtual void Update(); 
@@ -37,11 +37,16 @@ public:
 
     GameObject* GetParent() { return m_Parent; }
     void AttachChild(GameObject* _objChild);
+
     void DisconnectWithParent();
+    void DisconnectWithLayer();
 
 public:
     GameObject();
     virtual ~GameObject() override;
+
+    friend class Layer;
+    friend class Room;
 };
 
 template <typename T>

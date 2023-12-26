@@ -24,7 +24,7 @@ class Room :
     typedef Asset Super;
 private:
     RoomType m_Type;
-    Layer m_Layers[(int)LayerType::END];
+    Layer m_Layers[(int)LAYER_TYPE::END];
 
     Room* Left;
     Room* Right;
@@ -36,13 +36,15 @@ public:
     virtual bool Load(std::wstring _path) override;
     virtual bool Save() override;
 
+    virtual void Clear();
+
     virtual void Enter();
     virtual void Update();
     virtual void LateUpdate();
     virtual void Render();
     virtual void Exit();
 
-    virtual Layer& GetLayer(LayerType _type) { return m_Layers[(int)_type]; }
+    virtual Layer& GetLayer(LAYER_TYPE _type) { return m_Layers[(int)_type]; }
 
     // 15 x 9 tile
 
@@ -67,10 +69,12 @@ public:
         return nullptr;
     }
 
-    void AddActor(GameObject* _actr, LayerType _layr)
+    void AddActor(GameObject* _obj, LAYER_TYPE _layr, bool _bMove)
     {
-        m_Layers[(UINT)_layr].AddActor(_actr);
+        m_Layers[(UINT)_layr].AddActor(_obj, _bMove);
     }
+
+    void DetachGameObject(GameObject* _obj);
 
 public:
     Room();

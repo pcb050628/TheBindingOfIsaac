@@ -5,7 +5,6 @@
 
 #include "components.h"
 
-class Script;
 class RenderComponent;
 
 class GameObject :
@@ -16,7 +15,6 @@ class GameObject :
 private:
     Component*                  m_Components[(UINT)COMPONENT_TYPE::END];
     RenderComponent*            m_RenderComponent;
-    std::vector<Script*>        m_Scripts;
 
     std::vector<GameObject*>    m_ChildObjs;
 
