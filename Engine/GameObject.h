@@ -41,12 +41,16 @@ public:
     void DisconnectWithParent();
     void DisconnectWithLayer();
 
+private:
+    void Destroy() { SetDead(); }
+
 public:
     GameObject();
     virtual ~GameObject() override;
 
     friend class Layer;
     friend class Room;
+    friend class TaskManager;
 };
 
 template <typename T>

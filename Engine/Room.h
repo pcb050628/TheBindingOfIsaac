@@ -69,9 +69,9 @@ public:
         return nullptr;
     }
 
-    void AddActor(GameObject* _obj, LAYER_TYPE _layr, bool _bMove)
+    void AddObject(GameObject* _obj, LAYER_TYPE _layr, bool _bMove)
     {
-        m_Layers[(UINT)_layr].AddActor(_obj, _bMove);
+        m_Layers[(UINT)_layr].AddObject(_obj, _bMove);
     }
 
     void DetachGameObject(GameObject* _obj);

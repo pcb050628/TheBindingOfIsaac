@@ -2,6 +2,7 @@
 
 #include "Entity.h"
 #include "TaskManager.h"
+#include "GameObject.h"
 
 
 bool IsValid(Entity* _entity)
@@ -32,6 +33,15 @@ void ChangeRoom(DIRECTION _dir)
 	Task task = {};
 	task.Type = TASKTYPE::CHANGE_ROOM;
 	task.Param_1 = (UINT_PTR)_dir;
+
+	TaskManager::GetInst()->AddTask(task);
+}
+
+void Destroy(GameObject* _obj)
+{
+	Task task = {};
+	task.Type = TASKTYPE::DELETE_OBJECT;
+	task.Param_1 = (UINT_PTR)_obj;
 
 	TaskManager::GetInst()->AddTask(task);
 }

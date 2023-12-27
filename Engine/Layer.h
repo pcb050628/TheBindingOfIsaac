@@ -29,11 +29,13 @@ public:
 
     void Clear();
 
-    void AddActor(GameObject* _obj, bool _bMove = false);
+    void AddObject(GameObject* _obj, bool _bMove = false);
     void DetachGameObject(GameObject* _obj);
 
 public:
     Layer();
     ~Layer() override;
+
+    friend class Room;
 };
 

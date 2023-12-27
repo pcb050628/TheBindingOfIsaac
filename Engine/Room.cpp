@@ -11,6 +11,10 @@ Room::Room() : Super(AssetType::ROOM)
 	, Top(nullptr)
 	, Bottom(nullptr)
 {
+	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
+	{
+		m_Layers[i].m_iLayerIdx = i;
+	}
 }
 
 Room::~Room()

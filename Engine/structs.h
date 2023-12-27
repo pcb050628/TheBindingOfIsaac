@@ -21,13 +21,11 @@ struct tTransform
 };
 extern tTransform g_Transform;
 
-enum class GOBJ_TYPE
+struct tMaterial
 {
-	GOBJ,
-	MONSTER,
-	PLAYER,
-	OBJECT,
-	TRAP,
-	DOOR,
-	TRAPDOOR,
+	int iArr[4];
+	float floatArr[4];
+	Vec2  Vec2Arr[4];
+	Vec4  Vec4Arr[4];
+	Matrix matArr[4];
 };

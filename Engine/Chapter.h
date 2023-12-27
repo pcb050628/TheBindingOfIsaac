@@ -31,9 +31,9 @@ private:
             m_CurRoom = room;
     }
 
-    void AddActor(GameObject* _actr, LAYER_TYPE _layr)
+    void AddObject(GameObject* _actr, LAYER_TYPE _layr, bool _bMove)
     {
-        m_CurRoom->AddActor(_actr, _layr);
+        m_CurRoom->AddObject(_actr, _layr, _bMove);
     }
 
     friend class TaskManager;

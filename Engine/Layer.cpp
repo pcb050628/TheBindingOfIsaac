@@ -1,10 +1,12 @@
 #include "pch.h"
 #include "Layer.h"
 #include "GameObject.h"
+#include "GarbageCollection.h"
 
 Layer::Layer()
 	: m_Parents()
 	, m_Gobjs()
+	, m_iLayerIdx(-1)
 {
 }
 
@@ -45,7 +47,10 @@ void Layer::Render()
 	for (; iter != m_Parents.end();)
 	{
 		if (!IsValid(*iter))
+		{
+			GarbageCollection::GetInst()->Add(*iter);
 			iter = m_Parents.erase(iter);
+		}
 		else
 			iter++;
 	}
@@ -60,7 +65,7 @@ void Layer::Clear()
 	}
 }
 
-void Layer::AddActor(GameObject* _obj, bool _bMove)
+void Layer::AddObject(GameObject* _obj, bool _bMove)
 {
 	if (!_obj->GetParent())
 	{

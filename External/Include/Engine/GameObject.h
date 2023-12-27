@@ -20,6 +20,8 @@ private:
 
     GameObject*                 m_Parent;
 
+    int                         m_iLayerIdx;
+
 public:
     virtual void Update(); 
     virtual void LateUpdate();
@@ -35,11 +37,20 @@ public:
 
     GameObject* GetParent() { return m_Parent; }
     void AttachChild(GameObject* _objChild);
+
     void DisconnectWithParent();
+    void DisconnectWithLayer();
+
+private:
+    void Destroy() { SetDead(); }
 
 public:
     GameObject();
     virtual ~GameObject() override;
+
+    friend class Layer;
+    friend class Room;
+    friend class TaskManager;
 };
 
 template <typename T>

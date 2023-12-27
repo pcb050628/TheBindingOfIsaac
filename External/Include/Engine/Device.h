@@ -22,6 +22,7 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11RasterizerState>	m_arrRS[(UINT)RS_TYPE::END];
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> m_arrDSS[(UINT)DSS_TYPE::END];
 	Microsoft::WRL::ComPtr<ID3D11BlendState>		m_arrBS[(UINT)BS_TYPE::END];
+	Microsoft::WRL::ComPtr<ID3D11SamplerState>		m_arrSS[2];
 
 	Vec2											m_vResolution;
 	Vec4											m_vClearColor;

@@ -16,36 +16,6 @@
     <Filter Include="0_Default\Cpp">
       <UniqueIdentifier>{8a325902-a467-4192-886a-f302050a56cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\01_Manager">
-      <UniqueIdentifier>{ba5a6859-296a-4bb7-a7d4-3f52267484b5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\ResourceManager">
-      <UniqueIdentifier>{623d8b65-a4ce-4ee1-a1f9-b96f13044a83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\LogManager">
-      <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\TaskManager">
-      <UniqueIdentifier>{103698d5-9ebf-4913-8bb7-12d9f1d72022}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\Time">
-      <UniqueIdentifier>{e2de632d-9ecf-43c5-a5e5-b37715126cc3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\Input">
-      <UniqueIdentifier>{3002f376-0cdf-4a02-a532-f84a4eee8483}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\ChpaterManager">
-      <UniqueIdentifier>{937263d6-8374-4e70-8ba3-7b874945b305}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\AssetManager">
-      <UniqueIdentifier>{6a7751a8-c377-4179-b451-c68125c1f5f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\02_Device">
-      <UniqueIdentifier>{87d3064c-312f-475f-902f-549a2295aa9f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\02_Device\ConstantBuffer">
-      <UniqueIdentifier>{be9362fe-4ac7-44e2-8ebc-149f959a8bb4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\03_OBJ">
       <UniqueIdentifier>{5aaf40f6-0afe-4b69-b2e5-fdca117409aa}</UniqueIdentifier>
     </Filter>
@@ -69,15 +39,6 @@
     </Filter>
     <Filter Include="01_Basic\04_Chapter">
       <UniqueIdentifier>{a610fea3-fc03-4907-8cac-7386f1499ee0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\AssetManager\Asset">
-      <UniqueIdentifier>{f4dc2568-a603-47b3-9c9b-b17bcea629fc}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\ResourceManager\Resource">
-      <UniqueIdentifier>{21aaa8c3-5ce9-4710-854f-edd385ed5d16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\01_Manager\ResourceManager\Resource\Shader">
-      <UniqueIdentifier>{82b62f05-edb6-4eb4-9e10-b9bcadbd364a}</UniqueIdentifier>
     </Filter>
     <Filter Include="0_Default\ShaderCode">
       <UniqueIdentifier>{2e8e88dc-8e6c-4f64-bddb-10b6e006409c}</UniqueIdentifier>
@@ -115,6 +76,51 @@
     <Filter Include="02_Derived\GameObject\Monster">
       <UniqueIdentifier>{9bb63a6b-2439-4307-80f8-4c28b5720d9b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\02_Manager">
+      <UniqueIdentifier>{ba5a6859-296a-4bb7-a7d4-3f52267484b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\ResourceManager">
+      <UniqueIdentifier>{623d8b65-a4ce-4ee1-a1f9-b96f13044a83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\ResourceManager\Resource">
+      <UniqueIdentifier>{21aaa8c3-5ce9-4710-854f-edd385ed5d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\ResourceManager\Resource\Shader">
+      <UniqueIdentifier>{82b62f05-edb6-4eb4-9e10-b9bcadbd364a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\LogManager">
+      <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\TaskManager">
+      <UniqueIdentifier>{103698d5-9ebf-4913-8bb7-12d9f1d72022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\Time">
+      <UniqueIdentifier>{e2de632d-9ecf-43c5-a5e5-b37715126cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\Input">
+      <UniqueIdentifier>{3002f376-0cdf-4a02-a532-f84a4eee8483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\ChpaterManager">
+      <UniqueIdentifier>{937263d6-8374-4e70-8ba3-7b874945b305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\AssetManager">
+      <UniqueIdentifier>{6a7751a8-c377-4179-b451-c68125c1f5f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\AssetManager\Asset">
+      <UniqueIdentifier>{f4dc2568-a603-47b3-9c9b-b17bcea629fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Device">
+      <UniqueIdentifier>{87d3064c-312f-475f-902f-549a2295aa9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Device\ConstantBuffer">
+      <UniqueIdentifier>{be9362fe-4ac7-44e2-8ebc-149f959a8bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Material">
+      <UniqueIdentifier>{6c2e0e00-fa06-48fa-892c-8a05e848fb1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\GarbageCollection">
+      <UniqueIdentifier>{e8fbffdc-aec6-40ad-8497-638934964e8d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -127,7 +133,7 @@
       <Filter>01_Basic\00_Engine</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
-      <Filter>01_Basic\01_Manager\Time</Filter>
+      <Filter>01_Basic\02_Manager\Time</Filter>
     </ClInclude>
     <ClInclude Include="define.h">
       <Filter>0_Default\Header</Filter>
@@ -139,7 +145,7 @@
       <Filter>01_Basic\03_OBJ\Component</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>01_Basic\01_Manager\Input</Filter>
+      <Filter>01_Basic\02_Manager\Input</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>01_Basic</Filter>
@@ -148,22 +154,22 @@
       <Filter>01_Basic\04_Chapter</Filter>
     </ClInclude>
     <ClInclude Include="ChapterManager.h">
-      <Filter>01_Basic\01_Manager\ChpaterManager</Filter>
+      <Filter>01_Basic\02_Manager\ChpaterManager</Filter>
     </ClInclude>
     <ClInclude Include="Device.h">
-      <Filter>01_Basic\02_Device</Filter>
+      <Filter>01_Basic\01_Device</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>01_Basic\01_Manager\ResourceManager</Filter>
+      <Filter>01_Basic\02_Manager\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="AssetManager.h">
-      <Filter>01_Basic\01_Manager\AssetManager</Filter>
+      <Filter>01_Basic\02_Manager\AssetManager</Filter>
     </ClInclude>
     <ClInclude Include="LogManager.h">
-      <Filter>01_Basic\01_Manager\LogManager</Filter>
+      <Filter>01_Basic\02_Manager\LogManager</Filter>
     </ClInclude>
     <ClInclude Include="TaskManager.h">
-      <Filter>01_Basic\01_Manager\TaskManager</Filter>
+      <Filter>01_Basic\02_Manager\TaskManager</Filter>
     </ClInclude>
     <ClInclude Include="functions.h">
       <Filter>0_Default\Header</Filter>
@@ -179,13 +185,13 @@
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Shader</Filter>
+      <Filter>01_Basic\02_Manager\ResourceManager\Resource\Shader</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsShader.h">
       <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
     </ClInclude>
     <ClInclude Include="ConstantBuffer.h">
-      <Filter>01_Basic\02_Device\ConstantBuffer</Filter>
+      <Filter>01_Basic\01_Device\ConstantBuffer</Filter>
     </ClInclude>
     <ClInclude Include="RenderComponent.h">
       <Filter>01_Basic\03_OBJ\Component</Filter>
@@ -206,16 +212,22 @@
       <Filter>02_Derived\Resource\Mesh</Filter>
     </ClInclude>
     <ClInclude Include="Asset.h">
-      <Filter>01_Basic\01_Manager\AssetManager\Asset</Filter>
+      <Filter>01_Basic\02_Manager\AssetManager\Asset</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
-      <Filter>01_Basic\01_Manager\ResourceManager\Resource</Filter>
+      <Filter>01_Basic\02_Manager\ResourceManager\Resource</Filter>
     </ClInclude>
     <ClInclude Include="resources.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>02_Derived\Resource\Shader\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>02_Derived\Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="GarbageCollection.h">
+      <Filter>01_Basic\02_Manager\GarbageCollection</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -226,7 +238,7 @@
       <Filter>01_Basic\00_Engine</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
-      <Filter>01_Basic\01_Manager\Time</Filter>
+      <Filter>01_Basic\02_Manager\Time</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>01_Basic\03_OBJ\GameObject</Filter>
@@ -235,7 +247,7 @@
       <Filter>01_Basic\03_OBJ\Component</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>01_Basic\01_Manager\Input</Filter>
+      <Filter>01_Basic\02_Manager\Input</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>01_Basic</Filter>
@@ -244,22 +256,22 @@
       <Filter>01_Basic\04_Chapter</Filter>
     </ClCompile>
     <ClCompile Include="ChapterManager.cpp">
-      <Filter>01_Basic\01_Manager\ChpaterManager</Filter>
+      <Filter>01_Basic\02_Manager\ChpaterManager</Filter>
     </ClCompile>
     <ClCompile Include="Device.cpp">
-      <Filter>01_Basic\02_Device</Filter>
+      <Filter>01_Basic\01_Device</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>01_Basic\01_Manager\ResourceManager</Filter>
+      <Filter>01_Basic\02_Manager\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="AssetManager.cpp">
-      <Filter>01_Basic\01_Manager\AssetManager</Filter>
+      <Filter>01_Basic\02_Manager\AssetManager</Filter>
     </ClCompile>
     <ClCompile Include="LogManager.cpp">
-      <Filter>01_Basic\01_Manager\LogManager</Filter>
+      <Filter>01_Basic\02_Manager\LogManager</Filter>
     </ClCompile>
     <ClCompile Include="TaskManager.cpp">
-      <Filter>01_Basic\01_Manager\TaskManager</Filter>
+      <Filter>01_Basic\02_Manager\TaskManager</Filter>
     </ClCompile>
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="Layer.cpp">
@@ -272,13 +284,13 @@
       <Filter>0_Default\Cpp</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>01_Basic\01_Manager\ResourceManager\Resource\Shader</Filter>
+      <Filter>01_Basic\02_Manager\ResourceManager\Resource\Shader</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsShader.cpp">
       <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
     </ClCompile>
     <ClCompile Include="ConstantBuffer.cpp">
-      <Filter>01_Basic\02_Device\ConstantBuffer</Filter>
+      <Filter>01_Basic\01_Device\ConstantBuffer</Filter>
     </ClCompile>
     <ClCompile Include="RenderComponent.cpp">
       <Filter>01_Basic\03_OBJ\Component</Filter>
@@ -296,10 +308,10 @@
       <Filter>02_Derived\Resource\Mesh</Filter>
     </ClCompile>
     <ClCompile Include="Asset.cpp">
-      <Filter>01_Basic\01_Manager\AssetManager\Asset</Filter>
+      <Filter>01_Basic\02_Manager\AssetManager\Asset</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
-      <Filter>01_Basic\01_Manager\ResourceManager\Resource</Filter>
+      <Filter>01_Basic\02_Manager\ResourceManager\Resource</Filter>
     </ClCompile>
     <ClCompile Include="externs.cpp">
       <Filter>0_Default\Header</Filter>
@@ -309,6 +321,12 @@
     </ClCompile>
     <ClCompile Include="functions.cpp">
       <Filter>0_Default\Header</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>02_Derived\Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="GarbageCollection.cpp">
+      <Filter>01_Basic\02_Manager\GarbageCollection</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

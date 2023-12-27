@@ -30,6 +30,7 @@ public:
 	Chapter* GetCurChapter() { return m_CurChapter; }
 	Chapter* GetChpater(CHAPTERLEVEL _level) { return m_Chapters[(UINT)_level]; }
 
+	void DetachGameObject(class GameObject* _obj);
 
 private:
 	void ChangeChapter(CHAPTERLEVEL _level) { m_CurChapter = m_Chapters[(UINT)_level]; }

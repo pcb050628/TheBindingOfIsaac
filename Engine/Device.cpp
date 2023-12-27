@@ -205,6 +205,10 @@ int Device::CreateConstBuffer()
 	m_arrConstantBuffer[(UINT)CB_TYPE::TRANSFORM] = new ConstantBuffer(CB_TYPE::TRANSFORM);
 	m_arrConstantBuffer[(UINT)CB_TYPE::TRANSFORM]->Create(sizeof(tTransform), 1);
 
+	m_arrConstantBuffer[(UINT)CB_TYPE::MATERIAL_CONST] = new ConstantBuffer(CB_TYPE::MATERIAL_CONST);
+	m_arrConstantBuffer[(UINT)CB_TYPE::MATERIAL_CONST]->Create(sizeof(tMaterial), 1);
+
+
 	return S_OK;
 }
 
@@ -363,6 +367,50 @@ int Device::CreateBlendState()
 		if (FAILED(hResult))
 			return E_FAIL;
 	}
+
+	return S_OK;
+}
+
+int Device::CreateSamplerState()
+{
+	HRESULT hResult = S_OK;
+
+	D3D11_SAMPLER_DESC desc = {};
+	desc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc.Filter = D3D11_FILTER_ANISOTROPIC;
+
+	desc.MinLOD = 0;
+	desc.MaxLOD = 1;
+
+	hResult = m_pDevice->CreateSamplerState(&desc, m_arrSS[0].GetAddressOf());
+	if (FAILED(hResult))
+		return E_FAIL;
+
+	desc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+	desc.Filter = D3D11_FILTER_MIN_MAG_MIP_POINT;
+
+	desc.MinLOD = 0;
+	desc.MaxLOD = 1;
+
+	hResult = m_pDevice->CreateSamplerState(&desc, m_arrSS[1].GetAddressOf());
+	if (FAILED(hResult))
+		return E_FAIL;
+
+	m_pContext->VSSetSamplers(0, 1, m_arrSS[0].GetAddressOf());
+	m_pContext->HSSetSamplers(0, 1, m_arrSS[0].GetAddressOf());
+	m_pContext->DSSetSamplers(0, 1, m_arrSS[0].GetAddressOf());
+	m_pContext->GSSetSamplers(0, 1, m_arrSS[0].GetAddressOf());
+	m_pContext->PSSetSamplers(0, 1, m_arrSS[0].GetAddressOf());
+
+	m_pContext->VSSetSamplers(1, 1, m_arrSS[1].GetAddressOf());
+	m_pContext->HSSetSamplers(1, 1, m_arrSS[1].GetAddressOf());
+	m_pContext->DSSetSamplers(1, 1, m_arrSS[1].GetAddressOf());
+	m_pContext->GSSetSamplers(1, 1, m_arrSS[1].GetAddressOf());
+	m_pContext->PSSetSamplers(1, 1, m_arrSS[1].GetAddressOf());
 
 	return S_OK;
 }
