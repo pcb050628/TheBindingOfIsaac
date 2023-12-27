@@ -55,5 +55,6 @@ private:
 	int CreateRasterizerState();
 	int CreateDepthStencilState();
 	int CreateBlendState();
+	int CreateSamplerState();
 };
 

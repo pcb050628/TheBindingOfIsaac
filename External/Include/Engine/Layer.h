@@ -35,5 +35,7 @@ public:
 public:
     Layer();
     ~Layer() override;
+
+    friend class Room;
 };
 

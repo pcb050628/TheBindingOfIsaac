@@ -4,7 +4,7 @@
 
 using namespace std;
 
-enum Key
+enum class Key
 {
 	Q,W,E,R,T,Y,U,I,O,P,
 	A,S,D,F,G,H,J,K,L,
@@ -17,7 +17,7 @@ enum Key
 	END,
 };
 
-enum KeyState
+enum class KeyState
 {
 	Pressed,
 	Hold,
