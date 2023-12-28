@@ -6,8 +6,8 @@ class Material :
 {
 private:
     tMaterial               m_ConstData;
-    class Texture*          m_Textures[TEX_PARAM::END];
 
+    class Texture*          m_Textures[TEX_PARAM::END];
     class GraphicsShader*   m_Shader;
 
 public:
@@ -18,6 +18,7 @@ public:
 
 public:
     void SetShader(GraphicsShader* _shader) { m_Shader = _shader; }
+    void SetTexture(Texture* _tex, TEX_PARAM _param) { m_Textures[_param] = _tex; }
 
 
 public:

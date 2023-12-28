@@ -5,8 +5,8 @@ class RenderComponent :
     public Component
 {
 private:
-    class Mesh*             m_Mesh;
-    class GraphicsShader*   m_Shader;
+    class Mesh*         m_Mesh;
+    class Material*     m_Material;
 
 public:
     virtual void Update() {}
@@ -16,10 +16,10 @@ public:
 
 public:
     void SetMesh(Mesh* _mesh) { m_Mesh = _mesh; }
-    void SetShader(GraphicsShader* _shader) { m_Shader = _shader; }
+    void SetMaterial(Material* _material) { m_Material = _material; }
 
     Mesh* GetMesh() { return m_Mesh; }
-    GraphicsShader* GetShader() { return m_Shader; }
+    Material* GetMaterial() { return m_Material; }
 
 public:
     RenderComponent(COMPONENT_TYPE _type);

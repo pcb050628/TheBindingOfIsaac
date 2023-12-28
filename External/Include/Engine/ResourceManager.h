@@ -75,6 +75,8 @@ RESOURCE_TYPE GetResourceType()
 		return RESOURCE_TYPE::MESH;
 	else if (&type == &typeid(class GraphicsShader))
 		return RESOURCE_TYPE::GRAPHICS_SHADER;
+	else if (&type == &typeid(class Material))
+		return RESOURCE_TYPE::MATERIAL;
 
 	return value;
 }

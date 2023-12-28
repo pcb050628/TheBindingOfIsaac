@@ -6,7 +6,7 @@
 #include "Transform.h"
 
 #include "Mesh.h"
-#include "GraphicsShader.h"
+#include "Material.h"
 
 MeshRenderer::MeshRenderer() : RenderComponent(COMPONENT_TYPE::MESHRENDERER)
 {
@@ -18,8 +18,8 @@ MeshRenderer::~MeshRenderer()
 
 void MeshRenderer::UpdateData()
 {
-	if(GetShader() != nullptr)
-		GetShader()->UpdateData();
+	if(GetMaterial() != nullptr)
+		GetMaterial()->UpdateData();
 
 	GetOwner()->GetComponent<Transform>()->UpdateData();
 }

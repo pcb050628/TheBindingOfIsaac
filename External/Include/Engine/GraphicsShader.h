@@ -49,11 +49,13 @@ public:
     bool Load(const std::wstring& _path) override;
     bool Save() override;
 
-public:
+private:
     void UpdateData() override;
 
 public:
     GraphicsShader();
     ~GraphicsShader();
+
+    friend class Material;
 };
 
