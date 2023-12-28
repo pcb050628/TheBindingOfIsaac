@@ -46,6 +46,17 @@ cbuffer MATERIAL : register(b1)
 };
 
 Texture2D g_tex_0 : register(t0);
+Texture2D g_tex_1 : register(t1);
+Texture2D g_tex_2 : register(t2);
+Texture2D g_tex_3 : register(t3);
+Texture2D g_tex_4 : register(t4);
+Texture2D g_tex_5 : register(t5);
+
+TextureCube g_texcube_0 : register(t6);
+TextureCube g_texcube_1 : register(t7);
+
+Texture2DArray g_texarr_0 : register(t8);
+Texture2DArray g_texarr_1 : register(t9);
 
 SamplerState g_sam_0 : register(s0);
 SamplerState g_sam_1 : register(s1);
