@@ -99,5 +99,9 @@ void ResourceManager::Init()
 	GraphicsShader* pShader = nullptr;
 
 	pShader = new GraphicsShader;
-	ResourceManager::GetInst()->LoadByPath<GraphicsShader>(L"test_Shader", GetContentPath() + L"Resource\\Shader\\Graphics\\test_Shader.txt");
+	LoadByPath<GraphicsShader>(L"test_Shader", GetContentPath() + L"Resource\\Shader\\Graphics\\test_Shader.txt");
+
+	Material* pMaterial = new Material;
+
+	AddResource(L"DefaultMaterial", pMaterial);
 }

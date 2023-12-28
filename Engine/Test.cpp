@@ -8,6 +8,7 @@
 #include "components.h"
 
 #include "GraphicsShader.h"
+#include "Material.h"
 
 Test::Test()
 	: m_Gobjs()
@@ -30,6 +31,9 @@ void Test::Init()
 	MeshRenderer* mr = obj->GetComponent<MeshRenderer>();
 	mr->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
 	//mr->SetShader(ResourceManager::GetInst()->Find<GraphicsShader>(L"test_Shader"));
+
+	mr->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"DefaultMaterial"));
+	mr->GetMaterial()->SetShader(ResourceManager::GetInst()->Find<GraphicsShader>(L"test_Shader"));
 
 	obj->GetComponent<Transform>()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
 	obj->GetComponent<Transform>()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
