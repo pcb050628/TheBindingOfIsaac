@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "ResourceManager.h"
 
+#include "Chapter.h"
+
 #include "Mesh.h"
 #include "GraphicsShader.h"
 
@@ -99,9 +101,20 @@ void ResourceManager::Init()
 	GraphicsShader* pShader = nullptr;
 
 	pShader = new GraphicsShader;
-	LoadByPath<GraphicsShader>(L"test_Shader", GetContentPath() + L"Resource\\Shader\\Graphics\\test_Shader.txt");
+	LoadByTXTFile<GraphicsShader>(GetContentPath() + L"Resource\\Shader\\Graphics\\test_Shader.txt");
 
 	Material* pMaterial = new Material;
+	LoadByTXTFile<Material>(GetContentPath() + L"Resource\\Material\\test_Material.txt");
+}
 
-	AddResource(L"DefaultMaterial", pMaterial);
+void ResourceManager::LoadAllResource(CHAPTERLEVEL _level) // Load All chapter resource , 순서는 Shader -> Image -> Material 순으로 로드
+{
+	//filesystem::path filePath = GetContentPath();
+	//std::wifstream fileStream(filePath);
+	//
+	//wchar_t szName[20] = {};
+	//_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+	//
+	//m_ResourceName = szName;
+	//m_ResourcePath = _strFilePath;
 }

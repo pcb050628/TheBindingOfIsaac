@@ -49,6 +49,8 @@ bool Texture::Load(const std::wstring& _strFilePath)
 	m_SRView->GetResource((ID3D11Resource**)m_Tex2D.GetAddressOf());
 	m_Tex2D->GetDesc(&m_Desc);
 
+	m_ResourcePath = _strFilePath;
+
     return true;
 }
 

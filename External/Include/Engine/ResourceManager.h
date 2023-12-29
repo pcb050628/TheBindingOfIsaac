@@ -14,6 +14,9 @@ private:
 public:
 	void Init();
 
+private:
+	void LoadAllResource(enum class CHAPTERLEVEL _level);
+
 public:
 	template <typename T>
 	T* Find(std::wstring _strKey)
@@ -34,18 +37,19 @@ public:
 	}
 
 	template <typename T>
-	T* LoadByPath(std::wstring _strName, std::wstring _path) // ?대뜑?먯꽌 李얘린
+	T* LoadByTXTFile(std::wstring _path)
 	{
-		T* f = Find<T>(_strName); 
-		if (f != nullptr) 
-			return f; 
-
 		Resource* tmp = new T();
 		tmp->Load(_path);
 		if (tmp != nullptr)
 		{
-			tmp->SetResourceName(_strName);
-			m_Resources[(UINT)tmp->GetResourceType()].insert(std::make_pair(_strName, tmp));
+			if (Find<T>(tmp->GetResourceName()))
+			{
+				delete tmp;
+				MessageBoxW(nullptr, L"이미 같은 이름의 리소스가 있습니다", L"txt file Load Error", MB_OK);
+			}
+
+			m_Resources[(UINT)tmp->GetResourceType()].insert(std::make_pair(tmp->GetResourceName(), tmp));
 			return dynamic_cast<T*>(tmp);
 		}
 		else

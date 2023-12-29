@@ -32,8 +32,10 @@ void Test::Init()
 	mr->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
 	//mr->SetShader(ResourceManager::GetInst()->Find<GraphicsShader>(L"test_Shader"));
 
-	mr->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"DefaultMaterial"));
-	mr->GetMaterial()->SetShader(ResourceManager::GetInst()->Find<GraphicsShader>(L"test_Shader"));
+	mr->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"test_Material"));
+	//mr->GetMaterial()->SetShader(ResourceManager::GetInst()->Find<GraphicsShader>(L"test_Shader"));
+
+	//mr->GetMaterial()->Save();
 
 	obj->GetComponent<Transform>()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
 	obj->GetComponent<Transform>()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
