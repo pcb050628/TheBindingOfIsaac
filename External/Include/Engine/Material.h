@@ -23,41 +23,43 @@ public:
     template<typename T>
     void SetScalarParam(const T& _data, SCALAR_PARAM _param)
     {
+        const T* pValue = &_data;
+
         switch (_param)
         {
         case INT_0:
         case INT_1:
         case INT_2:
         case INT_3:
-            m_ConstData.iArr[_param] = (int)_data;
+            m_ConstData.iArr[_param] = *((int*)pValue);
             break;
 
         case FLOAT_0:
         case FLOAT_1:
         case FLOAT_2:
         case FLOAT_3:
-            m_ConstData.fArr[_param - FLOAT_0] = (float)_data;
+            m_ConstData.fArr[_param - FLOAT_0] = *((float*)pValue);
             break;
 
         case VEC2_0:
         case VEC2_1:
         case VEC2_2:
         case VEC2_3:
-            m_ConstData.v2Arr[_param - VEC2_0] = (Vec2)_data;
+            m_ConstData.v2Arr[_param - VEC2_0] = *((Vec2*)pValue);
             break;
 
         case VEC4_0:
         case VEC4_1:
         case VEC4_2:
         case VEC4_3:
-            m_ConstData.v4Arr[_param - VEC4_0] = (Vec4)_data;
+            m_ConstData.v4Arr[_param - VEC4_0] = *((Vec4*)pValue);
             break;
 
         case MAT_0:
         case MAT_1:
         case MAT_2:
         case MAT_3:
-            m_ConstData.matArr[_param - MAT_0] = (Matrix)_data;
+            m_ConstData.matArr[_param - MAT_0] = *((Matrix*)pValue);
             break;
         }
     }
