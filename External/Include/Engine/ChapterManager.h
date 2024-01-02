@@ -32,6 +32,8 @@ public:
 
 	void DetachGameObject(class GameObject* _obj);
 
+	void RegisterObj(GameObject* _obj, LAYER_TYPE _layerType);
+
 private:
 	void ChangeChapter(CHAPTERLEVEL _level) { m_CurChapter = m_Chapters[(UINT)_level]; }
 

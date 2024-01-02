@@ -48,6 +48,8 @@ void GameObject::LateUpdate()
 			m_Components[i]->LateUpdate();
 	}
 
+	ChapterManager::GetInst()->RegisterObj(this, (LAYER_TYPE)m_iLayerIdx);
+
 	for (GameObject* child : m_ChildObjs)
 	{
 		child->LateUpdate();

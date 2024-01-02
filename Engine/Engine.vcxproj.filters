@@ -121,6 +121,12 @@
     <Filter Include="01_Basic\02_Manager\GarbageCollection">
       <UniqueIdentifier>{e8fbffdc-aec6-40ad-8497-638934964e8d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Collider2D">
+      <UniqueIdentifier>{da20efbe-7ece-4c32-84c1-80428a077ec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\RenderManager">
+      <UniqueIdentifier>{b0d52536-7264-4dc3-a7f6-296fb4cf64a6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -229,6 +235,12 @@
     <ClInclude Include="GarbageCollection.h">
       <Filter>01_Basic\02_Manager\GarbageCollection</Filter>
     </ClInclude>
+    <ClInclude Include="Collider2D.h">
+      <Filter>01_Basic\03_OBJ\Component\Collider2D</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>01_Basic\02_Manager\RenderManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -328,9 +340,21 @@
     <ClCompile Include="GarbageCollection.cpp">
       <Filter>01_Basic\02_Manager\GarbageCollection</Filter>
     </ClCompile>
+    <ClCompile Include="Collider2D.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Collider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>01_Basic\02_Manager\RenderManager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="Std2d.fx">
+    <FxCompile Include="std2d.fx">
+      <Filter>0_Default\ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="debug.fx">
+      <Filter>0_Default\ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="values.fx">
       <Filter>0_Default\ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

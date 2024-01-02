@@ -33,3 +33,8 @@ void Chapter::DetachGameObject(GameObject* _obj)
 {
 	m_CurRoom->DetachGameObject(_obj);
 }
+
+void Chapter::GenerateRooms(CHAPTERLEVEL _level)
+{
+	// 만들어진 room 에셋들을 챕터단계에 맞게 랜덤하고 겹치지않게 불러오기
+}

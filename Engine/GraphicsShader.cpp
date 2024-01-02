@@ -157,10 +157,15 @@ bool GraphicsShader::Load(const std::wstring& _strFilePath)
 				break;
 			else
 			{
-				if (line == L"[VS_PATH]")
+				if (line == L"[TOPOLOGY]")
+				{
+					std::string str = std::string().assign(line.begin(), line.end());
+					m_Topology = (D3D11_PRIMITIVE_TOPOLOGY)atoi(str.c_str());
+				}
+				else if (line == L"[VS_PATH]")
 				{
 					std::getline(fileStream, line);
-					m_VSPath = line; 
+					m_VSPath = line;
 				}
 				else if (line == L"[VS_FuncName]")
 				{
@@ -249,6 +254,8 @@ bool GraphicsShader::Save()
 
 	if (fileStream.is_open())
 	{
+		fileStream << L"[TOPOLOGY]\n" << m_Topology << std::endl;
+
 		fileStream << L"[VS_PATH]\n" << m_VSPath.c_str() << std::endl;
 		fileStream << L"[VS_FuncName]\n" << m_VSFuncName.c_str() << std::endl;
 

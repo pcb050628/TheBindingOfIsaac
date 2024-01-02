@@ -8,6 +8,9 @@
 #include "ChapterManager.h"
 #include "Device.h"
 #include "ResourceManager.h"
+#include "RenderManager.h"
+#include "GarbageCollection.h"
+#include "TaskManager.h"
 
 #include "Test.h"
 
@@ -37,30 +40,27 @@ void Engine::Init(HWND _hWnd, const RECT& _Resolution)
 	Device::GetInst()->Init(m_hWnd, res);
 	ResourceManager::GetInst()->Init();
 	AssetManager::GetInst()->Init();
-	//ChapterManager::GetInst()->Init();
+	ChapterManager::GetInst()->Init();
+	RenderManager::GetInst()->Init();
 	Test::GetInst()->Init();
 }
 
 void Engine::Run()
 {
 	Update();
-	Render();
 }
 
 void Engine::Update()
 {
 	Time::GetInst()->Update();
 	Input::GetInst()->Update();
-	//ChapterManager::GetInst()->Update();
-	Test::GetInst()->Update();
-	Test::GetInst()->LateUpdate();
-}
 
-void Engine::Render()
-{
-	Device::GetInst()->DrawStart();
-	Test::GetInst()->Render();
-	Device::GetInst()->DrawEnd();
+	ChapterManager::GetInst()->Update();
+	RenderManager::GetInst()->Update();
+
+	GarbageCollection::GetInst()->Update();
+
+	TaskManager::GetInst()->Update();
 }
 
 void Engine::SetWindowSize(const RECT& _Resolution, bool _menu)

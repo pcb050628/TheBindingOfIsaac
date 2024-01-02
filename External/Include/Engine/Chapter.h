@@ -18,6 +18,8 @@ public:
 
     void DetachGameObject(GameObject* _obj);
 
+    void GenerateRooms(CHAPTERLEVEL _level);
+
 public:
     Chapter();
     virtual ~Chapter() override;

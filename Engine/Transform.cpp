@@ -81,3 +81,18 @@ void Transform::UpdateData()
 	constBuffer->SetData(&g_Transform);
 	constBuffer->UpdateData();
 }
+
+Vec3 Transform::GetWorldScale()
+{
+	GameObject* pParent = GetOwner()->GetParent();
+	Vec3 vWorldScale = m_vRelativeScale;
+
+	while (pParent)
+	{
+		vWorldScale *= pParent->GetComponent<Transform>()->GetRelativeScale();
+
+		pParent = pParent->GetParent();
+	}
+
+	return vWorldScale;
+}

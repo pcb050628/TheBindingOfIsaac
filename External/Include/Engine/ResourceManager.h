@@ -15,6 +15,10 @@ public:
 	void Init();
 
 private:
+	void CreateDefaultMesh();
+	void CreateDefaultShader();
+	void CreateDefaultMaterial();
+
 	void LoadAllResource(enum class CHAPTERLEVEL _level);
 
 public:

@@ -28,9 +28,12 @@ private:
     Matrix  m_matView;
     Matrix  m_matProj;
 
+    UINT    m_LayerCheck;
+
 public:
     virtual void Update() override;
     virtual void LateUpdate() override;
+    virtual void Render() override;
 
 public:
     float GetFOV() { return m_FOV; }
@@ -38,6 +41,11 @@ public:
 
     void SetFOV(float _fov) { m_FOV = _fov; }
     void SetScale(float _scale) { m_Scale = _scale; }
+
+    void LayerCheck(int _layerIdx, bool _check);
+    void LayerCheck(enum class LAYER_TYPE _layerType, bool _check);
+
+    void SetCameraPriority(int _Priority);
 
 public:
     Camera();

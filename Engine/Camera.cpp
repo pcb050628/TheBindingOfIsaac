@@ -2,6 +2,10 @@
 #include "Camera.h"
 
 #include "Device.h"
+#include "ChapterManager.h"
+#include "RenderManager.h"
+
+#include "Layer.h"
 
 #include "GameObject.h"
 
@@ -59,7 +63,47 @@ void Camera::LateUpdate()
 	{
 		m_matProj = DirectX::XMMatrixPerspectiveFovLH(m_FOV, m_AspectRatio, 1.f, m_Far);
 	}
+}
 
+void Camera::Render()
+{
 	g_Transform.matView = m_matView;
 	g_Transform.matProj = m_matProj;
+
+	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
+	{
+		if (false == (m_LayerCheck & (1 << i)))
+			continue;
+
+		ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetLayer((LAYER_TYPE)i).Render();
+	}
+}
+
+void Camera::LayerCheck(int _layerIdx, bool _check)
+{
+	if (_check)
+	{
+		m_LayerCheck |= (1 << _layerIdx);
+	}
+	else
+	{
+		m_LayerCheck &= ~(1 << _layerIdx);
+	}
+}
+
+void Camera::LayerCheck(LAYER_TYPE _layerType, bool _check)
+{
+	if (_check)
+	{
+		m_LayerCheck |= (1 << (int)_layerType);
+	}
+	else
+	{
+		m_LayerCheck &= ~(1 << (int)_layerType);
+	}
+}
+
+void Camera::SetCameraPriority(int _Priority)
+{
+	RenderManager::GetInst()->RegisterCamera(this, _Priority);
 }

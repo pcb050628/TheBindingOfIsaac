@@ -11,7 +11,7 @@ private:
     const COMPONENT_TYPE m_Type;
 
 public:
-    virtual void Update() = 0;
+    virtual void Update() {}
     virtual void LateUpdate() = 0;
     virtual void Render() {}
     virtual void UpdateData() {}

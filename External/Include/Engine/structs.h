@@ -29,3 +29,27 @@ struct tMaterial
 	Vec4  v4Arr[4];
 	Matrix matArr[4];
 };
+
+enum class DEBUG_SHAPE
+{
+	RECT,
+	CIRCLE,
+	CUBE,
+	SPHERE,
+};
+
+struct tDebugShapeInfo
+{
+	DEBUG_SHAPE	eShape;
+
+	Vec3		vWorldPos;
+	Vec3		vWorldScale;
+	Vec3		vWorldRot;
+	Matrix		matWorld;
+
+	Vec3		vColor;
+	float		fLifeTime;
+	float		fDuration;
+	bool		bDepthTest;
+};
+

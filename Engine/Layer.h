@@ -32,6 +32,8 @@ public:
     void AddObject(GameObject* _obj, bool _bMove = false);
     void DetachGameObject(GameObject* _obj);
 
+    void RegisterObject(GameObject* _obj);
+
 public:
     Layer();
     ~Layer() override;

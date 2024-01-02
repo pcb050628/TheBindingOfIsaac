@@ -18,6 +18,13 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::Init()
 {
+
+
+
+}
+
+void ResourceManager::CreateDefaultMesh()
+{
 	Mesh* pMesh = nullptr;
 
 	// 전역변수에 삼각형 위치 설정
@@ -25,7 +32,7 @@ void ResourceManager::Init()
 	//    |   \   |	     
 	//   3(G)---- 2(Magenta)  
 	Vtx arrVtx[4] = {};
-	
+
 	arrVtx[0].vPos = Vec3(-0.5f, 0.5f, 0.f);
 	arrVtx[0].vColor = Vec4(1.f, 0.f, 0.f, 1.f);
 	arrVtx[0].vUV = Vec2(0.f, 0.f);
@@ -56,6 +63,15 @@ void ResourceManager::Init()
 	pMesh->Create(arrVtx, 4, arrIdx, 6);
 	AddResource(L"RectMesh", pMesh);
 
+	// Topology LineStrip 용도	
+	//   0(Red)-- 1(Blue)	     
+	//    |       |	     
+	//   3(G)---- 2(Magenta)   
+	arrIdx[0] = 0;	arrIdx[1] = 1;	arrIdx[2] = 2;	arrIdx[3] = 3; 	arrIdx[4] = 0;
+
+	pMesh = new Mesh;
+	pMesh->Create(arrVtx, 4, arrIdx, 5);
+	AddResource(L"RectMesh_Debug", pMesh);
 
 	// =================
 	// CircleMesh 만들기
@@ -96,15 +112,41 @@ void ResourceManager::Init()
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
 	AddResource(L"CircleMesh", pMesh);
 
+	// CircleMesh_Debug
+	vecIdx.clear();
+	for (int i = 1; i < vecVtx.size(); ++i)
+	{
+		vecIdx.push_back(i);
+	}
 
+	pMesh = new Mesh;
+	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
+	AddResource(L"CircleMesh_Debug", pMesh);
+	vecVtx.clear();
+	vecIdx.clear();
+}
 
+void ResourceManager::CreateDefaultShader()
+{
+	// 이 처럼 불러오는 부분들중 기본 리소스가 아닌 특정 부분에서만 사용하는 리소스라면 아래의 LoadAllResource 함수를 통해서 가져올것
 	GraphicsShader* pShader = nullptr;
 
 	pShader = new GraphicsShader;
-	LoadByTXTFile<GraphicsShader>(GetContentPath() + L"Resource\\Shader\\Graphics\\test_Shader.txt");
+	LoadByTXTFile<GraphicsShader>(GetContentPath() + L"Resource\\Shader\\Graphics\\default_Shader.txt");
 
-	Material* pMaterial = new Material;
-	LoadByTXTFile<Material>(GetContentPath() + L"Resource\\Material\\test_Material.txt");
+	pShader = new GraphicsShader;
+	LoadByTXTFile<GraphicsShader>(GetContentPath() + L"Resource\\Shader\\Graphics\\debug_Shader.txt");
+}
+
+void ResourceManager::CreateDefaultMaterial()
+{
+	Material* pMaterial = nullptr;
+
+	pMaterial = new Material;
+	LoadByTXTFile<Material>(GetContentPath() + L"Resource\\Material\\default_Material.txt");
+
+	pMaterial = new Material;
+	LoadByTXTFile<Material>(GetContentPath() + L"Resource\\Material\\debug_Material.txt");
 }
 
 void ResourceManager::LoadAllResource(CHAPTERLEVEL _level) // Load All chapter resource , 순서는 Shader -> Image -> Material 순으로 로드

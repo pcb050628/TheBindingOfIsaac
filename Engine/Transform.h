@@ -27,7 +27,12 @@ public:
     Vec3 GetLocalDir(DIR_TYPE _type) { return m_vLocalDir[(UINT)_type]; }
     Vec3 GetWorldDir(DIR_TYPE _type) { return m_vWorldDir[(UINT)_type]; }
 
+    Vec3 GetWorldPos() { return m_matWorld.Translation(); }
+    Vec3 GetWorldScale();
+
     Matrix GetWorldMat() { return m_matWorld; }
+
+    void SetWorldMat(Matrix _mat) { m_matWorld = _mat; }
 
     void SetRelativePos(Vec3 _pos) { m_vRelativePos = _pos; }
     void SetRelativeScale(Vec3 _scale) { m_vRelativeScale = _scale; }

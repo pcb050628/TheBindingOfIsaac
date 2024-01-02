@@ -10,12 +10,3 @@ Component::Component(COMPONENT_TYPE _type)
 Component::~Component()
 {
 }
-
-void Component::Update()
-{
-
-}
-
-void Component::LateUpdate()
-{
-}

@@ -124,3 +124,8 @@ void Layer::DetachGameObject(GameObject* _obj)
 		assert(nullptr);
 	}
 }
+
+void Layer::RegisterObject(GameObject* _obj)
+{
+	m_Gobjs.push_back(_obj);
+}
