@@ -3,7 +3,7 @@
 
 #include "GameObject.h"
 
-Room::Room() : Super(AssetType::ROOM)
+Room::Room() : Resource(RESOURCE_TYPE::ROOM)
 	, m_Layers()
 	, m_Type(RoomType::Common)
 	, Left(nullptr)
@@ -21,19 +21,13 @@ Room::~Room()
 {
 }
 
-void Room::Create(const std::wstring& _name)
-{
-}
-
-bool Room::Load(std::wstring _path)
+bool Room::Load(const std::wstring& _strFilePath)
 {
 	return false;
 }
 
 bool Room::Save()
 {
-
-
 	return false;
 }
 

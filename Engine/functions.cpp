@@ -3,6 +3,7 @@
 #include "Entity.h"
 #include "TaskManager.h"
 #include "GameObject.h"
+#include "Layer.h"
 
 
 bool IsValid(Entity* _entity)
@@ -18,14 +19,18 @@ void ChangeChapter(CHAPTERLEVEL _level)
 	Task task;
 	task.Type = TASKTYPE::CHANGE_CHAPTER;
 	task.Param_1 = (UINT_PTR)_level;
+
+	//TaskManager::GetInst()->AddTask(task);
 }
 
-void AddGameObject(GameObject* _actr, CHAPTERLEVEL _level)
+void AddGameObject(GameObject* _actr, LAYER_TYPE _layer)
 {
 	Task task;
 	task.Type = TASKTYPE::CREATE_OBJECT;
 	task.Param_1 = (UINT_PTR)_actr;
-	task.Param_2 = (UINT_PTR)_level;
+	task.Param_2 = (UINT_PTR)_layer;
+
+	TaskManager::GetInst()->AddTask(task);
 }
 
 void ChangeRoom(DIRECTION _dir)

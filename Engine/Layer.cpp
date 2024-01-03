@@ -59,7 +59,7 @@ void Layer::Render()
 void Layer::Clear()
 {
 	auto iter = m_Gobjs.begin();
-	for (; iter != m_Gobjs.end(); iter++)
+	for (; iter != m_Gobjs.end();)
 	{
 		iter = m_Gobjs.erase(iter);
 	}
@@ -75,10 +75,12 @@ void Layer::AddObject(GameObject* _obj, bool _bMove)
 		}
 	}
 
+	m_Parents.push_back(_obj);
+
 	std::queue<GameObject*> queueObj;
 	queueObj.push(_obj);
 
-	while (queueObj.empty())
+	while (!queueObj.empty())
 	{
 		GameObject* front = queueObj.front();
 

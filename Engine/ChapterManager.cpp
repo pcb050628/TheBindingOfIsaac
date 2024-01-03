@@ -1,6 +1,10 @@
 #include "pch.h"
 #include "ChapterManager.h"
 #include "TaskManager.h"
+#include "ResourceManager.h"
+
+#include "GameObject.h"
+#include "components.h"
 
 ChapterManager::ChapterManager()
 	: m_CurChapter(nullptr)
@@ -19,25 +23,43 @@ ChapterManager::~ChapterManager()
 
 void ChapterManager::Init()
 {
-	for (Chapter* chptr : m_Chapters)
+	for (int i = 0; i < 4; i++)
 	{
-		chptr = new Chapter();
+		m_Chapters[i] = new Chapter;
 	}
+
+	m_CurChapter = m_Chapters[0];
+
+	GameObject* gobj = new GameObject;
+	gobj->AddComponent(new Transform);
+	gobj->AddComponent(new MeshRenderer);
+
+	gobj->GetComponent<MeshRenderer>()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
+	gobj->GetComponent<MeshRenderer>()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
+
+	AddGameObject(gobj, LAYER_TYPE::Player);
+
+	gobj = new GameObject;
+	gobj->AddComponent(new Transform);
+	gobj->AddComponent(new Camera);
+
+	gobj->GetComponent<Transform>()->SetRelativePos(Vec3(0.f, 0.f, -10.f));
+
+	gobj->GetComponent<Camera>()->SetCameraPriority(0);
+	gobj->GetComponent<Camera>()->LayerCheck(LAYER_TYPE::Player, true);
+
+	AddGameObject(gobj, LAYER_TYPE::Background);
 }
 
 void ChapterManager::Update()
 {
 	m_CurChapter->Update();
+	m_CurChapter->LateUpdate();
 }
 
 void ChapterManager::Render()
 {
 	m_CurChapter->Render();
-}
-
-void ChapterManager::LateUpdate()
-{
-	m_CurChapter->LateUpdate();
 }
 
 void ChapterManager::DetachGameObject(GameObject* _obj)

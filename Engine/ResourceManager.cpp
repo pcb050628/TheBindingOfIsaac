@@ -18,9 +18,9 @@ ResourceManager::~ResourceManager()
 
 void ResourceManager::Init()
 {
-
-
-
+	CreateDefaultMesh();
+	CreateDefaultShader();
+	CreateDefaultMaterial();
 }
 
 void ResourceManager::CreateDefaultMesh()

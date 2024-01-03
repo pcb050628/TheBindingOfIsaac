@@ -6,6 +6,8 @@ Chapter::Chapter()
 	: m_Rooms()
 	, m_CurRoom(nullptr)
 {
+	m_CurRoom = new Room();
+	m_Rooms.push_back(m_CurRoom);
 }
 
 Chapter::~Chapter()

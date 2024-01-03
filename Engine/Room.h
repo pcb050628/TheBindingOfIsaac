@@ -1,5 +1,5 @@
 #pragma once
-#include "Asset.h"
+#include "Resource.h"
 #include "Layer.h"
 
 enum DIRECTION
@@ -19,9 +19,8 @@ enum class RoomType
 };
 
 class Room :
-    public Asset
+    public Resource
 {
-    typedef Asset Super;
 private:
     RoomType m_Type;
     Layer m_Layers[(int)LAYER_TYPE::END];
@@ -32,8 +31,7 @@ private:
     Room* Bottom;
 
 public:
-    virtual void Create(const std::wstring& _name);
-    virtual bool Load(std::wstring _path) override;
+    virtual bool Load(const std::wstring& _strFilePath) override;
     virtual bool Save() override;
 
     virtual void Clear();

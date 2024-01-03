@@ -20,10 +20,6 @@ public:
 
     void GenerateRooms(CHAPTERLEVEL _level);
 
-public:
-    Chapter();
-    virtual ~Chapter() override;
-
 private:
     void ChangeRoom(DIRECTION _dir)
     {
@@ -37,6 +33,10 @@ private:
     {
         m_CurRoom->AddObject(_actr, _layr, _bMove);
     }
+
+public:
+    Chapter();
+    virtual ~Chapter() override;
 
     friend class TaskManager;
 };
