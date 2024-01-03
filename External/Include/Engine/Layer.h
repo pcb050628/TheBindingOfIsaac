@@ -34,6 +34,8 @@ public:
 
     void RegisterObject(GameObject* _obj);
 
+    const vector<GameObject*>& GetGameObject() { return m_Gobjs; }
+
 public:
     Layer();
     ~Layer() override;

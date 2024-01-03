@@ -3,6 +3,8 @@
 #include "TaskManager.h"
 
 ChapterManager::ChapterManager()
+	: m_CurChapter(nullptr)
+	, m_Chapters{}
 {
 
 }

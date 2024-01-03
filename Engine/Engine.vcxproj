@@ -178,6 +178,7 @@ call EngineCopy.bat</Command>
   <ItemGroup>
     <ClInclude Include="Camera.h" />
     <ClInclude Include="Collider2D.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="components.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="GameObject.h" />
@@ -218,6 +219,7 @@ call EngineCopy.bat</Command>
   <ItemGroup>
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="Collider2D.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
     <ClCompile Include="externs.cpp" />
     <ClCompile Include="functions.cpp" />

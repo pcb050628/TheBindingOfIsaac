@@ -44,7 +44,8 @@ public:
     virtual void Render();
     virtual void Exit();
 
-    virtual Layer& GetLayer(LAYER_TYPE _type) { return m_Layers[(int)_type]; }
+    virtual Layer* GetLayer(int _type) { return &m_Layers[_type]; }
+    virtual Layer* GetLayer(LAYER_TYPE _type) { return GetLayer((int)_type); }
 
     // 15 x 9 tile
 

@@ -20,6 +20,10 @@ private:
 
 public:
     void LateUpdate() override;
+    
+    void BeginOverlap(Collider2D* _other);
+    void Overlap(Collider2D* _other);
+    void EndOverlap(Collider2D* _other);
 
 public:
     void SetOffsetPos(Vec2 _pos) { m_vOffsetPos = Vec3(_pos.x, _pos.y, 0.f); }
@@ -33,6 +37,8 @@ public:
     Vec2 GetOffsetScale() { return Vec2(m_vOffsetScale.x, m_vOffsetScale.y); }
     bool IsAbsolute() { return m_bAbsolute; }
     COLLIDER2D_TYPE GetCollider2DType() { return m_Type; }
+
+    const Matrix& GetColliderWorldMat() { return m_matColWorld; }
 
 public:
     Collider2D();

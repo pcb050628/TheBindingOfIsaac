@@ -1,89 +1,41 @@
 #pragma once
-#include "define.h"
-#include "pch.h"
 #include "Layer.h"
 
-class Collider;
-
-struct COLLIDER_ID
+union CollisionID
 {
-	INT_PTR left;
-	INT_PTR right;
-
-	bool operator == (const COLLIDER_ID& _other) const
+	struct
 	{
-		if (left == _other.left && right == _other.right)
-			return true;
-		return false;
-	}
+		UINT LeftID;
+		UINT RightID;
+	};
 
-	bool operator < (const COLLIDER_ID& _other) const
-	{
-		if (left < _other.left)
-			return true;
-		else if (left > _other.left)
-			return false;
-		else
-		{
-			if (right < _other.right)
-				return true;
-			else
-				return false;
-		}
-	}
-
-	COLLIDER_ID()
-		: left(0)
-		, right(0)
-	{}
-
-	COLLIDER_ID(INT_PTR _Left, INT_PTR _Right)
-		: left(_Left)
-		, right(_Right)
-	{}
+	UINT_PTR id;
 };
+
+class Collider2D;
 
 class CollisionManager
 {
 	SINGLETON(CollisionManager)
 private:
-	bool						m_CollisionMatrix[(int)LayerType::END][(int)LayerType::END];
-	std::map<COLLIDER_ID, bool>	m_mapID;
+	UINT m_CollisionMatrix[(UINT)LAYER_TYPE::END];
+	std::map<UINT_PTR, bool> m_prevInfo;
 
 public:
+	void Init();
 	void Update();
-	void LateUpdate();
 
-	void LayerCollisionCheck(LayerType _layer1, LayerType _layer2, bool value)
-	{
-		int ly1 = (int)_layer1;
-		int ly2 = (int)_layer2;
+public:
+	void Clear();
 
-		if (ly2 < ly1)
-		{
-			int tmp = ly1;
-			ly1 = ly2;
-			ly2 = tmp;
-		}
+	void CollisionMatrixCheck(LAYER_TYPE _layerType1, LAYER_TYPE _layerType2, bool _check = true);
 
-		m_CollisionMatrix[ly1][ly2] = value;
-	}
+	void LayerCollisionCheck(UINT _left, UINT _right);
+	bool ColliderCollisionCheck(Collider2D* _left, Collider2D* _right);
 
-	void ResetCollisionMatrix()
-	{
-		for (int row = 0; row < (int)LayerType::END; row++)
-		{
-			for (int col = row; col < (int)LayerType::END; col++)
-			{
-				m_CollisionMatrix[row][col] = false;
-			}
-		}
-	}
+	bool BoxToBox(Collider2D* _left, Collider2D* _right);
+	bool CircleToCircle(Collider2D* _left, Collider2D* _right);
+	bool BoxToCircle(Collider2D* _box, Collider2D* _circle);
 
-	void LayerCheck(int _layer1, int _layer2);
-	bool isCollision(Collider* col1, Collider* col2);
-	bool isCollision(class BoxCollider* col1, class CircleCollider* col2);
-	bool isCollision(class BoxCollider* col1, class BoxCollider* col2);
-	bool isCollision(class CircleCollider* col1, class CircleCollider* col2);
 };
 

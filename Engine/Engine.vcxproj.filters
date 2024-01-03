@@ -127,6 +127,9 @@
     <Filter Include="01_Basic\02_Manager\RenderManager">
       <UniqueIdentifier>{b0d52536-7264-4dc3-a7f6-296fb4cf64a6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\02_Manager\CollisionManager">
+      <UniqueIdentifier>{419c544f-6659-40af-801a-1d231039f0f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -241,6 +244,9 @@
     <ClInclude Include="RenderManager.h">
       <Filter>01_Basic\02_Manager\RenderManager</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>01_Basic\02_Manager\CollisionManager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -345,6 +351,9 @@
     </ClCompile>
     <ClCompile Include="RenderManager.cpp">
       <Filter>01_Basic\02_Manager\RenderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>01_Basic\02_Manager\CollisionManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
