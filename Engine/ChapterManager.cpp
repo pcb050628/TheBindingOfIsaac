@@ -47,6 +47,6 @@ void ChapterManager::DetachGameObject(GameObject* _obj)
 
 void ChapterManager::RegisterObj(GameObject* _obj, LAYER_TYPE _layerType)
 {
-	m_CurChapter->GetCurRoom()->GetLayer(_layerType).RegisterObject(_obj);
+	m_CurChapter->GetCurRoom()->GetLayer(_layerType)->RegisterObject(_obj);
 }
 

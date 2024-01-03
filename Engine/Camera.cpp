@@ -75,7 +75,7 @@ void Camera::Render()
 		if (false == (m_LayerCheck & (1 << i)))
 			continue;
 
-		ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetLayer((LAYER_TYPE)i).Render();
+		ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetLayer((LAYER_TYPE)i)->Render();
 	}
 }
 
