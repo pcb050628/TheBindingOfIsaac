@@ -18,6 +18,7 @@ Camera::Camera() : Component(COMPONENT_TYPE::CAMERA)\
 	, m_Scale(1.f)
 	, m_AspectRatio(1.f)
 	, m_Far(10000.f)
+	, m_LayerCheck()
 {
 	m_AspectRatio = Device::GetInst()->GetResolution().x / Device::GetInst()->GetResolution().y;
 }

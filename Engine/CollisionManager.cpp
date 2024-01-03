@@ -9,6 +9,8 @@
 #include "Collider2D.h"
 
 CollisionManager::CollisionManager()
+	: m_CollisionMatrix{}
+	, m_prevInfo{}
 {}
 
 CollisionManager::~CollisionManager()

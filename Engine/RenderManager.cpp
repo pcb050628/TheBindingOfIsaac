@@ -10,6 +10,9 @@
 #include "MeshRenderer.h"
 
 RenderManager::RenderManager()
+	: m_Cams{}
+	, m_DebugObj(nullptr)
+	, m_DebugShapeInfos{}
 {
 
 }

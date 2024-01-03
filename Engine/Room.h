@@ -45,7 +45,8 @@ public:
     virtual Layer* GetLayer(int _type) { return &m_Layers[_type]; }
     virtual Layer* GetLayer(LAYER_TYPE _type) { return GetLayer((int)_type); }
 
-    // 15 x 9 tile
+    // 15 x 9 tile / include walls
+    // tile is for make room easier
 
     virtual Room* GetRoomByDir(DIRECTION _dir)
     {
