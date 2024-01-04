@@ -51,10 +51,11 @@ private:
 	int CreateSwapChain();
 	int CreateRenderTargetView();
 	int CreateDepthStencilView();
-	int CreateConstBuffer();
 	int CreateRasterizerState();
 	int CreateDepthStencilState();
 	int CreateBlendState();
 	int CreateSamplerState();
+
+	int CreateConstBuffer();
 };
 

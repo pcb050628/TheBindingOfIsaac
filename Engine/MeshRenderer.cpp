@@ -4,6 +4,7 @@
 #include "GameObject.h"
 
 #include "Transform.h"
+#include "Animator2D.h"
 
 #include "Mesh.h"
 #include "Material.h"

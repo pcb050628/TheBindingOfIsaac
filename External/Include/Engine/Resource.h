@@ -5,6 +5,7 @@
 enum class RESOURCE_TYPE
 {
 	TEXTURE,
+	ANIM,
 	SOUND,
 	MESH,
 	GRAPHICS_SHADER,

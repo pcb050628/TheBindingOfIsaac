@@ -130,6 +130,12 @@
     <Filter Include="01_Basic\02_Manager\CollisionManager">
       <UniqueIdentifier>{419c544f-6659-40af-801a-1d231039f0f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Animator2D">
+      <UniqueIdentifier>{a5873e2d-ab40-4e88-8b2d-a0a278ccb471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Animator2D\Anim">
+      <UniqueIdentifier>{9e4eb150-da88-4450-92df-a0961428ee4f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -247,6 +253,12 @@
     <ClInclude Include="CollisionManager.h">
       <Filter>01_Basic\02_Manager\CollisionManager</Filter>
     </ClInclude>
+    <ClInclude Include="Animator2D.h">
+      <Filter>01_Basic\03_OBJ\Component\Animator2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim.h">
+      <Filter>01_Basic\03_OBJ\Component\Animator2D\Anim</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -354,6 +366,12 @@
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>01_Basic\02_Manager\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator2D.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Animator2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Animator2D\Anim</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

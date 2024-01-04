@@ -29,6 +29,17 @@ struct tMaterial
 	Vec4  v4Arr[4];
 	Matrix matArr[4];
 };
+extern tMaterial g_Material;
+
+struct tAnimData
+{
+	Vec2 vLeftTop;
+	Vec2 vSliceSize;
+	Vec2 vOffset;
+	int UseAnim2D;
+	int	iPadding;
+};
+extern tAnimData g_AnimData;
 
 enum class DEBUG_SHAPE
 {
