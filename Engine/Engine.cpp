@@ -6,8 +6,11 @@
 #include "Input.h"
 #include "AssetManager.h"
 #include "ChapterManager.h"
-#include "RenderManager.h"
+#include "Device.h"
 #include "ResourceManager.h"
+#include "RenderManager.h"
+#include "GarbageCollection.h"
+#include "TaskManager.h"
 
 #include "Test.h"
 
@@ -34,34 +37,30 @@ void Engine::Init(HWND _hWnd, const RECT& _Resolution)
 
 	Time::GetInst()->Init();
 	Input::GetInst()->Init();
-	RenderManager::GetInst()->Init(m_hWnd, res);
+	Device::GetInst()->Init(m_hWnd, res);
+	ResourceManager::GetInst()->Init();
 	AssetManager::GetInst()->Init();
-	//ChapterManager::GetInst()->Init();
+	ChapterManager::GetInst()->Init();
+	RenderManager::GetInst()->Init();
 	Test::GetInst()->Init();
 }
 
 void Engine::Run()
 {
 	Update();
-	Render();
 }
 
 void Engine::Update()
 {
 	Time::GetInst()->Update();
 	Input::GetInst()->Update();
-	//ChapterManager::GetInst()->Update();
-	Test::GetInst()->Update();
-}
 
-void Engine::Render()
-{
-	RenderManager::GetInst()->PrepareDraw();
+	ChapterManager::GetInst()->Update();
+	RenderManager::GetInst()->Update();
 
-	RenderManager::GetInst()->StartDraw();
-	//ChapterManager::GetInst()->Render();
-	Test::GetInst()->Render();
-	RenderManager::GetInst()->EndDraw();
+	GarbageCollection::GetInst()->Update();
+
+	TaskManager::GetInst()->Update();
 }
 
 void Engine::SetWindowSize(const RECT& _Resolution, bool _menu)

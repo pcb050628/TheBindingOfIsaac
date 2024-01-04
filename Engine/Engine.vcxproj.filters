@@ -13,83 +13,128 @@
     <Filter Include="01_Basic">
       <UniqueIdentifier>{617f5d94-e7e2-4f3e-9310-0ab2ab7b7c8f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Time">
-      <UniqueIdentifier>{e2de632d-9ecf-43c5-a5e5-b37715126cc3}</UniqueIdentifier>
+    <Filter Include="0_Default\Cpp">
+      <UniqueIdentifier>{8a325902-a467-4192-886a-f302050a56cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Input">
-      <UniqueIdentifier>{3002f376-0cdf-4a02-a532-f84a4eee8483}</UniqueIdentifier>
+    <Filter Include="01_Basic\03_OBJ">
+      <UniqueIdentifier>{5aaf40f6-0afe-4b69-b2e5-fdca117409aa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Actor">
+    <Filter Include="01_Basic\03_OBJ\GameObject">
       <UniqueIdentifier>{ab4ef27e-0623-4472-b652-8e27f2ca6a13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Component">
+    <Filter Include="01_Basic\03_OBJ\Component">
       <UniqueIdentifier>{52071b8b-fe31-47fb-8c56-4c8bf86f09b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Engine">
+    <Filter Include="01_Basic\03_OBJ\Component\MeshRenderer">
+      <UniqueIdentifier>{ab8962f3-58cb-4390-b435-b655455611af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Transform">
+      <UniqueIdentifier>{7112f7fd-07fc-4684-8a8d-ffb375edf28a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Camera">
+      <UniqueIdentifier>{9e1d0302-9ee0-4a53-8c97-73babea338a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\00_Engine">
       <UniqueIdentifier>{af015e03-e944-425a-b2d8-06789f014dfe}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Chapter">
+    <Filter Include="01_Basic\04_Chapter">
       <UniqueIdentifier>{a610fea3-fc03-4907-8cac-7386f1499ee0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\Chapter\Room">
-      <UniqueIdentifier>{f13cba26-4208-49a6-9cb9-850f1f74154a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\Chapter\Room\Layer">
-      <UniqueIdentifier>{97e22aa5-1be1-4805-8a99-59f9bcc15af3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\Collision">
-      <UniqueIdentifier>{8401d1bb-90ee-40da-875f-62aa4a71c683}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\ChpaterManager">
-      <UniqueIdentifier>{937263d6-8374-4e70-8ba3-7b874945b305}</UniqueIdentifier>
+    <Filter Include="0_Default\ShaderCode">
+      <UniqueIdentifier>{2e8e88dc-8e6c-4f64-bddb-10b6e006409c}</UniqueIdentifier>
     </Filter>
     <Filter Include="02_Derived">
-      <UniqueIdentifier>{21418021-1b47-4377-b907-85c8162c10eb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Component">
-      <UniqueIdentifier>{c4a9f9dd-bdc3-474f-9613-8f70fe12a258}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Chapter">
-      <UniqueIdentifier>{385b2696-b616-4af1-9e34-2a0c901e09d2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Room">
-      <UniqueIdentifier>{8c25dd5c-9546-4865-a3e1-e89da898c909}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Actor">
-      <UniqueIdentifier>{fd3952d4-e8db-4db4-9821-bf0708c210fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\RenderManager">
-      <UniqueIdentifier>{87d3064c-312f-475f-902f-549a2295aa9f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\ResourceManager">
-      <UniqueIdentifier>{623d8b65-a4ce-4ee1-a1f9-b96f13044a83}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\ResourceManager\Resource">
-      <UniqueIdentifier>{a1a59f4b-bb74-4c54-8a2e-2541b336acbf}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\LogManager">
-      <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\StateMachine">
-      <UniqueIdentifier>{c62bd41e-a209-48c9-9ba0-d07e59661e17}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\StateMachine\State">
-      <UniqueIdentifier>{1de22112-b1b8-4271-b3cd-d1cbcac1a83e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\AssetManager">
-      <UniqueIdentifier>{6a7751a8-c377-4179-b451-c68125c1f5f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Asset">
-      <UniqueIdentifier>{7c6794c5-7b71-4f32-a7d4-70729ec96108}</UniqueIdentifier>
+      <UniqueIdentifier>{b4a4a2a9-4f4c-47cf-a796-bd3530fd3474}</UniqueIdentifier>
     </Filter>
     <Filter Include="02_Derived\Resource">
-      <UniqueIdentifier>{d95ef0a3-c4ec-41f7-a099-721fbe613a6c}</UniqueIdentifier>
+      <UniqueIdentifier>{cafe09bd-827c-4918-82c2-8c020c536f48}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\GameManagerWindow">
-      <UniqueIdentifier>{96f86393-ec81-4269-8a04-02cee5cd4a27}</UniqueIdentifier>
+    <Filter Include="02_Derived\Resource\Mesh">
+      <UniqueIdentifier>{95ee1ca8-b3a6-413e-b020-106336bb7adc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\TaskManager">
+    <Filter Include="02_Derived\Resource\Shader">
+      <UniqueIdentifier>{c7faa404-689d-4407-b3fb-0e107a781eb7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader\GraphicsShader">
+      <UniqueIdentifier>{e73a9598-c32f-4322-b529-2426f9327153}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader\ComputerShader">
+      <UniqueIdentifier>{75779e23-2aea-4d1c-bffa-ae30978887f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader\Texture">
+      <UniqueIdentifier>{62893589-68fd-4f68-bbe8-8cc05bb484b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\GameObject">
+      <UniqueIdentifier>{f56fcdea-c783-43cc-9b26-8062767feeb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\GameObject\Humanoid">
+      <UniqueIdentifier>{f7d20c5e-5c8c-4a5c-81f5-d3a530dab4d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\GameObject\Player">
+      <UniqueIdentifier>{256dc24e-6336-442e-ad87-8680ec8bde20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\GameObject\Monster">
+      <UniqueIdentifier>{9bb63a6b-2439-4307-80f8-4c28b5720d9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager">
+      <UniqueIdentifier>{ba5a6859-296a-4bb7-a7d4-3f52267484b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\ResourceManager">
+      <UniqueIdentifier>{623d8b65-a4ce-4ee1-a1f9-b96f13044a83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\ResourceManager\Resource">
+      <UniqueIdentifier>{21aaa8c3-5ce9-4710-854f-edd385ed5d16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\ResourceManager\Resource\Shader">
+      <UniqueIdentifier>{82b62f05-edb6-4eb4-9e10-b9bcadbd364a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\LogManager">
+      <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\TaskManager">
       <UniqueIdentifier>{103698d5-9ebf-4913-8bb7-12d9f1d72022}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\Time">
+      <UniqueIdentifier>{e2de632d-9ecf-43c5-a5e5-b37715126cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\Input">
+      <UniqueIdentifier>{3002f376-0cdf-4a02-a532-f84a4eee8483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\ChpaterManager">
+      <UniqueIdentifier>{937263d6-8374-4e70-8ba3-7b874945b305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\AssetManager">
+      <UniqueIdentifier>{6a7751a8-c377-4179-b451-c68125c1f5f0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\AssetManager\Asset">
+      <UniqueIdentifier>{f4dc2568-a603-47b3-9c9b-b17bcea629fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Device">
+      <UniqueIdentifier>{87d3064c-312f-475f-902f-549a2295aa9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\01_Device\ConstantBuffer">
+      <UniqueIdentifier>{be9362fe-4ac7-44e2-8ebc-149f959a8bb4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Material">
+      <UniqueIdentifier>{6c2e0e00-fa06-48fa-892c-8a05e848fb1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\GarbageCollection">
+      <UniqueIdentifier>{e8fbffdc-aec6-40ad-8497-638934964e8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Collider2D">
+      <UniqueIdentifier>{da20efbe-7ece-4c32-84c1-80428a077ec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\RenderManager">
+      <UniqueIdentifier>{b0d52536-7264-4dc3-a7f6-296fb4cf64a6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\CollisionManager">
+      <UniqueIdentifier>{419c544f-6659-40af-801a-1d231039f0f4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Animator2D">
+      <UniqueIdentifier>{a5873e2d-ab40-4e88-8b2d-a0a278ccb471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Animator2D\Anim">
+      <UniqueIdentifier>{9e4eb150-da88-4450-92df-a0961428ee4f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -100,98 +145,119 @@
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Engine.h">
-      <Filter>01_Basic\Engine</Filter>
+      <Filter>01_Basic\00_Engine</Filter>
     </ClInclude>
     <ClInclude Include="Time.h">
-      <Filter>01_Basic\Time</Filter>
+      <Filter>01_Basic\02_Manager\Time</Filter>
     </ClInclude>
     <ClInclude Include="define.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Actor.h">
-      <Filter>01_Basic\Actor</Filter>
+    <ClInclude Include="GameObject.h">
+      <Filter>01_Basic\03_OBJ\GameObject</Filter>
     </ClInclude>
     <ClInclude Include="Component.h">
-      <Filter>01_Basic\Component</Filter>
+      <Filter>01_Basic\03_OBJ\Component</Filter>
     </ClInclude>
     <ClInclude Include="Input.h">
-      <Filter>01_Basic\Input</Filter>
+      <Filter>01_Basic\02_Manager\Input</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h">
       <Filter>01_Basic</Filter>
     </ClInclude>
-    <ClInclude Include="CollisionManager.h">
-      <Filter>01_Basic\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Collider.h">
-      <Filter>01_Basic\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="BoxCollider.h">
-      <Filter>02_Derived\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="CircleCollider.h">
-      <Filter>02_Derived\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Chapter.h">
-      <Filter>01_Basic\Chapter</Filter>
-    </ClInclude>
-    <ClInclude Include="Room.h">
-      <Filter>01_Basic\Chapter\Room</Filter>
-    </ClInclude>
-    <ClInclude Include="Layer.h">
-      <Filter>01_Basic\Chapter\Room\Layer</Filter>
-    </ClInclude>
-    <ClInclude Include="Humanoid.h">
-      <Filter>02_Derived\Actor</Filter>
+      <Filter>01_Basic\04_Chapter</Filter>
     </ClInclude>
     <ClInclude Include="ChapterManager.h">
-      <Filter>01_Basic\ChpaterManager</Filter>
+      <Filter>01_Basic\02_Manager\ChpaterManager</Filter>
     </ClInclude>
-    <ClInclude Include="RenderManager.h">
-      <Filter>01_Basic\RenderManager</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureRenderer.h">
-      <Filter>02_Derived\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Animator.h">
-      <Filter>02_Derived\Component</Filter>
+    <ClInclude Include="Device.h">
+      <Filter>01_Basic\01_Device</Filter>
     </ClInclude>
     <ClInclude Include="ResourceManager.h">
-      <Filter>01_Basic\ResourceManager</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>01_Basic\ResourceManager\Resource</Filter>
-    </ClInclude>
-    <ClInclude Include="Texture.h">
-      <Filter>02_Derived\Asset</Filter>
-    </ClInclude>
-    <ClInclude Include="Anim.h">
-      <Filter>02_Derived\Asset</Filter>
-    </ClInclude>
-    <ClInclude Include="StateMachine.h">
-      <Filter>01_Basic\StateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="State.h">
-      <Filter>01_Basic\StateMachine\State</Filter>
+      <Filter>01_Basic\02_Manager\ResourceManager</Filter>
     </ClInclude>
     <ClInclude Include="AssetManager.h">
-      <Filter>01_Basic\AssetManager</Filter>
-    </ClInclude>
-    <ClInclude Include="ShaderTextureResource.h">
-      <Filter>02_Derived\Resource</Filter>
+      <Filter>01_Basic\02_Manager\AssetManager</Filter>
     </ClInclude>
     <ClInclude Include="LogManager.h">
-      <Filter>01_Basic\LogManager</Filter>
+      <Filter>01_Basic\02_Manager\LogManager</Filter>
     </ClInclude>
     <ClInclude Include="TaskManager.h">
-      <Filter>01_Basic\TaskManager</Filter>
+      <Filter>01_Basic\02_Manager\TaskManager</Filter>
     </ClInclude>
     <ClInclude Include="functions.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Test.h" />
+    <ClInclude Include="Layer.h">
+      <Filter>01_Basic\04_Chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="Room.h">
+      <Filter>01_Basic\04_Chapter</Filter>
+    </ClInclude>
+    <ClInclude Include="structs.h">
+      <Filter>0_Default\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>01_Basic\02_Manager\ResourceManager\Resource\Shader</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphicsShader.h">
+      <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>01_Basic\01_Device\ConstantBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderComponent.h">
+      <Filter>01_Basic\03_OBJ\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Transform.h">
+      <Filter>01_Basic\03_OBJ\Component\Transform</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRenderer.h">
+      <Filter>01_Basic\03_OBJ\Component\MeshRenderer</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>01_Basic\03_OBJ\Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="components.h">
+      <Filter>0_Default\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>02_Derived\Resource\Mesh</Filter>
+    </ClInclude>
     <ClInclude Include="Asset.h">
-      <Filter>01_Basic\AssetManager</Filter>
+      <Filter>01_Basic\02_Manager\AssetManager\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>01_Basic\02_Manager\ResourceManager\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="resources.h">
+      <Filter>0_Default\Header</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>02_Derived\Resource\Shader\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>02_Derived\Resource\Material</Filter>
+    </ClInclude>
+    <ClInclude Include="GarbageCollection.h">
+      <Filter>01_Basic\02_Manager\GarbageCollection</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider2D.h">
+      <Filter>01_Basic\03_OBJ\Component\Collider2D</Filter>
+    </ClInclude>
+    <ClInclude Include="RenderManager.h">
+      <Filter>01_Basic\02_Manager\RenderManager</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>01_Basic\02_Manager\CollisionManager</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator2D.h">
+      <Filter>01_Basic\03_OBJ\Component\Animator2D</Filter>
+    </ClInclude>
+    <ClInclude Include="Anim.h">
+      <Filter>01_Basic\03_OBJ\Component\Animator2D\Anim</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -199,92 +265,124 @@
       <Filter>0_Default\pch</Filter>
     </ClCompile>
     <ClCompile Include="Engine.cpp">
-      <Filter>01_Basic\Engine</Filter>
+      <Filter>01_Basic\00_Engine</Filter>
     </ClCompile>
     <ClCompile Include="Time.cpp">
-      <Filter>01_Basic\Time</Filter>
+      <Filter>01_Basic\02_Manager\Time</Filter>
     </ClCompile>
-    <ClCompile Include="Actor.cpp">
-      <Filter>01_Basic\Actor</Filter>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>01_Basic\03_OBJ\GameObject</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
-      <Filter>01_Basic\Component</Filter>
+      <Filter>01_Basic\03_OBJ\Component</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp">
-      <Filter>01_Basic\Input</Filter>
+      <Filter>01_Basic\02_Manager\Input</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
       <Filter>01_Basic</Filter>
     </ClCompile>
-    <ClCompile Include="CollisionManager.cpp">
-      <Filter>01_Basic\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Collider.cpp">
-      <Filter>01_Basic\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="BoxCollider.cpp">
-      <Filter>02_Derived\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="CircleCollider.cpp">
-      <Filter>02_Derived\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Chapter.cpp">
-      <Filter>01_Basic\Chapter</Filter>
-    </ClCompile>
-    <ClCompile Include="Room.cpp">
-      <Filter>01_Basic\Chapter\Room</Filter>
-    </ClCompile>
-    <ClCompile Include="Layer.cpp">
-      <Filter>01_Basic\Chapter\Room\Layer</Filter>
-    </ClCompile>
-    <ClCompile Include="Humanoid.cpp">
-      <Filter>02_Derived\Actor</Filter>
+      <Filter>01_Basic\04_Chapter</Filter>
     </ClCompile>
     <ClCompile Include="ChapterManager.cpp">
-      <Filter>01_Basic\ChpaterManager</Filter>
+      <Filter>01_Basic\02_Manager\ChpaterManager</Filter>
     </ClCompile>
-    <ClCompile Include="RenderManager.cpp">
-      <Filter>01_Basic\RenderManager</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureRenderer.cpp">
-      <Filter>02_Derived\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Animator.cpp">
-      <Filter>02_Derived\Component</Filter>
+    <ClCompile Include="Device.cpp">
+      <Filter>01_Basic\01_Device</Filter>
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
-      <Filter>01_Basic\ResourceManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>01_Basic\ResourceManager\Resource</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
-      <Filter>02_Derived\Asset</Filter>
-    </ClCompile>
-    <ClCompile Include="Anim.cpp">
-      <Filter>02_Derived\Asset</Filter>
-    </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>01_Basic\StateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="State.cpp">
-      <Filter>01_Basic\StateMachine\State</Filter>
+      <Filter>01_Basic\02_Manager\ResourceManager</Filter>
     </ClCompile>
     <ClCompile Include="AssetManager.cpp">
-      <Filter>01_Basic\AssetManager</Filter>
-    </ClCompile>
-    <ClCompile Include="ShaderTextureResource.cpp">
-      <Filter>02_Derived\Resource</Filter>
+      <Filter>01_Basic\02_Manager\AssetManager</Filter>
     </ClCompile>
     <ClCompile Include="LogManager.cpp">
-      <Filter>01_Basic\LogManager</Filter>
+      <Filter>01_Basic\02_Manager\LogManager</Filter>
     </ClCompile>
     <ClCompile Include="TaskManager.cpp">
-      <Filter>01_Basic\TaskManager</Filter>
+      <Filter>01_Basic\02_Manager\TaskManager</Filter>
     </ClCompile>
     <ClCompile Include="Test.cpp" />
-    <ClCompile Include="Asset.cpp">
-      <Filter>01_Basic\AssetManager</Filter>
+    <ClCompile Include="Layer.cpp">
+      <Filter>01_Basic\04_Chapter</Filter>
     </ClCompile>
+    <ClCompile Include="Room.cpp">
+      <Filter>01_Basic\04_Chapter</Filter>
+    </ClCompile>
+    <ClCompile Include="structs.cpp">
+      <Filter>0_Default\Cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>01_Basic\02_Manager\ResourceManager\Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphicsShader.cpp">
+      <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>01_Basic\01_Device\ConstantBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderComponent.cpp">
+      <Filter>01_Basic\03_OBJ\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Transform.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRenderer.cpp">
+      <Filter>01_Basic\03_OBJ\Component\MeshRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>02_Derived\Resource\Mesh</Filter>
+    </ClCompile>
+    <ClCompile Include="Asset.cpp">
+      <Filter>01_Basic\02_Manager\AssetManager\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>01_Basic\02_Manager\ResourceManager\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="externs.cpp">
+      <Filter>0_Default\Header</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>02_Derived\Resource\Shader\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="functions.cpp">
+      <Filter>0_Default\Header</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>02_Derived\Resource\Material</Filter>
+    </ClCompile>
+    <ClCompile Include="GarbageCollection.cpp">
+      <Filter>01_Basic\02_Manager\GarbageCollection</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider2D.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Collider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="RenderManager.cpp">
+      <Filter>01_Basic\02_Manager\RenderManager</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>01_Basic\02_Manager\CollisionManager</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator2D.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Animator2D</Filter>
+    </ClCompile>
+    <ClCompile Include="Anim.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Animator2D\Anim</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="std2d.fx">
+      <Filter>0_Default\ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="debug.fx">
+      <Filter>0_Default\ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="values.fx">
+      <Filter>0_Default\ShaderCode</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

@@ -4,10 +4,14 @@
 #include "AssetManager.h"
 #include "ResourceManager.h"
 #include "Texture.h"
-#include "TextureRenderer.h"
+
+#include "components.h"
+
+#include "GraphicsShader.h"
+#include "Material.h"
 
 Test::Test()
-	: m_Actors()
+	: m_Gobjs()
 {
 
 }
@@ -19,25 +23,50 @@ Test::~Test()
 
 void Test::Init()
 {
-	Actor* a = new Actor();
-	TextureRenderer* tr = a->AddComponent<TextureRenderer>();
-	Texture* t = nullptr;
-	//std::wstring path = GetContentPath();
-	//path += L"Resource\\Image\\Rooms\\Basement.png";
-	//AssetManager::GetInst()->Create<Texture>(AssetID::TEXTURE_CHAPTER1_BACKGROUND, path, L"basement_background_texture_resource");
-	t = AssetManager::GetInst()->Load<Texture>(AssetID::TEXTURE_CHAPTER1_BACKGROUND);
-	tr->SetTexture(t);
-	m_Actors.push_back(a);
+	GameObject* obj = new GameObject;
+
+	obj->AddComponent(new Transform);
+	obj->AddComponent(new MeshRenderer);
+
+	MeshRenderer* mr = obj->GetComponent<MeshRenderer>();
+	mr->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
+	//mr->SetShader(ResourceManager::GetInst()->Find<GraphicsShader>(L"test_Shader"));
+
+	mr->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"test_Material"));
+	//mr->GetMaterial()->SetShader(ResourceManager::GetInst()->Find<GraphicsShader>(L"test_Shader"));
+
+	//mr->GetMaterial()->Save();
+
+	obj->GetComponent<Transform>()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
+	obj->GetComponent<Transform>()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
+
+	m_Gobjs.push_back(obj);
+
+	GameObject* cam = new GameObject;
+	
+	cam->AddComponent(new Transform);
+	cam->AddComponent(new Camera);
+	
+	cam->GetComponent<Transform>()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
+	cam->GetComponent<Transform>()->SetRelativeRot(Vec3(0.f, 0.f, 0.f));
+	
+	m_Gobjs.push_back(cam);
 }
 
 void Test::Update()
 {
-	for (Actor* actr : m_Actors)
-		actr->Update();
+	for (GameObject* gobj : m_Gobjs)
+		gobj->Update();
+}
+
+void Test::LateUpdate()
+{
+	for (GameObject* gobj : m_Gobjs)
+		gobj->LateUpdate();
 }
 
 void Test::Render()
 {
-	for (Actor* actr : m_Actors)
-		actr->Render();
+	for (GameObject* gobj : m_Gobjs)
+		gobj->Render();
 }

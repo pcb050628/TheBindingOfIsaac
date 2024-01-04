@@ -16,9 +16,9 @@ public:
 
     virtual Room* GetCurRoom() { return m_CurRoom; }
 
-public:
-    Chapter();
-    virtual ~Chapter() override;
+    void DetachGameObject(GameObject* _obj);
+
+    void GenerateRooms(CHAPTERLEVEL _level);
 
 private:
     void ChangeRoom(DIRECTION _dir)
@@ -29,10 +29,14 @@ private:
             m_CurRoom = room;
     }
 
-    void AddActor(Actor* _actr, LayerType _layr)
+    void AddObject(GameObject* _actr, LAYER_TYPE _layr, bool _bMove)
     {
-        m_CurRoom->AddActor(_actr, _layr);
+        m_CurRoom->AddObject(_actr, _layr, _bMove);
     }
+
+public:
+    Chapter();
+    virtual ~Chapter() override;
 
     friend class TaskManager;
 };

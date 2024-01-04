@@ -1,11 +1,16 @@
 #include "pch.h"
 #include "Texture.h"
-#include "RenderManager.h"
-#include "ResourceManager.h"
 
-Texture::Texture() : Super(AssetType::TEXTURE)
-	, m_TextureResource(nullptr)
-	, m_ImageSection({})
+#include "Device.h"
+
+Texture::Texture() : Resource(RESOURCE_TYPE::TEXTURE)
+	, m_Image()
+	, m_Tex2D()
+	, m_Desc{}
+	, m_RSView()
+	, m_DSView()
+	, m_SRView()
+	, m_UAView()
 {
 }
 
@@ -13,127 +18,47 @@ Texture::~Texture()
 {
 }
 
-void Texture::Render(Vec2 _pos)
+bool Texture::Load(const std::wstring& _strFilePath)
 {
-	RenderManager::GetInst()->TextureRender(m_TextureResource->GetTextureView().Get(), _pos, m_ImageSection);
-}
+	wchar_t szExt[20] = {};
+	_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 20);
 
-bool Texture::Load(std::wstring _FilePath)
-{
-	FILE* pFile = nullptr;
+	HRESULT hr = S_OK;
 
-	_wfopen_s(&pFile, _FilePath.c_str(), L"r");
-
-	std::wstring resourceName;
-
-	while (true)
+	if (!wcscmp(szExt, L".dds") || !wcscmp(szExt, L".DDS"))
 	{
-		wchar_t szRead[256] = {};
-		if (EOF == fwscanf_s(pFile, L"%s", szRead, 256))
-		{
-			return false;
-		}
-		
-		if (!wcscmp(szRead, L"[RESOURCE_NAME]"))
-		{
-			fwscanf_s(pFile, L"%s", szRead, 256);
-			resourceName = szRead;
-		}
-		else if (!wcscmp(szRead, L"[RESOURCE_PATH]"))
-		{
-			std::wstring path;
-
-			fwscanf_s(pFile, L"%s", szRead, 256);
-			path = szRead;
-
-			m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(resourceName, path);
-		}
-		else if (!wcscmp(szRead, L"[LEFT]"))
-		{
-			int value = 0;
-			fwscanf_s(pFile, L"%d", &value);
-			m_ImageSection.left = value;
-		}
-		else if (!wcscmp(szRead, L"[TOP]"))
-		{
-			int value = 0;
-			fwscanf_s(pFile, L"%d", &value);
-			m_ImageSection.top = value;
-		}
-		else if (!wcscmp(szRead, L"[RIGHT]"))
-		{
-			int value = 0;
-			fwscanf_s(pFile, L"%d", &value);
-			m_ImageSection.right = value;
-		}
-		else if (!wcscmp(szRead, L"[BOTTOM]"))
-		{
-			int value = 0;
-			fwscanf_s(pFile, L"%d", &value);
-			m_ImageSection.bottom = value;
-
-			break;
-		}
+		hr = LoadFromDDSFile(_strFilePath.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, m_Image);
 	}
 
-	return true;
-}
-
-bool Texture::Save()
-{
-	FILE* pFile = nullptr;
-
-	std::wstring _FilePath = GetContentPath() + L"Asset\\" + std::to_wstring((UINT)Super::GetAssetID());
-
-	_wfopen_s(&pFile, _FilePath.c_str(), L"w");
-
-	/*if (nullptr == pFile)
+	else if (!wcscmp(szExt, L".tga") || !wcscmp(szExt, L".TGA"))
 	{
-		LOG(ERR, L"파일 열기 실패");
+		hr = LoadFromTGAFile(_strFilePath.c_str(), nullptr, m_Image);
+	}
+
+	else
+	{
+		// png, bmp, jpg, jpeg
+		hr = LoadFromWICFile(_strFilePath.c_str(), DirectX::WIC_FLAGS_NONE, nullptr, m_Image);
+	}
+
+	if (FAILED(hr))
 		return false;
-	}*/
 
-	// 이름
-	fwprintf_s(pFile, L"[RESOURCE_NAME]\n");
+	DirectX::CreateShaderResourceView(
+		Device::GetInst()->GetDevice().Get(), m_Image.GetImages(), m_Image.GetImageCount(), m_Image.GetMetadata(), m_SRView.GetAddressOf());
+	m_SRView->GetResource((ID3D11Resource**)m_Tex2D.GetAddressOf());
+	m_Tex2D->GetDesc(&m_Desc);
 
-	fwprintf_s(pFile, m_TextureResource->GetResourceName().c_str());
-	fwprintf_s(pFile, L"\n\n");
+	m_ResourcePath = _strFilePath;
 
-	// 경로
-	fwprintf_s(pFile, L"[RESOURCE_PATH]\n");
-
-	fwprintf_s(pFile, m_TextureResource->GetResourcePath().c_str());
-	fwprintf_s(pFile, L"\n\n");
-
-	// image section
-	//fwprintf_s(pFile, L"[TEXTURE_SECTION]\n");
-
-	fwprintf_s(pFile, L"[LEFT]\n");
-	fwprintf_s(pFile, L"%d\n", m_ImageSection.left);
-
-	fwprintf_s(pFile, L"[TOP]\n");
-	fwprintf_s(pFile, L"%d\n", m_ImageSection.top);
-
-	fwprintf_s(pFile, L"[RIGHT]\n");
-	fwprintf_s(pFile, L"%d\n", m_ImageSection.right);
-
-	fwprintf_s(pFile, L"[BOTTOM]\n");
-	fwprintf_s(pFile, L"%d\n", m_ImageSection.bottom);
-
-	fclose(pFile);
-
-	return true;
+    return true;
 }
 
-bool Texture::Create(std::wstring _resourcePath, std::wstring _resourceName)
+void Texture::UpdateData(int _regiNum)
 {
-	m_TextureResource = ResourceManager::GetInst()->LoadByPath<ShaderTextureResource>(_resourceName, _resourcePath);
-
-	if (m_TextureResource != nullptr)
-	{
-		Save();
-		return true;
-	}
-
-	return false;
+	Device::GetInst()->GetContext()->VSSetShaderResources(_regiNum, 1, m_SRView.GetAddressOf());
+	Device::GetInst()->GetContext()->HSSetShaderResources(_regiNum, 1, m_SRView.GetAddressOf());
+	Device::GetInst()->GetContext()->DSSetShaderResources(_regiNum, 1, m_SRView.GetAddressOf());
+	Device::GetInst()->GetContext()->GSSetShaderResources(_regiNum, 1, m_SRView.GetAddressOf());
+	Device::GetInst()->GetContext()->PSSetShaderResources(_regiNum, 1, m_SRView.GetAddressOf());
 }

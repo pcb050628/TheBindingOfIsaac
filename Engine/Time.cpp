@@ -33,8 +33,8 @@ void Time::Update()
 	count += m_DeltaTime;
 	if (count > 1.f)
 	{
-		wchar_t szText[50] = {};
-		swprintf_s(szText, 50, L"DeltaTime : %f, FPS : %d", m_DeltaTime, static_cast<int>((1 / m_DeltaTime)));
+		wchar_t szText[100] = {};
+		swprintf_s(szText, 100, L"DeltaTime : %f, FPS : %d", m_DeltaTime, (int)(1 / m_DeltaTime));
 		SetWindowText(Engine::GetInst()->GetHwnd(), (const char*)szText);
 
 		count = 0;

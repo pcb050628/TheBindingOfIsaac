@@ -26,9 +26,9 @@ public:
 
     virtual Vec2 GetFinalPos();
 
-    virtual void BeginOverlap(Collider* _myCol, Actor* _otherActor, Collider* _otherCol) = 0;
-    virtual void Overlap(Collider* _myCol, Actor* _otherActor, Collider* _otherCol) = 0;
-    virtual void EndOverlap(Collider* _myCol, Actor* _otherActor, Collider* _otherCol) = 0;
+    virtual void BeginOverlap(Collider* _myCol, GameObject* _otherActor, Collider* _otherCol) = 0;
+    virtual void Overlap(Collider* _myCol, GameObject* _otherActor, Collider* _otherCol) = 0;
+    virtual void EndOverlap(Collider* _myCol, GameObject* _otherActor, Collider* _otherCol) = 0;
 
 public:
     Collider(ColliderType _type);

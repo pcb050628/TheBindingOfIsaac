@@ -1,10 +1,9 @@
 #pragma once
-#include "Actor.h"
+#include "GameObject.h"
 
 class Humanoid :
-    public Actor
+    public GameObject
 {
-    typedef Actor Super;
 protected:
     enum Direction
     {
@@ -13,11 +12,9 @@ protected:
         left,
         right,
     };
-
 private:
-    // �Ӹ��� ���� �ִϸ����� �Ǵ� ���͸� ���� ������ �ֱ�
-    // �Ӹ��� ������ �̷���� ���͵��� �� Ŭ������ ��ӹ�����
-
+    // 머리
+    // 몸
 
 public:
     virtual void Update() override;
