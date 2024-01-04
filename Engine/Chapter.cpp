@@ -6,8 +6,6 @@ Chapter::Chapter()
 	: m_Rooms()
 	, m_CurRoom(nullptr)
 {
-	m_CurRoom = new Room();
-	m_Rooms.push_back(m_CurRoom);
 }
 
 Chapter::~Chapter()
@@ -16,8 +14,6 @@ Chapter::~Chapter()
 
 void Chapter::Update()
 {
-	m_CurRoom->Clear();
-
 	m_CurRoom->Update();
 }
 
@@ -31,12 +27,11 @@ void Chapter::Render()
 	m_CurRoom->Render();
 }
 
-void Chapter::DetachGameObject(GameObject* _obj)
+void ChangeRoom(DIRECTION _dir)
 {
-	m_CurRoom->DetachGameObject(_obj);
-}
+	Task task = {};
+	task.Type = TASKTYPE::CHANGE_ROOM;
+	task.Param_1 = (UINT_PTR)_dir;
 
-void Chapter::GenerateRooms(CHAPTERLEVEL _level)
-{
-	// 만들어진 room 에셋들을 챕터단계에 맞게 랜덤하고 겹치지않게 불러오기
+	TaskManager::GetInst()->AddTask(task);
 }

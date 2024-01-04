@@ -2,25 +2,25 @@
 #include "define.h"
 #include "Asset.h"
 
-class AssetManager 
+class AssetManager
 {
 	SINGLETON(AssetManager)
 private:
-	std::map<std::wstring, Asset*> m_Assets[(UINT)AssetType::END];
-	//std::vector<std::wstring> m_AssetIDs[(UINT)AssetType::END];
-	std::map<std::wstring, std::wstring> m_AssetPaths;
+	std::map<AssetID, Asset*> m_Assets;
+	std::vector<AssetID> m_AssetIDs[(UINT)AssetType::END];
+	std::map<AssetID, std::wstring> m_AssetPaths;
 
-public:	// ë°©ì‹??Id ë¥?ê°€ì§€?”ê²Œ ?„ë‹ˆ??wstring?´ë‚˜ int ?€?…ìœ¼ë¡??¤ê°’??ê°€ì§€ê³?ê·¸ê±¸ ?Œì¼ ?´ë¦„?¼ë¡œ ?€?¥í•˜ê²?? ë“¯, ?„ì¬ ë°©ì‹?€ ?¬ìš©?˜ì? ?Šì„ ê²?
+public:
 	void Init();
 	
 	template <typename T>
-	T* Load(const std::wstring& _strKey)
+	T* Load(AssetID _id)
 	{
-		auto asset = m_Assets.find(_strKey);
+		auto asset = m_Assets.find(_id);
 		if (asset != m_Assets.end())
 			return dynamic_cast<T*>(asset->second);
 
-		auto iter = m_AssetPaths.find(_strKey);
+		auto iter = m_AssetPaths.find(_id);
 		if (iter != m_AssetPaths.end())
 		{
 			std::wstring path = iter->second;
@@ -35,10 +35,10 @@ public:	// ë°©ì‹??Id ë¥?ê°€ì§€?”ê²Œ ?„ë‹ˆ??wstring?´ë‚˜ int ?€?…ìœ¼ë¡??¤ê°’??ê°
 	void Save(Asset* _asset) { _asset->Save(); }
 
 	template <typename T>
-	bool Create(const std::wstring& _strKey, std::wstring _resourcePath, std::wstring _resourceName = L"resource")
+	bool Create(AssetID _id, std::wstring _resourcePath, std::wstring _resourceName = L"resource")
 	{
 		Asset* asset = new T();
-		asset->SetAssetID(_strKey);
+		asset->SetAssetID(_id);
 		return asset->Create(_resourcePath, _resourceName);
 	}
 };

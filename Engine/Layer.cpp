@@ -1,133 +1,80 @@
 #include "pch.h"
 #include "Layer.h"
-#include "GameObject.h"
-#include "GarbageCollection.h"
+#include "Actor.h"
+#include "Collider.h"
 
 Layer::Layer()
-	: m_Parents()
-	, m_Gobjs()
-	, m_iLayerIdx(-1)
+	: m_Actors()
 {
 }
 
 Layer::~Layer()
 {
-	auto iter = m_Parents.begin();
-	for (; iter != m_Parents.end(); )
+	auto iter = m_Actors.begin();
+	for (; iter != m_Actors.end(); )
 	{
 		delete (*iter);
-		iter = m_Parents.erase(iter);
+		iter = m_Actors.erase(iter);
 	}
 }
 
 void Layer::Update()
 {
-	for (GameObject* gobj : m_Parents)
+	for (Actor* actor : m_Actors)
 	{
-		gobj->Update();
+		actor->Update();
 	}
 }
 
 void Layer::LateUpdate()
 {
-	for (GameObject* gobj : m_Parents)
+	for (Actor* actor : m_Actors)
 	{
-		gobj->LateUpdate();
+		actor->LateUpdate();
 	}
 }
 
 void Layer::Render()
 {
-	for (GameObject* gobj : m_Gobjs)
+	for (Actor* actor : m_Actors)
 	{
-		gobj->Render();
+		actor->Render();
 	}
 
-	auto iter = m_Parents.begin();
-	for (; iter != m_Parents.end();)
+	auto iter = m_Actors.begin();
+	for (; iter != m_Actors.end();)
 	{
-		if (!IsValid(*iter))
-		{
-			GarbageCollection::GetInst()->Add(*iter);
-			iter = m_Parents.erase(iter);
-		}
+		if ((*iter)->GetIsDead())
+			iter = m_Actors.erase(iter);
 		else
 			iter++;
 	}
 }
 
-void Layer::Clear()
+vector<Actor*> Layer::GetActorAboveTileY(int _y)
 {
-	auto iter = m_Gobjs.begin();
-	for (; iter != m_Gobjs.end();)
+	vector<Actor*> value = {};
+
+	for (Actor* actor : m_Actors)
 	{
-		iter = m_Gobjs.erase(iter);
+		if (static_cast<int>(actor->GetPosition().y) == _y)
+			value.push_back(actor);
 	}
+
+	return value;
 }
 
-void Layer::AddObject(GameObject* _obj, bool _bMove)
+vector<Collider*> Layer::GetAllCollider()
 {
-	if (!_obj->GetParent())
+	vector<Collider*> vec = {};
+
+	for (Actor* act : m_Actors)
 	{
-		if (_obj->m_iLayerIdx != -1)
+		for (int i = 0; i < act->GetComponent(COLLIDER)->size(); i++)
 		{
-			_obj->DisconnectWithLayer();
+			vec.push_back(static_cast<Collider*>(act->GetComponent(COLLIDER)->at(i)));
 		}
 	}
 
-	m_Parents.push_back(_obj);
-
-	std::queue<GameObject*> queueObj;
-	queueObj.push(_obj);
-
-	while (!queueObj.empty())
-	{
-		GameObject* front = queueObj.front();
-
-		for (int i = 0; i < front->m_ChildObjs.size(); i++)
-		{
-			queueObj.push(front->m_ChildObjs[i]);
-		}
-
-		if (front == _obj)
-			front->m_iLayerIdx = m_iLayerIdx;
-		else
-		{
-			if (_bMove)
-				front->m_iLayerIdx = m_iLayerIdx;
-			else if(front->m_iLayerIdx == -1)
-				front->m_iLayerIdx = m_iLayerIdx;
-		}
-
-		queueObj.pop();
-	}
-}
-
-void Layer::DetachGameObject(GameObject* _obj)
-{
-	assert(_obj->m_iLayerIdx = m_iLayerIdx);
-
-	if (_obj->GetParent())
-	{
-		_obj->m_iLayerIdx = -1;
-	}
-	else
-	{
-		auto iter = m_Parents.begin();
-		for (; iter != m_Parents.end(); iter++)
-		{
-			if (*iter == _obj)
-			{
-				m_Parents.erase(iter);
-				return;
-			}
-		}
-
-		assert(nullptr);
-	}
-}
-
-void Layer::RegisterObject(GameObject* _obj)
-{
-	m_Gobjs.push_back(_obj);
+	return vec;
 }

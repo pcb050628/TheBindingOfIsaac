@@ -1,5 +1,5 @@
 #pragma once
-#include "Resource.h"
+#include "Asset.h"
 #include "Layer.h"
 
 enum DIRECTION
@@ -19,11 +19,12 @@ enum class RoomType
 };
 
 class Room :
-    public Resource
+    public Asset
 {
+    typedef Asset Super;
 private:
     RoomType m_Type;
-    Layer m_Layers[(int)LAYER_TYPE::END];
+    Layer m_Layers[(int)LayerType::END];
 
     Room* Left;
     Room* Right;
@@ -31,10 +32,8 @@ private:
     Room* Bottom;
 
 public:
-    virtual bool Load(const std::wstring& _strFilePath) override;
+    virtual bool Load(std::wstring _path) override;
     virtual bool Save() override;
-
-    virtual void Clear();
 
     virtual void Enter();
     virtual void Update();
@@ -42,11 +41,9 @@ public:
     virtual void Render();
     virtual void Exit();
 
-    virtual Layer* GetLayer(int _type) { return &m_Layers[_type]; }
-    virtual Layer* GetLayer(LAYER_TYPE _type) { return GetLayer((int)_type); }
+    virtual Layer& GetLayer(LayerType _type) { return m_Layers[(int)_type]; }
 
-    // 15 x 9 tile / include walls
-    // tile is for make room easier
+    // 15 x 9 tile
 
     virtual Room* GetRoomByDir(DIRECTION _dir)
     {
@@ -69,12 +66,10 @@ public:
         return nullptr;
     }
 
-    void AddObject(GameObject* _obj, LAYER_TYPE _layr, bool _bMove)
+    void AddActor(Actor* _actr, LayerType _layr)
     {
-        m_Layers[(UINT)_layr].AddObject(_obj, _bMove);
+        m_Layers[(UINT)_layr].AddActor(_actr);
     }
-
-    void DetachGameObject(GameObject* _obj);
 
 public:
     Room();

@@ -1,9 +1,8 @@
 #include "pch.h"
 #include "TaskManager.h"
 #include "ChapterManager.h"
-#include "GarbageCollection.h"
 
-#include "GameObject.h"
+#include "Actor.h"
 
 TaskManager::TaskManager()
 {
@@ -34,27 +33,12 @@ void TaskManager::Update()
 			ChapterManager::GetInst()->ChangeChapter((CHAPTERLEVEL)task.Param_1);
 			break;
 
-		case TASKTYPE::CREATE_OBJECT:
-			ChapterManager::GetInst()->GetCurChapter()->AddObject((GameObject*)task.Param_1, (LAYER_TYPE)task.Param_2, false);
+		case TASKTYPE::CREATE_ACTOR:
+			ChapterManager::GetInst()->GetCurChapter()->AddActor((Actor*)task.Param_1, (LayerType)task.Param_2);
 			break;
 
-		case TASKTYPE::DELETE_OBJECT:
-		{
-			std::queue<GameObject*> queueObj;
-			queueObj.push(((GameObject*)task.Param_1));
-			while (!queueObj.empty())
-			{
-				GameObject* obj = queueObj.front();
-
-				for (int i = 0; i < obj->m_ChildObjs.size(); i++)
-				{
-					queueObj.push(obj->m_ChildObjs[i]);
-				}
-
-				obj->Destroy();
-				queueObj.pop();
-			}
-		}
+		case TASKTYPE::DELETE_ACTOR:
+			delete (Actor*)task.Param_1;
 			break;
 		}
 

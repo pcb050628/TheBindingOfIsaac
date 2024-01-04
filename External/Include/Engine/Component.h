@@ -1,29 +1,38 @@
 #pragma once
 #include "Entity.h"
 
+enum ComponentType
+{
+    STATEMACHINE,
+    COLLIDER,
+    RENDERER,
+    ANIMATOR,
+
+    End,
+};
+
 class Component :
     public Entity
 {
     typedef Entity Super;
 
 private:
-    class GameObject* m_Owner;
-    const COMPONENT_TYPE m_Type;
+    class Actor* m_Owner;
+    const ComponentType m_Type;
 
 public:
-    virtual void Update() {}
+    virtual void Update() = 0;
     virtual void LateUpdate() = 0;
-    virtual void Render() {}
-    virtual void UpdateData() {}
+    virtual void Render();
 
-    GameObject* GetOwner() { return m_Owner; }
+    Actor* GetOwner() { return m_Owner; }
 
-    virtual const COMPONENT_TYPE GetType() { return m_Type; }
+    virtual const ComponentType GetType() { return m_Type; }
 
 public:
-    Component(COMPONENT_TYPE _type);
+    Component(ComponentType _type);
     virtual ~Component();
 
-    friend GameObject;
+    friend Actor;
 };
 

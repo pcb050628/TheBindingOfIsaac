@@ -1,9 +1,7 @@
 #include "pch.h"
 #include "Room.h"
 
-#include "GameObject.h"
-
-Room::Room() : Resource(RESOURCE_TYPE::ROOM)
+Room::Room() : Super(AssetType::ROOM)
 	, m_Layers()
 	, m_Type(RoomType::Common)
 	, Left(nullptr)
@@ -11,17 +9,13 @@ Room::Room() : Resource(RESOURCE_TYPE::ROOM)
 	, Top(nullptr)
 	, Bottom(nullptr)
 {
-	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
-	{
-		m_Layers[i].m_iLayerIdx = i;
-	}
 }
 
 Room::~Room()
 {
 }
 
-bool Room::Load(const std::wstring& _strFilePath)
+bool Room::Load(std::wstring _path)
 {
 	return false;
 }
@@ -29,14 +23,6 @@ bool Room::Load(const std::wstring& _strFilePath)
 bool Room::Save()
 {
 	return false;
-}
-
-void Room::Clear()
-{
-	for (Layer& layer : m_Layers)
-	{
-		layer.Clear();
-	}
 }
 
 void Room::Enter()
@@ -71,8 +57,3 @@ void Room::Exit()
 {
 }
 
-
-void Room::DetachGameObject(GameObject* _obj)
-{
-	m_Layers[_obj->m_iLayerIdx].DetachGameObject(_obj);
-}

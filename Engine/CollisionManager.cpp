@@ -4,281 +4,132 @@
 #include "ChapterManager.h"
 #include "Chapter.h"
 #include "Room.h"
+#include "Layer.h"
+#include "Actor.h"
 
-#include "GameObject.h"
-#include "Collider2D.h"
+#include "Collider.h"
+#include "BoxCollider.h"
+#include "CircleCollider.h"
 
 CollisionManager::CollisionManager()
-	: m_CollisionMatrix{}
-	, m_prevInfo{}
-{}
+	: m_CollisionMatrix()
+{
+
+}
 
 CollisionManager::~CollisionManager()
-{}
-
-void CollisionManager::Init()
 {
+
 }
 
 void CollisionManager::Update()
 {
-	for (UINT row = 0; row < (UINT)LAYER_TYPE::END; row++)
+	for (int row = 0; row < (int)LayerType::END; row++)
 	{
-		for (UINT col = row; col < (UINT)LAYER_TYPE::END; col++)
+		for (int col = row; col < (int)LayerType::END; col++)
 		{
-			if (!(m_CollisionMatrix[row] & (1 << col)))
-				continue;
-
-			LayerCollisionCheck(row, col);
+			if (m_CollisionMatrix[row][col])
+			{
+				LayerCheck(row, col);
+			}
 		}
 	}
 }
 
-void CollisionManager::Clear()
+void CollisionManager::LateUpdate()
 {
 }
 
-void CollisionManager::CollisionMatrixCheck(LAYER_TYPE _layerType1, LAYER_TYPE _layerType2, bool _check)
+void CollisionManager::LayerCheck(int _layer1, int _layer2)
 {
-	UINT row = (UINT)_layerType1;
-	UINT col = (UINT)_layerType2;
+	vector<Collider*> l1Col = ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetLayer((LayerType)_layer1).GetAllCollider();
+	vector<Collider*> l2Col = ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetLayer((LayerType)_layer2).GetAllCollider();
 
-	if (row > col)
+	for (int one = 0; one < l1Col.size(); one++)
 	{
-		UINT tmp = row;
-		row = col;
-		col = row;
-	}
-
-	if(_check)
-		m_CollisionMatrix[row] |= (1 << col);
-	else
-		m_CollisionMatrix[row] &= ~(1 << col);
-}
-
-void CollisionManager::LayerCollisionCheck(UINT _left, UINT _right)
-{
-	Layer* layerLeft = ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetLayer(_left);
-	Layer* layerRight = ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetLayer(_right);
-
-	const std::vector<GameObject*>& objLeft = layerLeft->GetGameObject();
-	const std::vector<GameObject*>& objRight = layerRight->GetGameObject();
-
-	for (int i = 0; i < objLeft.size(); i++)
-	{
-		for (int j = i; j < objRight.size(); i++)
+		for (int two = 0; two < l2Col.size(); two++)
 		{
-			if (objLeft[i] == objRight[j] || !(objLeft[i]->GetComponent<Collider2D>() && objRight[j]->GetComponent<Collider2D>()))
-				continue;
+			COLLIDER_ID ID(l1Col[one]->GetID(), l2Col[two]->GetID());
 
-			CollisionID id = {};
-			id.LeftID = objLeft[i]->GetComponent<Collider2D>()->GetID();
-			id.RightID = objRight[j]->GetComponent<Collider2D>()->GetID();
+			map<COLLIDER_ID, bool>::iterator iter = m_mapID.find(ID);
 
-			auto iter = m_prevInfo.begin();
-			if (m_prevInfo.find(id.id) == m_prevInfo.end())
+			if (iter == m_mapID.end())
 			{
-				m_prevInfo.insert(make_pair(id.id, false));
-				iter = m_prevInfo.find(id.id);
+				m_mapID.insert(make_pair(ID, false));
+				iter = m_mapID.find(ID);
 			}
 
-			bool dead = objLeft[i]->GetIsDead() || objRight[j]->GetIsDead();
-
-			if (ColliderCollisionCheck(objLeft[i]->GetComponent<Collider2D>(), objRight[j]->GetComponent<Collider2D>()))
+			if (isCollision(l1Col[one], l2Col[two]))
 			{
-				if (!dead)
+				if (iter->second == false)
 				{
-					if (iter->second)
-					{
-						objLeft[i]->GetComponent<Collider2D>()->Overlap(objRight[j]->GetComponent<Collider2D>());
-						objRight[j]->GetComponent<Collider2D>()->Overlap(objLeft[i]->GetComponent<Collider2D>());
-					}
-					else
-					{
-						objLeft[i]->GetComponent<Collider2D>()->Overlap(objRight[j]->GetComponent<Collider2D>());
-						objRight[j]->GetComponent<Collider2D>()->Overlap(objLeft[i]->GetComponent<Collider2D>());
-						iter->second = true;
-					}
+					l1Col[one]->BeginOverlap(l1Col[one], l2Col[two]->GetOwner(), l2Col[two]);
+					l2Col[two]->BeginOverlap(l2Col[two], l1Col[one]->GetOwner(), l1Col[one]);
 				}
 				else
 				{
-					objLeft[i]->GetComponent<Collider2D>()->EndOverlap(objRight[j]->GetComponent<Collider2D>());
-					objRight[j]->GetComponent<Collider2D>()->EndOverlap(objLeft[i]->GetComponent<Collider2D>());
-					iter->second = false;
+					l1Col[one]->Overlap(l1Col[one], l2Col[two]->GetOwner(), l2Col[two]);
+					l2Col[two]->Overlap(l2Col[two], l1Col[one]->GetOwner(), l1Col[one]);
 				}
+
+				iter->second = true;
 			}
 			else
 			{
-				if (iter->second)
+				if (iter->second == true)
 				{
-					objLeft[i]->GetComponent<Collider2D>()->EndOverlap(objRight[j]->GetComponent<Collider2D>());
-					objRight[j]->GetComponent<Collider2D>()->EndOverlap(objLeft[i]->GetComponent<Collider2D>());
-					iter->second = false;
+					l1Col[one]->EndOverlap(l1Col[one], l2Col[two]->GetOwner(), l2Col[two]);
+					l2Col[two]->EndOverlap(l2Col[two], l1Col[one]->GetOwner(), l1Col[one]);
 				}
+
+				iter->second = false;
 			}
 		}
 	}
 }
 
-bool CollisionManager::ColliderCollisionCheck(Collider2D* _left, Collider2D* _right)
+bool CollisionManager::isCollision(Collider* col1, Collider* col2)
 {
-	if (_left->GetCollider2DType() == COLLIDER2D_TYPE::BOX &&
-		_left->GetCollider2DType() == COLLIDER2D_TYPE::BOX)
-	{
-		return BoxToBox(_left, _right);
-	}
-	else if (_left->GetCollider2DType() == COLLIDER2D_TYPE::CIRCLE &&
-		_left->GetCollider2DType() == COLLIDER2D_TYPE::CIRCLE)
-	{
-		return CircleToCircle(_left, _right);
-	}
-	else
-	{
-		return BoxToCircle(_left, _right);
-	}
-}
-
-bool CollisionManager::BoxToBox(Collider2D* _left, Collider2D* _right)
-{
-	const Matrix& matLeft = _left->GetColliderWorldMat();
-	const Matrix& matRight = _right->GetColliderWorldMat();
-
-	// Rect Local
-	// 0 -- 1
-	// |    |
-	// 3 -- 2
-	static Vec3 arrRect[4] = { Vec3(-0.5f, 0.5f, 0.f)
-							  , Vec3(0.5f, 0.5f, 0.f)
-							  , Vec3(0.5f, -0.5f, 0.f)
-							  , Vec3(-0.5f, -0.5f, 0.f) };
-
-	Vec3 arrProj[4] = {};
-
-	Vec3 tmp1 = DirectX::XMVector3TransformCoord(arrRect[1], matLeft);
-	Vec3 tmp2 = DirectX::XMVector3TransformCoord(arrRect[0], matLeft);
-	arrProj[0] = tmp1 - tmp2;
-
-	tmp1 = DirectX::XMVector3TransformCoord(arrRect[3], matLeft);
-	tmp2 = DirectX::XMVector3TransformCoord(arrRect[0], matLeft);
-	arrProj[1] = tmp1 - tmp2;
-
-	tmp1 = DirectX::XMVector3TransformCoord(arrRect[1], matRight);
-	tmp2 = DirectX::XMVector3TransformCoord(arrRect[0], matRight);
-	arrProj[2] = tmp1 - tmp2;
-
-	tmp1 = DirectX::XMVector3TransformCoord(arrRect[3], matRight);
-	tmp2 = DirectX::XMVector3TransformCoord(arrRect[0], matRight);
-	arrProj[3] = tmp1 - tmp2;
-
-	tmp1 = DirectX::XMVector3TransformCoord(Vec3(0.f, 0.f, 0.f), matRight);
-	tmp2 = DirectX::XMVector3TransformCoord(Vec3(0.f, 0.f, 0.f), matLeft);
-	Vec3 vCenter = tmp1 - tmp2;
-
-	// i 번째 투영축으로 4개의 표면벡터를 투영시킨다.
-	for (int i = 0; i < 4; ++i)
-	{
-		// i 번째 표면백터를 투영축으로 삼는다
-		Vec3 vProj = arrProj[i];
-
-		// 단위벡터로 만들어서 내적할 경우 투영된 길이를 구할 수 있게 한다.
-		vProj.Normalize();
-
-		// 투영된 길이를 누적시킬 변수
-		float ProjAcc = 0.f;
-
-		// 반복문 돌면서 4개의 표면벡터를 지정된 투영축으로 투영시켜서 길이를 누적받는다.
-		for (int j = 0; j < 4; ++j)
-		{
-			ProjAcc += fabs(vProj.Dot(arrProj[j]));
-		}
-
-		// 투영된 길이의 절반씩 합친 길이가 필요하기 때문에 전체 합친길이를 2 로 나눈다
-		ProjAcc /= 2.f;
-
-		// 두 충돌체의 중심을 이은 벡터도 투영시킨다.
-		float fCenterDist = fabs(vProj.Dot(vCenter));
-
-		// 중심을 이은 벡터를 투영시킨 길이가, 표면을 투영시킨 길이의 절반보다 크다면 
-		// 둘을 분리시킬 수 있다.
-		if (ProjAcc < fCenterDist)
-		{
-			return false;
-		}
-	}
-
-	// 4번의 테스트동안 분리할 수 없었다.
-	return true;
-}
-
-bool CollisionManager::CircleToCircle(Collider2D* _left, Collider2D* _right)
-{
-	Vec3 leftPos = _left->GetColliderWorldMat().Translation();
-	Vec3 rightPos = _right->GetColliderWorldMat().Translation();
-
-	float dist = (leftPos - rightPos).Length();
-
-	if (fabs(dist) < fabs(_left->GetOffsetScale().x + _right->GetOffsetScale().x))
-		return true;
-	else
+	if (!IsValid(col1->GetOwner()) || !IsValid(col2->GetOwner()))
 		return false;
-}
 
-bool CollisionManager::BoxToCircle(Collider2D* _box, Collider2D* _circle)
-{
-	if (_box->GetCollider2DType() != COLLIDER2D_TYPE::BOX)
-	{
-		auto tmp = _box;
-		_box = _circle;
-		_circle = tmp;
-	}
-
-	const Matrix& matBox = _box->GetColliderWorldMat();
-	const Matrix& matCircle = _circle->GetColliderWorldMat();
-
-	// Rect Local
-	// 0 -- 1
-	// |    |
-	// 3 -- 2
-	static Vec3 arrRect[4] = { Vec3(-0.5f, 0.5f, 0.f)
-							  , Vec3(0.5f, 0.5f, 0.f)
-							  , Vec3(0.5f, -0.5f, 0.f)
-							  , Vec3(-0.5f, -0.5f, 0.f) };
-
-	Vec3 arrEdge[4] = {};
-
-	arrEdge[0] = DirectX::XMVector3TransformCoord(arrRect[0], matBox);
-	arrEdge[1] = DirectX::XMVector3TransformCoord(arrRect[1], matBox);
-	arrEdge[2] = DirectX::XMVector3TransformCoord(arrRect[2], matBox);
-	arrEdge[3] = DirectX::XMVector3TransformCoord(arrRect[3], matBox);
-
-	Vec3 circlePos = DirectX::XMVector3TransformCoord(Vec3(0.f, 0.f, 0.f), matCircle);
-	Vec3 boxPos = DirectX::XMVector3TransformCoord(Vec3(0.f, 0.f, 0.f), matBox);
-
-	Vec3 vProj = boxPos - circlePos;
-
-	float dist = vProj.Length();
-	Vec3 vLine = {};
-
-	int idx = 0;
-	for (int i = 0; i < 4; i++)
-	{
-		float mostShort = fabs((circlePos - arrEdge[idx]).Length());
-		float dist = fabs((circlePos - arrEdge[i]).Length());
-		if (mostShort > dist)
-			idx = i;
-	}
-
-	if (idx == 0)
-		vLine = arrEdge[0] - arrEdge[1];
-	else if(idx == 1)
-		vLine = arrEdge[1] - arrEdge[0];
-	else if (idx == 2)
-		vLine = arrEdge[2] - arrEdge[3];
-	else if (idx == 3)
-		vLine = arrEdge[3] - arrEdge[2];
-
-	if (fabs(dist) < vProj.Dot(vLine))
-		return false;
+	if (col1->GetColliderType() == col2->GetColliderType())
+		if (col1->GetColliderType() == ColliderType::Box)
+			return isCollision(static_cast<BoxCollider*>(col1), static_cast<BoxCollider*>(col2));
+		else
+			return isCollision(static_cast<CircleCollider*>(col1), static_cast<CircleCollider*>(col2));
+	else if (col1->GetColliderType() == ColliderType::Box)
+		return isCollision(static_cast<BoxCollider*>(col1), static_cast<CircleCollider*>(col2));
 	else
-		return true;
+		return isCollision(static_cast<BoxCollider*>(col2), static_cast<CircleCollider*>(col1));
 }
+
+bool CollisionManager::isCollision(BoxCollider* col1, CircleCollider* col2)
+{
+	if (fabs((col1->GetFinalPos() - col2->GetFinalPos()).Length()) < fabs(col1->GetScale().Length() + col2->GetRadius()))
+		return true;
+
+	return false;
+}
+
+bool CollisionManager::isCollision(BoxCollider* col1, BoxCollider* col2)
+{
+	if (col1->GetFinalPos().x - col1->GetScale().x > col2->GetFinalPos().x + col2->GetScale().x
+		|| col1->GetFinalPos().x + col1->GetScale().x < col2->GetFinalPos().x - col2->GetScale().x)
+		return true;
+
+	if (col1->GetFinalPos().y - col1->GetScale().y < col2->GetFinalPos().y + col2->GetScale().y
+		|| col1->GetFinalPos().y + col1->GetScale().y > col2->GetFinalPos().y - col2->GetScale().y)
+		return true;
+
+	return false;
+}
+
+bool CollisionManager::isCollision(CircleCollider* col1, CircleCollider* col2)
+{
+	if (fabs((col1->GetFinalPos() - col2->GetFinalPos()).Length()) < fabs(col1->GetRadius() + col2->GetRadius()))
+		return true;
+
+	return false;
+}
+

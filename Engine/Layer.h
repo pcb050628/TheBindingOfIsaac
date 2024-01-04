@@ -1,7 +1,7 @@
 #pragma once
 #include "Entity.h"
 
-enum class LAYER_TYPE
+enum class LayerType
 {
     Background,
     Object,
@@ -12,34 +12,29 @@ enum class LAYER_TYPE
     END,
 };
 
-class GameObject;
+class Actor;
 class Layer :
     public Entity
 {
 private:
-    vector<GameObject*> m_Parents;
-    vector<GameObject*> m_Gobjs;
-
-    int                 m_iLayerIdx;
+    vector<Actor*> m_Actors;
 
 public:
     void Update();
     void LateUpdate();
     void Render();
 
-    void Clear();
+    // ���߿� �����Ҷ� ����Ұ�
+    vector<Actor*> GetActorAboveTileY(int _y);
+    vector<class Collider*> GetAllCollider();
 
-    void AddObject(GameObject* _obj, bool _bMove = false);
-    void DetachGameObject(GameObject* _obj);
-
-    void RegisterObject(GameObject* _obj);
-
-    const vector<GameObject*>& GetGameObject() { return m_Gobjs; }
+    void AddActor(Actor* _actr)
+    {
+        m_Actors.push_back(_actr);
+    }
 
 public:
     Layer();
     ~Layer() override;
-
-    friend class Room;
 };
 

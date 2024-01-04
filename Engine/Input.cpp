@@ -1,7 +1,7 @@
 #include "pch.h"
 #include "Input.h"
 
-int ASCII[(UINT)Key::END] =
+int ASCII[Key::END] =
 {
 	'Q','W','E','R','T','Y','U','I','O','P',
 	'A','S','D','F','G','H','J','K','L',
@@ -24,7 +24,7 @@ Input::~Input()
 
 void Input::Init()
 {
-	for (int i = 0; i < (UINT)Key::END; i++)
+	for (int i = 0; i < Key::END; i++)
 	{
 		KeyData data((Key)i);
 		m_Keys.push_back(data);
@@ -33,7 +33,7 @@ void Input::Init()
 
 void Input::Update()
 {
-	for (int i = 0; i < (UINT)Key::END; i++)
+	for (int i = 0; i < Key::END; i++)
 	{
 		if (GetKeyState(ASCII[i]) & 0x8000)
 		{

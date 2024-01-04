@@ -2,32 +2,24 @@
 #include "Entity.h"
 #include "define.h"
 
-enum class RESOURCE_TYPE
+enum class ResourceType
 {
-	TEXTURE,
-	ANIM,
-	SOUND,
-	MESH,
-	GRAPHICS_SHADER,
-	COMPUTER_SHADER,
-	MATERIAL,
-	ROOM,
-	CHAPTER,
-	END
+	Texture,
+	Sound,
+	End
 };
 
 class Resource : 
 	public Entity
 {
-protected:
+private:
 	std::wstring m_ResourcePath;
 	std::wstring m_ResourceName;
 
-	const RESOURCE_TYPE	m_Type;
-
 public:
-	virtual bool Load(const std::wstring& _strFilePath) { return false; }
-	virtual bool Save() { return false; }
+	//static ResourceType GetType() { return m_Type; }
+
+	virtual bool Load(std::wstring _FilePath) = 0;
 
 	virtual void SetResourcePath(std::wstring _path) { m_ResourcePath = _path; }
 	virtual std::wstring GetResourcePath() { return m_ResourcePath; }
@@ -35,10 +27,8 @@ public:
 	virtual void SetResourceName(std::wstring _name) { m_ResourceName = _name; }
 	virtual std::wstring GetResourceName() { return m_ResourceName; }
 
-	virtual RESOURCE_TYPE GetResourceType() { return m_Type; }
-
 public:
-	Resource(RESOURCE_TYPE _type);
+	Resource(ResourceType _type);
 	virtual ~Resource() override;
 
 	friend class ResouceManager;
