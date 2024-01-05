@@ -58,11 +58,11 @@ cbuffer MATERIAL_CONST : register(b1)
 
 cbuffer ANIM_DATA : register(b2)
 {
-    float2 vLeftTop;
-    float2 vSliceSize;
-    float2 vOffset;
-    int UseAnim2D;
-    int iPadding;
+    float2  g_vLeftTop;
+    float2  g_vSliceSize;
+    float2  g_vOffset;
+    int     UseAnim2D;
+    int     iPadding;
 }
 
 Texture2D g_tex_0 : register(t0);

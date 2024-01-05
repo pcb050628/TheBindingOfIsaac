@@ -18,7 +18,11 @@ Animator2D::~Animator2D()
 
 void Animator2D::Clear()
 {
+	ConstantBuffer* pCB = Device::GetInst()->GetConstBuffer(CB_TYPE::ANIMATION2D);
+	g_AnimData.UseAnim2D = 0;
 
+	pCB->SetData(&g_AnimData);
+	pCB->UpdateData();
 }
 
 void Animator2D::UpdateData()

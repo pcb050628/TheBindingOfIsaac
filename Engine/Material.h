@@ -1,14 +1,17 @@
 #pragma once
 #include "Resource.h"
 
+#include "Texture.h"
+#include "GraphicsShader.h"
+
 class Material :
     public Resource
 {
 private:
     tMaterial               m_ConstData;
 
-    class Texture*          m_Textures[TEX_PARAM::END];
-    class GraphicsShader*   m_Shader;
+    Texture*          m_Textures[TEX_PARAM::END];
+    GraphicsShader*   m_Shader;
 
 public:
     virtual bool Load(const std::wstring& _strFilePath);

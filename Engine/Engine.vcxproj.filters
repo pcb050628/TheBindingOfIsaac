@@ -259,6 +259,9 @@
     <ClInclude Include="Anim.h">
       <Filter>01_Basic\03_OBJ\Component\Animator2D\Anim</Filter>
     </ClInclude>
+    <ClInclude Include="global.h">
+      <Filter>0_Default\Header</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

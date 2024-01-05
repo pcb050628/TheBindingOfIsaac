@@ -18,13 +18,14 @@ private:
     // 파일에서 이미지를 가져옴, Texture 클래스를 불러오는게 아님
     bool Load(const std::wstring& _path) override;
 
-private:
+public:
     void UpdateData(int _regiNum);
 
 public:
     Texture();
     ~Texture();
 
-    friend class Material;
+    //friend class Material;
+    //friend class Anim;
 };
 

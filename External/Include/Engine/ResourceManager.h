@@ -41,7 +41,7 @@ public:
 	}
 
 	template <typename T>
-	T* LoadByTXTFile(std::wstring _path)
+	T* LoadByFileName(const std::wstring& _path)
 	{
 		Resource* tmp = new T();
 		tmp->Load(_path);
@@ -79,12 +79,14 @@ RESOURCE_TYPE GetResourceType()
 
 	RESOURCE_TYPE value = RESOURCE_TYPE::END;
 
-	if (&type == &typeid(class Mesh))
+	if (&type == &typeid(Mesh))
 		return RESOURCE_TYPE::MESH;
-	else if (&type == &typeid(class GraphicsShader))
+	else if (&type == &typeid(GraphicsShader))
 		return RESOURCE_TYPE::GRAPHICS_SHADER;
-	else if (&type == &typeid(class Material))
+	else if (&type == &typeid(Material))
 		return RESOURCE_TYPE::MATERIAL;
+	else if (&type == &typeid(Texture))
+		return RESOURCE_TYPE::TEXTURE;
 
 	return value;
 }

@@ -6,6 +6,7 @@
 #include "GameObject.h"
 #include "components.h"
 
+
 ChapterManager::ChapterManager()
 	: m_CurChapter(nullptr)
 	, m_Chapters{}
@@ -34,8 +35,11 @@ void ChapterManager::Init()
 	gobj->AddComponent(new Transform);
 	gobj->AddComponent(new MeshRenderer);
 
+	Texture* tex = new Texture();
+
 	gobj->GetComponent<MeshRenderer>()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
 	gobj->GetComponent<MeshRenderer>()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
+	//gobj->GetComponent<MeshRenderer>()->GetMaterial()->SetTexture(ResourceManager::GetInst()->LoadByFileName<Texture>(L"Resource\\Image\\Rocks.png"), TEX_PARAM::TEX_0);
 
 	AddGameObject(gobj, LAYER_TYPE::Player);
 

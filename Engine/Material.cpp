@@ -5,8 +5,6 @@
 #include "ResourceManager.h"
 
 #include "ConstantBuffer.h"
-#include "GraphicsShader.h"
-#include "Texture.h"
 
 Material::Material()
 	: Resource(RESOURCE_TYPE::MATERIAL)
