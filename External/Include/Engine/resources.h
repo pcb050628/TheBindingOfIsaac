@@ -2,3 +2,4 @@
 #include "Mesh.h"
 #include "GraphicsShader.h"
 #include "Material.h"
+#include "Texture.h"

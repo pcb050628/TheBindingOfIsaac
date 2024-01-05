@@ -39,7 +39,7 @@ void Engine::Init(HWND _hWnd, const RECT& _Resolution)
 	Input::GetInst()->Init();
 	Device::GetInst()->Init(m_hWnd, res);
 	ResourceManager::GetInst()->Init();
-	AssetManager::GetInst()->Init();
+	//AssetManager::GetInst()->Init();
 	ChapterManager::GetInst()->Init();
 	RenderManager::GetInst()->Init();
 	Test::GetInst()->Init();

@@ -22,7 +22,7 @@
 #include "wrl.h"
 #include <d3d11.h>
 #include <d3dcompiler.h>
-#include "DirectXTex.h"
+#include <DirectXTex/DirectXTex.h>
 
 #pragma comment(lib, "d3d11.lib")
 #pragma comment(lib, "d3dcompiler.lib")
@@ -33,7 +33,7 @@
 #pragma comment(lib, "..\\External\\Library\\DirectXTex\\DirectXTex")
 #endif
 
-#include "directxtk/SimpleMath.h"
+#include <DirectX/SimpleMath.h>
 using namespace DirectX::SimpleMath;
 
 typedef Vector2 Vec2;
