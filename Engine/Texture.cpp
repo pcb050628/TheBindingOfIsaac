@@ -23,22 +23,24 @@ bool Texture::Load(const std::wstring& _strFilePath)
 	wchar_t szExt[20] = {};
 	_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 20);
 
+	std::wstring path = GetContentPath() + _strFilePath;
+
 	HRESULT hr = S_OK;
 
 	if (!wcscmp(szExt, L".dds") || !wcscmp(szExt, L".DDS"))
 	{
-		hr = LoadFromDDSFile(_strFilePath.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, m_Image);
+		hr = LoadFromDDSFile(path.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, m_Image);
 	}
 
 	else if (!wcscmp(szExt, L".tga") || !wcscmp(szExt, L".TGA"))
 	{
-		hr = LoadFromTGAFile(_strFilePath.c_str(), nullptr, m_Image);
+		hr = LoadFromTGAFile(path.c_str(), nullptr, m_Image);
 	}
 
 	else
 	{
 		// png, bmp, jpg, jpeg
-		hr = LoadFromWICFile(_strFilePath.c_str(), DirectX::WIC_FLAGS_NONE, nullptr, m_Image);
+		hr = LoadFromWICFile(path.c_str(), DirectX::WIC_FLAGS_NONE, nullptr, m_Image);
 	}
 
 	if (FAILED(hr))

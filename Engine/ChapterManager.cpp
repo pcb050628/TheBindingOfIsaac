@@ -36,7 +36,7 @@ void ChapterManager::Init()
 
 	gobj->GetComponent<MeshRenderer>()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
 	gobj->GetComponent<MeshRenderer>()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
-	gobj->GetComponent<MeshRenderer>()->GetMaterial()->SetTexture(ResourceManager::GetInst()->Load<Texture>(GetContentPath() + L"Resource\\Image\\Rocks.png"), TEX_0);
+	gobj->GetComponent<MeshRenderer>()->GetMaterial()->SetTexture(ResourceManager::GetInst()->Load<Texture>(L"Resource\\Image\\Rocks.png"), TEX_0);
 
 	AddGameObject(gobj, LAYER_TYPE::Player);
 

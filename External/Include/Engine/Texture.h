@@ -16,7 +16,7 @@ private:
 
 private:
     // 파일에서 이미지를 가져옴, Texture 클래스를 불러오는게 아님
-    bool Load(const std::wstring& _path) override;
+    bool Load(const std::wstring& filePath) override;
 
 public:
     void UpdateData(int _regiNum);

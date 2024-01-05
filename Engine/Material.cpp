@@ -20,13 +20,42 @@ Material::~Material()
 {
 }
 
+void Material::UpdateData()
+{
+	if (nullptr == m_Shader)
+		return;
+
+	// 사용할 쉐이더 바인딩
+	m_Shader->UpdateData();
+
+	// Texture Update(Register Binding)
+	for (UINT i = 0; i < TEX_PARAM::END; ++i)
+	{
+		if (nullptr != m_Textures[i])
+		{
+			m_Textures[i]->UpdateData(i);
+			m_ConstData.bTex[i] = 1;
+		}
+		else
+		{
+			Texture::Clear(i);
+			m_ConstData.bTex[i] = 0;
+		}
+	}
+
+	// 상수 데이터 업데이트
+	static ConstantBuffer* pCB = Device::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL_CONST);
+	pCB->SetData(&m_ConstData);
+	pCB->UpdateData();
+}
+
 bool Material::Load(const std::wstring& _strFilePath)
 {
-	filesystem::path filePath = _strFilePath;
+	filesystem::path filePath = GetContentPath() + _strFilePath;
 	std::wifstream fileStream(filePath);
 
 	wchar_t szName[20] = {};
-	_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+	_wsplitpath_s(filePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
 
 	m_ResourceName = szName;
 	m_ResourcePath = _strFilePath;
@@ -130,6 +159,7 @@ bool Material::Load(const std::wstring& _strFilePath)
 			}
 		}
 
+		fileStream.close();
 		return true;
 	}
 	else
@@ -144,11 +174,11 @@ bool Material::Save()
 
 	if (fileStream.is_open())
 	{
-		if(m_Shader != nullptr)
+		if (m_Shader != nullptr)
 			fileStream << L"[Shader_Name]\n" << m_Shader->GetResourceName().c_str() << std::endl;
 		else
 			fileStream << L"[Shader_Name]\n" << L"NULL" << std::endl;
-		
+
 		for (int i = 0; i < TEX_PARAM::END; i++)
 		{
 			if (m_Textures[i] != nullptr)
@@ -167,33 +197,4 @@ bool Material::Save()
 		return false;
 
 	return false;
-}
-
-void Material::UpdateData()
-{
-	if (nullptr == m_Shader)
-		return;
-
-	// 사용할 쉐이더 바인딩
-	m_Shader->UpdateData();
-
-	// Texture Update(Register Binding)
-	for (UINT i = 0; i < TEX_PARAM::END; ++i)
-	{
-		if (nullptr != m_Textures[i])
-		{
-			m_Textures[i]->UpdateData(i);
-			m_ConstData.bTex[i] = 1;
-		}
-		else
-		{
-			Texture::Clear(i);
-			m_ConstData.bTex[i] = 0;
-		}
-	}
-
-	// 상수 데이터 업데이트
-	static ConstantBuffer* pCB = Device::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL_CONST);
-	pCB->SetData(&m_ConstData);
-	pCB->UpdateData();
 }

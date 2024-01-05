@@ -134,16 +134,16 @@ int GraphicsShader::CreatePixelShader(const std::wstring& _strRelativePath, cons
 	return S_OK;
 }
 
-bool GraphicsShader::Load(const std::wstring& _strFilePath)
+bool GraphicsShader::Load(const std::wstring& _relativePath)
 {
-	filesystem::path filePath = _strFilePath;
+	filesystem::path filePath = GetContentPath() + _relativePath;
 	std::wifstream fileStream(filePath);
 
 	wchar_t szName[20] = {};
-	_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+	_wsplitpath_s(filePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
 
 	m_ResourceName = szName;
-	m_ResourcePath = _strFilePath;
+	m_ResourcePath = _relativePath;
 
 	if (fileStream.is_open())
 	{
@@ -230,6 +230,8 @@ bool GraphicsShader::Load(const std::wstring& _strFilePath)
 				}
 			}
 		}
+
+		fileStream.close();
 	}
 
 	if (m_VSPath != L"NULL" && m_VSFuncName != "NULL")

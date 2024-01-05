@@ -41,10 +41,10 @@ public:
 	}
 
 	template <typename T>
-	T* Load(std::wstring _path)
+	T* Load(std::wstring _relativePath)
 	{
 		Resource* tmp = new T();
-		tmp->Load(_path);
+		tmp->Load(_relativePath);
 		if (tmp != nullptr)
 		{
 			if (Find<T>(tmp->GetResourceName()))
