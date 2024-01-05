@@ -27,9 +27,19 @@ void MeshRenderer::UpdateData()
 
 void MeshRenderer::Render()
 {
-	if (GetMesh() == nullptr)
+	if (nullptr == GetMesh() || nullptr == GetMaterial())
 		return;
 
+	if (GetOwner()->GetComponent<Animator2D>())
+	{
+		GetOwner()->GetComponent<Animator2D>()->UpdateData();
+	}
+	else
+	{
+		Animator2D::Clear();
+	}
+
 	UpdateData();
+
 	GetMesh()->Render();
 }

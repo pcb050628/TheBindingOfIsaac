@@ -25,9 +25,13 @@ struct tMaterial
 {
 	int iArr[4];
 	float fArr[4];
-	Vec2  v2Arr[4];
-	Vec4  v4Arr[4];
+	Vec2 v2Arr[4];
+	Vec4 v4Arr[4];
 	Matrix matArr[4];
+
+	int	bTex[TEX_PARAM::END];
+
+	int iPadding[2];
 };
 extern tMaterial g_Material;
 

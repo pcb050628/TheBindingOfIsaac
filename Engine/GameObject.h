@@ -10,8 +10,6 @@ class RenderComponent;
 class GameObject :
     public Entity
 {
-    typedef Entity Super;
-
 private:
     Component*                  m_Components[(UINT)COMPONENT_TYPE::END];
     RenderComponent*            m_RenderComponent;

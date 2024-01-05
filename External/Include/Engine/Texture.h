@@ -18,8 +18,13 @@ private:
     // 파일에서 이미지를 가져옴, Texture 클래스를 불러오는게 아님
     bool Load(const std::wstring& _path) override;
 
-private:
+public:
     void UpdateData(int _regiNum);
+
+    static void Clear(int _regiNum);
+
+    UINT GetWidth() { return m_Desc.Width; }
+    UINT GetHeight() { return m_Desc.Height; }
 
 public:
     Texture();

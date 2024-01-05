@@ -41,7 +41,7 @@ public:
 	}
 
 	template <typename T>
-	T* LoadByTXTFile(std::wstring _path)
+	T* Load(std::wstring _path)
 	{
 		Resource* tmp = new T();
 		tmp->Load(_path);

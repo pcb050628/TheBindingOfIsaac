@@ -62,3 +62,13 @@ void Texture::UpdateData(int _regiNum)
 	Device::GetInst()->GetContext()->GSSetShaderResources(_regiNum, 1, m_SRView.GetAddressOf());
 	Device::GetInst()->GetContext()->PSSetShaderResources(_regiNum, 1, m_SRView.GetAddressOf());
 }
+
+void Texture::Clear(int _regiNum)
+{
+	ID3D11ShaderResourceView* pSRV = nullptr;
+	Device::GetInst()->GetContext()->VSSetShaderResources(_regiNum, 1, &pSRV);
+	Device::GetInst()->GetContext()->HSSetShaderResources(_regiNum, 1, &pSRV);
+	Device::GetInst()->GetContext()->DSSetShaderResources(_regiNum, 1, &pSRV);
+	Device::GetInst()->GetContext()->GSSetShaderResources(_regiNum, 1, &pSRV);
+	Device::GetInst()->GetContext()->PSSetShaderResources(_regiNum, 1, &pSRV);
+}

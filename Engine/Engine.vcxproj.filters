@@ -64,18 +64,6 @@
     <Filter Include="02_Derived\Resource\Shader\Texture">
       <UniqueIdentifier>{62893589-68fd-4f68-bbe8-8cc05bb484b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\GameObject">
-      <UniqueIdentifier>{f56fcdea-c783-43cc-9b26-8062767feeb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\GameObject\Humanoid">
-      <UniqueIdentifier>{f7d20c5e-5c8c-4a5c-81f5-d3a530dab4d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\GameObject\Player">
-      <UniqueIdentifier>{256dc24e-6336-442e-ad87-8680ec8bde20}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\GameObject\Monster">
-      <UniqueIdentifier>{9bb63a6b-2439-4307-80f8-4c28b5720d9b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\02_Manager">
       <UniqueIdentifier>{ba5a6859-296a-4bb7-a7d4-3f52267484b5}</UniqueIdentifier>
     </Filter>
@@ -135,6 +123,9 @@
     </Filter>
     <Filter Include="01_Basic\03_OBJ\Component\Animator2D\Anim">
       <UniqueIdentifier>{9e4eb150-da88-4450-92df-a0961428ee4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Script">
+      <UniqueIdentifier>{936676bd-e3dc-435e-9b23-e8af07f9030f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

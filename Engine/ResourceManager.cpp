@@ -132,10 +132,10 @@ void ResourceManager::CreateDefaultShader()
 	GraphicsShader* pShader = nullptr;
 
 	pShader = new GraphicsShader;
-	LoadByTXTFile<GraphicsShader>(GetContentPath() + L"Resource\\Shader\\Graphics\\default_Shader.txt");
+	Load<GraphicsShader>(GetContentPath() + L"Resource\\Shader\\Graphics\\default_Shader.txt");
 
 	pShader = new GraphicsShader;
-	LoadByTXTFile<GraphicsShader>(GetContentPath() + L"Resource\\Shader\\Graphics\\debug_Shader.txt");
+	Load<GraphicsShader>(GetContentPath() + L"Resource\\Shader\\Graphics\\debug_Shader.txt");
 }
 
 void ResourceManager::CreateDefaultMaterial()
@@ -143,10 +143,10 @@ void ResourceManager::CreateDefaultMaterial()
 	Material* pMaterial = nullptr;
 
 	pMaterial = new Material;
-	LoadByTXTFile<Material>(GetContentPath() + L"Resource\\Material\\default_Material.txt");
+	Load<Material>(GetContentPath() + L"Resource\\Material\\default_Material.txt");
 
 	pMaterial = new Material;
-	LoadByTXTFile<Material>(GetContentPath() + L"Resource\\Material\\debug_Material.txt");
+	Load<Material>(GetContentPath() + L"Resource\\Material\\debug_Material.txt");
 }
 
 void ResourceManager::LoadAllResource(CHAPTERLEVEL _level) // Load All chapter resource , 순서는 Shader -> Image -> Material 순으로 로드

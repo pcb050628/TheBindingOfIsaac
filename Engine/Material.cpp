@@ -171,10 +171,29 @@ bool Material::Save()
 
 void Material::UpdateData()
 {
-	if (m_Shader != nullptr)
-		m_Shader->UpdateData();
+	if (nullptr == m_Shader)
+		return;
 
-	ConstantBuffer* cBuffer = Device::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL_CONST);
-	cBuffer->SetData(&m_ConstData);
-	cBuffer->UpdateData();
+	// 사용할 쉐이더 바인딩
+	m_Shader->UpdateData();
+
+	// Texture Update(Register Binding)
+	for (UINT i = 0; i < TEX_PARAM::END; ++i)
+	{
+		if (nullptr != m_Textures[i])
+		{
+			m_Textures[i]->UpdateData(i);
+			m_ConstData.bTex[i] = 1;
+		}
+		else
+		{
+			Texture::Clear(i);
+			m_ConstData.bTex[i] = 0;
+		}
+	}
+
+	// 상수 데이터 업데이트
+	static ConstantBuffer* pCB = Device::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL_CONST);
+	pCB->SetData(&m_ConstData);
+	pCB->UpdateData();
 }

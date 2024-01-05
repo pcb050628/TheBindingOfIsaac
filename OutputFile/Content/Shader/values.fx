@@ -58,11 +58,12 @@ cbuffer MATERIAL_CONST : register(b1)
 
 cbuffer ANIM_DATA : register(b2)
 {
-    float2 vLeftTop;
-    float2 vSliceSize;
-    float2 vOffset;
+    float2 g_vLeftTop;
+    float2 g_vSliceSize;
+    float2 g_vOffset;
+    float2 g_vBackground;
     int UseAnim2D;
-    int iPadding;
+    float3 vPadding;
 }
 
 Texture2D g_tex_0 : register(t0);
@@ -78,7 +79,7 @@ TextureCube g_texcube_1 : register(t7);
 Texture2DArray g_texarr_0 : register(t8);
 Texture2DArray g_texarr_1 : register(t9);
 
-Texture2D g_anim_tex : register(t10);
+Texture2D g_anim2d_tex : register(t10);
 
 SamplerState g_sam_0 : register(s0);
 SamplerState g_sam_1 : register(s1);

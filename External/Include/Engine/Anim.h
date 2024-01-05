@@ -6,6 +6,7 @@ struct Frame
     Vec2 vLeftTop;
     Vec2 vSliceSize;
     Vec2 vOffset;
+    Vec2 vBackground;
     float fDuration;
 };
 
@@ -36,6 +37,8 @@ public:
 public:
     bool Load(const std::wstring& _strFilePath) override;
     bool Save() override;
+
+    void Create(Texture* _atlas, Vec2 _leftTop, Vec2 _sliceSize, Vec2 _offset, Vec2 _background, int _frmCount, int _FPS);
 
 public:
     Anim();
