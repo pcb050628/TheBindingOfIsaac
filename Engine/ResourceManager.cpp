@@ -5,6 +5,7 @@
 
 #include "Mesh.h"
 #include "GraphicsShader.h"
+#include "ChapterManager.h"
 
 ResourceManager::ResourceManager()
 {
@@ -21,6 +22,7 @@ void ResourceManager::Init()
 	CreateDefaultMesh();
 	CreateDefaultShader();
 	CreateDefaultMaterial();
+	ResourceManager::GetInst()->Load<Texture>(L"Resource\\Image\\Rocks.png");
 }
 
 void ResourceManager::CreateDefaultMesh()

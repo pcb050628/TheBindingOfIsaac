@@ -44,6 +44,7 @@ void Animator2D::CreateAnim(const wstring& _strKey, Texture* _altas
 	assert(!ResourceManager::GetInst()->IsExist(_strKey, RESOURCE_TYPE::ANIM));
 
 	Anim* pAnim = new Anim;
+	pAnim->SetResourceName(_strKey);
 	pAnim->Create(_altas, _leftTop, _sliceSize, _offsetSize, _background, _frmCount, _FPS);
 	m_Anims.insert(make_pair(_strKey, pAnim));
 }

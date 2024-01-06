@@ -23,6 +23,11 @@ bool Texture::Load(const std::wstring& _strFilePath)
 	wchar_t szExt[20] = {};
 	_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 20);
 
+	wchar_t szName[20] = {};
+	_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+
+	m_ResourceName = szName;
+
 	std::wstring path = GetContentPath() + _strFilePath;
 
 	HRESULT hr = S_OK;

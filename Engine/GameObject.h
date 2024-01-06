@@ -64,6 +64,8 @@ COMPONENT_TYPE GetCompType()
         type = COMPONENT_TYPE::MESHRENDERER;
     else if (&info == &typeid(class Camera))
         type = COMPONENT_TYPE::CAMERA;
+    else if (&info == &typeid(class Animator2D))
+        type = COMPONENT_TYPE::ANIMATOR2D;
 
     return type;
 }

@@ -40,8 +40,9 @@ struct tAnimData
 	Vec2 vLeftTop;
 	Vec2 vSliceSize;
 	Vec2 vOffset;
-	int UseAnim2D;
-	int	iPadding;
+	Vec2 vBackGround;
+	int  UseAnim2D;
+	Vec3 vPadding;
 };
 extern tAnimData g_AnimData;
 

@@ -30,9 +30,13 @@ void Anim::UpdateData()
 	g_AnimData.vLeftTop = m_Frames[m_CurFrameIdx].vLeftTop;
 	g_AnimData.vSliceSize = m_Frames[m_CurFrameIdx].vSliceSize;
 	g_AnimData.vOffset = m_Frames[m_CurFrameIdx].vOffset;
+	g_AnimData.vBackGround = m_Frames[m_CurFrameIdx].vBackground;
 	g_AnimData.UseAnim2D = 1;
 	pCB->SetData(&g_AnimData);
 	pCB->UpdateData();
+
+	// 10 register : anim_tex
+	m_Atlas->UpdateData(10);
 }
 
 void Anim::LateUpdate()
@@ -51,6 +55,30 @@ void Anim::LateUpdate()
 				--m_CurFrameIdx;
 		}
 	}
+}
+
+void Anim::Create(Texture* _atlas, Vec2 _leftTop, Vec2 _sliceSize, Vec2 _offset, Vec2 _background, int _frmCount, int _FPS)
+{
+	m_Atlas = _atlas;
+
+	for (int i = 0; i < _frmCount; ++i)
+	{
+		Frame frm = {};
+
+		frm.vSliceSize = Vec2(_sliceSize.x / (float)_atlas->GetWidth(), _sliceSize.y / (float)_atlas->GetHeight());
+
+		frm.vLeftTop = Vec2(_leftTop.x / (float)_atlas->GetWidth() + frm.vSliceSize.x * i, _leftTop.y / (float)_atlas->GetHeight());
+
+		frm.vOffset = Vec2(_offset.x / (float)_atlas->GetWidth(), _offset.y / (float)_atlas->GetHeight());
+		frm.fDuration = 1.f / _FPS;
+
+		frm.vBackground = Vec2(_background.x / (float)_atlas->GetWidth(), _background.y / (float)_atlas->GetHeight());
+
+
+		m_Frames.push_back(frm);
+	}
+
+	ResourceManager::GetInst()->AddResource(m_ResourceName, this);
 }
 
 bool Anim::Load(const std::wstring& _relativePath)
@@ -188,26 +216,4 @@ bool Anim::Save()
 		return false;
 
 	return false;
-}
-
-void Anim::Create(Texture* _atlas, Vec2 _leftTop, Vec2 _sliceSize, Vec2 _offset, Vec2 _background, int _frmCount, int _FPS)
-{
-	m_Atlas = _atlas;
-
-	for (int i = 0; i < _frmCount; ++i)
-	{
-		Frame frm = {};
-
-		frm.vSliceSize = Vec2(_sliceSize.x / (float)_atlas->GetWidth(), _sliceSize.y / (float)_atlas->GetHeight());
-
-		frm.vLeftTop = Vec2(_leftTop.x / (float)_atlas->GetWidth() + frm.vSliceSize.x * i, _leftTop.y / (float)_atlas->GetHeight());
-
-		frm.vOffset = Vec2(_offset.x / (float)_atlas->GetWidth(), _offset.y / (float)_atlas->GetHeight());
-		frm.fDuration = 1.f / _FPS;
-
-		frm.vBackground = Vec2(_background.x / (float)_atlas->GetWidth(), _background.y / (float)_atlas->GetHeight());
-
-
-		m_Frames.push_back(frm);
-	}
 }
