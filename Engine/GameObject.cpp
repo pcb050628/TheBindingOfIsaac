@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "GameObject.h"
 
+#include "Script.h"
+
 #include "RenderComponent.h"
 
 #include "ChapterManager.h"
@@ -48,6 +50,11 @@ void GameObject::LateUpdate()
 			m_Components[i]->LateUpdate();
 	}
 
+	for (int i = 0; i < m_Scripts.size(); i++)
+	{
+		m_Scripts[i]->LateUpdate();
+	}
+
 	ChapterManager::GetInst()->RegisterObj(this, (LAYER_TYPE)m_iLayerIdx);
 
 	for (GameObject* child : m_ChildObjs)
@@ -70,12 +77,19 @@ void GameObject::AddComponent(Component* _comp)
 
 	assert(!m_Components[(UINT)type]);
 
-	m_Components[(UINT)type] = _comp;
-
-	if (nullptr != dynamic_cast<RenderComponent*>(_comp))
+	if (type == COMPONENT_TYPE::SCRIPT)
 	{
-		assert(!m_RenderComponent);
-		m_RenderComponent = (RenderComponent*)_comp;
+		m_Scripts.push_back((Script*)_comp);
+	}
+	else
+	{
+		m_Components[(UINT)type] = _comp;
+
+		if (nullptr != dynamic_cast<RenderComponent*>(_comp))
+		{
+			assert(!m_RenderComponent);
+			m_RenderComponent = (RenderComponent*)_comp;
+		}
 	}
 
 	_comp->m_Owner = this;
@@ -112,6 +126,4 @@ void GameObject::DisconnectWithLayer()
 {
 	if (m_iLayerIdx == -1)
 		return;
-
-
 }

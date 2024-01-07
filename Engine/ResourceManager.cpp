@@ -22,7 +22,8 @@ void ResourceManager::Init()
 	CreateDefaultMesh();
 	CreateDefaultShader();
 	CreateDefaultMaterial();
-	ResourceManager::GetInst()->Load<Texture>(L"Resource\\Image\\Rocks.png");
+	Load<Texture>(L"Resource\\Image\\Rocks.png");
+	//Load<Anim>(L"Resource\\Anim\\test_anim.txt");
 }
 
 void ResourceManager::CreateDefaultMesh()

@@ -7,7 +7,6 @@ struct Frame
     Vec2 vSliceSize;
     Vec2 vOffset;
     Vec2 vBackground;
-    float fDuration;
 };
 
 class Texture;
@@ -20,6 +19,7 @@ private:
 
     std::vector<Frame>  m_Frames;
     int                 m_CurFrameIdx;
+    float               m_fDuration;
     float               m_fAccTime;
 
     bool                m_bIsPlaying;
@@ -31,6 +31,7 @@ public:
 
     void Play() { m_bIsPlaying = true; }
     void Pause() { m_bIsPlaying = false; }
+    void Reset() { m_CurFrameIdx = 0; }
 
     void SetRepeat(bool _value) { m_bIsRepeat = _value; }
 

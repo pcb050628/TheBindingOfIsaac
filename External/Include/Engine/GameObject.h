@@ -5,6 +5,7 @@
 
 #include "components.h"
 
+class Script;
 class RenderComponent;
 
 class GameObject :
@@ -12,6 +13,7 @@ class GameObject :
 {
 private:
     Component*                  m_Components[(UINT)COMPONENT_TYPE::END];
+    std::vector<Script*>        m_Scripts;
     RenderComponent*            m_RenderComponent;
 
     std::vector<GameObject*>    m_ChildObjs;
@@ -31,6 +33,16 @@ public:
     T* GetComponent()
     {
         return (T*)m_Components[(UINT)GetCompType<T>()];
+    }
+
+    template <typename T>
+    T* GetScript()
+    {
+        for (int i = 0; i < m_Scripts.size(); i++)
+        {
+            if (nullptr != dynamic_cast<T*>(m_Scripts[i]))
+                return (T*)m_Scripts[i];
+        }
     }
 
     GameObject* GetParent() { return m_Parent; }

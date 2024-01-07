@@ -70,9 +70,13 @@ void Animator2D::Play()
 	if (m_CurAnim) m_CurAnim->Play();
 }
 
-void Animator2D::Pause()
+void Animator2D::Pause(bool _reset)
 {
-	if (m_CurAnim) m_CurAnim->Pause();
+	if (m_CurAnim)
+	{
+		m_CurAnim->Pause(); 
+		if (_reset) m_CurAnim->Reset();
+	}
 }
 
 void Animator2D::SetRepeat(bool _repeat)

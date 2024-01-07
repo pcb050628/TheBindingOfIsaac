@@ -47,10 +47,15 @@ public:
 		tmp->Load(_relativePath);
 		if (tmp != nullptr)
 		{
-			if (Find<T>(tmp->GetResourceName()))
+			if (IsExist(tmp->GetResourceName(), tmp->GetResourceType()))
 			{
 				delete tmp;
-				MessageBoxW(nullptr, L"이미 같은 이름의 리소스가 있습니다", L"txt file Load Error", MB_OK);
+
+				// 이미 같은 이름의 리소스가 존재할땐 이미 존재하던 리소스를 반환함
+				wchar_t szName[20] = {};
+				_wsplitpath_s(_relativePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+
+				return Find<T>(szName);
 			}
 
 			m_Resources[(UINT)tmp->GetResourceType()].insert(std::make_pair(tmp->GetResourceName(), tmp));
@@ -87,6 +92,8 @@ RESOURCE_TYPE GetResourceType()
 		return RESOURCE_TYPE::MATERIAL;
 	else if (&type == &typeid(Texture))
 		return RESOURCE_TYPE::TEXTURE;
+	else if (&type == &typeid(Anim))
+		return RESOURCE_TYPE::ANIM;
 
 	return value;
 }

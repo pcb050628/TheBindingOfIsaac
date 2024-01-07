@@ -13,6 +13,7 @@ Anim::Anim() : Resource(RESOURCE_TYPE::ANIM)
 	, m_Atlas(nullptr)
 	, m_Frames{}
 	, m_CurFrameIdx(0)
+	, m_fDuration(0.f)
 	, m_fAccTime(0.f)
 	, m_bIsPlaying(false)
 	, m_bIsRepeat(false)
@@ -27,11 +28,25 @@ void Anim::UpdateData()
 {
 	ConstantBuffer* pCB = Device::GetInst()->GetConstBuffer(CB_TYPE::ANIMATION2D);
 
-	g_AnimData.vLeftTop = m_Frames[m_CurFrameIdx].vLeftTop;
-	g_AnimData.vSliceSize = m_Frames[m_CurFrameIdx].vSliceSize;
-	g_AnimData.vOffset = m_Frames[m_CurFrameIdx].vOffset;
-	g_AnimData.vBackGround = m_Frames[m_CurFrameIdx].vBackground;
+	Vec2 leftop = m_Frames[m_CurFrameIdx].vLeftTop;
+	Vec2 slice = m_Frames[m_CurFrameIdx].vSliceSize;
+	Vec2 offset = m_Frames[m_CurFrameIdx].vOffset;
+	Vec2 backround = m_Frames[m_CurFrameIdx].vBackground;
+
+	float Atlas_X = m_Atlas->GetWidth();
+	float Atlas_Y = m_Atlas->GetHeight();
+
+	Vec2 UVLeftTop		= Vec2(leftop.x / (float)Atlas_X, leftop.y / (float)Atlas_Y);;
+	Vec2 UVSlice		= Vec2(slice.x / (float)Atlas_X, slice.y / (float)Atlas_Y);
+	Vec2 UVOffset		= Vec2(offset.x / (float)Atlas_X, offset.y / (float)Atlas_Y);
+	Vec2 UVBackground	= Vec2(backround.x / (float)Atlas_X, backround.y / (float)Atlas_Y);
+
+	g_AnimData.vLeftTop = UVLeftTop; 
+	g_AnimData.vSliceSize = UVSlice; 
+	g_AnimData.vOffset = UVOffset;
+	g_AnimData.vBackGround = UVBackground;
 	g_AnimData.UseAnim2D = 1;
+
 	pCB->SetData(&g_AnimData);
 	pCB->UpdateData();
 
@@ -43,7 +58,7 @@ void Anim::LateUpdate()
 {
 	m_fAccTime += Time::GetInst()->GetDeltaTime();
 	
-	if (m_fAccTime > m_Frames[m_CurFrameIdx].fDuration)
+	if (m_fAccTime > m_fDuration)
 	{
 		m_CurFrameIdx++;
 		m_fAccTime = 0;
@@ -65,20 +80,18 @@ void Anim::Create(Texture* _atlas, Vec2 _leftTop, Vec2 _sliceSize, Vec2 _offset,
 	{
 		Frame frm = {};
 
-		frm.vSliceSize = Vec2(_sliceSize.x / (float)_atlas->GetWidth(), _sliceSize.y / (float)_atlas->GetHeight());
-
-		frm.vLeftTop = Vec2(_leftTop.x / (float)_atlas->GetWidth() + frm.vSliceSize.x * i, _leftTop.y / (float)_atlas->GetHeight());
-
-		frm.vOffset = Vec2(_offset.x / (float)_atlas->GetWidth(), _offset.y / (float)_atlas->GetHeight());
-		frm.fDuration = 1.f / _FPS;
-
-		frm.vBackground = Vec2(_background.x / (float)_atlas->GetWidth(), _background.y / (float)_atlas->GetHeight());
-
+		frm.vLeftTop = Vec2(_leftTop.x + _sliceSize.x * i, _leftTop.y); 
+		frm.vSliceSize = _sliceSize; 
+		frm.vOffset = _offset; 
+		frm.vBackground = _background; 
 
 		m_Frames.push_back(frm);
 	}
 
+	m_fDuration = _FPS;
+
 	ResourceManager::GetInst()->AddResource(m_ResourceName, this);
+	Save();
 }
 
 bool Anim::Load(const std::wstring& _relativePath)
@@ -96,13 +109,16 @@ bool Anim::Load(const std::wstring& _relativePath)
 	{
 		std::wstring line;
 		int count = 0;
-		int frmCount = 0;
+		int frmCount = -1;
 		Frame frm = {};
-		while (line != L"END")
+		while (true)
 		{
 			std::getline(fileStream, line);
 
-			if (count >= frmCount)
+			if (line == L"END")
+				break;
+
+			if (frmCount != -1 && count >= frmCount)
 			{
 				MessageBoxW(nullptr, L"Anim ·Îµå Áß ¹º°¡ Àß¸øµÊ", L"Anim Load Failed", MB_OK);
 				return false;
@@ -112,6 +128,11 @@ bool Anim::Load(const std::wstring& _relativePath)
 			{
 				std::getline(fileStream, line);
 				m_Atlas = ResourceManager::GetInst()->Load<Texture>(line);
+			}
+			else if (line == L"[DURATION]")
+			{
+				std::getline(fileStream, line);
+				m_fDuration = stoi(line);
 			}
 			else if (line == L"[FRAME_COUNT]")
 			{
@@ -157,11 +178,6 @@ bool Anim::Load(const std::wstring& _relativePath)
 			{
 				std::getline(fileStream, line);
 				frm.vBackground.y = std::stoi(line);
-			}
-			else if (line == L"[DURATION]")
-			{
-				std::getline(fileStream, line);
-				frm.fDuration = std::stof(line);
 
 				m_Frames.push_back(frm);
 				count++;
@@ -187,6 +203,8 @@ bool Anim::Save()
 
 		fileStream << L"[ATLAS_PATH]\n" << m_Atlas->GetResourcePath() << std::endl;
 
+		fileStream << L"[DURATION]\n" << m_fDuration << std::endl;
+
 		fileStream << L"[FRAME_COUNT]\n" << m_Frames.size() << std::endl;
 
 		for (int i = 0; i < m_Frames.size(); i++)
@@ -202,8 +220,6 @@ bool Anim::Save()
 
 			fileStream << L"[BACKGROUND_X]\n" << m_Frames[i].vBackground.x << std::endl;
 			fileStream << L"[BACKGROUND_Y]\n" << m_Frames[i].vBackground.y << std::endl;
-
-			fileStream << L"[DURATION]\n" << m_Frames[i].fDuration << std::endl;
 		}
 
 		fileStream << L"END";

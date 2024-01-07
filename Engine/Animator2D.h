@@ -25,7 +25,7 @@ public:
     void Play(const std::wstring& _key, bool _repeat = false);
 
     void Play();
-    void Pause();
+    void Pause(bool _reset);
     void SetRepeat(bool _repeat);
 
 public:

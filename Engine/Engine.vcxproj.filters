@@ -250,6 +250,9 @@
     <ClInclude Include="Anim.h">
       <Filter>01_Basic\03_OBJ\Component\Animator2D\Anim</Filter>
     </ClInclude>
+    <ClInclude Include="Script.h">
+      <Filter>01_Basic\03_OBJ\Script</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -363,6 +366,9 @@
     </ClCompile>
     <ClCompile Include="Anim.cpp">
       <Filter>01_Basic\03_OBJ\Component\Animator2D\Anim</Filter>
+    </ClCompile>
+    <ClCompile Include="Script.cpp">
+      <Filter>01_Basic\03_OBJ\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

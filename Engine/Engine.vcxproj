@@ -216,6 +216,7 @@ call EngineCopy.bat</Command>
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="resources.h" />
     <ClInclude Include="Room.h" />
+    <ClInclude Include="Script.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="TaskManager.h" />
@@ -261,6 +262,7 @@ call EngineCopy.bat</Command>
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="Room.cpp" />
+    <ClCompile Include="Script.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="structs.cpp" />
     <ClCompile Include="TaskManager.cpp" />
