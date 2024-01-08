@@ -127,6 +127,9 @@
     <Filter Include="01_Basic\03_OBJ\Script">
       <UniqueIdentifier>{936676bd-e3dc-435e-9b23-e8af07f9030f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\01_Device\StructuredBuffer">
+      <UniqueIdentifier>{d4900645-975b-4382-8e3b-23754a9de0cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -253,6 +256,7 @@
     <ClInclude Include="Script.h">
       <Filter>01_Basic\03_OBJ\Script</Filter>
     </ClInclude>
+    <ClInclude Include="StructuredBuffer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -370,6 +374,7 @@
     <ClCompile Include="Script.cpp">
       <Filter>01_Basic\03_OBJ\Script</Filter>
     </ClCompile>
+    <ClCompile Include="StructuredBuffer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">

@@ -219,6 +219,7 @@ call EngineCopy.bat</Command>
     <ClInclude Include="Script.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="structs.h" />
+    <ClInclude Include="StructuredBuffer.h" />
     <ClInclude Include="TaskManager.h" />
     <ClInclude Include="Test.h" />
     <ClInclude Include="Texture.h" />
@@ -265,6 +266,7 @@ call EngineCopy.bat</Command>
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="structs.cpp" />
+    <ClCompile Include="StructuredBuffer.cpp" />
     <ClCompile Include="TaskManager.cpp" />
     <ClCompile Include="Test.cpp" />
     <ClCompile Include="Texture.cpp" />
