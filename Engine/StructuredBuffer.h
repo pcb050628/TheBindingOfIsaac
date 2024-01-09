@@ -29,6 +29,8 @@ public:
     void SetData(void* _data, UINT _elementCount = 0);
     void GetData(void* _destData, UINT _elementCount = 0);
 
+    void UpdateData(int _regiNum);
+
 public:
     StructuredBuffer();
     ~StructuredBuffer();

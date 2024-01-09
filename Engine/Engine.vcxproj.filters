@@ -130,6 +130,9 @@
     <Filter Include="01_Basic\01_Device\StructuredBuffer">
       <UniqueIdentifier>{d4900645-975b-4382-8e3b-23754a9de0cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\Light2D">
+      <UniqueIdentifier>{4347232e-8c71-4538-860e-748f7e574e70}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -256,7 +259,12 @@
     <ClInclude Include="Script.h">
       <Filter>01_Basic\03_OBJ\Script</Filter>
     </ClInclude>
-    <ClInclude Include="StructuredBuffer.h" />
+    <ClInclude Include="StructuredBuffer.h">
+      <Filter>01_Basic\01_Device\StructuredBuffer</Filter>
+    </ClInclude>
+    <ClInclude Include="Light2D.h">
+      <Filter>01_Basic\03_OBJ\Component\Light2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -374,7 +382,12 @@
     <ClCompile Include="Script.cpp">
       <Filter>01_Basic\03_OBJ\Script</Filter>
     </ClCompile>
-    <ClCompile Include="StructuredBuffer.cpp" />
+    <ClCompile Include="StructuredBuffer.cpp">
+      <Filter>01_Basic\01_Device\StructuredBuffer</Filter>
+    </ClCompile>
+    <ClCompile Include="Light2D.cpp">
+      <Filter>01_Basic\03_OBJ\Component\Light2D</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="std2d.fx">
@@ -384,6 +397,9 @@
       <Filter>0_Default\ShaderCode</Filter>
     </FxCompile>
     <FxCompile Include="values.fx">
+      <Filter>0_Default\ShaderCode</Filter>
+    </FxCompile>
+    <FxCompile Include="struct.fx">
       <Filter>0_Default\ShaderCode</Filter>
     </FxCompile>
   </ItemGroup>

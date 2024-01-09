@@ -46,6 +46,29 @@ struct tAnimData
 };
 extern tAnimData g_AnimData;
 
+struct tLightInfo
+{
+	Vec4 vColor;
+	Vec4 vSpecular;
+	Vec4 vAmbient;
+
+	Vec3	vWorldPos;
+	Vec3	vWorldDir;
+	float	fRadius;	
+	float	fAngle;		
+
+	int		LightType;
+
+	Vec3	vPadding;
+};
+
+enum class LIGHT_TYPE
+{
+	DIRECTIONAL,
+	POINT,
+	SPOT,
+};
+
 enum class DEBUG_SHAPE
 {
 	RECT,

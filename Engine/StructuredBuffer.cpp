@@ -73,6 +73,9 @@ int StructuredBuffer::Create(UINT _elementSize, UINT _elementCount, SB_TYPE _typ
 
 void StructuredBuffer::SetData(void* _data, UINT _elementCount)
 {
+	if (_data == nullptr)
+		return;
+
 	if (!m_bSysMemMove)
 	{
 		MessageBoxW(nullptr, L"데이터를 입력할 수 없는 버퍼입니다.", L"structured buffer Error", MB_OK);
@@ -110,4 +113,13 @@ void StructuredBuffer::GetData(void* _destData, UINT _elementCount)
 	Device::GetInst()->GetContext()->Map(m_SB_Read.Get(), 0, D3D11_MAP_READ, 0, &data);
 	memcpy(_destData, data.pData, m_ElementSize * _elementCount);
 	Device::GetInst()->GetContext()->Unmap(m_SB_Read.Get(), 0);
+}
+
+void StructuredBuffer::UpdateData(int _regiNum)
+{
+	Device::GetInst()->GetContext()->VSSetShaderResources(_regiNum, 1, m_SRV.GetAddressOf());
+	Device::GetInst()->GetContext()->HSSetShaderResources(_regiNum, 1, m_SRV.GetAddressOf());
+	Device::GetInst()->GetContext()->DSSetShaderResources(_regiNum, 1, m_SRV.GetAddressOf());
+	Device::GetInst()->GetContext()->GSSetShaderResources(_regiNum, 1, m_SRV.GetAddressOf());
+	Device::GetInst()->GetContext()->PSSetShaderResources(_regiNum, 1, m_SRV.GetAddressOf());
 }
