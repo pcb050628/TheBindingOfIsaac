@@ -14,6 +14,17 @@
 					type* operator = (const type& _other) = delete;
 
 
+enum class LAYER_TYPE
+{
+	Background,
+	Object,
+	Monster,
+	Player,
+	Pickup,
+	Item,
+	END,
+};
+
 enum class COMPONENT_TYPE
 {
 	TRANSFORM,	
@@ -149,4 +160,14 @@ enum TEX_PARAM
 	TEXARR_1,
 
 	END,
+};
+
+enum class SHADER_DOMAIN
+{
+	DOMAIN_OPAUQUE,
+	DOMAIN_MASKED,
+	DOMAIN_TRANSPARENT,
+	DOMAIN_POSTPROCESS,
+
+	DOMAIN_DEBUG,
 };

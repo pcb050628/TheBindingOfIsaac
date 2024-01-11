@@ -41,27 +41,31 @@ void Layer::Render()
 	for (GameObject* gobj : m_Gobjs)
 	{
 		gobj->Render();
-	}
-
-	auto iter = m_Parents.begin();
-	for (; iter != m_Parents.end();)
-	{
-		if (!IsValid(*iter))
-		{
-			GarbageCollection::GetInst()->Add(*iter);
-			iter = m_Parents.erase(iter);
-		}
-		else
-			iter++;
-	}
+	}	
 }
 
 void Layer::Clear()
 {
-	auto iter = m_Gobjs.begin();
-	for (; iter != m_Gobjs.end();)
 	{
-		iter = m_Gobjs.erase(iter);
+		auto iter = m_Gobjs.begin();
+		for (; iter != m_Gobjs.end();)
+		{
+			iter = m_Gobjs.erase(iter);
+		}
+	}
+
+	{
+		auto iter = m_Parents.begin();
+		for (; iter != m_Parents.end();)
+		{
+			if (!IsValid(*iter))
+			{
+				GarbageCollection::GetInst()->Add(*iter);
+				iter = m_Parents.erase(iter);
+			}
+			else
+				iter++;
+		}
 	}
 }
 

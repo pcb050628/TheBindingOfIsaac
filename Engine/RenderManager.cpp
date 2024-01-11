@@ -16,6 +16,7 @@ RenderManager::RenderManager()
 	: m_Cams{}
 	, m_DebugObj(nullptr)
 	, m_DebugShapeInfos{}
+	, m_Light2DBuffer()
 {
 
 }
@@ -75,8 +76,11 @@ void RenderManager::Render()
 {
 	for (int i = 0; i < m_Cams.size(); i++)
 	{
-		if(m_Cams[i] != nullptr)
+		if (m_Cams[i] != nullptr)
+		{
+			m_Cams[i]->SortObject();
 			m_Cams[i]->Render();
+		}
 	}
 }
 

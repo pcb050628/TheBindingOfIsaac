@@ -10,6 +10,10 @@
 #include "GameObject.h"
 
 #include "Transform.h"
+#include "RenderComponent.h"
+
+#include "Material.h"
+#include "GraphicsShader.h"
 
 Camera::Camera() : Component(COMPONENT_TYPE::CAMERA)\
 	, m_ProjType(PROJ_TYPE::ORTHOGRAPHICS)
@@ -66,18 +70,66 @@ void Camera::LateUpdate()
 	}
 }
 
-void Camera::Render()
+void Camera::SortObject()
 {
-	g_Transform.matView = m_matView;
-	g_Transform.matProj = m_matProj;
-
 	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
 	{
 		if (false == (m_LayerCheck & (1 << i)))
 			continue;
 
-		ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetLayer((LAYER_TYPE)i)->Render();
+		const std::vector<GameObject*>& objs 
+			= ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetLayer((LAYER_TYPE)i)->GetGameObject();
+
+		for (int j = 0; j < objs.size(); j++)
+		{
+			if (!( objs[j]->GetRenderCom()
+				&& objs[j]->GetRenderCom()->GetMesh()
+				&& objs[j]->GetRenderCom()->GetMaterial()
+				&& objs[j]->GetRenderCom()->GetMaterial()->GetShader()))
+			{
+				continue;
+			}
+
+			SHADER_DOMAIN domain = objs[j]->GetRenderCom()->GetMaterial()->GetShader()->GetDomain();
+
+			switch (domain)
+			{
+			case SHADER_DOMAIN::DOMAIN_OPAUQUE:
+				m_Opaque.push_back(objs[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_MASKED:
+				m_Masked.push_back(objs[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_TRANSPARENT:
+				m_Transparent.push_back(objs[j]);
+				break;
+			case SHADER_DOMAIN::DOMAIN_POSTPROCESS:
+				m_PostProcess.push_back(objs[j]);
+				break;
+			}
+		}
 	}
+}
+
+void Camera::Render()
+{
+	g_Transform.matView = m_matView;
+	g_Transform.matProj = m_matProj;
+
+	Render(m_Opaque);
+	Render(m_Masked);
+	Render(m_Transparent);
+	Render(m_PostProcess);
+}
+
+void Camera::Render(std::vector<GameObject*>& _objs)
+{
+	for (int i = 0; i < _objs.size(); i++)
+	{
+		_objs[i]->Render();
+	}
+
+	_objs.clear();
 }
 
 void Camera::LayerCheck(int _layerIdx, bool _check)

@@ -28,12 +28,24 @@ private:
     Matrix  m_matView;
     Matrix  m_matProj;
 
-    UINT    m_LayerCheck;
+    // render ฐüทร
+    UINT                        m_LayerCheck;
+
+    std::vector<GameObject*>    m_Opaque;
+    std::vector<GameObject*>    m_Masked;
+    std::vector<GameObject*>    m_Transparent;
+    std::vector<GameObject*>    m_PostProcess;
+
 
 public:
     virtual void Update() override;
     virtual void LateUpdate() override;
+
+    void SortObject();
     virtual void Render() override;
+
+private:
+    void Render(std::vector<GameObject*>& _objs);
 
 public:
     float GetFOV() { return m_FOV; }
@@ -43,7 +55,7 @@ public:
     void SetScale(float _scale) { m_Scale = _scale; }
 
     void LayerCheck(int _layerIdx, bool _check);
-    void LayerCheck(enum class LAYER_TYPE _layerType, bool _check);
+    void LayerCheck(LAYER_TYPE _layerType, bool _check);
 
     void SetCameraPriority(int _Priority);
 

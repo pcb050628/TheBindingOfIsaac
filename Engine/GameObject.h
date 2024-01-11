@@ -45,6 +45,8 @@ public:
         }
     }
 
+    RenderComponent* GetRenderCom() { return m_RenderComponent; }
+
     GameObject* GetParent() { return m_Parent; }
     void AttachChild(GameObject* _objChild);
 

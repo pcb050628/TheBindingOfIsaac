@@ -1,17 +1,6 @@
 #pragma once
 #include "Entity.h"
 
-enum class LAYER_TYPE
-{
-    Background,
-    Object,
-    Monster,
-    Player,
-    Pickup,
-    Item,
-    END,
-};
-
 class GameObject;
 class Layer :
     public Entity

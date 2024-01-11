@@ -3,6 +3,8 @@
 
 #include "struct.fx"
 
+#define PI 3.1415926535f
+
 cbuffer TRANSFORM : register(b0)
 {
     row_major Matrix g_matWorld;
@@ -67,6 +69,18 @@ cbuffer ANIM_DATA : register(b2)
     float3 vPadding;
 }
 
+cbuffer GLOBAL_DATA : register(b3)
+{
+    float2 g_RenderResolution;  // 렌더링 해상도
+    float g_dt;                 // Delta Time
+    float g_time;               // 누적 시간
+    int g_Light2DCount;         // 2D 광원 개수
+    int g_Light3DCount;         // 3D 광원 개수
+    float2 globalpadding;
+}
+
+
+
 Texture2D g_tex_0 : register(t0);
 Texture2D g_tex_1 : register(t1);
 Texture2D g_tex_2 : register(t2);
@@ -82,7 +96,8 @@ Texture2DArray g_texarr_1 : register(t9);
 
 Texture2D g_anim2d_tex : register(t10);
 
-StructuredBuffer<tLightInfo> g_LightInfo : register(t11);
+StructuredBuffer<tLightInfo> g_Light2D : register(t11);
+StructuredBuffer<tLightInfo> g_Light3D : register(t12);
 
 SamplerState g_sam_0 : register(s0);
 SamplerState g_sam_1 : register(s1);

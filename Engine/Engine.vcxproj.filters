@@ -402,5 +402,8 @@
     <FxCompile Include="struct.fx">
       <Filter>0_Default\ShaderCode</Filter>
     </FxCompile>
+    <FxCompile Include="func.fx">
+      <Filter>0_Default\ShaderCode</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

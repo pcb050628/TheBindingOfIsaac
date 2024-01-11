@@ -7,7 +7,7 @@ Texture::Texture() : Resource(RESOURCE_TYPE::TEXTURE)
 	, m_Image()
 	, m_Tex2D()
 	, m_Desc{}
-	, m_RSView()
+	, m_RTView()
 	, m_DSView()
 	, m_SRView()
 	, m_UAView()
@@ -59,6 +59,63 @@ bool Texture::Load(const std::wstring& _strFilePath)
 	m_ResourcePath = _strFilePath;
 
     return true;
+}
+
+int Texture::Create(UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _BindFlag, D3D11_USAGE _Usage)
+{
+	HRESULT hResult = S_OK;
+
+	m_Desc.Format = _Format;
+
+	m_Desc.BindFlags = _BindFlag;
+
+	m_Desc.Width = _Width;
+	m_Desc.Height = _Height;
+
+	m_Desc.SampleDesc.Count = 1;
+	m_Desc.SampleDesc.Quality = 0;
+
+	m_Desc.MipLevels = 1;
+	m_Desc.MiscFlags = 0;
+
+	m_Desc.ArraySize = 1;
+
+	m_Desc.Usage = _Usage;
+	if (_Usage == D3D11_USAGE_DYNAMIC)
+	{
+		m_Desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	}
+
+	hResult = Device::GetInst()->GetDevice()->CreateTexture2D(&m_Desc, nullptr, m_Tex2D.GetAddressOf());
+	if (FAILED(hResult)) return E_FAIL;
+
+	if (m_Desc.BindFlags & D3D11_BIND_DEPTH_STENCIL)
+	{
+		hResult = Device::GetInst()->GetDevice()->CreateDepthStencilView(m_Tex2D.Get(), nullptr, m_DSView.GetAddressOf());
+		if (FAILED(hResult)) return E_FAIL;
+	}
+	else
+	{
+		if (m_Desc.BindFlags & D3D11_BIND_SHADER_RESOURCE)
+		{
+			hResult = Device::GetInst()->GetDevice()->CreateShaderResourceView(m_Tex2D.Get(), nullptr, m_SRView.GetAddressOf());
+			if (FAILED(hResult)) return E_FAIL;
+		}
+
+		if (m_Desc.BindFlags & D3D11_BIND_RENDER_TARGET)
+		{
+			hResult = Device::GetInst()->GetDevice()->CreateRenderTargetView(m_Tex2D.Get(), nullptr, m_RTView.GetAddressOf());
+			if (FAILED(hResult)) return E_FAIL;
+		}
+
+		if (m_Desc.BindFlags & D3D11_BIND_UNORDERED_ACCESS)
+		{
+			hResult = Device::GetInst()->GetDevice()->CreateUnorderedAccessView(m_Tex2D.Get(), nullptr, m_UAView.GetAddressOf());
+			if (FAILED(hResult)) return E_FAIL;
+		}
+	}
+
+	return S_OK;
 }
 
 void Texture::UpdateData(int _regiNum)

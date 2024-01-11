@@ -13,6 +13,8 @@ private:
 	std::vector<Camera*>			m_Cams;
 	std::vector<Light2D*>			m_Light2D;
 
+	class Texture*					m_PostProcessTex;
+
 	StructuredBuffer*				m_Light2DBuffer;
 
 	std::vector<tDebugShapeInfo>	m_DebugShapeInfos;

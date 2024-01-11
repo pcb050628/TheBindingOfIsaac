@@ -3,6 +3,7 @@
 
 #include "values.fx"
 #include "struct.fx"
+#include "func.fx"
 
 struct VS_IN
 {
@@ -16,6 +17,8 @@ struct VS_OUT
     float4 vPosition : SV_Position;
     float4 vColor : COLOR;
     float2 vUV : TEXCOORD;
+    
+    float3 vWorldPos : POSITION;
 };
 
 VS_OUT VS_Std2D(VS_IN _in)
@@ -31,6 +34,7 @@ VS_OUT VS_Std2D(VS_IN _in)
     
     output.vColor = _in.vColor;
     output.vUV = _in.vUV;
+    output.vWorldPos = mul(float4(_in.vPos, 1.f), g_matWorld);
     
     return output;
 }
@@ -55,8 +59,6 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
         else
         {
             vColor = g_anim2d_tex.Sample(g_sam_1, vUV);
-            if (vColor.a <= 0.01f)
-                discard;
         }
     }
     else
@@ -107,7 +109,19 @@ float4 PS_Std2D(VS_OUT _in) : SV_Target
     //}
     }
     
-
+    if (vColor.a <= 0.01f)
+    {
+        discard;
+    }
+    
+    tLightColor LightColor = (tLightColor) 0.f;
+    
+    for (int i = 0; i < g_Light2DCount; i++)
+    {
+        CalLight2D(_in.vWorldPos, i, LightColor);
+    }
+    
+    vColor.rgb *= (LightColor.vColor.rgb + LightColor.vAmbient.rgb);
     
     return vColor;
 }

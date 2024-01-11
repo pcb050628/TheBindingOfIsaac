@@ -20,6 +20,8 @@ public:
     void SetShader(GraphicsShader* _shader) { m_Shader = _shader; }
     void SetTexture(Texture* _tex, TEX_PARAM _param) { m_Textures[_param] = _tex; }
 
+    GraphicsShader* GetShader() { return m_Shader; }
+
     template<typename T>
     void SetScalarParam(const T& _data, SCALAR_PARAM _param)
     {

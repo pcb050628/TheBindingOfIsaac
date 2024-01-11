@@ -228,6 +228,12 @@ bool GraphicsShader::Load(const std::wstring& _relativePath)
 					std::getline(fileStream, line);
 					m_BSType = (BS_TYPE)std::stoi(line);
 				}
+
+				else if (line == L"[SHADER_DOMAIN]")
+				{
+					std::getline(fileStream, line);
+					m_Domain = (SHADER_DOMAIN)std::stoi(line);
+				}
 			}
 		}
 
@@ -276,6 +282,8 @@ bool GraphicsShader::Save()
 		fileStream << L"[RS_TYPE]\n" << (UINT)m_RSType << std::endl;
 		fileStream << L"[DSS_TYPE]\n" << (UINT)m_DSSType << std::endl;
 		fileStream << L"[BS_TYPE]\n" << (UINT)m_BSType << std::endl;
+
+		fileStream << L"[SHADER_DOMAIN]" << (UINT)m_Domain << std::endl;
 
 		fileStream << L"END";
 

@@ -39,6 +39,8 @@ private:
     std::wstring                                    m_PSPath;
     std::string                                     m_PSFuncName;
 
+    SHADER_DOMAIN                                   m_Domain;
+
 public:
     int CreateVertexShader(const std::wstring& _strRelativePath, const std::string& _strFuncName);
     int CreateHullShader(const std::wstring& _strRelativePath, const std::string& _strFuncName);
@@ -49,8 +51,11 @@ public:
     bool Load(const std::wstring& _relativePath) override;
     bool Save() override;
 
+    SHADER_DOMAIN GetDomain() { return m_Domain; }
+
 private:
     void UpdateData() override;
+
 
 public:
     GraphicsShader();
