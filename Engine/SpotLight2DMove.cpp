@@ -17,11 +17,11 @@ void SpotLight2DMove::LateUpdate()
 
 	if (KEY_HOLD(RIGHT))
 	{
-		vRot.z += 50.f * DT;
+		vRot.z += 10.f * DT;
 	}
 	if (KEY_HOLD(LEFT))
 	{
-		vRot.z -= 50.f * DT;
+		vRot.z -= 10.f * DT;
 	}
 
 	if (KEY_HOLD(W))
