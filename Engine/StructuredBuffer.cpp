@@ -90,7 +90,7 @@ void StructuredBuffer::SetData(void* _data, UINT _elementCount)
 
 	D3D11_MAPPED_SUBRESOURCE data = {};
 	Device::GetInst()->GetContext()->Map(m_SB_Write.Get(), 0, D3D11_MAP_WRITE_DISCARD, 0, &data);
-	memcpy(&data, _data, m_ElementSize * _elementCount);
+	memcpy(data.pData, _data, m_ElementSize * _elementCount);
 	Device::GetInst()->GetContext()->Unmap(m_SB_Write.Get(), 0);
 
 	Device::GetInst()->GetContext()->CopyResource(m_SB.Get(), m_SB_Write.Get());

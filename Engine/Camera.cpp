@@ -119,10 +119,10 @@ void Camera::Render()
 	Render(m_Opaque);
 	Render(m_Masked);
 	Render(m_Transparent);
-	Render(m_PostProcess);
+	Render_PostProcess();
 }
 
-void Camera::Render(std::vector<GameObject*>& _objs)
+void Camera::Render(vector<GameObject*>& _objs)
 {
 	for (int i = 0; i < _objs.size(); i++)
 	{
@@ -130,6 +130,16 @@ void Camera::Render(std::vector<GameObject*>& _objs)
 	}
 
 	_objs.clear();
+}
+
+void Camera::Render_PostProcess()
+{
+	for (int i = 0; i < m_PostProcess.size(); i++)
+	{
+		m_PostProcess[i]->Render();
+	}
+
+	m_PostProcess.clear();
 }
 
 void Camera::LayerCheck(int _layerIdx, bool _check)

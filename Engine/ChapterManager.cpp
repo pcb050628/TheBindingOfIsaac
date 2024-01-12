@@ -54,6 +54,18 @@ void ChapterManager::Init()
 	gobj->GetCamera()->LayerCheck(LAYER_TYPE::Player, true);
 
 	AddGameObject(gobj, LAYER_TYPE::Background);
+
+
+	gobj = new GameObject;
+	gobj->AddComponent(new Transform);
+	gobj->AddComponent(new Light2D);
+
+	gobj->GetTransform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
+
+	gobj->GetLight2D()->SetLigthType(LIGHT_TYPE::DIRECTIONAL);
+	gobj->GetLight2D()->SetAmbient(Vec4(1.f));
+
+	AddGameObject(gobj, LAYER_TYPE::Light);
 }
 
 void ChapterManager::Update()

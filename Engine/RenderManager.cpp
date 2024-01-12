@@ -3,6 +3,7 @@
 
 #include "Device.h"
 #include "StructuredBuffer.h"
+#include "ConstantBuffer.h"
 
 #include "Time.h"
 #include "ResourceManager.h"
@@ -55,6 +56,12 @@ void RenderManager::Update()
 
 void RenderManager::UpdateData()
 {
+	g_globalData.g_Light2DCount = (int)m_Light2D.size();
+	
+	static ConstantBuffer* pCB = Device::GetInst()->GetConstBuffer(CB_TYPE::GLOBAL_DATA);
+	pCB->SetData(&g_globalData);
+	pCB->UpdateData();
+
 	static std::vector<tLightInfo> infos = {};
 	for (int i = 0; i < m_Light2D.size(); i++)
 	{

@@ -46,6 +46,7 @@ public:
 
 private:
     void Render(std::vector<GameObject*>& _objs);
+    void Render_PostProcess();
 
 public:
     float GetFOV() { return m_FOV; }

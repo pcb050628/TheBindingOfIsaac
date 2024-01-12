@@ -17,6 +17,7 @@
 enum class LAYER_TYPE
 {
 	Background,
+	Light,
 	Object,
 	Monster,
 	Player,
