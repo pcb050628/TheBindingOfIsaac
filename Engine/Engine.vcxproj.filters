@@ -130,6 +130,12 @@
     <Filter Include="01_Basic\03_OBJ\Script\SpotLightTest">
       <UniqueIdentifier>{787dacd8-7900-4b44-9daa-6fc1cebbdbfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="0_Default\ShaderCode\Util">
+      <UniqueIdentifier>{74648d36-854d-4384-8581-922c557d2e2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="0_Default\ShaderCode\Render">
+      <UniqueIdentifier>{f3c83fc9-74e1-4932-8d77-2153930604fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -381,20 +387,23 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="std2d.fx">
-      <Filter>0_Default\ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="debug.fx">
-      <Filter>0_Default\ShaderCode</Filter>
-    </FxCompile>
-    <FxCompile Include="values.fx">
-      <Filter>0_Default\ShaderCode</Filter>
+    <FxCompile Include="func.fx">
+      <Filter>0_Default\ShaderCode\Util</Filter>
     </FxCompile>
     <FxCompile Include="struct.fx">
-      <Filter>0_Default\ShaderCode</Filter>
+      <Filter>0_Default\ShaderCode\Util</Filter>
     </FxCompile>
-    <FxCompile Include="func.fx">
-      <Filter>0_Default\ShaderCode</Filter>
+    <FxCompile Include="values.fx">
+      <Filter>0_Default\ShaderCode\Util</Filter>
+    </FxCompile>
+    <FxCompile Include="debug.fx">
+      <Filter>0_Default\ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="std2d.fx">
+      <Filter>0_Default\ShaderCode\Render</Filter>
+    </FxCompile>
+    <FxCompile Include="postprocess.fx">
+      <Filter>0_Default\ShaderCode\Render</Filter>
     </FxCompile>
   </ItemGroup>
 </Project>
