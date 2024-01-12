@@ -55,9 +55,11 @@ public:
     void SetFOV(float _fov) { m_FOV = _fov; }
     void SetScale(float _scale) { m_Scale = _scale; }
 
+    void LayerCheckAll(bool _check);
     void LayerCheck(int _layerIdx, bool _check);
     void LayerCheck(LAYER_TYPE _layerType, bool _check);
 
+    // Camera Register
     void SetCameraPriority(int _Priority);
 
 public:

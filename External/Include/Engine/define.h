@@ -23,6 +23,8 @@ enum class LAYER_TYPE
 	Player,
 	Pickup,
 	Item,
+	UI,
+	Camera,
 	END,
 };
 

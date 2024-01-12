@@ -3,7 +3,7 @@
 [VS_PATH]
 Shader\std2d.fx
 [VS_FuncName]
-VS_UI2D
+VS_Std2D
 [HS_PATH]
 NULL
 [HS_FuncName]
@@ -19,7 +19,7 @@ NULL
 [PS_PATH]
 Shader\std2d.fx
 [PS_FuncName]
-PS_Std2D
+PS_UI2D
 [RS_TYPE]
 2
 [DSS_TYPE]

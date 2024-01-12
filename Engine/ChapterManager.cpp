@@ -30,6 +30,7 @@ void ChapterManager::Init()
 
 	m_CurChapter = m_Chapters[0];
 
+	// Anim Test obj
 	GameObject* gobj = new GameObject;
 	gobj->AddComponent(new Transform);
 	gobj->AddComponent(new MeshRenderer);
@@ -37,13 +38,26 @@ void ChapterManager::Init()
 		
 	gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
 	gobj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
-	//gobj->GetComponent<MeshRenderer>()->GetMaterial()->SetTexture(ResourceManager::GetInst()->Find<Texture>(L"Rocks"), TEX_0);
 
 	gobj->GetAnimator2D()->CreateAnim(L"test_anim", ResourceManager::GetInst()->Find<Texture>(L"Rocks"), Vec2(0.f, 0.f), Vec2(32.f, 32.f), Vec2(0.f, 0.f), Vec2(40.f, 40.f), 6, 1);
 	gobj->GetAnimator2D()->Play(L"test_anim", true);
 
+	gobj->SetName(L"test_player");
 	AddGameObject(gobj, LAYER_TYPE::Player);
 
+	// UI Test obj
+	gobj = new GameObject;
+	gobj->AddComponent(new Transform);
+	gobj->AddComponent(new MeshRenderer);
+
+	gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"ui_Material")); 
+	gobj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh")); 
+	gobj->GetMeshRenderer()->GetMaterial()->SetTexture(ResourceManager::GetInst()->Find<Texture>(L"Rocks"), TEX_0);
+
+	gobj->SetName(L"test_ui");
+	AddGameObject(gobj, LAYER_TYPE::UI);
+
+	// Main Cam
 	gobj = new GameObject;
 	gobj->AddComponent(new Transform);
 	gobj->AddComponent(new Camera);
@@ -51,9 +65,24 @@ void ChapterManager::Init()
 	gobj->GetTransform()->SetRelativePos(Vec3(0.f, 0.f, -10.f));
 
 	gobj->GetCamera()->SetCameraPriority(0);
-	gobj->GetCamera()->LayerCheck(LAYER_TYPE::Player, true);
+	gobj->GetCamera()->LayerCheckAll(true);
+	gobj->GetCamera()->LayerCheck(LAYER_TYPE::UI, false);
 
-	AddGameObject(gobj, LAYER_TYPE::Background);
+	gobj->SetName(L"MAIN_CAM");
+	AddGameObject(gobj, LAYER_TYPE::Camera);
+
+	// UI Cam
+	//gobj = new GameObject;
+	//gobj->AddComponent(new Transform);
+	//gobj->AddComponent(new Camera);
+	//
+	//gobj->GetTransform()->SetRelativePos(Vec3(0.f, 0.f, -10.f));
+	//
+	//gobj->GetCamera()->SetCameraPriority(1);
+	//gobj->GetCamera()->LayerCheck(LAYER_TYPE::UI, true);
+	//
+	//gobj->SetName(L"UI_CAM");
+	//AddGameObject(gobj, LAYER_TYPE::Camera);
 
 
 	gobj = new GameObject;

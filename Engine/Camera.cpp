@@ -148,6 +148,14 @@ void Camera::Render_PostProcess()
 	m_PostProcess.clear();
 }
 
+void Camera::LayerCheckAll(bool _check)
+{
+	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
+	{
+		LayerCheck(i, _check);
+	}
+}
+
 void Camera::LayerCheck(int _layerIdx, bool _check)
 {
 	if (_check)

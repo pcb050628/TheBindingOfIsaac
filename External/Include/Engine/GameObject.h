@@ -35,12 +35,12 @@ public:
         return m_Components[(UINT)_type];
     }
 
-    GET_COMPONENT(Transform, TRANSFORM);
+    GET_COMPONENT(Transform,    TRANSFORM);
     GET_COMPONENT(MeshRenderer, MESHRENDERER);
-    GET_COMPONENT(Camera, CAMERA);
-    GET_COMPONENT(Light2D, LIGHT2D);
-    GET_COMPONENT(Collider2D, COLLIDER2D);
-    GET_COMPONENT(Animator2D, ANIMATOR2D);
+    GET_COMPONENT(Camera,       CAMERA);
+    GET_COMPONENT(Light2D,      LIGHT2D);
+    GET_COMPONENT(Collider2D,   COLLIDER2D);
+    GET_COMPONENT(Animator2D,   ANIMATOR2D);
 
     template <typename T>
     T* GetScript()
