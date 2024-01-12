@@ -4,7 +4,6 @@
 
 #include "Time.h"
 #include "Input.h"
-#include "AssetManager.h"
 #include "ChapterManager.h"
 #include "Device.h"
 #include "ResourceManager.h"
@@ -39,7 +38,6 @@ void Engine::Init(HWND _hWnd, const RECT& _Resolution)
 	Input::GetInst()->Init();
 	Device::GetInst()->Init(m_hWnd, res);
 	ResourceManager::GetInst()->Init();
-	//AssetManager::GetInst()->Init();
 	ChapterManager::GetInst()->Init();
 	RenderManager::GetInst()->Init();
 	Test::GetInst()->Init();

@@ -190,8 +190,6 @@ call EngineCopy.bat</Command>
     <ClInclude Include="components.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Asset.h" />
-    <ClInclude Include="AssetManager.h" />
     <ClInclude Include="Chapter.h" />
     <ClInclude Include="ChapterManager.h" />
     <ClInclude Include="Component.h" />
@@ -237,8 +235,6 @@ call EngineCopy.bat</Command>
     <ClCompile Include="externs.cpp" />
     <ClCompile Include="functions.cpp" />
     <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Asset.cpp" />
-    <ClCompile Include="AssetManager.cpp" />
     <ClCompile Include="Chapter.cpp" />
     <ClCompile Include="ChapterManager.cpp" />
     <ClCompile Include="Component.cpp" />

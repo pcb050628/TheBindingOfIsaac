@@ -25,15 +25,6 @@
     <Filter Include="01_Basic\03_OBJ\Component">
       <UniqueIdentifier>{52071b8b-fe31-47fb-8c56-4c8bf86f09b1}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\03_OBJ\Component\MeshRenderer">
-      <UniqueIdentifier>{ab8962f3-58cb-4390-b435-b655455611af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\03_OBJ\Component\Transform">
-      <UniqueIdentifier>{7112f7fd-07fc-4684-8a8d-ffb375edf28a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\03_OBJ\Component\Camera">
-      <UniqueIdentifier>{9e1d0302-9ee0-4a53-8c97-73babea338a0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\00_Engine">
       <UniqueIdentifier>{af015e03-e944-425a-b2d8-06789f014dfe}</UniqueIdentifier>
     </Filter>
@@ -79,20 +70,8 @@
     <Filter Include="01_Basic\02_Manager\TaskManager">
       <UniqueIdentifier>{103698d5-9ebf-4913-8bb7-12d9f1d72022}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\02_Manager\Time">
-      <UniqueIdentifier>{e2de632d-9ecf-43c5-a5e5-b37715126cc3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\02_Manager\Input">
-      <UniqueIdentifier>{3002f376-0cdf-4a02-a532-f84a4eee8483}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\02_Manager\ChpaterManager">
       <UniqueIdentifier>{937263d6-8374-4e70-8ba3-7b874945b305}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\02_Manager\AssetManager">
-      <UniqueIdentifier>{6a7751a8-c377-4179-b451-c68125c1f5f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\02_Manager\AssetManager\Asset">
-      <UniqueIdentifier>{f4dc2568-a603-47b3-9c9b-b17bcea629fc}</UniqueIdentifier>
     </Filter>
     <Filter Include="01_Basic\01_Device">
       <UniqueIdentifier>{87d3064c-312f-475f-902f-549a2295aa9f}</UniqueIdentifier>
@@ -106,20 +85,11 @@
     <Filter Include="01_Basic\02_Manager\GarbageCollection">
       <UniqueIdentifier>{e8fbffdc-aec6-40ad-8497-638934964e8d}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\03_OBJ\Component\Collider2D">
-      <UniqueIdentifier>{da20efbe-7ece-4c32-84c1-80428a077ec1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\02_Manager\RenderManager">
       <UniqueIdentifier>{b0d52536-7264-4dc3-a7f6-296fb4cf64a6}</UniqueIdentifier>
     </Filter>
     <Filter Include="01_Basic\02_Manager\CollisionManager">
       <UniqueIdentifier>{419c544f-6659-40af-801a-1d231039f0f4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\03_OBJ\Component\Animator2D">
-      <UniqueIdentifier>{a5873e2d-ab40-4e88-8b2d-a0a278ccb471}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\03_OBJ\Component\Animator2D\Anim">
-      <UniqueIdentifier>{9e4eb150-da88-4450-92df-a0961428ee4f}</UniqueIdentifier>
     </Filter>
     <Filter Include="01_Basic\03_OBJ\Script">
       <UniqueIdentifier>{936676bd-e3dc-435e-9b23-e8af07f9030f}</UniqueIdentifier>
@@ -127,11 +97,35 @@
     <Filter Include="01_Basic\01_Device\StructuredBuffer">
       <UniqueIdentifier>{d4900645-975b-4382-8e3b-23754a9de0cc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\03_OBJ\Component\Light2D">
-      <UniqueIdentifier>{4347232e-8c71-4538-860e-748f7e574e70}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_Derived\Resource\Texture">
       <UniqueIdentifier>{62893589-68fd-4f68-bbe8-8cc05bb484b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\Time">
+      <UniqueIdentifier>{e2de632d-9ecf-43c5-a5e5-b37715126cc3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\Input">
+      <UniqueIdentifier>{3002f376-0cdf-4a02-a532-f84a4eee8483}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\01. Transform">
+      <UniqueIdentifier>{7112f7fd-07fc-4684-8a8d-ffb375edf28a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\02. MeshRenderer">
+      <UniqueIdentifier>{ab8962f3-58cb-4390-b435-b655455611af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\03. Camera">
+      <UniqueIdentifier>{9e1d0302-9ee0-4a53-8c97-73babea338a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\04. Animator2D">
+      <UniqueIdentifier>{a5873e2d-ab40-4e88-8b2d-a0a278ccb471}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\04. Animator2D\Anim">
+      <UniqueIdentifier>{9e4eb150-da88-4450-92df-a0961428ee4f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\05. Collider2D">
+      <UniqueIdentifier>{da20efbe-7ece-4c32-84c1-80428a077ec1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\03_OBJ\Component\06. Light2D">
+      <UniqueIdentifier>{4347232e-8c71-4538-860e-748f7e574e70}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -174,9 +168,6 @@
     <ClInclude Include="ResourceManager.h">
       <Filter>01_Basic\02_Manager\ResourceManager</Filter>
     </ClInclude>
-    <ClInclude Include="AssetManager.h">
-      <Filter>01_Basic\02_Manager\AssetManager</Filter>
-    </ClInclude>
     <ClInclude Include="LogManager.h">
       <Filter>01_Basic\02_Manager\LogManager</Filter>
     </ClInclude>
@@ -209,22 +200,19 @@
       <Filter>01_Basic\03_OBJ\Component</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
-      <Filter>01_Basic\03_OBJ\Component\Transform</Filter>
+      <Filter>01_Basic\03_OBJ\Component\01. Transform</Filter>
     </ClInclude>
     <ClInclude Include="MeshRenderer.h">
-      <Filter>01_Basic\03_OBJ\Component\MeshRenderer</Filter>
+      <Filter>01_Basic\03_OBJ\Component\02. MeshRenderer</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>01_Basic\03_OBJ\Component\Camera</Filter>
+      <Filter>01_Basic\03_OBJ\Component\03. Camera</Filter>
     </ClInclude>
     <ClInclude Include="components.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>02_Derived\Resource\Mesh</Filter>
-    </ClInclude>
-    <ClInclude Include="Asset.h">
-      <Filter>01_Basic\02_Manager\AssetManager\Asset</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
       <Filter>01_Basic\02_Manager\ResourceManager\Resource</Filter>
@@ -242,7 +230,7 @@
       <Filter>01_Basic\02_Manager\GarbageCollection</Filter>
     </ClInclude>
     <ClInclude Include="Collider2D.h">
-      <Filter>01_Basic\03_OBJ\Component\Collider2D</Filter>
+      <Filter>01_Basic\03_OBJ\Component\05. Collider2D</Filter>
     </ClInclude>
     <ClInclude Include="RenderManager.h">
       <Filter>01_Basic\02_Manager\RenderManager</Filter>
@@ -251,10 +239,10 @@
       <Filter>01_Basic\02_Manager\CollisionManager</Filter>
     </ClInclude>
     <ClInclude Include="Animator2D.h">
-      <Filter>01_Basic\03_OBJ\Component\Animator2D</Filter>
+      <Filter>01_Basic\03_OBJ\Component\04. Animator2D</Filter>
     </ClInclude>
     <ClInclude Include="Anim.h">
-      <Filter>01_Basic\03_OBJ\Component\Animator2D\Anim</Filter>
+      <Filter>01_Basic\03_OBJ\Component\04. Animator2D\Anim</Filter>
     </ClInclude>
     <ClInclude Include="Script.h">
       <Filter>01_Basic\03_OBJ\Script</Filter>
@@ -263,7 +251,7 @@
       <Filter>01_Basic\01_Device\StructuredBuffer</Filter>
     </ClInclude>
     <ClInclude Include="Light2D.h">
-      <Filter>01_Basic\03_OBJ\Component\Light2D</Filter>
+      <Filter>01_Basic\03_OBJ\Component\06. Light2D</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -300,9 +288,6 @@
     <ClCompile Include="ResourceManager.cpp">
       <Filter>01_Basic\02_Manager\ResourceManager</Filter>
     </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>01_Basic\02_Manager\AssetManager</Filter>
-    </ClCompile>
     <ClCompile Include="LogManager.cpp">
       <Filter>01_Basic\02_Manager\LogManager</Filter>
     </ClCompile>
@@ -332,19 +317,16 @@
       <Filter>01_Basic\03_OBJ\Component</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
-      <Filter>01_Basic\03_OBJ\Component\Transform</Filter>
+      <Filter>01_Basic\03_OBJ\Component\01. Transform</Filter>
     </ClCompile>
     <ClCompile Include="MeshRenderer.cpp">
-      <Filter>01_Basic\03_OBJ\Component\MeshRenderer</Filter>
+      <Filter>01_Basic\03_OBJ\Component\02. MeshRenderer</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>01_Basic\03_OBJ\Component\Camera</Filter>
+      <Filter>01_Basic\03_OBJ\Component\03. Camera</Filter>
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>02_Derived\Resource\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Asset.cpp">
-      <Filter>01_Basic\02_Manager\AssetManager\Asset</Filter>
     </ClCompile>
     <ClCompile Include="Resource.cpp">
       <Filter>01_Basic\02_Manager\ResourceManager\Resource</Filter>
@@ -365,7 +347,7 @@
       <Filter>01_Basic\02_Manager\GarbageCollection</Filter>
     </ClCompile>
     <ClCompile Include="Collider2D.cpp">
-      <Filter>01_Basic\03_OBJ\Component\Collider2D</Filter>
+      <Filter>01_Basic\03_OBJ\Component\05. Collider2D</Filter>
     </ClCompile>
     <ClCompile Include="RenderManager.cpp">
       <Filter>01_Basic\02_Manager\RenderManager</Filter>
@@ -374,10 +356,10 @@
       <Filter>01_Basic\02_Manager\CollisionManager</Filter>
     </ClCompile>
     <ClCompile Include="Animator2D.cpp">
-      <Filter>01_Basic\03_OBJ\Component\Animator2D</Filter>
+      <Filter>01_Basic\03_OBJ\Component\04. Animator2D</Filter>
     </ClCompile>
     <ClCompile Include="Anim.cpp">
-      <Filter>01_Basic\03_OBJ\Component\Animator2D\Anim</Filter>
+      <Filter>01_Basic\03_OBJ\Component\04. Animator2D\Anim</Filter>
     </ClCompile>
     <ClCompile Include="Script.cpp">
       <Filter>01_Basic\03_OBJ\Script</Filter>
@@ -386,7 +368,7 @@
       <Filter>01_Basic\01_Device\StructuredBuffer</Filter>
     </ClCompile>
     <ClCompile Include="Light2D.cpp">
-      <Filter>01_Basic\03_OBJ\Component\Light2D</Filter>
+      <Filter>01_Basic\03_OBJ\Component\06. Light2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
