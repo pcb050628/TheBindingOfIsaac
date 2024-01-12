@@ -41,12 +41,12 @@ void Camera::LateUpdate()
 	m_matProj = DirectX::XMMatrixIdentity();
 
 	//
-	Vec3 vPos = GetOwner()->GetComponent<Transform>()->GetRelativePos();
+	Vec3 vPos = GetOwner()->GetTransform()->GetRelativePos();
 	Matrix matTrans = DirectX::XMMatrixTranslation(-vPos.x, -vPos.y, -vPos.z);
 
-	Vec3 vRight = GetOwner()->GetComponent<Transform>()->GetLocalDir(DIR_TYPE::RIGHT);
-	Vec3 vUp = GetOwner()->GetComponent<Transform>()->GetLocalDir(DIR_TYPE::UP);
-	Vec3 vFront = GetOwner()->GetComponent<Transform>()->GetLocalDir(DIR_TYPE::FRONT);
+	Vec3 vRight = GetOwner()->GetTransform()->GetLocalDir(DIR_TYPE::RIGHT);
+	Vec3 vUp = GetOwner()->GetTransform()->GetLocalDir(DIR_TYPE::UP);
+	Vec3 vFront = GetOwner()->GetTransform()->GetLocalDir(DIR_TYPE::FRONT);
 
 	//
 	Matrix matRot = DirectX::XMMatrixIdentity();

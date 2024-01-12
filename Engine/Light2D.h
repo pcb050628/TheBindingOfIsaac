@@ -15,7 +15,7 @@ public:
     void SetLightColor(Vec4 _color) { m_Info.vColor = _color; }
     void SetSpecular(Vec4 _spec) { m_Info.vSpecular = _spec; }
     void SetAmbient(Vec4 _ambient) { m_Info.vAmbient = _ambient; }
-    void SetLgithType(LIGHT_TYPE _type) { m_Info.LightType = (int)_type; }
+    void SetLigthType(LIGHT_TYPE _type) { m_Info.LightType = (int)_type; }
     void SetRadius(float _radius) { m_Info.fRadius = _radius; }
     void SetAngle(float _angle) { m_Info.fAngle = _angle; }
 

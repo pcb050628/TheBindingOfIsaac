@@ -35,8 +35,8 @@ void RenderManager::Init()
 	m_DebugObj->AddComponent(new Transform);
 	m_DebugObj->AddComponent(new MeshRenderer);
 
-	m_DebugObj->GetComponent<MeshRenderer>()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"")); 
-	m_DebugObj->GetComponent<MeshRenderer>()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"")); 
+	m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"")); 
+	m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L""));
 }
 
 void RenderManager::Update()
@@ -93,27 +93,27 @@ void RenderManager::Render_Debug()
 		switch ((*iter).eShape)
 		{
 		case DEBUG_SHAPE::RECT:
-			m_DebugObj->GetComponent<MeshRenderer>()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh_Debug"));
-			m_DebugObj->GetComponent<MeshRenderer>()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
+			m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh_Debug"));
+			m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
 			break;
 		case DEBUG_SHAPE::CIRCLE:
-			m_DebugObj->GetComponent<MeshRenderer>()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"CircleMesh_Debug"));
-			m_DebugObj->GetComponent<MeshRenderer>()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
+			m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"CircleMesh_Debug"));
+			m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
 			break;
 		case DEBUG_SHAPE::CUBE:
-			m_DebugObj->GetComponent<MeshRenderer>()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"CubeMesh"));
-			m_DebugObj->GetComponent<MeshRenderer>()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
+			m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"CubeMesh"));
+			m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
 			break;
 		case DEBUG_SHAPE::SPHERE:
-			m_DebugObj->GetComponent<MeshRenderer>()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"SphereMesh"));
-			m_DebugObj->GetComponent<MeshRenderer>()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
+			m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"SphereMesh"));
+			m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
 			break;
 		}
 
-		m_DebugObj->GetComponent<MeshRenderer>()->GetMaterial()->SetScalarParam((*iter).vColor, VEC4_0);
+		m_DebugObj->GetMeshRenderer()->GetMaterial()->SetScalarParam((*iter).vColor, VEC4_0);
 
-		m_DebugObj->GetComponent<Transform>()->SetWorldMat((*iter).matWorld);
-		m_DebugObj->GetComponent<Transform>()->UpdateData();
+		m_DebugObj->GetTransform()->SetWorldMat((*iter).matWorld);
+		m_DebugObj->GetTransform()->UpdateData();
 
 		m_DebugObj->Render();
 

@@ -68,12 +68,12 @@ void CollisionManager::LayerCollisionCheck(UINT _left, UINT _right)
 	{
 		for (int j = i; j < objRight.size(); i++)
 		{
-			if (objLeft[i] == objRight[j] || !(objLeft[i]->GetComponent<Collider2D>() && objRight[j]->GetComponent<Collider2D>()))
+			if (objLeft[i] == objRight[j] || !(objLeft[i]->GetCollider2D() && objRight[j]->GetCollider2D()))
 				continue;
 
 			CollisionID id = {};
-			id.LeftID = objLeft[i]->GetComponent<Collider2D>()->GetID();
-			id.RightID = objRight[j]->GetComponent<Collider2D>()->GetID();
+			id.LeftID = objLeft[i]->GetCollider2D()->GetID();
+			id.RightID = objRight[j]->GetCollider2D()->GetID();
 
 			auto iter = m_prevInfo.begin();
 			if (m_prevInfo.find(id.id) == m_prevInfo.end())
@@ -84,26 +84,26 @@ void CollisionManager::LayerCollisionCheck(UINT _left, UINT _right)
 
 			bool dead = objLeft[i]->GetIsDead() || objRight[j]->GetIsDead();
 
-			if (ColliderCollisionCheck(objLeft[i]->GetComponent<Collider2D>(), objRight[j]->GetComponent<Collider2D>()))
+			if (ColliderCollisionCheck(objLeft[i]->GetCollider2D(), objRight[j]->GetCollider2D()))
 			{
 				if (!dead)
 				{
 					if (iter->second)
 					{
-						objLeft[i]->GetComponent<Collider2D>()->Overlap(objRight[j]->GetComponent<Collider2D>());
-						objRight[j]->GetComponent<Collider2D>()->Overlap(objLeft[i]->GetComponent<Collider2D>());
+						objLeft[i]->GetCollider2D()->Overlap(objRight[j]->GetCollider2D());
+						objRight[j]->GetCollider2D()->Overlap(objLeft[i]->GetCollider2D());
 					}
 					else
 					{
-						objLeft[i]->GetComponent<Collider2D>()->Overlap(objRight[j]->GetComponent<Collider2D>());
-						objRight[j]->GetComponent<Collider2D>()->Overlap(objLeft[i]->GetComponent<Collider2D>());
+						objLeft[i]->GetCollider2D()->Overlap(objRight[j]->GetCollider2D());
+						objRight[j]->GetCollider2D()->Overlap(objLeft[i]->GetCollider2D());
 						iter->second = true;
 					}
 				}
 				else
 				{
-					objLeft[i]->GetComponent<Collider2D>()->EndOverlap(objRight[j]->GetComponent<Collider2D>());
-					objRight[j]->GetComponent<Collider2D>()->EndOverlap(objLeft[i]->GetComponent<Collider2D>());
+					objLeft[i]->GetCollider2D()->EndOverlap(objRight[j]->GetCollider2D());
+					objRight[j]->GetCollider2D()->EndOverlap(objLeft[i]->GetCollider2D());
 					iter->second = false;
 				}
 			}
@@ -111,8 +111,8 @@ void CollisionManager::LayerCollisionCheck(UINT _left, UINT _right)
 			{
 				if (iter->second)
 				{
-					objLeft[i]->GetComponent<Collider2D>()->EndOverlap(objRight[j]->GetComponent<Collider2D>());
-					objRight[j]->GetComponent<Collider2D>()->EndOverlap(objLeft[i]->GetComponent<Collider2D>());
+					objLeft[i]->GetCollider2D()->EndOverlap(objRight[j]->GetCollider2D());
+					objRight[j]->GetCollider2D()->EndOverlap(objLeft[i]->GetCollider2D());
 					iter->second = false;
 				}
 			}

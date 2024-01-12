@@ -49,11 +49,11 @@ void Transform::LateUpdate()
 
 	if (GetOwner()->GetParent())
 	{
-		const Matrix& parentWorldMat = GetOwner()->GetParent()->GetComponent<Transform>()->GetWorldMat();
+		const Matrix& parentWorldMat = GetOwner()->GetParent()->GetTransform()->GetWorldMat();
 
 		if (m_bAbsolute)
 		{
-			Vec3 parentScale = GetOwner()->GetParent()->GetComponent<Transform>()->GetRelativeScale();
+			Vec3 parentScale = GetOwner()->GetParent()->GetTransform()->GetRelativeScale();
 			Matrix parentScaleMatInv = DirectX::XMMatrixScaling(1.f / parentScale.x, 1.f / parentScale.y, 1.f / parentScale.z);
 
 			m_matWorld = m_matWorld * parentScaleMatInv * parentWorldMat;
@@ -89,7 +89,7 @@ Vec3 Transform::GetWorldScale()
 
 	while (pParent)
 	{
-		vWorldScale *= pParent->GetComponent<Transform>()->GetRelativeScale();
+		vWorldScale *= pParent->GetTransform()->GetRelativeScale();
 
 		pParent = pParent->GetParent();
 	}

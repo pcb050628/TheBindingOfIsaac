@@ -28,7 +28,7 @@ void Test::Init()
 	obj->AddComponent(new Transform);
 	obj->AddComponent(new MeshRenderer);
 
-	MeshRenderer* mr = obj->GetComponent<MeshRenderer>();
+	MeshRenderer* mr = obj->GetMeshRenderer();
 	mr->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
 	//mr->SetShader(ResourceManager::GetInst()->Find<GraphicsShader>(L"test_Shader"));
 
@@ -37,8 +37,8 @@ void Test::Init()
 
 	//mr->GetMaterial()->Save();
 
-	obj->GetComponent<Transform>()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
-	obj->GetComponent<Transform>()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
+	obj->GetTransform()->SetRelativePos(Vec3(0.f, 0.f, 100.f));
+	obj->GetTransform()->SetRelativeScale(Vec3(100.f, 100.f, 1.f));
 
 	m_Gobjs.push_back(obj);
 
@@ -47,8 +47,8 @@ void Test::Init()
 	cam->AddComponent(new Transform);
 	cam->AddComponent(new Camera);
 	
-	cam->GetComponent<Transform>()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
-	cam->GetComponent<Transform>()->SetRelativeRot(Vec3(0.f, 0.f, 0.f));
+	cam->GetTransform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
+	cam->GetTransform()->SetRelativeRot(Vec3(0.f, 0.f, 0.f));
 	
 	m_Gobjs.push_back(cam);
 }

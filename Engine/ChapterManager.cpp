@@ -35,12 +35,12 @@ void ChapterManager::Init()
 	gobj->AddComponent(new MeshRenderer);
 	gobj->AddComponent(new Animator2D);
 		
-	gobj->GetComponent<MeshRenderer>()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
-	gobj->GetComponent<MeshRenderer>()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
+	gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
+	gobj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
 	//gobj->GetComponent<MeshRenderer>()->GetMaterial()->SetTexture(ResourceManager::GetInst()->Find<Texture>(L"Rocks"), TEX_0);
 
-	gobj->GetComponent<Animator2D>()->CreateAnim(L"test_anim", ResourceManager::GetInst()->Find<Texture>(L"Rocks"), Vec2(0.f, 0.f), Vec2(32.f, 32.f), Vec2(0.f, 0.f), Vec2(40.f, 40.f), 6, 1);
-	gobj->GetComponent<Animator2D>()->Play(L"test_anim", true);
+	gobj->GetAnimator2D()->CreateAnim(L"test_anim", ResourceManager::GetInst()->Find<Texture>(L"Rocks"), Vec2(0.f, 0.f), Vec2(32.f, 32.f), Vec2(0.f, 0.f), Vec2(40.f, 40.f), 6, 1);
+	gobj->GetAnimator2D()->Play(L"test_anim", true);
 
 	AddGameObject(gobj, LAYER_TYPE::Player);
 
@@ -48,10 +48,10 @@ void ChapterManager::Init()
 	gobj->AddComponent(new Transform);
 	gobj->AddComponent(new Camera);
 
-	gobj->GetComponent<Transform>()->SetRelativePos(Vec3(0.f, 0.f, -10.f));
+	gobj->GetTransform()->SetRelativePos(Vec3(0.f, 0.f, -10.f));
 
-	gobj->GetComponent<Camera>()->SetCameraPriority(0);
-	gobj->GetComponent<Camera>()->LayerCheck(LAYER_TYPE::Player, true);
+	gobj->GetCamera()->SetCameraPriority(0);
+	gobj->GetCamera()->LayerCheck(LAYER_TYPE::Player, true);
 
 	AddGameObject(gobj, LAYER_TYPE::Background);
 }

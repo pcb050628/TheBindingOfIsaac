@@ -22,7 +22,7 @@ void MeshRenderer::UpdateData()
 	if(GetMaterial() != nullptr)
 		GetMaterial()->UpdateData();
 
-	GetOwner()->GetComponent<Transform>()->UpdateData();
+	GetOwner()->GetTransform()->UpdateData();
 }
 
 void MeshRenderer::Render()
@@ -30,9 +30,9 @@ void MeshRenderer::Render()
 	if (nullptr == GetMesh() || nullptr == GetMaterial())
 		return;
 
-	if (GetOwner()->GetComponent<Animator2D>())
+	if (GetOwner()->GetAnimator2D())
 	{
-		GetOwner()->GetComponent<Animator2D>()->UpdateData();
+		GetOwner()->GetAnimator2D()->UpdateData();
 	}
 	else
 	{
