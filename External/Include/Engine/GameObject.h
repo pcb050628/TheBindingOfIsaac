@@ -9,13 +9,6 @@
 
 class Script;
 
-class Transform;
-class MeshRenderer;
-class Camera;
-class Animator2D;
-class Light2D;
-class Collider2D;
-
 class GameObject :
     public Entity
 {

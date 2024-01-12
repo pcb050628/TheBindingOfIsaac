@@ -131,25 +131,16 @@ void ResourceManager::CreateDefaultMesh()
 
 void ResourceManager::CreateDefaultShader()
 {
-	// 이 처럼 불러오는 부분들중 기본 리소스가 아닌 특정 부분에서만 사용하는 리소스라면 아래의 LoadAllResource 함수를 통해서 가져올것
-	GraphicsShader* pShader = nullptr;
-
-	pShader = new GraphicsShader;
 	Load<GraphicsShader>(L"Resource\\Shader\\Graphics\\default_Shader.txt");
-
-	pShader = new GraphicsShader;
 	Load<GraphicsShader>(L"Resource\\Shader\\Graphics\\debug_Shader.txt");
+	Load<GraphicsShader>(L"Resource\\Shader\\Graphics\\ui_Shader.txt");
 }
 
 void ResourceManager::CreateDefaultMaterial()
 {
-	Material* pMaterial = nullptr;
-
-	pMaterial = new Material;
 	Load<Material>(L"Resource\\Material\\default_Material.txt");
-
-	pMaterial = new Material;
 	Load<Material>(L"Resource\\Material\\debug_Material.txt");
+	Load<Material>(L"Resource\\Material\\ui_Material.txt");
 }
 
 Texture* ResourceManager::CreateTexture(const std::wstring& _strKey, UINT _width, UINT _height, DXGI_FORMAT _format, UINT _bindFlags, D3D11_USAGE _usage)

@@ -19,8 +19,6 @@ private:
 	void CreateDefaultShader();
 	void CreateDefaultMaterial();
 
-	void LoadAllResource(enum class CHAPTERLEVEL _level);
-
 public:
 	template <typename T>
 	T* Find(std::wstring _strKey)
