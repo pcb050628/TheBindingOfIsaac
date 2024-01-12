@@ -46,6 +46,17 @@ struct tAnimData
 };
 extern tAnimData g_AnimData;
 
+struct tGlobalData
+{
+	Vec2	g_RenderResolution;	// 렌더링 해상도
+	float	g_dt;                 // Delta Time
+	float	g_time;               // 누적 시간
+	int		g_Light2DCount;         // 2D 광원 개수
+	int		g_Light3DCount;         // 3D 광원 개수
+	Vec2	globalpadding;
+};
+extern tGlobalData g_globalData;
+
 struct tLightInfo
 {
 	Vec4 vColor;

@@ -3,6 +3,8 @@
 #include "Engine.h"
 #include "assert.h"
 
+#include "ResourceManager.h"
+
 #include "ConstantBuffer.h"
 
 Device::Device()
@@ -10,7 +12,6 @@ Device::Device()
 	, m_pContext(nullptr)
 	, m_hRenderWnd(nullptr)
 	, m_pSwapChain(nullptr)
-	, m_pRTView(nullptr)
 	, m_arrConstantBuffer()
 {
 
@@ -99,7 +100,7 @@ int Device::Init(HWND _hwnd, Vec2 _resolution)
 		m_pContext->RSSetViewports(1, &viewport);
 	}
 
-	m_pContext->OMSetRenderTargets(1, m_pRTView.GetAddressOf(), m_pDSView.Get());
+	m_pContext->OMSetRenderTargets(1, m_pRTTex->GetRTV().GetAddressOf(), m_pDSTex->GetDSV().Get());
 
 	m_vClearColor = Vec4(0.3f, 0.3f, 0.3f, 1.f);
 
@@ -114,8 +115,8 @@ void Device::DrawStart()
 	color[2] = m_vClearColor.z;
 	color[3] = m_vClearColor.w;
 
-	m_pContext->ClearRenderTargetView(m_pRTView.Get(), color);
-	m_pContext->ClearDepthStencilView(m_pDSView.Get(), D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH | D3D11_CLEAR_FLAG::D3D11_CLEAR_STENCIL, 1.f, 0);
+	m_pContext->ClearRenderTargetView(m_pRTTex->GetRTV().Get(), color);
+	m_pContext->ClearDepthStencilView(m_pDSTex->GetDSV().Get(), D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH | D3D11_CLEAR_FLAG::D3D11_CLEAR_STENCIL, 1.f, 0);
 }
 
 int Device::CreateSwapChain()
@@ -156,11 +157,15 @@ int Device::CreateSwapChain()
 
 int Device::CreateRenderTargetView()
 {
-	HRESULT hResult = m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&m_pRTTex); 
+	Microsoft::WRL::ComPtr<ID3D11Texture2D> pTex;
+
+	HRESULT hResult = m_pSwapChain->GetBuffer(0, __uuidof(ID3D11Texture2D), (void**)&pTex);
 	if (FAILED(hResult)) 
 		return E_FAIL;
-	hResult = m_pDevice->CreateRenderTargetView(m_pRTTex.Get(), 0, m_pRTView.GetAddressOf()); 
-	if (FAILED(hResult))
+
+	m_pRTTex = ResourceManager::GetInst()->CreateTexture(L"DeviceRenderTargetTexture", pTex);
+
+	if (!m_pRTTex)
 		return E_FAIL;
 
 	return S_OK;
@@ -189,12 +194,11 @@ int Device::CreateDepthStencilView()
 
 	desc.ArraySize = 1;
 
-	hResult = m_pDevice->CreateTexture2D(&desc, nullptr, m_pDSTex.GetAddressOf());
-	if (FAILED(hResult))
-		return E_FAIL;
+	m_pDSTex = ResourceManager::GetInst()->CreateTexture(L"DeviceDepthStencilTexture"
+														, (UINT)m_vResolution.x, (UINT)m_vResolution.y
+														, DXGI_FORMAT_D24_UNORM_S8_UINT, D3D11_BIND_DEPTH_STENCIL);
 
-	hResult = m_pDevice->CreateDepthStencilView(m_pDSTex.Get(), nullptr, m_pDSView.GetAddressOf());
-	if (FAILED(hResult))
+	if (!m_pDSTex)
 		return E_FAIL;
 
 	return S_OK;
@@ -210,6 +214,9 @@ int Device::CreateConstBuffer()
 
 	m_arrConstantBuffer[(UINT)CB_TYPE::ANIMATION2D] = new ConstantBuffer(CB_TYPE::ANIMATION2D);
 	m_arrConstantBuffer[(UINT)CB_TYPE::ANIMATION2D]->Create(sizeof(tAnimData), 1);
+
+	m_arrConstantBuffer[(UINT)CB_TYPE::GLOBAL_DATA] = new ConstantBuffer(CB_TYPE::GLOBAL_DATA);
+	m_arrConstantBuffer[(UINT)CB_TYPE::GLOBAL_DATA]->Create(sizeof(tGlobalData), 1);
 
 	return S_OK;
 }

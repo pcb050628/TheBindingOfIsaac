@@ -67,14 +67,22 @@ public:
 		return nullptr;
 	}
 
-	bool AddResource(std::wstring _strKey, Resource* _resource)
+	int AddResource(std::wstring _strKey, Resource* _resource)
 	{
 		if (IsExist(_strKey, _resource->GetResourceType()))
-			return false;
+		{
+			MessageBoxW(nullptr, L"이미 존재하는 키 값 입니다", L"리소스 추가 실패", MB_OK);
+			return E_FAIL;
+		}
 
 		m_Resources[(UINT)_resource->GetResourceType()].insert(std::make_pair(_strKey, _resource));
-		return true;
+		return S_OK;
 	}
+
+	Texture* CreateTexture(const std::wstring& _strKey
+		, UINT _width, UINT _height, DXGI_FORMAT _format, UINT _bindFlags, D3D11_USAGE _usage = D3D11_USAGE_DEFAULT);
+
+	Texture* CreateTexture(const std::wstring& _strKey, Microsoft::WRL::ComPtr<ID3D11Texture2D> _tex2D);
 };
 
 template <typename T>

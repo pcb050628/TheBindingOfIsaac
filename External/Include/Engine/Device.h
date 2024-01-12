@@ -1,6 +1,7 @@
 #pragma once
 
 class ConstantBuffer;
+class Texture;
 class Device
 {
 	SINGLETON(Device)
@@ -11,11 +12,8 @@ private:
 	HWND											m_hRenderWnd;
 	Microsoft::WRL::ComPtr<IDXGISwapChain>			m_pSwapChain;
 
-	Microsoft::WRL::ComPtr<ID3D11RenderTargetView>	m_pRTView;
-	Microsoft::WRL::ComPtr<ID3D11Texture2D>			m_pRTTex;
-
-	Microsoft::WRL::ComPtr<ID3D11DepthStencilView>	m_pDSView;
-	Microsoft::WRL::ComPtr<ID3D11Texture2D>			m_pDSTex;
+	Texture*										m_pRTTex;
+	Texture*										m_pDSTex;
 
 	ConstantBuffer*									m_arrConstantBuffer[(UINT)CB_TYPE::END];
 

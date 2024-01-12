@@ -152,6 +152,42 @@ void ResourceManager::CreateDefaultMaterial()
 	Load<Material>(L"Resource\\Material\\debug_Material.txt");
 }
 
+Texture* ResourceManager::CreateTexture(const std::wstring& _strKey, UINT _width, UINT _height, DXGI_FORMAT _format, UINT _bindFlags, D3D11_USAGE _usage)
+{
+	Texture* pTex = new Texture();
+
+	if (FAILED(pTex->Create(_width, _height, _format, _bindFlags, _usage)))
+	{
+		MessageBoxW(nullptr, L"Texture 생성 실패", L"리소스 생성 실패", MB_OK);
+		return nullptr;
+	}
+
+	if (FAILED(AddResource(_strKey, pTex)))
+	{
+		return nullptr;
+	}
+
+	return pTex;
+}
+
+Texture* ResourceManager::CreateTexture(const std::wstring& _strKey, Microsoft::WRL::ComPtr<ID3D11Texture2D> _tex2D)
+{
+	Texture* pTex = new Texture();
+
+	if (FAILED(pTex->Create(_tex2D)))
+	{
+		MessageBoxW(nullptr, L"Texture 생성 실패", L"리소스 생성 실패", MB_OK);
+		return nullptr;
+	}
+
+	if (FAILED(AddResource(_strKey, pTex)))
+	{
+		return nullptr;
+	}
+
+	return pTex;
+}
+
 void ResourceManager::LoadAllResource(CHAPTERLEVEL _level) // Load All chapter resource , 순서는 Shader -> Image -> Material 순으로 로드
 {
 	//filesystem::path filePath = GetContentPath();

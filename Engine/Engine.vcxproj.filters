@@ -61,9 +61,6 @@
     <Filter Include="02_Derived\Resource\Shader\ComputerShader">
       <UniqueIdentifier>{75779e23-2aea-4d1c-bffa-ae30978887f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Resource\Shader\Texture">
-      <UniqueIdentifier>{62893589-68fd-4f68-bbe8-8cc05bb484b8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\02_Manager">
       <UniqueIdentifier>{ba5a6859-296a-4bb7-a7d4-3f52267484b5}</UniqueIdentifier>
     </Filter>
@@ -132,6 +129,9 @@
     </Filter>
     <Filter Include="01_Basic\03_OBJ\Component\Light2D">
       <UniqueIdentifier>{4347232e-8c71-4538-860e-748f7e574e70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Texture">
+      <UniqueIdentifier>{62893589-68fd-4f68-bbe8-8cc05bb484b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -233,7 +233,7 @@
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>02_Derived\Resource\Shader\Texture</Filter>
+      <Filter>02_Derived\Resource\Texture</Filter>
     </ClInclude>
     <ClInclude Include="Material.h">
       <Filter>02_Derived\Resource\Material</Filter>
@@ -353,7 +353,7 @@
       <Filter>0_Default\Header</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>02_Derived\Resource\Shader\Texture</Filter>
+      <Filter>02_Derived\Resource\Texture</Filter>
     </ClCompile>
     <ClCompile Include="functions.cpp">
       <Filter>0_Default\Header</Filter>
