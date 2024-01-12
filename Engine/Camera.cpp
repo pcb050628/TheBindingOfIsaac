@@ -14,6 +14,7 @@
 
 #include "Material.h"
 #include "GraphicsShader.h"
+#include "Texture.h"
 
 Camera::Camera() : Component(COMPONENT_TYPE::CAMERA)\
 	, m_ProjType(PROJ_TYPE::ORTHOGRAPHICS)
@@ -119,6 +120,7 @@ void Camera::Render()
 	Render(m_Opaque);
 	Render(m_Masked);
 	Render(m_Transparent);
+
 	Render_PostProcess();
 }
 
@@ -136,6 +138,10 @@ void Camera::Render_PostProcess()
 {
 	for (int i = 0; i < m_PostProcess.size(); i++)
 	{
+		RenderManager::GetInst()->CopyRenderTargetToPostProcessTex();
+		Texture* pPostProcessTex = RenderManager::GetInst()->GetPostProcessTex();
+		pPostProcessTex->UpdateData(13);
+
 		m_PostProcess[i]->Render();
 	}
 

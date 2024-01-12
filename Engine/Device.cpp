@@ -24,7 +24,7 @@ Device::~Device()
 
 int Device::Init(HWND _hwnd, Vec2 _resolution)
 {
-	m_vResolution = _resolution;
+	m_vRenderResolution = _resolution;
 	m_hRenderWnd = _hwnd;
 
 	{ // device initialize
@@ -92,8 +92,8 @@ int Device::Init(HWND _hwnd, Vec2 _resolution)
 
 		viewport.TopLeftX = 0;
 		viewport.TopLeftY = 0;
-		viewport.Width = m_vResolution.x;
-		viewport.Height = m_vResolution.y;
+		viewport.Width = m_vRenderResolution.x;
+		viewport.Height = m_vRenderResolution.y;
 		viewport.MaxDepth = 1.f;
 		viewport.MinDepth = 0.f;
 
@@ -124,8 +124,8 @@ int Device::CreateSwapChain()
 	DXGI_SWAP_CHAIN_DESC swapChainDesc = {};
 	swapChainDesc.BufferCount = 1;
 	swapChainDesc.BufferUsage = DXGI_USAGE_RENDER_TARGET_OUTPUT;
-	swapChainDesc.BufferDesc.Width = (UINT)m_vResolution.x;
-	swapChainDesc.BufferDesc.Height = (UINT)m_vResolution.y;
+	swapChainDesc.BufferDesc.Width = (UINT)m_vRenderResolution.x;
+	swapChainDesc.BufferDesc.Height = (UINT)m_vRenderResolution.y;
 	swapChainDesc.BufferDesc.Format = DXGI_FORMAT_R8G8B8A8_UNORM;
 	swapChainDesc.BufferDesc.RefreshRate.Denominator = 1;
 	swapChainDesc.BufferDesc.RefreshRate.Numerator = 60;
@@ -180,8 +180,8 @@ int Device::CreateDepthStencilView()
 
 	desc.BindFlags = D3D11_BIND_DEPTH_STENCIL;
 
-	desc.Width = (UINT)m_vResolution.x;
-	desc.Height = (UINT)m_vResolution.y;
+	desc.Width = (UINT)m_vRenderResolution.x;
+	desc.Height = (UINT)m_vRenderResolution.y;
 
 	desc.CPUAccessFlags = 0;
 	desc.Usage = D3D11_USAGE_DEFAULT;
@@ -195,7 +195,7 @@ int Device::CreateDepthStencilView()
 	desc.ArraySize = 1;
 
 	m_pDSTex = ResourceManager::GetInst()->CreateTexture(L"DeviceDepthStencilTexture"
-														, (UINT)m_vResolution.x, (UINT)m_vResolution.y
+														, (UINT)m_vRenderResolution.x, (UINT)m_vRenderResolution.y
 														, DXGI_FORMAT_D24_UNORM_S8_UINT, D3D11_BIND_DEPTH_STENCIL);
 
 	if (!m_pDSTex)

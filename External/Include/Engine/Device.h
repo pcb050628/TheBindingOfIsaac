@@ -22,7 +22,7 @@ private:
 	Microsoft::WRL::ComPtr<ID3D11BlendState>		m_arrBS[(UINT)BS_TYPE::END];
 	Microsoft::WRL::ComPtr<ID3D11SamplerState>		m_arrSS[2];
 
-	Vec2											m_vResolution;
+	Vec2											m_vRenderResolution;
 	Vec4											m_vClearColor;
 	
 public:
@@ -43,7 +43,7 @@ public:
 
 	void SetClearColor(Vec4 norm_color) { m_vClearColor = norm_color; }
 
-	Vec2 GetResolution() { return m_vResolution; }
+	Vec2 GetResolution() { return m_vRenderResolution; }
 
 private:
 	int CreateSwapChain();
