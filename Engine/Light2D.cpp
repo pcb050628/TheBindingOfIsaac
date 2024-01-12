@@ -16,7 +16,7 @@ Light2D::~Light2D()
 
 void Light2D::LateUpdate()
 {
-	Vec3 vPos = GetOwner()->GetTransform()->GetRelativePos();
+	Vec3 vPos = GetOwner()->GetTransform()->GetWorldPos();
 	Vec3 vDir = GetOwner()->GetTransform()->GetWorldDir(DIR_TYPE::RIGHT);
 
 	m_Info.vWorldPos = vPos;

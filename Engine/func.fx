@@ -42,8 +42,12 @@ void CalLight2D(float3 _WorldPos, int _LightIdx, inout tLightColor _output)
     // Spot Light
     else
     {
-        float fDist = distance(info.vWorldPos.xy, _WorldPos.xy);
-        float fTheta = dot((_WorldPos.xy - info.vWorldPos.xy), info.vWorldDir.xy) / (length(_WorldPos.xy - info.vWorldPos.xy) * length(info.vWorldDir.xy));
+        float fDist = distance(_WorldPos.xy, info.vWorldPos.xy);
+        
+        float2 vec1 = normalize(_WorldPos.xy - info.vWorldPos.xy);
+        float2 vec2 = normalize(info.vWorldDir.xy);
+        
+        float fTheta = acos(dot(vec1, vec2));
         
         float RadToDeg = fTheta * (180 / PI);
         

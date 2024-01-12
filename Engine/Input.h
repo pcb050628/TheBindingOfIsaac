@@ -4,13 +4,17 @@
 
 using namespace std;
 
+#define KEY_HOLD(key) Input::GetInst()->CompareKeyState(Key::##key, KeyState::Hold)
+#define KEY_PRESSED(key) Input::GetInst()->CompareKeyState(Key::##key, KeyState::Pressed)
+#define KEY_RELEASE(key) Input::GetInst()->CompareKeyState(Key::##key, KeyState::Release)
+
 enum class Key
 {
 	Q,W,E,R,T,Y,U,I,O,P,
 	A,S,D,F,G,H,J,K,L,
 	Z,X,C,V,B,N,M,
 
-	Up,Left,Down,Right,
+	UP,LEFT,DOWN,RIGHT,
 	MLBTN,MRBTN,
 	TAB,
 

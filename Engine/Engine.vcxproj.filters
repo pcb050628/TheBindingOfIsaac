@@ -127,6 +127,9 @@
     <Filter Include="01_Basic\03_OBJ\Component\06. Light2D">
       <UniqueIdentifier>{4347232e-8c71-4538-860e-748f7e574e70}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\03_OBJ\Script\SpotLightTest">
+      <UniqueIdentifier>{787dacd8-7900-4b44-9daa-6fc1cebbdbfd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -253,6 +256,9 @@
     <ClInclude Include="Light2D.h">
       <Filter>01_Basic\03_OBJ\Component\06. Light2D</Filter>
     </ClInclude>
+    <ClInclude Include="SpotLight2DMove.h">
+      <Filter>01_Basic\03_OBJ\Script\SpotLightTest</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -369,6 +375,9 @@
     </ClCompile>
     <ClCompile Include="Light2D.cpp">
       <Filter>01_Basic\03_OBJ\Component\06. Light2D</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight2DMove.cpp">
+      <Filter>01_Basic\03_OBJ\Script\SpotLightTest</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

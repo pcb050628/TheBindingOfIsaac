@@ -26,15 +26,15 @@ void Transform::LateUpdate()
 {
 	m_matWorld = DirectX::XMMatrixIdentity();
 
-	Matrix matPosition = DirectX::XMMatrixTranslation(m_vRelativePos.x, m_vRelativePos.y, m_vRelativePos.z);
+	Matrix matTranslation = DirectX::XMMatrixTranslation(m_vRelativePos.x, m_vRelativePos.y, m_vRelativePos.z);
 
 	Matrix matScale = DirectX::XMMatrixScaling(m_vRelativeScale.x, m_vRelativeScale.y, m_vRelativeScale.z);
 
 	Matrix matRotateX = DirectX::XMMatrixRotationX(m_vRelativeRot.x);
-	Matrix matRotateY = DirectX::XMMatrixRotationX(m_vRelativeRot.y);
-	Matrix matRotateZ = DirectX::XMMatrixRotationX(m_vRelativeRot.z);
+	Matrix matRotateY = DirectX::XMMatrixRotationY(m_vRelativeRot.y);
+	Matrix matRotateZ = DirectX::XMMatrixRotationZ(m_vRelativeRot.z);
 
-	m_matWorld = matScale * matRotateX * matRotateY * matRotateZ * matPosition;
+	m_matWorld = matScale * matRotateX * matRotateY * matRotateZ * matTranslation;
 
 	m_vLocalDir[(UINT)DIR_TYPE::RIGHT] = Vec3(1.f, 0.f, 0.f);
 	m_vLocalDir[(UINT)DIR_TYPE::UP]	  = Vec3(0.f, 1.f, 0.f);
@@ -42,9 +42,8 @@ void Transform::LateUpdate()
 
 	for (int i = 0; i < (UINT)DIR_TYPE::END; i++)
 	{
-		m_vLocalDir[i] = DirectX::XMVector3TransformNormal(m_vLocalDir[i], m_matWorld);
-		m_vLocalDir[i].Normalize();
-		m_vWorldDir[i] = m_vLocalDir[i];
+		m_vLocalDir[i] = XMVector3TransformNormal(m_vLocalDir[i], m_matWorld);
+		m_vWorldDir[i] = m_vLocalDir[i].Normalize();
 	}
 
 	if (GetOwner()->GetParent())

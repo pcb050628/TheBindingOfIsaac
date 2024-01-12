@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include "define.h"
 
+#define DT Time::GetInst()->GetDeltaTime();
+
 class Time
 {
 	SINGLETON(Time)

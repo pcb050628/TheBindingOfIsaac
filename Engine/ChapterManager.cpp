@@ -3,8 +3,12 @@
 #include "TaskManager.h"
 #include "ResourceManager.h"
 
+#include "Device.h"
+
 #include "GameObject.h"
 #include "components.h"
+
+#include "SpotLight2DMove.h"
 
 ChapterManager::ChapterManager()
 	: m_CurChapter(nullptr)
@@ -88,13 +92,19 @@ void ChapterManager::Init()
 	gobj = new GameObject;
 	gobj->AddComponent(new Transform);
 	gobj->AddComponent(new Light2D);
+	gobj->AddComponent(new SpotLight2DMove);
 
 	gobj->GetTransform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
 
-	gobj->GetLight2D()->SetLigthType(LIGHT_TYPE::DIRECTIONAL);
-	gobj->GetLight2D()->SetAmbient(Vec4(1.f));
+	gobj->GetLight2D()->SetLigthType(LIGHT_TYPE::SPOT);
+	//gobj->GetLight2D()->SetAmbient(Vec4(1.f));
+	gobj->GetLight2D()->SetRadius(100.f);
+	gobj->GetLight2D()->SetAngle(60.f);
+	gobj->GetLight2D()->SetLightColor(Vec4(1.f));
 
 	AddGameObject(gobj, LAYER_TYPE::Light);
+
+	Device::GetInst()->SetClearColor(Vec4(0.f, 0.f, 0.f, 1.f));
 }
 
 void ChapterManager::Update()

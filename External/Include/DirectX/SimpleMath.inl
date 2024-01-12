@@ -945,12 +945,13 @@ inline Vector3 Vector3::Cross(const Vector3& V) const noexcept
     return result;
 }
 
-inline void Vector3::Normalize() noexcept
+inline Vector3& Vector3::Normalize() noexcept
 {
     using namespace DirectX;
-    const XMVECTOR v1 = XMLoadFloat3(this);
-    const XMVECTOR X = XMVector3Normalize(v1);
+    XMVECTOR v1 = XMLoadFloat3(this);
+    XMVECTOR X = XMVector3Normalize(v1);
     XMStoreFloat3(this, X);
+    return *this;
 }
 
 inline void Vector3::Normalize(Vector3& result) const noexcept
