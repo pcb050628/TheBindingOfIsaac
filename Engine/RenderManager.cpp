@@ -55,8 +55,6 @@ void RenderManager::Update()
 	Render_Debug();
 
 	Clear();
-
-	Device::GetInst()->DrawEnd();
 }
 
 void RenderManager::UpdateData()

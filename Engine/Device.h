@@ -39,7 +39,7 @@ public:
 	int Init(HWND _hwnd, Vec2 _resolution);
 	
 	void DrawStart();
-	void DrawEnd() { m_pSwapChain->Present(0, 0); }
+	void Present() { m_pSwapChain->Present(0, 0); }
 
 	void SetClearColor(Vec4 norm_color) { m_vClearColor = norm_color; }
 

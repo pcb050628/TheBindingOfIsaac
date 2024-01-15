@@ -4,14 +4,23 @@
     <Filter Include="Default">
       <UniqueIdentifier>{16ff3c47-b541-4624-a5db-bd9be62dec09}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Default\Source">
-      <UniqueIdentifier>{a70bec0e-8252-4f1a-9129-9f0ffd92d5f2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Default\Header">
       <UniqueIdentifier>{6fb01863-0a20-4c3a-b533-f86528f5affe}</UniqueIdentifier>
     </Filter>
     <Filter Include="Default\Resource">
       <UniqueIdentifier>{0c4c32c0-6d1c-4a87-9898-0d02159cca59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGui">
+      <UniqueIdentifier>{c358980b-941b-489b-8e9c-6ebacc65f959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default\pch">
+      <UniqueIdentifier>{43ab4c61-1f19-4121-bfdc-ecdf461825c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGuiManager">
+      <UniqueIdentifier>{8992aaa4-cbc7-4d6c-9f1b-a5291683b3dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI">
+      <UniqueIdentifier>{e33c2fae-01b9-49b6-a627-d829672f9758}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,6 +36,39 @@
     <ClInclude Include="main.h">
       <Filter>Default\Header</Filter>
     </ClInclude>
+    <ClInclude Include="imgui.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_dx11.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_impl_win32.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imgui_internal.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_rectpack.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_textedit.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imstb_truetype.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="imconfig.h">
+      <Filter>ImGui</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Default\pch</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiManager.h">
+      <Filter>ImGuiManager</Filter>
+    </ClInclude>
+    <ClInclude Include="GUI.h">
+      <Filter>GUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -37,8 +79,36 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Default\Source</Filter>
+    <ClCompile Include="imgui.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_demo.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_draw.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_dx11.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_impl_win32.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_tables.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="imgui_widgets.cpp">
+      <Filter>ImGui</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Default\pch</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiManager.cpp">
+      <Filter>ImGuiManager</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="GUI.cpp">
+      <Filter>GUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

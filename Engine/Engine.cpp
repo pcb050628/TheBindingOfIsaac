@@ -43,12 +43,7 @@ void Engine::Init(HWND _hWnd, const RECT& _Resolution)
 	Test::GetInst()->Init();
 }
 
-void Engine::Run()
-{
-	Update();
-}
-
-void Engine::Update()
+void Engine::Progress()
 {
 	Time::GetInst()->Update();
 	Input::GetInst()->Update();

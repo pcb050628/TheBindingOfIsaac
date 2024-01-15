@@ -15,9 +15,7 @@ private:
 
 public:
 	void Init(HWND _hWnd, const RECT& _Resolution);
-	void Run();
-	void Update();
-	void Render();
+	void Progress();
 
 	void SetWindowSize(const RECT& _Resolution, bool _menu);
 

@@ -100,8 +100,6 @@ int Device::Init(HWND _hwnd, Vec2 _resolution)
 		m_pContext->RSSetViewports(1, &viewport);
 	}
 
-	m_pContext->OMSetRenderTargets(1, m_pRTTex->GetRTV().GetAddressOf(), m_pDSTex->GetDSV().Get());
-
 	m_vClearColor = Vec4(0.3f, 0.3f, 0.3f, 1.f);
 
 	return S_OK;
@@ -117,6 +115,8 @@ void Device::DrawStart()
 
 	m_pContext->ClearRenderTargetView(m_pRTTex->GetRTV().Get(), color);
 	m_pContext->ClearDepthStencilView(m_pDSTex->GetDSV().Get(), D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH | D3D11_CLEAR_FLAG::D3D11_CLEAR_STENCIL, 1.f, 0);
+
+	m_pContext->OMSetRenderTargets(1, m_pRTTex->GetRTV().GetAddressOf(), m_pDSTex->GetDSV().Get());
 }
 
 int Device::CreateSwapChain()
