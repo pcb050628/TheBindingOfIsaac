@@ -22,6 +22,27 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{e33c2fae-01b9-49b6-a627-d829672f9758}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\Inspector">
+      <UniqueIdentifier>{010163e1-b70c-4de4-b171-3ac14110ff77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Outliner">
+      <UniqueIdentifier>{d631dd2c-d92a-4722-9061-67414ddbb305}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Content">
+      <UniqueIdentifier>{990191bd-873e-4fbe-9532-ccb18d0ea019}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Inspector\Component">
+      <UniqueIdentifier>{19e4c36d-bfa3-41ea-acd7-a127dad84adb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Inspector\Resource">
+      <UniqueIdentifier>{3522cb50-7cdf-4fcb-bc87-aa6f95315c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Inspector\Component\Transform">
+      <UniqueIdentifier>{d269db0c-60bb-4b98-b7ee-b8da3990cd43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Inspector\Component\MeshRenderer">
+      <UniqueIdentifier>{8236df18-1e23-4cf8-bbbd-3c86694f75a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -69,6 +90,12 @@
     <ClInclude Include="GUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="Inspector.h">
+      <Filter>GUI\Inspector</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformGUI.h">
+      <Filter>GUI\Inspector\Component\Transform</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -109,6 +136,12 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="GUI.cpp">
       <Filter>GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="Inspector.cpp">
+      <Filter>GUI\Inspector</Filter>
+    </ClCompile>
+    <ClCompile Include="TransformGUI.cpp">
+      <Filter>GUI\Inspector\Component\Transform</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

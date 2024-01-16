@@ -1,10 +1,11 @@
 #include "pch.h"
 #include "ImGuiManager.h"
 
-
 #include "imgui.h"
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
+
+#include "GUI.h"
 
 ImGuiManager::ImGuiManager()
 {}
@@ -75,14 +76,21 @@ void ImGuiManager::Update()
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::Begin("hello");
-    ImGui::SetWindowSize(ImVec2(200, 200));
-    ImGui::Button("button");
-    ImGui::End();
+    std::map<std::string, GUI*>::iterator iter = m_mapGUI.begin();
+    for (; iter != m_mapGUI.end(); iter++)
+    {
+        iter->second->Update();
+    }
 }
 
 void ImGuiManager::Render()
 {
+    std::map<std::string, GUI*>::iterator iter = m_mapGUI.begin();
+    for (; iter != m_mapGUI.end(); iter++)
+    {
+        iter->second->Render();
+    }
+
     // Rendering
     ImGui::Render();
     ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
