@@ -5,7 +5,7 @@ class SpotLight2DMove :
     public Script
 {
 public:
-    void LateUpdate() override;
+    void Update() override;
 
 public:
     SpotLight2DMove();

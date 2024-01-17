@@ -43,6 +43,18 @@
     <Filter Include="GUI\Inspector\Component\MeshRenderer">
       <UniqueIdentifier>{8236df18-1e23-4cf8-bbbd-3c86694f75a2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\Inspector\Component\Camera">
+      <UniqueIdentifier>{830168cc-ef12-4573-984f-194b0cf570a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Inspector\Component\Animator2D">
+      <UniqueIdentifier>{c3eefe1b-3044-44bc-a3c4-296bf7e20b23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Inspector\Component\Collider2D">
+      <UniqueIdentifier>{dfd586dc-b44f-43b5-a753-0e634aa3105b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Inspector\Component\Light2D">
+      <UniqueIdentifier>{6a9ba4cd-8533-42b0-80d0-cec6e6ee1a01}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -96,6 +108,12 @@
     <ClInclude Include="TransformGUI.h">
       <Filter>GUI\Inspector\Component\Transform</Filter>
     </ClInclude>
+    <ClInclude Include="ComponentGUI.h">
+      <Filter>GUI\Inspector\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Animator2DGUI.h">
+      <Filter>GUI\Inspector\Component\Animator2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -142,6 +160,12 @@
     </ClCompile>
     <ClCompile Include="TransformGUI.cpp">
       <Filter>GUI\Inspector\Component\Transform</Filter>
+    </ClCompile>
+    <ClCompile Include="ComponentGUI.cpp">
+      <Filter>GUI\Inspector\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Animator2DGUI.cpp">
+      <Filter>GUI\Inspector\Component\Animator2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

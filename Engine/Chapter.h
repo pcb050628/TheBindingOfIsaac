@@ -9,16 +9,19 @@ private:
     vector<Room*> m_Rooms;
     Room* m_CurRoom;
 
+    bool m_bEditMode;
+
 public:
     virtual void Update();
     virtual void LateUpdate();
-    virtual void Render();
 
     virtual Room* GetCurRoom() { return m_CurRoom; }
 
     void DetachGameObject(GameObject* _obj);
 
-    void GenerateRooms(CHAPTERLEVEL _level);
+    void GenerateRooms(CHAPTER_LEVEL _level);
+
+    void SetEditMode(bool _bValue);
 
 private:
     void ChangeRoom(DIRECTION _dir)

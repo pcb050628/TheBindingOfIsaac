@@ -44,7 +44,7 @@ void GUI::Render()
 		}
 		else
 		{
-			ImGui::BeginChild(std::string(m_strName + m_strID).c_str());
+			ImGui::BeginChild(std::string(m_strName + m_strID).c_str(), m_Size);
 
 			RenderUpdate();
 

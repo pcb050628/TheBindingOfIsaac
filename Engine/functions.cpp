@@ -14,7 +14,7 @@ bool IsValid(Entity* _entity)
 		return false;
 }
 
-void ChangeChapter(CHAPTERLEVEL _level)
+void ChangeChapter(CHAPTER_LEVEL _level)
 {
 	Task task;
 	task.Type = TASKTYPE::CHANGE_CHAPTER;
@@ -65,4 +65,28 @@ std::wstring GetContentPath()
 	}
 
 	return directoryPath + L"\\Content\\";
+}
+
+std::wstring ToWstring(const std::string& _str)
+{ 
+	return std::wstring(_str.begin(), _str.end()); 
+}
+
+std::string ToString(const std::wstring& _str)
+{
+	return std::string(_str.begin(), _str.end());
+}
+
+void Vec3::ToDegree()
+{
+	x = x * (180 / PI);
+	y = y * (180 / PI);
+	z = z * (180 / PI);
+}
+
+void Vec3::ToRadian()
+{
+	x = x * (PI / 180);
+	y = y * (PI / 180);
+	z = z * (PI / 180);
 }

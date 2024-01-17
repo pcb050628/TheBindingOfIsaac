@@ -26,17 +26,18 @@ void Chapter::LateUpdate()
 	m_CurRoom->LateUpdate();
 }
 
-void Chapter::Render()
-{
-	m_CurRoom->Render();
-}
-
 void Chapter::DetachGameObject(GameObject* _obj)
 {
 	m_CurRoom->DetachGameObject(_obj);
 }
 
-void Chapter::GenerateRooms(CHAPTERLEVEL _level)
+void Chapter::GenerateRooms(CHAPTER_LEVEL _level)
 {
 	// 만들어진 room 에셋들을 챕터단계에 맞게 랜덤하고 겹치지않게 불러오기
+}
+
+void Chapter::SetEditMode(bool _bValue)
+{
+	m_bEditMode = _bValue;
+	m_CurRoom->SetEditMode(_bValue);
 }

@@ -146,6 +146,9 @@ namespace DirectX
             Vector2 operator+ () const noexcept { return *this; }
             Vector2 operator- () const noexcept { return Vector2(-x, -y); }
 
+            typedef float(&f2)[2];
+            operator f2() const { return (f2)x; }
+
             // Vector operations
             bool InBounds(const Vector2& Bounds) const noexcept;
 
@@ -259,11 +262,17 @@ namespace DirectX
             Vector3 operator+ () const noexcept { return *this; }
             Vector3 operator- () const noexcept;
 
+            typedef float(&f3)[3];
+            operator f3() const { return (f3)x; }
+
             // Vector operations
             bool InBounds(const Vector3& Bounds) const noexcept;
 
             float Length() const noexcept;
             float LengthSquared() const noexcept;
+
+            void ToDegree();
+            void ToRadian();
 
             float Dot(const Vector3& V) const noexcept;
             void Cross(const Vector3& V, Vector3& result) const noexcept;

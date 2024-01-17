@@ -95,8 +95,8 @@ void CollisionManager::LayerCollisionCheck(UINT _left, UINT _right)
 					}
 					else
 					{
-						objLeft[i]->GetCollider2D()->Overlap(objRight[j]->GetCollider2D());
-						objRight[j]->GetCollider2D()->Overlap(objLeft[i]->GetCollider2D());
+						objLeft[i]->GetCollider2D()->BeginOverlap(objRight[j]->GetCollider2D());
+						objRight[j]->GetCollider2D()->BeginOverlap(objLeft[i]->GetCollider2D());
 						iter->second = true;
 					}
 				}

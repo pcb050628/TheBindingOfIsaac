@@ -1,17 +1,12 @@
 #pragma once
-#include "GUI.h"
+#include "ComponentGUI.h"
 
 class GameObject;
 class TransformGUI :
-    public GUI
+    public ComponentGUI
 {
-private:
-    GameObject* m_TargetObject;
-    
 public:
     void RenderUpdate() override;
-
-    void SetTargetObject(GameObject* _object);
 
 public:
     TransformGUI();

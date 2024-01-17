@@ -36,6 +36,11 @@ void GameObject::Update()
 			m_Components[i]->Update();
 	}
 
+	for (int i = 0; i < m_Scripts.size(); i++)
+	{
+		m_Scripts[i]->Update();
+	}
+
 	for (GameObject* child : m_ChildObjs)
 	{
 		child->Update();
@@ -48,11 +53,6 @@ void GameObject::LateUpdate()
 	{
 		if (m_Components[i] != nullptr)
 			m_Components[i]->LateUpdate();
-	}
-
-	for (int i = 0; i < m_Scripts.size(); i++)
-	{
-		m_Scripts[i]->LateUpdate();
 	}
 
 	ChapterManager::GetInst()->RegisterObj(this, (LAYER_TYPE)m_iLayerIdx);

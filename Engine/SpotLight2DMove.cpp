@@ -10,7 +10,7 @@ SpotLight2DMove::~SpotLight2DMove()
 {
 }
 
-void SpotLight2DMove::LateUpdate()
+void SpotLight2DMove::Update()
 {
 	Vec3 vRot = GetTransform()->GetRelativeRotation();
 	Vec3 vPos = GetTransform()->GetRelativePos();
@@ -42,6 +42,6 @@ void SpotLight2DMove::LateUpdate()
 	}
 
 
-	GetTransform()->SetRelativeRot(vRot);
+	GetTransform()->SetRelativeRotation(vRot);
 	GetTransform()->SetRelativePos(vPos);
 }

@@ -56,18 +56,21 @@ void Anim::UpdateData()
 
 void Anim::LateUpdate()
 {
-	m_fAccTime += Time::GetInst()->GetDeltaTime();
-	
-	if (m_fAccTime > m_fDuration)
+	if (m_bIsPlaying)
 	{
-		m_CurFrameIdx++;
-		m_fAccTime = 0;
-		if (m_Frames.size() <= m_CurFrameIdx)
+		m_fAccTime += Time::GetInst()->GetDeltaTime();
+		
+		if (m_fAccTime > m_fDuration)
 		{
-			if (m_bIsRepeat)
-				m_CurFrameIdx = 0;
-			else
-				--m_CurFrameIdx;
+			m_CurFrameIdx++;
+			m_fAccTime = 0;
+			if (m_Frames.size() <= m_CurFrameIdx)
+			{
+				if (m_bIsRepeat)
+					m_CurFrameIdx = 0;
+				else
+					--m_CurFrameIdx;
+			}
 		}
 	}
 }

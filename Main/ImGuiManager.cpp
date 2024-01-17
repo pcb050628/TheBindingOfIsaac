@@ -5,7 +5,11 @@
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
 
+#include <Engine/ChapterManager.h>
+
 #include "GUI.h"
+
+#include "Inspector.h"
 
 ImGuiManager::ImGuiManager()
 {}
@@ -62,6 +66,8 @@ void ImGuiManager::Init(HWND _hMainWnd, Microsoft::WRL::ComPtr<ID3D11Device> _De
     //io.Fonts->AddFontFromFileTTF("../../misc/fonts/Cousine-Regular.ttf", 15.0f);
     //ImFont* font = io.Fonts->AddFontFromFileTTF("c:\\Windows\\Fonts\\ArialUni.ttf", 18.0f, nullptr, io.Fonts->GetGlyphRangesJapanese());
     //IM_ASSERT(font != nullptr);
+
+    CrateGUI();
 }
 
 void ImGuiManager::Progress()
@@ -75,6 +81,14 @@ void ImGuiManager::Update()
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
+
+    ImGui::ShowDemoWindow();
+
+    if (!((Inspector*)FindGUI("##Inspector"))->GetTargetObject())
+    {
+        GameObject* gobj = ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->FindObject(L"test_rock");
+        ((Inspector*)FindGUI("##Inspector"))->SetTargetObject(gobj);
+    }
 
     std::map<std::string, GUI*>::iterator iter = m_mapGUI.begin();
     for (; iter != m_mapGUI.end(); iter++)
@@ -101,4 +115,11 @@ void ImGuiManager::Render()
         ImGui::UpdatePlatformWindows();
         ImGui::RenderPlatformWindowsDefault();
     }
-}   
+}
+
+void ImGuiManager::CrateGUI()
+{
+    GUI* gui = new Inspector;
+    m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
+
+}

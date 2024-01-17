@@ -36,7 +36,7 @@ public:
 
     void SetRelativePos(Vec3 _pos) { m_vRelativePos = _pos; }
     void SetRelativeScale(Vec3 _scale) { m_vRelativeScale = _scale; }
-    void SetRelativeRot(Vec3 _rotate) { m_vRelativeRot = _rotate; }
+    void SetRelativeRotation(Vec3 _rotate) { m_vRelativeRot = _rotate; }
 
 public:
     Transform();

@@ -23,6 +23,7 @@ public:
 
     void RegisterObject(GameObject* _obj);
 
+    vector<GameObject*> GetParentObjects() { return m_Parents; }
     const vector<GameObject*>& GetGameObject() { return m_Gobjs; }
 
 public:

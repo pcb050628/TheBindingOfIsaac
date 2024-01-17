@@ -27,12 +27,12 @@ ChapterManager::~ChapterManager()
 
 void ChapterManager::Init()
 {
-	for (int i = 0; i < 4; i++)
+	for (int i = 0; i < (UINT)CHAPTER_LEVEL::END; i++)
 	{
 		m_Chapters[i] = new Chapter;
 	}
 
-	m_CurChapter = m_Chapters[0];
+	m_CurChapter = m_Chapters[(UINT)CHAPTER_LEVEL::EDIT];
 
 	// Anim Test obj
 	GameObject* gobj = new GameObject;
@@ -46,8 +46,8 @@ void ChapterManager::Init()
 	gobj->GetAnimator2D()->CreateAnim(L"test_anim", ResourceManager::GetInst()->Find<Texture>(L"Rocks"), Vec2(0.f, 0.f), Vec2(32.f, 32.f), Vec2(0.f, 0.f), Vec2(40.f, 40.f), 6, 1);
 	gobj->GetAnimator2D()->Play(L"test_anim", true);
 
-	gobj->SetName(L"test_player");
-	AddGameObject(gobj, LAYER_TYPE::Player);
+	gobj->SetName(L"test_rock");
+	AddGameObject(gobj, LAYER_TYPE::Object);
 
 	// UI Test obj
 	gobj = new GameObject;
@@ -110,11 +110,6 @@ void ChapterManager::Update()
 	m_CurChapter->LateUpdate();
 }
 
-void ChapterManager::Render()
-{
-	m_CurChapter->Render();
-}
-
 void ChapterManager::DetachGameObject(GameObject* _obj)
 {
 	m_CurChapter->DetachGameObject(_obj);
@@ -123,5 +118,11 @@ void ChapterManager::DetachGameObject(GameObject* _obj)
 void ChapterManager::RegisterObj(GameObject* _obj, LAYER_TYPE _layerType)
 {
 	m_CurChapter->GetCurRoom()->GetLayer(_layerType)->RegisterObject(_obj);
+}
+
+void ChapterManager::SetEditMode(bool _bValue)
+{
+	m_bEditMode = _bValue;
+	m_CurChapter->SetEditMode(_bValue);
 }
 

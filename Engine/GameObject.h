@@ -55,6 +55,7 @@ public:
     RenderComponent* GetRenderCom() { return m_RenderComponent; }
 
     GameObject* GetParent() { return m_Parent; }
+    std::vector<GameObject*>& GetChild() { return m_ChildObjs; }
     void AttachChild(GameObject* _objChild);
 
     void DisconnectWithParent();

@@ -2,13 +2,13 @@
 #include "define.h"
 #include "Chapter.h"
 
-enum class CHAPTERLEVEL
+enum class CHAPTER_LEVEL
 {
 	BASEMENT,
 	CAVES,
 	DEPTHS,
 	WOMB,
-	GMLEVEL,
+	EDIT,
 	END,
 };
 
@@ -16,24 +16,26 @@ class ChapterManager
 {
 	SINGLETON(ChapterManager)
 private:
-	Chapter* m_Chapters[(UINT)CHAPTERLEVEL::END];
+	Chapter* m_Chapters[(UINT)CHAPTER_LEVEL::END];
 	Chapter* m_CurChapter;
+
+	bool m_bEditMode;
 
 public:
 	void Init();
 	void Update();
-	void Render();
-	void LateUpdate();
 
 	Chapter* GetCurChapter() { return m_CurChapter; }
-	Chapter* GetChpater(CHAPTERLEVEL _level) { return m_Chapters[(UINT)_level]; }
+	Chapter* GetChpater(CHAPTER_LEVEL _level) { return m_Chapters[(UINT)_level]; }
 
 	void DetachGameObject(class GameObject* _obj);
 
 	void RegisterObj(GameObject* _obj, LAYER_TYPE _layerType);
 
+	void SetEditMode(bool _bValue);
+
 private:
-	void ChangeChapter(CHAPTERLEVEL _level) { m_CurChapter = m_Chapters[(UINT)_level]; }
+	void ChangeChapter(CHAPTER_LEVEL _level) { m_CurChapter = m_Chapters[(UINT)_level]; }
 
 	friend class TaskManager;
 };

@@ -3,16 +3,19 @@
 
 #include "Engine/GameObject.h"
 
+#include "TransformGUI.h"
+#include "Animator2DGUI.h"
+
 Inspector::Inspector() : GUI("Inspector", "##Inspector")
 	, m_TargetObject(nullptr)
 	, m_TargetResource(nullptr)
-	, m_TransformGUI(nullptr)
-	, m_MeshRendererGUI(nullptr)
-	, m_CameraGUI(nullptr)
-	, m_Animator2DGUI(nullptr)
-	, m_Collider2DGUI(nullptr)
-	, m_Light2DGUI(nullptr)
+	, m_ComGUI{}
 {
+	m_ComGUI[(UINT)COMPONENT_TYPE::TRANSFORM] = new TransformGUI;
+	AddChild(m_ComGUI[(UINT)COMPONENT_TYPE::TRANSFORM]);
+
+	m_ComGUI[(UINT)COMPONENT_TYPE::ANIMATOR2D] = new Animator2DGUI;
+	AddChild(m_ComGUI[(UINT)COMPONENT_TYPE::ANIMATOR2D]);
 }
 
 Inspector::~Inspector()
@@ -31,7 +34,13 @@ void Inspector::RenderUpdate()
 
 void Inspector::SetTargetObject(GameObject* _object)
 {
-	//m_TransformGUI;
+	m_TargetObject = _object;
+
+	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+	{
+		if (nullptr != m_ComGUI[i])
+			m_ComGUI[i]->SetTargetObject(_object);
+	}
 }
 
 void Inspector::SetTargetResource(Resouce* _resouce)

@@ -47,7 +47,7 @@ void Test::Init()
 	cam->AddComponent(new Camera);
 	
 	cam->GetTransform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
-	cam->GetTransform()->SetRelativeRot(Vec3(0.f, 0.f, 0.f));
+	cam->GetTransform()->SetRelativeRotation(Vec3(0.f, 0.f, 0.f));
 	
 	m_Gobjs.push_back(cam);
 }

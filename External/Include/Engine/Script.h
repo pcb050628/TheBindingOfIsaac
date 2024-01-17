@@ -15,7 +15,8 @@ class Script :
 private:
 
 public:
-    virtual void LateUpdate() override {}
+    virtual void Update() override {}
+    virtual void LateUpdate() final {}
 
     GET_OTHER_COMPONENT(Transform);
     GET_OTHER_COMPONENT(MeshRenderer);

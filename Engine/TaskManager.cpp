@@ -31,7 +31,7 @@ void TaskManager::Update()
 			break;
 
 		case TASKTYPE::CHANGE_CHAPTER:
-			ChapterManager::GetInst()->ChangeChapter((CHAPTERLEVEL)task.Param_1);
+			ChapterManager::GetInst()->ChangeChapter((CHAPTER_LEVEL)task.Param_1);
 			break;
 
 		case TASKTYPE::CREATE_OBJECT:

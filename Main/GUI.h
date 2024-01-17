@@ -7,6 +7,7 @@ class GUI
 private:
 	std::string			m_strName;
 	const std::string	m_strID;
+	ImVec2				m_Size;
 
 	bool				m_bActive;
 
@@ -16,10 +17,15 @@ private:
 public:
 	void SetName(const std::string& _name) { m_strName = _name; }
 	const std::string& GetName() { return m_strName; }
+	const std::string& GetID() { return m_strID; }
+
+	void SetSize(ImVec2 _size) { m_Size = _size; }
+	ImVec2 GetSize() { return m_Size; }
 
 	void AddChild(GUI* _ui)
 	{
 		m_Child.push_back(_ui);
+		_ui->m_Parent = this;
 	}
 	GUI* GetParent() { return m_Parent; }
 
