@@ -18,34 +18,34 @@ Texture::~Texture()
 {
 }
 
-bool Texture::Load(const std::wstring& _strFilePath)
+bool Texture::Load(const std::wstring& _FileName)
 {
+	std::wstring fullPath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
+
 	wchar_t szExt[20] = {};
-	_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 20);
+	_wsplitpath_s(_FileName.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 20);
 
 	wchar_t szName[20] = {};
-	_wsplitpath_s(_strFilePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+	_wsplitpath_s(_FileName.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
 
 	m_ResourceName = szName;
-
-	std::wstring path = GetContentPath() + _strFilePath;
 
 	HRESULT hr = S_OK;
 
 	if (!wcscmp(szExt, L".dds") || !wcscmp(szExt, L".DDS"))
 	{
-		hr = LoadFromDDSFile(path.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, m_Image);
+		hr = LoadFromDDSFile(fullPath.c_str(), DirectX::DDS_FLAGS_NONE, nullptr, m_Image);
 	}
 
 	else if (!wcscmp(szExt, L".tga") || !wcscmp(szExt, L".TGA"))
 	{
-		hr = LoadFromTGAFile(path.c_str(), nullptr, m_Image);
+		hr = LoadFromTGAFile(fullPath.c_str(), nullptr, m_Image);
 	}
 
 	else
 	{
 		// png, bmp, jpg, jpeg
-		hr = LoadFromWICFile(path.c_str(), DirectX::WIC_FLAGS_NONE, nullptr, m_Image);
+		hr = LoadFromWICFile(fullPath.c_str(), DirectX::WIC_FLAGS_NONE, nullptr, m_Image);
 	}
 
 	if (FAILED(hr))
@@ -56,7 +56,7 @@ bool Texture::Load(const std::wstring& _strFilePath)
 	m_SRView->GetResource((ID3D11Resource**)m_Tex2D.GetAddressOf());
 	m_Tex2D->GetDesc(&m_Desc);
 
-	m_ResourcePath = _strFilePath;
+	m_ResourcePath = _FileName;
 
     return true;
 }

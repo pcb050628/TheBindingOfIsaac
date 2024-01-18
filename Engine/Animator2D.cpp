@@ -54,6 +54,13 @@ void Animator2D::AddAnim(Anim* _anim)
 	m_Anims.insert(make_pair(_anim->GetResourceName(), _anim));
 }
 
+void Animator2D::RemoveAnim(const std::wstring& _strKey)
+{
+	auto iter = m_Anims.find(_strKey);
+	if (iter != m_Anims.end())
+		m_Anims.erase(iter);
+}
+
 void Animator2D::Play(const std::wstring& _key, bool _repeat)
 {
 	auto iter = m_Anims.find(_key);

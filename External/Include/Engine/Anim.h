@@ -39,18 +39,25 @@ public:
     bool IsRepeat() { return m_bIsRepeat; }
 
 public:
-    bool Load(const std::wstring& _strFilePath) override;
+    bool Load(const std::wstring& _FileName) override;
     bool Save() override;
 
     void Create(Texture* _atlas, Vec2 _leftTop, Vec2 _sliceSize, Vec2 _offset, Vec2 _background, int _frmCount, int _FPS);
 
+    void CreateNewFrame();
+    void RemoveCurFrame();
+
     Texture* GetAtlas() { return m_Atlas; }
     Frame& GetCurFrame() { return m_Frames[m_CurFrameIdx]; }
     int GetCurFrameIdx() { return m_CurFrameIdx; }
+    int GetMaxFrameIdx() { return m_Frames.size(); }
     float GetDuration() { return m_fDuration; }
 
     void SetAtlas(Texture* _atlas) { m_Atlas = _atlas; }
-    void SetCurFrameIdx(int _idx) { if (_idx < m_Frames.size()) m_CurFrameIdx = _idx; }
+    void SetCurFrameIdx(int _idx) 
+    {
+        if (_idx < m_Frames.size()) m_CurFrameIdx = _idx; 
+    }
     void SetDuration(float _duration) { m_fDuration = _duration; }
 
 

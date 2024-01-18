@@ -26,32 +26,47 @@ Anim::~Anim()
 
 void Anim::UpdateData()
 {
-	ConstantBuffer* pCB = Device::GetInst()->GetConstBuffer(CB_TYPE::ANIMATION2D);
+	static ConstantBuffer* pCB = Device::GetInst()->GetConstBuffer(CB_TYPE::ANIMATION2D);
 
-	Vec2 leftop = m_Frames[m_CurFrameIdx].vLeftTop;
-	Vec2 slice = m_Frames[m_CurFrameIdx].vSliceSize;
-	Vec2 offset = m_Frames[m_CurFrameIdx].vOffset;
-	Vec2 backround = m_Frames[m_CurFrameIdx].vBackground;
+	if (nullptr == m_Atlas)
+	{
+		g_AnimData.UseAnim2D = 0;
+	}
+	else
+	{
+		Vec2 leftop = m_Frames[m_CurFrameIdx].vLeftTop;
+		Vec2 slice = m_Frames[m_CurFrameIdx].vSliceSize;
+		Vec2 offset = m_Frames[m_CurFrameIdx].vOffset;
+		Vec2 backround = m_Frames[m_CurFrameIdx].vBackground;
 
-	float Atlas_X = m_Atlas->GetWidth();
-	float Atlas_Y = m_Atlas->GetHeight();
+		float Atlas_X = m_Atlas->GetWidth();
+		float Atlas_Y = m_Atlas->GetHeight();
 
-	Vec2 UVLeftTop		= Vec2(leftop.x / (float)Atlas_X, leftop.y / (float)Atlas_Y);;
-	Vec2 UVSlice		= Vec2(slice.x / (float)Atlas_X, slice.y / (float)Atlas_Y);
-	Vec2 UVOffset		= Vec2(offset.x / (float)Atlas_X, offset.y / (float)Atlas_Y);
-	Vec2 UVBackground	= Vec2(backround.x / (float)Atlas_X, backround.y / (float)Atlas_Y);
+		Vec2 UVLeftTop = Vec2(leftop.x / (float)Atlas_X, leftop.y / (float)Atlas_Y);;
+		Vec2 UVSlice = Vec2(slice.x / (float)Atlas_X, slice.y / (float)Atlas_Y);
+		Vec2 UVOffset = Vec2(offset.x / (float)Atlas_X, offset.y / (float)Atlas_Y);
+		Vec2 UVBackground = Vec2(backround.x / (float)Atlas_X, backround.y / (float)Atlas_Y);
 
-	g_AnimData.vLeftTop = UVLeftTop; 
-	g_AnimData.vSliceSize = UVSlice; 
-	g_AnimData.vOffset = UVOffset;
-	g_AnimData.vBackGround = UVBackground;
-	g_AnimData.UseAnim2D = 1;
+		g_AnimData.vLeftTop = UVLeftTop;
+		g_AnimData.vSliceSize = UVSlice;
+		g_AnimData.vOffset = UVOffset;
+		g_AnimData.vBackGround = UVBackground;
+		g_AnimData.UseAnim2D = 1;
+	}
 
 	pCB->SetData(&g_AnimData);
 	pCB->UpdateData();
 
 	// 10 register : anim_tex
-	m_Atlas->UpdateData(10);
+
+	if (nullptr == m_Atlas)
+	{
+		m_Atlas->Clear(10);
+	}
+	else
+	{
+		m_Atlas->UpdateData(10);
+	}
 }
 
 void Anim::LateUpdate()
@@ -97,16 +112,51 @@ void Anim::Create(Texture* _atlas, Vec2 _leftTop, Vec2 _sliceSize, Vec2 _offset,
 	Save();
 }
 
-bool Anim::Load(const std::wstring& _relativePath)
+void Anim::CreateNewFrame()
 {
-	filesystem::path filePath = GetContentPath() + _relativePath;
+	Frame frm = {};
+
+	if (m_Frames.size() > 0)
+	{
+		int idx = m_Frames.size() - 1;
+
+		frm.vLeftTop = m_Frames[idx].vLeftTop;
+		frm.vSliceSize = m_Frames[idx].vSliceSize;
+		frm.vOffset = m_Frames[idx].vOffset;
+		frm.vBackground = m_Frames[idx].vBackground;
+	}
+	else
+	{
+		frm.vLeftTop = {};
+		frm.vSliceSize = {};
+		frm.vOffset = {};
+		frm.vBackground = {};
+	}
+
+	m_Frames.push_back(frm);
+	m_CurFrameIdx = m_Frames.size() - 1;
+}
+
+void Anim::RemoveCurFrame()
+{
+	if (m_Frames.size() < 2)
+		return;
+
+	auto iter = m_Frames.begin() + m_CurFrameIdx;
+	m_Frames.erase(iter);
+	m_CurFrameIdx = 0;
+}
+
+bool Anim::Load(const std::wstring& _FileName)
+{
+	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
 	std::wifstream fileStream(filePath);
 
 	wchar_t szName[20] = {};
-	_wsplitpath_s(_relativePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+	_wsplitpath_s(_FileName.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
 
 	m_ResourceName = szName;
-	m_ResourcePath = _relativePath;
+	m_ResourcePath = _FileName;
 
 	if (fileStream.is_open())
 	{

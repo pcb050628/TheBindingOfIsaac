@@ -2,17 +2,25 @@
 #include "ComponentGUI.h"
 
 class Texture;
+class Anim;
 class Animator2DGUI :
     public ComponentGUI
 {
 private:
-    bool        m_bCreateMod;
-    Texture*    m_CreateAnimTex;
+    std::wstring    m_ExistingAnim;
+    Anim*           m_AdditionalAnim;
+
+    bool            m_bCreateMod;
+    int             m_iNameInitSize;
 
 public:
     virtual void RenderUpdate() override;
 
-    void SetCreateAnimTex(Texture* _tex) { m_CreateAnimTex = _tex; }
+    void SetCreateAnimTex(Texture* _tex);
+
+private:
+    void CreateAdditionalAnim();
+    void DeleteAdditionalAnim();
 
 public:
     Animator2DGUI();

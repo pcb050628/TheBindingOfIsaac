@@ -49,16 +49,16 @@ void Material::UpdateData()
 	pCB->UpdateData();
 }
 
-bool Material::Load(const std::wstring& _strFilePath)
+bool Material::Load(const std::wstring& _FileName)
 {
-	filesystem::path filePath = GetContentPath() + _strFilePath;
+	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
 	std::wifstream fileStream(filePath);
 
 	wchar_t szName[20] = {};
 	_wsplitpath_s(filePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
 
 	m_ResourceName = szName;
-	m_ResourcePath = _strFilePath;
+	m_ResourcePath = _FileName;
 
 	if (fileStream.is_open())
 	{
@@ -168,7 +168,7 @@ bool Material::Load(const std::wstring& _strFilePath)
 
 bool Material::Save()
 {
-	filesystem::path filePath = GetContentPath() + L"Resource\\Material\\" + m_ResourceName;
+	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + m_ResourceName;
 	filePath += L".txt";
 	std::wofstream fileStream(filePath);
 

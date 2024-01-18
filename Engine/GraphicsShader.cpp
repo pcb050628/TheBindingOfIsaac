@@ -136,7 +136,7 @@ int GraphicsShader::CreatePixelShader(const std::wstring& _strRelativePath, cons
 
 bool GraphicsShader::Load(const std::wstring& _relativePath)
 {
-	filesystem::path filePath = GetContentPath() + _relativePath;
+	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _relativePath;
 	std::wifstream fileStream(filePath);
 
 	wchar_t szName[20] = {};
@@ -256,7 +256,7 @@ bool GraphicsShader::Load(const std::wstring& _relativePath)
 
 bool GraphicsShader::Save()
 {
-	filesystem::path filePath = GetContentPath() + L"Resource\\Shader\\Graphics\\" + m_ResourceName;
+	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + m_ResourceName;
 	filePath += ".txt";
 	std::wofstream fileStream(filePath);
 

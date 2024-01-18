@@ -4,7 +4,7 @@
 #include "TaskManager.h"
 #include "GameObject.h"
 #include "Layer.h"
-
+#include "Resource.h"
 
 bool IsValid(Entity* _entity)
 {
@@ -65,6 +65,33 @@ std::wstring GetContentPath()
 	}
 
 	return directoryPath + L"\\Content\\";
+}
+
+const std::wstring& GetResourceFolderPath(RESOURCE_TYPE _type)
+{
+	switch (_type)
+	{
+	case RESOURCE_TYPE::TEXTURE:
+		return L"Resource\\Image\\";
+		break;
+	case RESOURCE_TYPE::ANIM:
+		return L"Resource\\Anim\\";
+		break;
+	case RESOURCE_TYPE::MATERIAL:
+		return L"Resource\\Material\\";
+		break;
+	case RESOURCE_TYPE::GRAPHICS_SHADER:
+		return L"Resource\\Shader\\Graphics\\";
+		break;
+		//case RESOURCE_TYPE::SOUND:
+		//	break;
+		//case RESOURCE_TYPE::COMPUTER_SHADER:
+		//	break;
+		//case RESOURCE_TYPE::ROOM:
+		//	break;
+		//case RESOURCE_TYPE::CHAPTER:
+		//	break;
+	}
 }
 
 std::wstring ToWstring(const std::string& _str)

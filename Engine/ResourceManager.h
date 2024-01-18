@@ -42,10 +42,10 @@ public:
 	}
 
 	template <typename T>
-	T* Load(std::wstring _relativePath)
+	T* Load(std::wstring _FileName)
 	{
 		Resource* tmp = new T();
-		tmp->Load(_relativePath);
+		tmp->Load(_FileName);
 		if (tmp != nullptr)
 		{
 			if (IsExist(tmp->GetResourceName(), tmp->GetResourceType()))
@@ -54,7 +54,7 @@ public:
 
 				// 이미 같은 이름의 리소스가 존재할땐 이미 존재하던 리소스를 반환함
 				wchar_t szName[20] = {};
-				_wsplitpath_s(_relativePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+				_wsplitpath_s(_FileName.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
 
 				return Find<T>(szName);
 			}
@@ -86,6 +86,8 @@ public:
 	Texture* CreateTexture(const std::wstring& _strKey, Microsoft::WRL::ComPtr<ID3D11Texture2D> _tex2D);
 
 	void GetAssetName(RESOURCE_TYPE _type, std::vector<std::string>& _vecStr);
+
+
 };
 
 template <typename T>
