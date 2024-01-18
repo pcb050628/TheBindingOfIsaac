@@ -91,7 +91,7 @@ Vec2 Room::GetTileByPos(Vec2 _pos)
 void Room::AddObjectByTile(GameObject* _obj, LAYER_TYPE _layr, Vec2 _tilePos, bool _bMove)
 {
 	m_Layers[(UINT)_layr]->AddObject(_obj, _bMove);
-	_obj->GetTransform()->SetRelativePos(Vec3(GetPosByTile(_tilePos)));
+	_obj->GetTransform()->SetRelativePos(Vec3(GetPosByTile(_tilePos).x, GetPosByTile(_tilePos).y, 0.f));
 }
 
 void Room::DetachGameObject(GameObject* _obj)

@@ -5,6 +5,9 @@
 
 #include "resources.h"
 
+template <typename T>
+RESOURCE_TYPE GetResourceType();
+
 class ResourceManager
 {
 	SINGLETON(ResourceManager);
@@ -81,6 +84,8 @@ public:
 		, UINT _width, UINT _height, DXGI_FORMAT _format, UINT _bindFlags, D3D11_USAGE _usage = D3D11_USAGE_DEFAULT);
 
 	Texture* CreateTexture(const std::wstring& _strKey, Microsoft::WRL::ComPtr<ID3D11Texture2D> _tex2D);
+
+	void GetAssetName(RESOURCE_TYPE _type, std::vector<std::string>& _vecStr);
 };
 
 template <typename T>

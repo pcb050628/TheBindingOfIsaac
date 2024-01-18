@@ -9,7 +9,8 @@
 
 #include "GUI.h"
 
-#include "Inspector.h"
+#include "InspectorGUI.h"
+#include "ListGUI.h"
 
 ImGuiManager::ImGuiManager()
 {}
@@ -84,10 +85,10 @@ void ImGuiManager::Update()
 
     ImGui::ShowDemoWindow();
 
-    if (!((Inspector*)FindGUI("##Inspector"))->GetTargetObject())
+    if (!((InspectorGUI*)FindGUI("##InspectorGUI"))->GetTargetObject())
     {
         GameObject* gobj = ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->FindObject(L"test_rock");
-        ((Inspector*)FindGUI("##Inspector"))->SetTargetObject(gobj);
+        ((InspectorGUI*)FindGUI("##InspectorGUI"))->SetTargetObject(gobj);
     }
 
     std::map<std::string, GUI*>::iterator iter = m_mapGUI.begin();
@@ -119,7 +120,9 @@ void ImGuiManager::Render()
 
 void ImGuiManager::CrateGUI()
 {
-    GUI* gui = new Inspector;
+    GUI* gui = new InspectorGUI;
     m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 
+    gui = new ListGUI;
+    m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 }

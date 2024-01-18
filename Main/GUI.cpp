@@ -5,6 +5,7 @@
 GUI::GUI(const std::string& _strName, const std::string& _strID)
 	: m_strName(_strName)
 	, m_strID(_strID)
+	, m_bModal(false)
 	, m_bActive(true)
 	, m_Parent(nullptr)
 	, m_Child{}
@@ -27,11 +28,26 @@ void GUI::Update()
 
 void GUI::Render()
 {
-	if (m_bActive)
+	if (!m_bActive)
+		return;
+
+	bool Active = m_bActive;
+
+	if (nullptr == m_Parent)
 	{
-		if (nullptr == m_Parent)
+		if (!m_bModal)
 		{
-			ImGui::Begin(std::string(m_strName + m_strID).c_str());
+			ImGui::Begin(std::string(m_strName + m_strID).c_str(), &Active);
+
+			if (Active != m_bActive)
+			{
+				m_bActive = Active;
+
+				if (m_bActive)
+					Activate();
+				else
+					Deactivate();
+			}
 
 			RenderUpdate();
 
@@ -44,16 +60,46 @@ void GUI::Render()
 		}
 		else
 		{
-			ImGui::BeginChild(std::string(m_strName + m_strID).c_str(), m_Size);
 
-			RenderUpdate();
-
-			for (int i = 0; i < m_Child.size(); i++)
+			ImGui::OpenPopup(std::string(m_strName + m_strID).c_str());
+			if (ImGui::BeginPopupModal(std::string(m_strName + m_strID).c_str(), &Active))
 			{
-				m_Child[i]->Render();
+				RenderUpdate();
+
+				for (size_t i = 0; i < m_Child.size(); ++i)
+				{
+					m_Child[i]->Render();
+				}
+
+				ImGui::EndPopup();
 			}
 
-			ImGui::EndChild();
+			else
+			{
+				// 활성화, 비활성화 전환이 발생한 경우에는 Activate or Deactivate 를 호출시킨다.
+				if (Active != m_bActive)
+				{
+					m_bActive = Active;
+
+					if (m_bActive)
+						Activate();
+					else
+						Deactivate();
+				}
+			}
 		}
+	}
+	else
+	{
+		ImGui::BeginChild(std::string(m_strName + m_strID).c_str(), m_Size);
+
+		RenderUpdate();
+
+		for (int i = 0; i < m_Child.size(); i++)
+		{
+			m_Child[i]->Render();
+		}
+
+		ImGui::EndChild();
 	}
 }

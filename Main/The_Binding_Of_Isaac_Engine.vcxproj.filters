@@ -55,6 +55,9 @@
     <Filter Include="GUI\Inspector\Component\Light2D">
       <UniqueIdentifier>{6a9ba4cd-8533-42b0-80d0-cec6e6ee1a01}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\List">
+      <UniqueIdentifier>{03a39e9e-b57f-4273-9e85-dbd712dd554c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -102,7 +105,7 @@
     <ClInclude Include="GUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="Inspector.h">
+    <ClInclude Include="InspectorGUI.h">
       <Filter>GUI\Inspector</Filter>
     </ClInclude>
     <ClInclude Include="TransformGUI.h">
@@ -113,6 +116,12 @@
     </ClInclude>
     <ClInclude Include="Animator2DGUI.h">
       <Filter>GUI\Inspector\Component\Animator2D</Filter>
+    </ClInclude>
+    <ClInclude Include="ListGUI.h">
+      <Filter>GUI\List</Filter>
+    </ClInclude>
+    <ClInclude Include="MeshRendererGUI.h">
+      <Filter>GUI\Inspector\Component\MeshRenderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -155,7 +164,7 @@
     <ClCompile Include="GUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
-    <ClCompile Include="Inspector.cpp">
+    <ClCompile Include="InspectorGUI.cpp">
       <Filter>GUI\Inspector</Filter>
     </ClCompile>
     <ClCompile Include="TransformGUI.cpp">
@@ -166,6 +175,12 @@
     </ClCompile>
     <ClCompile Include="Animator2DGUI.cpp">
       <Filter>GUI\Inspector\Component\Animator2D</Filter>
+    </ClCompile>
+    <ClCompile Include="ListGUI.cpp">
+      <Filter>GUI\List</Filter>
+    </ClCompile>
+    <ClCompile Include="MeshRendererGUI.cpp">
+      <Filter>GUI\Inspector\Component\MeshRenderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

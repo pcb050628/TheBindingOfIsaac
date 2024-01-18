@@ -2,12 +2,21 @@
 
 #include "imgui.h"
 
+//typedef std::function<void()> CALL_BACK_0;
+//typedef std::function<void(DWORD_PTR)> CALL_BACK_1;
+//typedef std::function<void(DWORD_PTR, DWORD_PTR)> CALL_BACK_2;
+
+typedef void(*CALL_BACK_0)(void);
+typedef void(*CALL_BACK_1)(DWORD_PTR);
+typedef void(*CALL_BACK_2)(DWORD_PTR, DWORD_PTR);
+
 class GUI
 {
 private:
 	std::string			m_strName;
 	const std::string	m_strID;
 	ImVec2				m_Size;
+	bool				m_bModal;
 
 	bool				m_bActive;
 
@@ -29,8 +38,11 @@ public:
 	}
 	GUI* GetParent() { return m_Parent; }
 
-	void Activate() { m_bActive = true; }
-	void Deactivate() { m_bActive = false; }
+	void SetModal(bool _bValue) { m_bModal = _bValue; }
+	bool IsModal() { return m_bModal; }
+
+	virtual void Activate() { m_bActive = true; }
+	virtual void Deactivate() { m_bActive = false; }
 	bool IsActive() { return m_bActive; }
 
 public:
@@ -40,6 +52,6 @@ public:
 
 public:
 	GUI(const std::string& _strName, const std::string& _strID);
-	~GUI();
+	virtual ~GUI();
 };
 

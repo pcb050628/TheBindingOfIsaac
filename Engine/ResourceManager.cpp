@@ -64,7 +64,8 @@ void ResourceManager::CreateDefaultMesh()
 
 	pMesh = new Mesh;
 	pMesh->Create(arrVtx, 4, arrIdx, 6);
-	AddResource(L"RectMesh", pMesh);
+	pMesh->SetResourceName(L"RectMesh");
+	AddResource(pMesh->GetResourceName(), pMesh);
 
 	// Topology LineStrip 용도	
 	//   0(Red)-- 1(Blue)	     
@@ -74,7 +75,8 @@ void ResourceManager::CreateDefaultMesh()
 
 	pMesh = new Mesh;
 	pMesh->Create(arrVtx, 4, arrIdx, 5);
-	AddResource(L"RectMesh_Debug", pMesh);
+	pMesh->SetResourceName(L"RectMesh_Debug");
+	AddResource(pMesh->GetResourceName(), pMesh);
 
 	// =================
 	// CircleMesh 만들기
@@ -113,7 +115,8 @@ void ResourceManager::CreateDefaultMesh()
 
 	pMesh = new Mesh;
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
-	AddResource(L"CircleMesh", pMesh);
+	pMesh->SetResourceName(L"CircleMesh");
+	AddResource(pMesh->GetResourceName(), pMesh);
 
 	// CircleMesh_Debug
 	vecIdx.clear();
@@ -124,7 +127,8 @@ void ResourceManager::CreateDefaultMesh()
 
 	pMesh = new Mesh;
 	pMesh->Create(vecVtx.data(), (UINT)vecVtx.size(), vecIdx.data(), (UINT)vecIdx.size());
-	AddResource(L"CircleMesh_Debug", pMesh);
+	pMesh->SetResourceName(L"CircleMesh_Debug");
+	AddResource(pMesh->GetResourceName(), pMesh);
 	vecVtx.clear();
 	vecIdx.clear();
 }
@@ -177,4 +181,12 @@ Texture* ResourceManager::CreateTexture(const std::wstring& _strKey, Microsoft::
 	}
 
 	return pTex;
+}
+
+void ResourceManager::GetAssetName(RESOURCE_TYPE _type, std::vector<std::string>& _vecStr)
+{
+	for (const auto asset : m_Resources[(UINT)_type])
+	{
+		_vecStr.push_back(ToString(asset.first));
+	}
 }

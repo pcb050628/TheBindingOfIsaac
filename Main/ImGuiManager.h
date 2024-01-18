@@ -1,6 +1,7 @@
 #pragma once
 
-class GUI;
+#include "GUI.h"
+
 class ImGuiManager
 {
 	SINGLETON(ImGuiManager)
