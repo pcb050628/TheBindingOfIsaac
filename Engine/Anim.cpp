@@ -116,22 +116,10 @@ void Anim::CreateNewFrame()
 {
 	Frame frm = {};
 
-	if (m_Frames.size() > 0)
-	{
-		int idx = m_Frames.size() - 1;
-
-		frm.vLeftTop = m_Frames[idx].vLeftTop;
-		frm.vSliceSize = m_Frames[idx].vSliceSize;
-		frm.vOffset = m_Frames[idx].vOffset;
-		frm.vBackground = m_Frames[idx].vBackground;
-	}
-	else
-	{
-		frm.vLeftTop = {};
-		frm.vSliceSize = {};
-		frm.vOffset = {};
-		frm.vBackground = {};
-	}
+	frm.vLeftTop = {};
+	frm.vSliceSize = {};
+	frm.vOffset = {};
+	frm.vBackground = {};
 
 	m_Frames.push_back(frm);
 	m_CurFrameIdx = m_Frames.size() - 1;
@@ -211,7 +199,7 @@ bool Anim::Load(const std::wstring& _FileName)
 			else if (line == L"[SLICE_X]")
 			{
 				std::getline(fileStream, line);
-				frm.vSliceSize.y = std::stoi(line);
+				frm.vSliceSize.x = std::stoi(line);
 			}
 			else if (line == L"[SLICE_Y]")
 			{
@@ -221,7 +209,7 @@ bool Anim::Load(const std::wstring& _FileName)
 			else if (line == L"[OFFSET_X]")
 			{
 				std::getline(fileStream, line);
-				frm.vOffset.y = std::stoi(line);
+				frm.vOffset.x = std::stoi(line);
 			}
 			else if (line == L"[OFFSET_Y]")
 			{
@@ -231,7 +219,7 @@ bool Anim::Load(const std::wstring& _FileName)
 			else if (line == L"[BACKGROUND_X]")
 			{
 				std::getline(fileStream, line);
-				frm.vBackground.y = std::stoi(line);
+				frm.vBackground.x = std::stoi(line);
 			}
 			else if (line == L"[BACKGROUND_Y]")
 			{

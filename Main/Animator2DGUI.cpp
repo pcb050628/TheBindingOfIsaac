@@ -11,22 +11,13 @@
 #include <Engine/Anim.h>
 #include <Engine/Texture.h>
 
-void CreatAnimTextrue(DWORD_PTR _str);
-void ChangeAnim(DWORD_PTR _str);
-
-
 Animator2DGUI::Animator2DGUI() : ComponentGUI("Animator2D", "##Animator2DGUI", COMPONENT_TYPE::ANIMATOR2D)
-	, m_AdditionalAnim(nullptr)
-	, m_bCreateMod(false)
-	, m_iNameInitSize(30)
 {
 	SetSize(ImVec2(0, 250));
 }
 
 Animator2DGUI::~Animator2DGUI()
 {
-	if (m_AdditionalAnim)
-		delete m_AdditionalAnim;
 }
 
 void Animator2DGUI::RenderUpdate()
@@ -34,8 +25,9 @@ void Animator2DGUI::RenderUpdate()
 	ComponentGUI::RenderUpdate();
 	{
 		Animator2D* targetAnimator2D = GetTargetObject()->GetAnimator2D();
+		std::vector<std::string> allAnim;
+		targetAnimator2D->GetAllAnim(allAnim);
 		Anim* curAnim = targetAnimator2D->GetCurAnim();
-		Frame& curFrame = curAnim->GetCurFrame();
 
 		if (curAnim)
 		{
@@ -43,8 +35,27 @@ void Animator2DGUI::RenderUpdate()
 			ImGui::Text("Anim"); ImGui::SameLine(); ImGui::InputText("##Animtor2DGUIAnimName", (char*)animName.c_str(), animName.size(), ImGuiInputTextFlags_ReadOnly);
 			ImGui::SameLine();
 			
+			if (ImGui::BeginCombo("##Animator2DGUIAnimSelectCombo", nullptr, ImGuiComboFlags_NoPreview))
+			{
+				for (int n = 0; n < allAnim.size(); n++)
+				{
+					const bool is_selected = (m_iSelectedIdx == n);
+					if (ImGui::Selectable(allAnim[n].c_str(), is_selected))
+					{
+						m_iSelectedIdx = n;
+						targetAnimator2D->Play(ToWstring(allAnim[n]));
+					}
 
-			if (ImGui::Button("AddAtlas##Animator2DGUIAddAnimButton"))
+					// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+					if (is_selected)
+						ImGui::SetItemDefaultFocus();
+				}
+				ImGui::EndCombo();
+			}
+
+			ImGui::Spacing();
+
+			if (ImGui::Button("AddAnim##Animator2DGUIAddAnimButton"))
 			{
 				ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
 
@@ -52,7 +63,7 @@ void Animator2DGUI::RenderUpdate()
 				ResourceManager::GetInst()->GetAssetName(RESOURCE_TYPE::ANIM, animlist);
 
 				list->AddString(animlist);
-				list->SetCallBack(ChangeAnim);
+				list->SetDelegate(this, (Delegate_1)&Animator2DGUI::AddAnim);
 				list->Activate();
 			}
 
@@ -69,61 +80,11 @@ void Animator2DGUI::RenderUpdate()
 	}
 }
 
-void Animator2DGUI::SetCreateAnimTex(Texture* _tex)
+void Animator2DGUI::AddAnim(DWORD_PTR _str)
 {
-	m_AdditionalAnim->SetAtlas(_tex);
+	std::string name = (char*)_str;
+	Anim* anim = ResourceManager::GetInst()->Find<Anim>(ToWstring(name));
+	GetTargetObject()->GetAnimator2D()->AddAnim(anim);
+	m_iSelectedIdx++;
 }
 
-void Animator2DGUI::CreateAdditionalAnim()
-{
-	Animator2D* animator = GetTargetObject()->GetAnimator2D();
-
-	m_ExistingAnim = animator->GetCurAnim()->GetResourceName();
-
-	if (m_AdditionalAnim)
-	{
-		delete m_AdditionalAnim;
-		m_AdditionalAnim = nullptr;
-	}
-
-	m_AdditionalAnim = new Anim;
-	m_AdditionalAnim->SetResourceName(L"New");
-	m_AdditionalAnim->GetResourceName().resize(m_iNameInitSize);
-
-	m_AdditionalAnim->CreateNewFrame();
-	animator->AddAnim(m_AdditionalAnim);
-	animator->Play(m_AdditionalAnim->GetResourceName());
-	m_AdditionalAnim->Pause();
-}
-
-void Animator2DGUI::DeleteAdditionalAnim()
-{
-	Animator2D* animator = GetTargetObject()->GetAnimator2D();
-
-	animator->RemoveAnim(m_AdditionalAnim->GetResourceName());
-	delete m_AdditionalAnim;
-	m_AdditionalAnim = nullptr;
-	GetTargetObject()->GetAnimator2D()->Play(m_ExistingAnim);
-}
-
-void CreatAnimTextrue(DWORD_PTR _str)
-{
-	std::wstring texName = ToWstring((char*)_str);
-	Texture* pTex = ResourceManager::GetInst()->Find<Texture>(texName);
-	assert(pTex);
-	InspectorGUI* inspector = (InspectorGUI*)ImGuiManager::GetInst()->FindGUI("##InspectorGUI");
-	Animator2D* animator = inspector->GetTargetObject()->GetAnimator2D();
-	Animator2DGUI* animatorGUI = (Animator2DGUI*)inspector->GetComponentGUI(COMPONENT_TYPE::ANIMATOR2D);
-	animatorGUI->SetCreateAnimTex(pTex);
-}
-
-
-void ChangeAnim(DWORD_PTR _str)
-{
-	std::wstring animName = ToWstring((char*)_str);
-	Anim* pAnim = ResourceManager::GetInst()->Find<Anim>(animName);
-	assert(pAnim);
-	InspectorGUI* inspector = (InspectorGUI*)ImGuiManager::GetInst()->FindGUI("##InspectorGUI");
-	Animator2D* animator = inspector->GetTargetObject()->GetAnimator2D();
-	animator->AddAnim(pAnim);
-}

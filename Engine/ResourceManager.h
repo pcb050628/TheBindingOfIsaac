@@ -21,6 +21,7 @@ private:
 	void CreateDefaultMesh();
 	void CreateDefaultShader();
 	void CreateDefaultMaterial();
+	void LoadAnim();
 
 public:
 	template <typename T>

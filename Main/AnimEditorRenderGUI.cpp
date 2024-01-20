@@ -57,6 +57,7 @@ void AnimEditorRenderGUI::RenderUpdate()
 			mouse_pos_in_canvas -= canvas_p0;
 			mouse_pos_in_canvas -= LeftTop;
 
+			//mosuePos -> PixelPos
 			//imageDelta 로 비율 조정하고 transformedImageSize로 UV값 얻고 UV값으로 픽셀값 얻기
 			ImVec2 UV = ImVec2(mouse_pos_in_canvas.x / transformedImageSize.x, mouse_pos_in_canvas.y / transformedImageSize.y); //ImVec2(mousePosInImage.x / transformedImageSize.x, mousePosInImage.y / transformedImageSize.y);
 			Vec2 Pixel = Vec2(UV.x * image->GetWidth(), UV.y * image->GetHeight());
@@ -64,43 +65,54 @@ void AnimEditorRenderGUI::RenderUpdate()
 			Pixel.y = (int)Pixel.y;
 			Pixel.x += 10;
 
+			// 현재 프레임 정보
+			Frame nFrame = anim->GetCurFrame();
+
+			//pixel 탐색에서 사용
+			FrameRect rect = { Pixel, Pixel };
+			std::set<Vec2> check;
+
 			//Image 복사 후 매핑
 			D3D11_TEXTURE2D_DESC desc = image->GetDesc();
 			desc.Usage = D3D11_USAGE_STAGING;
 			desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
 			desc.BindFlags = 0;
-			
+
 			Texture* pTex = new Texture;
 			pTex->Create(desc.Width, desc.Height, desc.Format, desc.BindFlags, desc.Usage);
-			
+
 			D3D11_MAPPED_SUBRESOURCE data = {};
 			Device::GetInst()->GetContext()->CopyResource(pTex->GetTex2D().Get(), image->GetTex2D().Get());
 			Device::GetInst()->GetContext()->Map(pTex->GetTex2D().Get(), 0, D3D11_MAP_READ, 0, &data);
-
-			Frame nFrame = {};
-			//nFrame.vLeftTop = Vec2(image->GetWidth(), image->GetHeight());
-			nFrame.vLeftTop = Pixel;
-
-			FrameRect rect = { Pixel, Pixel };
-
-			std::set<Vec2> check;
 
 			MakeFrameByPixelCoord(Pixel, rect, data, check);
 
 			Device::GetInst()->GetContext()->Unmap(pTex->GetTex2D().Get(), 0);
 			delete pTex;
 
-			nFrame.vLeftTop = rect.LT;
-			nFrame.vSliceSize = rect.RB - rect.LT;
-			nFrame.vBackground = nFrame.vSliceSize;
-
-			if (!(0 == nFrame.vSliceSize.x || 0 == nFrame.vSliceSize.y))
+			//현재 프레임이 잘리지 않은 경우
+			if (0 == nFrame.vSliceSize.x || 0 == nFrame.vSliceSize.y)
 			{
-				anim->AddFrame(nFrame);
+				//현재 프레임을 설졍함
+				Frame& CurFrame = anim->GetCurFrame();
+				
+				CurFrame.vLeftTop = rect.LT;
+				CurFrame.vSliceSize = rect.RB - rect.LT;
+				CurFrame.vBackground = nFrame.vSliceSize;
+			}
+			//현재 프레임이 이미 잘려 있는 경우
+			else
+			{
+				// 새로운 프레임을 만들어서 추가함
+				Frame frm = {};
+
+				frm.vLeftTop = rect.LT;
+				frm.vSliceSize = rect.RB - rect.LT;
+				frm.vBackground = nFrame.vSliceSize;
+
+				anim->AddFrame(frm);
 			}
 		}
-		//bool is_hovered = ImGui::IsItemHovered(); // Hovered
-		//bool is_active = ImGui::IsItemActive();   // Held
 
 		ImVec2 rect = ImVec2(10, 10);
 		ImColor col = ImVec4(1.f, 1.f, 0.f, 1.f);
@@ -125,7 +137,7 @@ void AnimEditorRenderGUI::RenderUpdate()
 			draw_list->AddRect(LeftTop + windowPos + BackgroundLeftTop - offset, LeftTop + windowPos + BackgroundLeftTop + background - offset, col);
 		}
 
-		//현재 프레임 띄우기 / Rect 같이 그려서 안에 넣기 ( 아직 안함 )
+		//현재 프레임 띄우기
 		{
 			//frame
 			Frame curFrame = anim->GetCurFrame();
@@ -142,15 +154,50 @@ void AnimEditorRenderGUI::RenderUpdate()
 			ImVec2 offsetUV		= ImVec2(offset.x / ImageSize.x		, offset.y / ImageSize.y);
 			ImVec2 backgroundUV = ImVec2(background.x / ImageSize.x	, background.y / ImageSize.y);
 
-			//final uv
+			//background in render uv
 			ImVec2 BackgroundLeftTopUV = leftTopUV + (sliceSizeUV / 2) - (backgroundUV / 2) - offsetUV;
 			ImVec2 BackgroundRightBotUV = BackgroundLeftTopUV + backgroundUV;
 
 			//drawPos
-			ImVec2 drawLeftTop = ImVec2(850, maxImageSize.y);
-			ImVec2 drawRightBot = drawLeftTop + sliceSize;
+			ImVec2 drawLeftTop = LeftTop + windowPos + maxImageSize + ImVec2(-250, 0);
+			ImVec2 drawRightBot = drawLeftTop + ImVec2(100, 100);
 
-			draw_list->AddImage(image->GetSRV().Get(), drawLeftTop, drawRightBot, BackgroundLeftTopUV, BackgroundRightBotUV);
+			//backgroundUV - LeftTopUV = Delta
+			ImVec2 DeltaLeftTopUV = leftTopUV - BackgroundLeftTopUV;
+			ImVec2 DeltaLeftTop = ImVec2(DeltaLeftTopUV.x * ImageSize.x, DeltaLeftTopUV.y * ImageSize.y);
+
+			ImVec2 DeltaRightBotUV = BackgroundRightBotUV - (leftTopUV + sliceSizeUV);
+			ImVec2 DeltaRightBot = ImVec2(DeltaRightBotUV.x * ImageSize.x, DeltaRightBotUV.y * ImageSize.y);
+
+			//final drawPos
+			drawLeftTop += DeltaLeftTop;
+			drawRightBot -= DeltaRightBot;
+
+			ImVec2 rightBotUV = leftTopUV + sliceSizeUV;
+
+			if (drawLeftTop.x > drawRightBot.x)
+			{
+				float sizeX = drawLeftTop.x - drawRightBot.x;
+				float tmpX = drawLeftTop.x;
+				drawLeftTop.x = drawRightBot.x;
+				drawRightBot.x = tmpX;
+
+				drawLeftTop.x += (sizeX / 2);
+				drawRightBot.x -= (sizeX / 2);
+			}
+
+			if (drawLeftTop.y > drawRightBot.y)
+			{
+				float sizeY = drawLeftTop.y - drawRightBot.y;
+				float tmpY = drawLeftTop.y;
+				drawLeftTop.y = drawRightBot.y;
+				drawRightBot.y = tmpY;
+
+				drawLeftTop.y += (sizeY / 2);
+				drawRightBot.y -= (sizeY / 2);
+			}
+
+			draw_list->AddImage(image->GetSRV().Get(), drawLeftTop, drawRightBot, leftTopUV, rightBotUV);
 		}
 	}
 }

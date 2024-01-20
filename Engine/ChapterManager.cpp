@@ -43,8 +43,9 @@ void ChapterManager::Init()
 	gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
 	gobj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
 
-	gobj->GetAnimator2D()->CreateAnim(L"test_anim", ResourceManager::GetInst()->Find<Texture>(L"Rocks"), Vec2(0.f, 0.f), Vec2(32.f, 32.f), Vec2(0.f, 0.f), Vec2(40.f, 40.f), 6, 1);
-	gobj->GetAnimator2D()->Play(L"test_anim", true);
+	//gobj->GetAnimator2D()->CreateAnim(L"test_anim", ResourceManager::GetInst()->Find<Texture>(L"Rocks"), Vec2(0.f, 0.f), Vec2(32.f, 32.f), Vec2(0.f, 0.f), Vec2(40.f, 40.f), 6, 1);
+	//gobj->GetAnimator2D()->AddAnim(ResourceManager::GetInst()->Load<Anim>(L"test_anim.txt"));
+	//gobj->GetAnimator2D()->Play(L"test_anim", true);
 
 	gobj->SetName(L"test_rock");
 	AddGameObject(gobj, LAYER_TYPE::Object);

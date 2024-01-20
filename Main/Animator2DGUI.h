@@ -7,20 +7,12 @@ class Animator2DGUI :
     public ComponentGUI
 {
 private:
-    std::wstring    m_ExistingAnim;
-    Anim*           m_AdditionalAnim;
-
-    bool            m_bCreateMod;
-    int             m_iNameInitSize;
+    int             m_iSelectedIdx;
 
 public:
     virtual void RenderUpdate() override;
 
-    void SetCreateAnimTex(Texture* _tex);
-
-private:
-    void CreateAdditionalAnim();
-    void DeleteAdditionalAnim();
+    virtual void AddAnim(DWORD_PTR _str);
 
 public:
     Animator2DGUI();

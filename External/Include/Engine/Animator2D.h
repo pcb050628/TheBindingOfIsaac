@@ -23,6 +23,7 @@ public:
     void AddAnim(Anim* _anim);
     void RemoveAnim(const std::wstring& _strKey);
     Anim* GetCurAnim() { return m_CurAnim; }
+    void GetAllAnim(std::vector<std::string>& _Out);
 
     void Play(const std::wstring& _key, bool _repeat = false);
 

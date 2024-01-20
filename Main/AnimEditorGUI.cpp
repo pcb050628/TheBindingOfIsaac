@@ -103,9 +103,9 @@ void AnimEditorGUI::RenderUpdate()
 			ImGui::Spacing();
 			
 			// 현재 프레임 설정
-			Vec2 frmLeftTop = Vec2(curFrame.vLeftTop.x, curFrame.vLeftTop.y);
-			Vec2 frmSliceSize = Vec2(curFrame.vSliceSize.x, curFrame.vSliceSize.y);
-			Vec2 frmOffset = Vec2(curFrame.vOffset.x, curFrame.vOffset.y);
+			Vec2 frmLeftTop		= Vec2(curFrame.vLeftTop.x	, curFrame.vLeftTop.y);
+			Vec2 frmSliceSize	= Vec2(curFrame.vSliceSize.x, curFrame.vSliceSize.y);
+			Vec2 frmOffset		= Vec2(curFrame.vOffset.x	, curFrame.vOffset.y);
 			Vec2 frmBackground = Vec2(curFrame.vBackground.x, curFrame.vBackground.y);
 			
 			ImGui::Text("LeftTop    :"); ImGui::SameLine(); ImGui::DragFloat2("##Animtor2DGUIFrameLeftTopSize", frmLeftTop);
@@ -113,10 +113,19 @@ void AnimEditorGUI::RenderUpdate()
 			ImGui::Text("Offset     :"); ImGui::SameLine(); ImGui::DragFloat2("##Animtor2DGUIFrameOffsetSize", frmOffset);
 			ImGui::Text("BackGround :"); ImGui::SameLine(); ImGui::DragFloat2("##Animtor2DGUIFrameBackgroundSize", frmBackground);
 			
-			curFrame.vLeftTop = frmLeftTop;
-			curFrame.vSliceSize = frmSliceSize;
-			curFrame.vOffset = frmOffset;
+			curFrame.vLeftTop	 = frmLeftTop;
+			curFrame.vSliceSize  = frmSliceSize;
+			curFrame.vOffset	 = frmOffset;
 			curFrame.vBackground = frmBackground;
+
+			if (curFrame.vBackground.x < curFrame.vSliceSize.x)
+			{
+				curFrame.vBackground.x = curFrame.vSliceSize.x;
+			}
+			if (curFrame.vBackground.y < curFrame.vSliceSize.y)
+			{
+				curFrame.vBackground.y = curFrame.vSliceSize.y;
+			}
 		}
 
 		m_EditAnim->LateUpdate();
