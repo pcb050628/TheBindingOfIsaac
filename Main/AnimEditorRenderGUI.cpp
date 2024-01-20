@@ -50,7 +50,15 @@ void AnimEditorRenderGUI::RenderUpdate()
 		//우클릭
 		if (ImGui::IsItemClicked(ImGuiMouseButton_Right))
 		{
-			int a = 0;
+			//시작 위치 sx, sy
+			//끝 위치 fx, fy
+			//크기 sizeX, sizeY
+			//
+			//sx + a, sy + sizeY / 3
+			//이렇게 a올리면서 알파값이 1인 곳 찾기
+			//찾은 후 그 부분을 기점으로 MakeFrameByPixelCoord 함수 호출
+			//만들어진 frame의 sliceSize 와 lefttop 을 이용해도 새로운 좌표 만들고 다시 a값 올리면서 알파값이 1인 곳 찾기(또는 rect를 사용해도됨)
+			//반복
 		}
 		//좌클릭
 		else if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
