@@ -51,6 +51,9 @@ void Animator2D::CreateAnim(const wstring& _strKey, Texture* _altas
 
 void Animator2D::AddAnim(Anim* _anim)
 {
+	if (m_Anims.find(_anim->GetResourceName()) == m_Anims.end())
+		return;
+
 	m_Anims.insert(make_pair(_anim->GetResourceName(), _anim));
 }
 

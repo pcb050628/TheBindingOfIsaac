@@ -15,6 +15,6 @@ public:
 
 public:
     ComponentGUI(const std::string& _strName, const std::string& _strID, COMPONENT_TYPE _type);
-    ~ComponentGUI();
+    virtual ~ComponentGUI();
 };
 

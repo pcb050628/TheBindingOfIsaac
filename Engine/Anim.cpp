@@ -137,6 +137,12 @@ void Anim::CreateNewFrame()
 	m_CurFrameIdx = m_Frames.size() - 1;
 }
 
+void Anim::AddFrame(Frame& _frame)
+{
+	m_Frames.push_back(_frame);
+	m_CurFrameIdx = m_Frames.size() - 1;
+}
+
 void Anim::RemoveCurFrame()
 {
 	if (m_Frames.size() < 2)
@@ -185,7 +191,7 @@ bool Anim::Load(const std::wstring& _FileName)
 			else if (line == L"[DURATION]")
 			{
 				std::getline(fileStream, line);
-				m_fDuration = stoi(line);
+				m_fDuration = stof(line);
 			}
 			else if (line == L"[FRAME_COUNT]")
 			{

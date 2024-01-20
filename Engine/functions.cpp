@@ -67,21 +67,23 @@ std::wstring GetContentPath()
 	return directoryPath + L"\\Content\\";
 }
 
-const std::wstring& GetResourceFolderPath(RESOURCE_TYPE _type)
+std::wstring GetResourceFolderPath(RESOURCE_TYPE _type)
 {
+	std::wstring out = L"Resource\\";
+
 	switch (_type)
 	{
 	case RESOURCE_TYPE::TEXTURE:
-		return L"Resource\\Image\\";
+		out += L"Image\\";
 		break;
 	case RESOURCE_TYPE::ANIM:
-		return L"Resource\\Anim\\";
+		out += L"Anim\\";
 		break;
 	case RESOURCE_TYPE::MATERIAL:
-		return L"Resource\\Material\\";
+		out += L"Material\\";
 		break;
 	case RESOURCE_TYPE::GRAPHICS_SHADER:
-		return L"Resource\\Shader\\Graphics\\";
+		out += L"Shader\\Graphics\\";
 		break;
 		//case RESOURCE_TYPE::SOUND:
 		//	break;
@@ -92,6 +94,8 @@ const std::wstring& GetResourceFolderPath(RESOURCE_TYPE _type)
 		//case RESOURCE_TYPE::CHAPTER:
 		//	break;
 	}
+
+	return out;
 }
 
 std::wstring ToWstring(const std::string& _str)

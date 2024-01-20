@@ -1,5 +1,5 @@
 [ATLAS_PATH]
-Resource\Image\Rocks.png
+Rocks.png
 [DURATION]
 1
 [FRAME_COUNT]

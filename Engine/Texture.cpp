@@ -20,7 +20,9 @@ Texture::~Texture()
 
 bool Texture::Load(const std::wstring& _FileName)
 {
-	std::wstring fullPath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
+	std::wstring fullPath = GetContentPath();
+	fullPath += GetResourceFolderPath(m_Type);
+	fullPath += _FileName;
 
 	wchar_t szExt[20] = {};
 	_wsplitpath_s(_FileName.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 20);
@@ -84,6 +86,10 @@ int Texture::Create(UINT _Width, UINT _Height, DXGI_FORMAT _Format, UINT _BindFl
 	if (_Usage == D3D11_USAGE_DYNAMIC)
 	{
 		m_Desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	}
+	else if (_Usage == D3D11_USAGE_STAGING)
+	{
+		m_Desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
 	}
 
 	hResult = Device::GetInst()->GetDevice()->CreateTexture2D(&m_Desc, nullptr, m_Tex2D.GetAddressOf());

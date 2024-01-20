@@ -2,14 +2,6 @@
 
 #include "imgui.h"
 
-//typedef std::function<void()> CALL_BACK_0;
-//typedef std::function<void(DWORD_PTR)> CALL_BACK_1;
-//typedef std::function<void(DWORD_PTR, DWORD_PTR)> CALL_BACK_2;
-
-typedef void(*CALL_BACK_0)(void);
-typedef void(*CALL_BACK_1)(DWORD_PTR);
-typedef void(*CALL_BACK_2)(DWORD_PTR, DWORD_PTR);
-
 class GUI
 {
 private:

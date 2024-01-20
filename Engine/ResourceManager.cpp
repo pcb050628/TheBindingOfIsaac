@@ -22,8 +22,9 @@ void ResourceManager::Init()
 	CreateDefaultMesh();
 	CreateDefaultShader();
 	CreateDefaultMaterial();
-	Load<Texture>(L"Resource\\Image\\Rocks.png");
-	//Load<Anim>(L"Resource\\Anim\\test_anim.txt");
+	Load<Texture>(L"Rocks.png");
+	Load<Texture>(L"Link.png");
+	Load<Anim>(L"Link_RightAnim_test.txt");
 }
 
 void ResourceManager::CreateDefaultMesh()
@@ -135,16 +136,16 @@ void ResourceManager::CreateDefaultMesh()
 
 void ResourceManager::CreateDefaultShader()
 {
-	Load<GraphicsShader>(L"Resource\\Shader\\Graphics\\default_Shader.txt");
-	Load<GraphicsShader>(L"Resource\\Shader\\Graphics\\debug_Shader.txt");
-	Load<GraphicsShader>(L"Resource\\Shader\\Graphics\\ui_Shader.txt");
+	Load<GraphicsShader>(L"default_Shader.txt");
+	Load<GraphicsShader>(L"debug_Shader.txt");
+	Load<GraphicsShader>(L"ui_Shader.txt");
 }
 
 void ResourceManager::CreateDefaultMaterial()
 {
-	Load<Material>(L"Resource\\Material\\default_Material.txt");
-	Load<Material>(L"Resource\\Material\\debug_Material.txt");
-	Load<Material>(L"Resource\\Material\\ui_Material.txt");
+	Load<Material>(L"default_Material.txt");
+	Load<Material>(L"debug_Material.txt");
+	Load<Material>(L"ui_Material.txt");
 }
 
 Texture* ResourceManager::CreateTexture(const std::wstring& _strKey, UINT _width, UINT _height, DXGI_FORMAT _format, UINT _bindFlags, D3D11_USAGE _usage)

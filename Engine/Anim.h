@@ -45,10 +45,12 @@ public:
     void Create(Texture* _atlas, Vec2 _leftTop, Vec2 _sliceSize, Vec2 _offset, Vec2 _background, int _frmCount, int _FPS);
 
     void CreateNewFrame();
+    void AddFrame(Frame& _frame);
     void RemoveCurFrame();
 
     Texture* GetAtlas() { return m_Atlas; }
     Frame& GetCurFrame() { return m_Frames[m_CurFrameIdx]; }
+    std::vector<Frame>& GetAllFrame() { return m_Frames; }
     int GetCurFrameIdx() { return m_CurFrameIdx; }
     int GetMaxFrameIdx() { return m_Frames.size(); }
     float GetDuration() { return m_fDuration; }

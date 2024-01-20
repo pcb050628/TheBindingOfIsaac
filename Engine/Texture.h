@@ -30,6 +30,8 @@ public:
     UINT GetWidth() { return m_Desc.Width; }
     UINT GetHeight() { return m_Desc.Height; }
 
+    D3D11_TEXTURE2D_DESC GetDesc() { return m_Desc; }
+
     Microsoft::WRL::ComPtr<ID3D11Texture2D>             GetTex2D() { return m_Tex2D; }
 
     Microsoft::WRL::ComPtr<ID3D11RenderTargetView>      GetRTV() { return m_RTView; }
@@ -43,5 +45,6 @@ public:
 
     friend class Material;
     friend class ResourceManager;
+    friend class AnimEditorRenderGUI;
 };
 

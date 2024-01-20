@@ -1,6 +1,14 @@
 #pragma once
 
-#include "GUI.h"
+class GUI;
+
+typedef void(GUI::* Delegate_0)();
+typedef void(GUI::* Delegate_1)(DWORD_PTR);
+typedef void(GUI::* Delegate_2)(DWORD_PTR, DWORD_PTR);
+
+typedef void(*CALL_BACK_0)(void);
+typedef void(*CALL_BACK_1)(DWORD_PTR);
+typedef void(*CALL_BACK_2)(DWORD_PTR, DWORD_PTR);
 
 class ImGuiManager
 {

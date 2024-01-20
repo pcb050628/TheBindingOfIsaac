@@ -58,6 +58,15 @@
     <Filter Include="GUI\List">
       <UniqueIdentifier>{03a39e9e-b57f-4273-9e85-dbd712dd554c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\Editor">
+      <UniqueIdentifier>{135cccb1-9de6-4095-9eba-938d9e70f17b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Editor\AnimEditor">
+      <UniqueIdentifier>{bf73d609-ab70-4e50-b28d-1c414c5c9086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Editor\RoomEditor">
+      <UniqueIdentifier>{5c6f6c73-db5f-41d0-b8f7-adf4fde38ebc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -123,6 +132,15 @@
     <ClInclude Include="MeshRendererGUI.h">
       <Filter>GUI\Inspector\Component\MeshRenderer</Filter>
     </ClInclude>
+    <ClInclude Include="EditorGUI.h">
+      <Filter>GUI\Editor</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimEditorGUI.h">
+      <Filter>GUI\Editor\AnimEditor</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimEditorRenderGUI.h">
+      <Filter>GUI\Editor\AnimEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -181,6 +199,15 @@
     </ClCompile>
     <ClCompile Include="MeshRendererGUI.cpp">
       <Filter>GUI\Inspector\Component\MeshRenderer</Filter>
+    </ClCompile>
+    <ClCompile Include="EditorGUI.cpp">
+      <Filter>GUI\Editor</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimEditorGUI.cpp">
+      <Filter>GUI\Editor\AnimEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimEditorRenderGUI.cpp">
+      <Filter>GUI\Editor\AnimEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -171,7 +171,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Animator2DGUI.h" />
+    <ClInclude Include="AnimEditorGUI.h" />
+    <ClInclude Include="AnimEditorRenderGUI.h" />
     <ClInclude Include="ComponentGUI.h" />
+    <ClInclude Include="EditorGUI.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GUI.h" />
     <ClInclude Include="imconfig.h" />
@@ -194,7 +197,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator2DGUI.cpp" />
+    <ClCompile Include="AnimEditorGUI.cpp" />
+    <ClCompile Include="AnimEditorRenderGUI.cpp" />
     <ClCompile Include="ComponentGUI.cpp" />
+    <ClCompile Include="EditorGUI.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="ImGuiManager.cpp" />

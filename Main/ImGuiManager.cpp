@@ -11,6 +11,8 @@
 
 #include "InspectorGUI.h"
 #include "ListGUI.h"
+#include "EditorGUI.h"
+#include "AnimEditorRenderGUI.h"
 
 ImGuiManager::ImGuiManager()
 {}
@@ -124,5 +126,11 @@ void ImGuiManager::CrateGUI()
     m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 
     gui = new ListGUI;
+    m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
+
+    gui = new EditorGUI;
+    m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
+
+    gui = new AnimEditorRenderGUI;
     m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 }
