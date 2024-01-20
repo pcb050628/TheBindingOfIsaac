@@ -46,10 +46,11 @@ public:
 
     void CreateNewFrame();
     void AddFrame(Frame& _frame);
-    void RemoveCurFrame();
+    bool RemoveCurFrame();
 
     Texture* GetAtlas() { return m_Atlas; }
     Frame& GetCurFrame() { return m_Frames[m_CurFrameIdx]; }
+    Frame& GetFrame(int _idx) { if (_idx < m_Frames.size()) return m_Frames[_idx]; }
     std::vector<Frame>& GetAllFrame() { return m_Frames; }
     int GetCurFrameIdx() { return m_CurFrameIdx; }
     int GetMaxFrameIdx() { return m_Frames.size(); }

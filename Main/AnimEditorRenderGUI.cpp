@@ -45,7 +45,15 @@ void AnimEditorRenderGUI::RenderUpdate()
 		ImVec2 imageDelta = ImVec2(transformedImageSize.x / image->GetWidth(), transformedImageSize.y / image->GetHeight());
 
 		//마우스 클릭으로 이미지 프레임 만들기
-		if (ImGui::InvisibleButton("canvas", LeftTop + transformedImageSize))
+		ImGui::InvisibleButton("canvas", LeftTop + transformedImageSize, ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight);
+
+		//우클릭
+		if (ImGui::IsItemClicked(ImGuiMouseButton_Right))
+		{
+			int a = 0;
+		}
+		//좌클릭
+		else if (ImGui::IsItemClicked(ImGuiMouseButton_Left))
 		{
 			//마우스 위치 얻기
 			ImVec2 mouse_pos_in_canvas(io.MousePos.x, io.MousePos.y);
@@ -54,69 +62,96 @@ void AnimEditorRenderGUI::RenderUpdate()
 				m_MouseClickPixel = mouse_pos_in_canvas - LeftTop;
 				ImGui::GetMouseCursor();
 			}
-			mouse_pos_in_canvas -= canvas_p0;
+			mouse_pos_in_canvas -= windowPos;
 			mouse_pos_in_canvas -= LeftTop;
 
 			//mosuePos -> PixelPos
-			//imageDelta 로 비율 조정하고 transformedImageSize로 UV값 얻고 UV값으로 픽셀값 얻기
+			//UV값 얻고 UV값으로 픽셀값 얻기
 			ImVec2 UV = ImVec2(mouse_pos_in_canvas.x / transformedImageSize.x, mouse_pos_in_canvas.y / transformedImageSize.y); //ImVec2(mousePosInImage.x / transformedImageSize.x, mousePosInImage.y / transformedImageSize.y);
 			Vec2 Pixel = Vec2(UV.x * image->GetWidth(), UV.y * image->GetHeight());
 			Pixel.x = (int)Pixel.x;
 			Pixel.y = (int)Pixel.y;
-			Pixel.x += 10;
 
-			// 현재 프레임 정보
-			Frame nFrame = anim->GetCurFrame();
-
-			//pixel 탐색에서 사용
-			FrameRect rect = { Pixel, Pixel };
-			std::set<Vec2> check;
-
-			//Image 복사 후 매핑
-			D3D11_TEXTURE2D_DESC desc = image->GetDesc();
-			desc.Usage = D3D11_USAGE_STAGING;
-			desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
-			desc.BindFlags = 0;
-
-			Texture* pTex = new Texture;
-			pTex->Create(desc.Width, desc.Height, desc.Format, desc.BindFlags, desc.Usage);
-
-			D3D11_MAPPED_SUBRESOURCE data = {};
-			Device::GetInst()->GetContext()->CopyResource(pTex->GetTex2D().Get(), image->GetTex2D().Get());
-			Device::GetInst()->GetContext()->Map(pTex->GetTex2D().Get(), 0, D3D11_MAP_READ, 0, &data);
-
-			MakeFrameByPixelCoord(Pixel, rect, data, check);
-
-			Device::GetInst()->GetContext()->Unmap(pTex->GetTex2D().Get(), 0);
-			delete pTex;
-
-			//현재 프레임이 잘리지 않은 경우
-			if (0 == nFrame.vSliceSize.x || 0 == nFrame.vSliceSize.y)
+			//현재 픽셀위치가 lefttop + sliceSize 안 위치에 해당하는 프레임이 있는지 검사
+			std::vector<Frame> vecFrame = anim->GetAllFrame();
+			int maxIdx = vecFrame.size();
+			bool IsExist = false;
+			int idx = 0;
+			for (; idx < maxIdx; idx++)
 			{
-				//현재 프레임을 설졍함
-				Frame& CurFrame = anim->GetCurFrame();
-				
-				CurFrame.vLeftTop = rect.LT;
-				CurFrame.vSliceSize = rect.RB - rect.LT;
-				CurFrame.vBackground = nFrame.vSliceSize;
+				Vec2 LT = vecFrame[idx].vLeftTop;
+				Vec2 RB = vecFrame[idx].vLeftTop + vecFrame[idx].vSliceSize;
+
+				if (Pixel.x > LT.x && Pixel.y > LT.y
+					&& Pixel.x < RB.x && Pixel.y < RB.y)
+				{
+					IsExist = true;
+					break;
+				}
 			}
-			//현재 프레임이 이미 잘려 있는 경우
+
+			//픽셀위치에 해당하는 프레임이 있다면 그 프레임을 현재 프레임으로 바꿈
+			if (IsExist)
+			{
+				anim->SetCurFrameIdx(idx);
+			}
+			//없으면 픽셀위치로 프레임 생성 또는 프레임 정보 설정
 			else
 			{
-				// 새로운 프레임을 만들어서 추가함
-				Frame frm = {};
+				// 현재 프레임 정보
+				Frame nFrame = anim->GetCurFrame();
 
-				frm.vLeftTop = rect.LT;
-				frm.vSliceSize = rect.RB - rect.LT;
-				frm.vBackground = nFrame.vSliceSize;
+				//pixel 탐색에서 사용
+				FrameRect rect = { Pixel, Pixel };
+				std::set<Vec2> check;
 
-				anim->AddFrame(frm);
+				//Image 복사 후 매핑
+				D3D11_TEXTURE2D_DESC desc = image->GetDesc();
+				desc.Usage = D3D11_USAGE_STAGING;
+				desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
+				desc.BindFlags = 0;
+
+				Texture* pTex = new Texture;
+				pTex->Create(desc.Width, desc.Height, desc.Format, desc.BindFlags, desc.Usage);
+
+				D3D11_MAPPED_SUBRESOURCE data = {};
+				Device::GetInst()->GetContext()->CopyResource(pTex->GetTex2D().Get(), image->GetTex2D().Get());
+				Device::GetInst()->GetContext()->Map(pTex->GetTex2D().Get(), 0, D3D11_MAP_READ, 0, &data);
+
+				MakeFrameByPixelCoord(Pixel, rect, data, check);
+
+				Device::GetInst()->GetContext()->Unmap(pTex->GetTex2D().Get(), 0);
+				delete pTex;
+
+				//현재 프레임이 잘리지 않은 경우
+				if (0 == nFrame.vSliceSize.x || 0 == nFrame.vSliceSize.y)
+				{
+					//현재 프레임을 설졍함
+					Frame& CurFrame = anim->GetCurFrame();
+
+					CurFrame.vLeftTop = rect.LT;
+					CurFrame.vSliceSize = rect.RB - rect.LT;
+					CurFrame.vBackground = nFrame.vSliceSize;
+				}
+				//현재 프레임이 이미 잘려 있는 경우
+				else
+				{
+					// 새로운 프레임을 만들어서 추가함
+					Frame frm = {};
+
+					frm.vLeftTop = rect.LT;
+					frm.vSliceSize = rect.RB - rect.LT;
+					frm.vBackground = nFrame.vSliceSize;
+
+					anim->AddFrame(frm);
+				}
 			}
 		}
 
-		ImVec2 rect = ImVec2(10, 10);
-		ImColor col = ImVec4(1.f, 1.f, 0.f, 1.f);
-		draw_list->AddRect(m_MouseClickPixel - rect, m_MouseClickPixel + rect, col);
+
+		//ImVec2 rect = ImVec2(10, 10);
+		//ImColor col = ImVec4(1.f, 1.f, 0.f, 1.f);
+		//draw_list->AddRect(m_MouseClickPixel - rect, m_MouseClickPixel + rect, col);
 
 		std::vector<Frame> frames = anim->GetAllFrame();
 		std::vector<Frame>::iterator iter = frames.begin();
@@ -153,6 +188,7 @@ void AnimEditorRenderGUI::RenderUpdate()
 			ImVec2 sliceSizeUV	= ImVec2(sliceSize.x / ImageSize.x	, sliceSize.y / ImageSize.y);
 			ImVec2 offsetUV		= ImVec2(offset.x / ImageSize.x		, offset.y / ImageSize.y);
 			ImVec2 backgroundUV = ImVec2(background.x / ImageSize.x	, background.y / ImageSize.y);
+			ImVec2 rightBotUV = leftTopUV + sliceSizeUV;
 
 			//background in render uv
 			ImVec2 BackgroundLeftTopUV = leftTopUV + (sliceSizeUV / 2) - (backgroundUV / 2) - offsetUV;
@@ -170,31 +206,62 @@ void AnimEditorRenderGUI::RenderUpdate()
 			ImVec2 DeltaRightBot = ImVec2(DeltaRightBotUV.x * ImageSize.x, DeltaRightBotUV.y * ImageSize.y);
 
 			//final drawPos
-			drawLeftTop += DeltaLeftTop;
-			drawRightBot -= DeltaRightBot;
-
-			ImVec2 rightBotUV = leftTopUV + sliceSizeUV;
-
-			if (drawLeftTop.x > drawRightBot.x)
+			
+			//offset correction
 			{
-				float sizeX = drawLeftTop.x - drawRightBot.x;
-				float tmpX = drawLeftTop.x;
-				drawLeftTop.x = drawRightBot.x;
-				drawRightBot.x = tmpX;
+				//lt
+				if(DeltaLeftTop.x > 0 )
+					drawLeftTop.x += DeltaLeftTop.x;
+				else
+				{
+					leftTopUV.x -= DeltaLeftTopUV.x;
+				}
+				if(DeltaLeftTop.y > 0)
+					drawLeftTop.y += DeltaLeftTop.y;
+				else
+				{
+					leftTopUV.y -= DeltaLeftTopUV.y;
+				}
 
-				drawLeftTop.x += (sizeX / 2);
-				drawRightBot.x -= (sizeX / 2);
+				//rb
+				if (DeltaRightBot.x > 0)
+					drawRightBot.x -= DeltaRightBot.x;
+				else
+				{
+					rightBotUV.x += DeltaRightBotUV.x;
+				}
+				if (DeltaRightBot.y > 0)
+					drawRightBot.y -= DeltaRightBot.y;
+				else
+				{
+					rightBotUV.y += DeltaRightBotUV.y;
+				}
 			}
 
-			if (drawLeftTop.y > drawRightBot.y)
+			//image Correction
 			{
-				float sizeY = drawLeftTop.y - drawRightBot.y;
-				float tmpY = drawLeftTop.y;
-				drawLeftTop.y = drawRightBot.y;
-				drawRightBot.y = tmpY;
+				//lt
+				if (drawLeftTop.x > drawRightBot.x)
+				{
+					float sizeX = drawLeftTop.x - drawRightBot.x;
+					float tmpX = drawLeftTop.x;
+					drawLeftTop.x = drawRightBot.x;
+					drawRightBot.x = tmpX;
 
-				drawLeftTop.y += (sizeY / 2);
-				drawRightBot.y -= (sizeY / 2);
+					drawLeftTop.x += (sizeX / 2);
+					drawRightBot.x -= (sizeX / 2);
+				}
+				//rb
+				if (drawLeftTop.y > drawRightBot.y)
+				{
+					float sizeY = drawLeftTop.y - drawRightBot.y;
+					float tmpY = drawLeftTop.y;
+					drawLeftTop.y = drawRightBot.y;
+					drawRightBot.y = tmpY;
+
+					drawLeftTop.y += (sizeY / 2);
+					drawRightBot.y -= (sizeY / 2);
+				}
 			}
 
 			draw_list->AddImage(image->GetSRV().Get(), drawLeftTop, drawRightBot, leftTopUV, rightBotUV);

@@ -98,7 +98,12 @@ void AnimEditorGUI::RenderUpdate()
 			
 			// 현재 프레임 삭제
 			if (ImGui::Button("Remove Current Frame##Animator2DGUICreateRemoveCurFrame"))
-				m_EditAnim->RemoveCurFrame();
+			{
+				if (!m_EditAnim->RemoveCurFrame())
+				{
+					curFrame = {};
+				}
+			}
 			
 			ImGui::Spacing();
 			

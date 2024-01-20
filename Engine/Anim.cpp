@@ -131,14 +131,15 @@ void Anim::AddFrame(Frame& _frame)
 	m_CurFrameIdx = m_Frames.size() - 1;
 }
 
-void Anim::RemoveCurFrame()
+bool Anim::RemoveCurFrame()
 {
 	if (m_Frames.size() < 2)
-		return;
+		return false;
 
 	auto iter = m_Frames.begin() + m_CurFrameIdx;
 	m_Frames.erase(iter);
 	m_CurFrameIdx = 0;
+	return true;
 }
 
 bool Anim::Load(const std::wstring& _FileName)
