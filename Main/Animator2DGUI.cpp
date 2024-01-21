@@ -22,60 +22,75 @@ Animator2DGUI::~Animator2DGUI()
 
 void Animator2DGUI::RenderUpdate()
 {
+	if (nullptr == GetTargetObject())
+		return;
+
 	ComponentGUI::RenderUpdate();
+
+	Animator2D* targetAnimator2D = GetTargetObject()->GetAnimator2D();
+	std::vector<std::string> allAnim;
+	targetAnimator2D->GetAllAnim(allAnim);
+	Anim* curAnim = targetAnimator2D->GetCurAnim();
+
+	ImGui::Text("Anims"); ImGui::SameLine();
+	if (ImGui::BeginCombo("##Animator2DGUIAnimSelectCombo", nullptr, ImGuiComboFlags_NoPreview))
 	{
-		Animator2D* targetAnimator2D = GetTargetObject()->GetAnimator2D();
-		std::vector<std::string> allAnim;
-		targetAnimator2D->GetAllAnim(allAnim);
-		Anim* curAnim = targetAnimator2D->GetCurAnim();
-
-		if (curAnim)
+		for (int n = 0; n < allAnim.size(); n++)
 		{
-			std::string animName = ToString(curAnim->GetResourceName());
-			ImGui::Text("Anim"); ImGui::SameLine(); ImGui::InputText("##Animtor2DGUIAnimName", (char*)animName.c_str(), animName.size(), ImGuiInputTextFlags_ReadOnly);
-			ImGui::SameLine();
-			
-			if (ImGui::BeginCombo("##Animator2DGUIAnimSelectCombo", nullptr, ImGuiComboFlags_NoPreview))
+			const bool is_selected = (m_iSelectedIdx == n);
+			if (ImGui::Selectable(allAnim[n].c_str(), is_selected))
 			{
-				for (int n = 0; n < allAnim.size(); n++)
-				{
-					const bool is_selected = (m_iSelectedIdx == n);
-					if (ImGui::Selectable(allAnim[n].c_str(), is_selected))
-					{
-						m_iSelectedIdx = n;
-						targetAnimator2D->Play(ToWstring(allAnim[n]));
-					}
-
-					// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
-					if (is_selected)
-						ImGui::SetItemDefaultFocus();
-				}
-				ImGui::EndCombo();
+				m_iSelectedIdx = n;
+				targetAnimator2D->Play(ToWstring(allAnim[n]));
 			}
 
-			ImGui::Spacing();
+			// Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+			if (is_selected)
+				ImGui::SetItemDefaultFocus();
+		}
+		ImGui::EndCombo();
+	}
 
-			if (ImGui::Button("AddAnim##Animator2DGUIAddAnimButton"))
-			{
-				ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
+	if (curAnim)
+	{
+		std::string animName = ToString(curAnim->GetResourceName());
+		ImGui::Text("Anim"); ImGui::SameLine(); ImGui::InputText("##Animtor2DGUIAnimName", (char*)animName.c_str(), animName.size(), ImGuiInputTextFlags_ReadOnly);
+		ImGui::Spacing();
 
-				std::vector<std::string> animlist;
-				ResourceManager::GetInst()->GetAssetName(RESOURCE_TYPE::ANIM, animlist);
+		if (ImGui::Button("AddAnim##Animator2DGUIAddAnimButton"))
+		{
+			ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
 
-				list->AddString(animlist);
-				list->SetDelegate(this, (Delegate_1)&Animator2DGUI::AddAnim);
-				list->Activate();
-			}
+			std::vector<std::string> animlist;
+			ResourceManager::GetInst()->GetAssetName(RESOURCE_TYPE::ANIM, animlist);
 
-			bool play = curAnim->IsPlaying();
-			ImGui::Text("Play"); ImGui::SameLine(); ImGui::Checkbox("##Animtor2DGUIAnimPlayButton", &play);
-			play ? curAnim->Play() : curAnim->Pause();
+			list->AddString(animlist);
+			list->SetDelegate(this, (Delegate_1)&Animator2DGUI::AddAnim);
+			list->Activate();
+		}
 
-			ImGui::SameLine();
+		bool play = curAnim->IsPlaying();
+		ImGui::Text("Play"); ImGui::SameLine(); ImGui::Checkbox("##Animtor2DGUIAnimPlayButton", &play);
+		play ? curAnim->Play() : curAnim->Pause();
 
-			bool repeat = curAnim->IsRepeat();
-			ImGui::Text("Repeat"); ImGui::SameLine(); ImGui::Checkbox("##Animtor2DGUIAnimRepeatButton", &repeat);
-			curAnim->SetRepeat(repeat);
+		ImGui::SameLine();
+
+		bool repeat = curAnim->IsRepeat();
+		ImGui::Text("Repeat"); ImGui::SameLine(); ImGui::Checkbox("##Animtor2DGUIAnimRepeatButton", &repeat);
+		curAnim->SetRepeat(repeat);
+	}
+	else
+	{
+		if (ImGui::Button("AddAnim##Animator2DGUIAddAnimButton"))
+		{
+			ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
+
+			std::vector<std::string> animlist;
+			ResourceManager::GetInst()->GetAssetName(RESOURCE_TYPE::ANIM, animlist);
+
+			list->AddString(animlist);
+			list->SetDelegate(this, (Delegate_1)&Animator2DGUI::AddAnim);
+			list->Activate();
 		}
 	}
 }

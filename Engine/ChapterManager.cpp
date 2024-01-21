@@ -39,6 +39,7 @@ void ChapterManager::Init()
 	gobj->AddComponent(new Transform);
 	gobj->AddComponent(new MeshRenderer);
 	gobj->AddComponent(new Animator2D);
+	gobj->AddComponent(new Collider2D);
 		
 	gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
 	gobj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
@@ -49,6 +50,11 @@ void ChapterManager::Init()
 
 	gobj->SetName(L"test_rock");
 	AddGameObject(gobj, LAYER_TYPE::Object);
+
+	GameObject* child = new GameObject;
+	child->SetName(L"ChildObj");
+
+	gobj->AttachChild(child);
 
 	// UI Test obj
 	gobj = new GameObject;
@@ -100,6 +106,7 @@ void ChapterManager::Init()
 	gobj->GetLight2D()->SetLigthType(LIGHT_TYPE::DIRECTIONAL);
 	gobj->GetLight2D()->SetAmbient(Vec4(1.f));
 
+	gobj->SetName(L"light_test");
 	AddGameObject(gobj, LAYER_TYPE::Light);
 
 	Device::GetInst()->SetClearColor(Vec4(0.f, 0.f, 0.f, 1.f));

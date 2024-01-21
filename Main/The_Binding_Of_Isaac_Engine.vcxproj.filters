@@ -141,6 +141,18 @@
     <ClInclude Include="AnimEditorRenderGUI.h">
       <Filter>GUI\Editor\AnimEditor</Filter>
     </ClInclude>
+    <ClInclude Include="OutlinerGUI.h">
+      <Filter>GUI\Outliner</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider2DGUI.h">
+      <Filter>GUI\Inspector\Component\Collider2D</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraGUI.h">
+      <Filter>GUI\Inspector\Component\Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="Light2DGUI.h">
+      <Filter>GUI\Inspector\Component\Light2D</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -208,6 +220,18 @@
     </ClCompile>
     <ClCompile Include="AnimEditorRenderGUI.cpp">
       <Filter>GUI\Editor\AnimEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="OutlinerGUI.cpp">
+      <Filter>GUI\Outliner</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider2DGUI.cpp">
+      <Filter>GUI\Inspector\Component\Collider2D</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraGUI.cpp">
+      <Filter>GUI\Inspector\Component\Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="Light2DGUI.cpp">
+      <Filter>GUI\Inspector\Component\Light2D</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -132,3 +132,14 @@ GameObject* Room::FindObject(const std::wstring& _strName)
 
 	return nullptr;
 }
+
+void Room::GetAllObject(std::vector<GameObject*>& _out)
+{
+	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
+	{
+		if (0 < m_Layers[i]->m_Parents.size())
+		{
+			_out.insert(_out.end(), m_Layers[i]->m_Parents.begin(), m_Layers[i]->m_Parents.end());
+		}
+	}
+}

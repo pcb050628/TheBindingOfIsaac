@@ -110,14 +110,14 @@ void RenderManager::Render_Debug()
 			m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"CircleMesh_Debug"));
 			m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
 			break;
-		case DEBUG_SHAPE::CUBE:
-			m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"CubeMesh"));
-			m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
-			break;
-		case DEBUG_SHAPE::SPHERE:
-			m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"SphereMesh"));
-			m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
-			break;
+		//case DEBUG_SHAPE::CUBE:
+		//	m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"CubeMesh"));
+		//	m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
+		//	break;
+		//case DEBUG_SHAPE::SPHERE:
+		//	m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"SphereMesh"));
+		//	m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"debug_Material"));
+		//	break;
 		}
 
 		m_DebugObj->GetMeshRenderer()->GetMaterial()->SetScalarParam((*iter).vColor, VEC4_0);
@@ -127,7 +127,7 @@ void RenderManager::Render_Debug()
 
 		m_DebugObj->Render();
 
-		(*iter).fDuration += Time::GetInst()->GetDeltaTime();
+		(*iter).fLifeTime += Time::GetInst()->GetDeltaTime();
 		if ((*iter).fDuration <= (*iter).fLifeTime)
 			iter = m_DebugShapeInfos.erase(iter);
 		else

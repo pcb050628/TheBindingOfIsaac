@@ -78,12 +78,14 @@ enum class LIGHT_TYPE
 	DIRECTIONAL,
 	POINT,
 	SPOT,
+	END
 };
 
 enum class DEBUG_SHAPE
 {
 	RECT,
 	CIRCLE,
+	CROSS,
 	CUBE,
 	SPHERE,
 };

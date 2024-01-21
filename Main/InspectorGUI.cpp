@@ -4,8 +4,11 @@
 #include "Engine/GameObject.h"
 
 #include "TransformGUI.h"
+#include "Collider2DGUI.h"
 #include "MeshRendererGUI.h"
 #include "Animator2DGUI.h"
+#include "Light2DGUI.h"
+#include "CameraGUI.h"
 
 InspectorGUI::InspectorGUI() : GUI("Inspector", "##InspectorGUI")
 	, m_TargetObject(nullptr)
@@ -15,11 +18,20 @@ InspectorGUI::InspectorGUI() : GUI("Inspector", "##InspectorGUI")
 	m_ComGUI[(UINT)COMPONENT_TYPE::TRANSFORM] = new TransformGUI;
 	AddChild(m_ComGUI[(UINT)COMPONENT_TYPE::TRANSFORM]);
 
+	m_ComGUI[(UINT)COMPONENT_TYPE::COLLIDER2D] = new Collider2DGUI;
+	AddChild(m_ComGUI[(UINT)COMPONENT_TYPE::COLLIDER2D]);
+
 	m_ComGUI[(UINT)COMPONENT_TYPE::MESHRENDERER] = new MeshRendererGUI;
 	AddChild(m_ComGUI[(UINT)COMPONENT_TYPE::MESHRENDERER]);
 
 	m_ComGUI[(UINT)COMPONENT_TYPE::ANIMATOR2D] = new Animator2DGUI;
 	AddChild(m_ComGUI[(UINT)COMPONENT_TYPE::ANIMATOR2D]);
+
+	m_ComGUI[(UINT)COMPONENT_TYPE::LIGHT2D] = new Light2DGUI;
+	AddChild(m_ComGUI[(UINT)COMPONENT_TYPE::LIGHT2D]);
+
+	m_ComGUI[(UINT)COMPONENT_TYPE::CAMERA] = new CameraGUI;
+	AddChild(m_ComGUI[(UINT)COMPONENT_TYPE::CAMERA]);
 }
 
 InspectorGUI::~InspectorGUI()

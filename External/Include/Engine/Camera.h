@@ -49,15 +49,24 @@ private:
     void Render_PostProcess();
 
 public:
+    PROJ_TYPE GetProjType() { return m_ProjType; }
+    void SetProjType(PROJ_TYPE _type);
+
     float GetFOV() { return m_FOV; }
+    float GetWidth() { return m_Width; }
     float GetScale() { return m_Scale; }
+    float GetFar() { return m_Far; }
 
     void SetFOV(float _fov) { m_FOV = _fov; }
+    void SetWidth(float _width) { m_Width = _width; }
     void SetScale(float _scale) { m_Scale = _scale; }
+    void SetFar(float _far) { m_Far = _far; }
 
     void LayerCheckAll(bool _check);
     void LayerCheck(int _layerIdx, bool _check);
     void LayerCheck(LAYER_TYPE _layerType, bool _check);
+    bool GetLayerCheck(int _layerType);
+    bool GetLayerCheck(LAYER_TYPE _layerType);
 
     // Camera Register
     void SetCameraPriority(int _Priority);

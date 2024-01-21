@@ -10,6 +10,7 @@
 #include "GUI.h"
 
 #include "InspectorGUI.h"
+#include "OutlinerGUI.h"
 #include "ListGUI.h"
 #include "EditorGUI.h"
 #include "AnimEditorRenderGUI.h"
@@ -87,11 +88,11 @@ void ImGuiManager::Update()
 
     ImGui::ShowDemoWindow();
 
-    if (!((InspectorGUI*)FindGUI("##InspectorGUI"))->GetTargetObject())
-    {
-        GameObject* gobj = ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->FindObject(L"test_rock");
-        ((InspectorGUI*)FindGUI("##InspectorGUI"))->SetTargetObject(gobj);
-    }
+    //if (!((InspectorGUI*)FindGUI("##InspectorGUI"))->GetTargetObject())
+    //{
+    //    GameObject* gobj = ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->FindObject(L"test_rock");
+    //    ((InspectorGUI*)FindGUI("##InspectorGUI"))->SetTargetObject(gobj);
+    //}
 
     std::map<std::string, GUI*>::iterator iter = m_mapGUI.begin();
     for (; iter != m_mapGUI.end(); iter++)
@@ -123,6 +124,9 @@ void ImGuiManager::Render()
 void ImGuiManager::CrateGUI()
 {
     GUI* gui = new InspectorGUI;
+    m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
+
+    gui = new OutlinerGUI;
     m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 
     gui = new ListGUI;

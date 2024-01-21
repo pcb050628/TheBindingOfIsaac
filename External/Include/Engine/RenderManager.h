@@ -27,6 +27,8 @@ public:
 	void UpdateData();
 	void Clear();
 
+	void AddDebugShapeInfo(tDebugShapeInfo& _info) { m_DebugShapeInfos.push_back(_info); }
+
 	void Render();
 	void Render_Debug();
 

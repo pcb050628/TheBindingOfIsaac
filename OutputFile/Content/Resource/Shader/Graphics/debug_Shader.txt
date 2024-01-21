@@ -1,9 +1,9 @@
 [TOPOLOGY]
 3
 [VS_PATH]
-Shader\std2d.fx
+Shader\debug.fx
 [VS_FuncName]
-VS_Std2D
+VS_DebugShape
 [HS_PATH]
 NULL
 [HS_FuncName]
@@ -17,9 +17,9 @@ NULL
 [GS_FuncName]
 NULL
 [PS_PATH]
-Shader\std2d.fx
+Shader\debug.fx
 [PS_FuncName]
-PS_Std2D
+PS_DebugShape
 [RS_TYPE]
 2
 [DSS_TYPE]

@@ -15,6 +15,7 @@
 
 #define PI 3.14159265359
 
+
 enum class LAYER_TYPE
 {
 	Background,

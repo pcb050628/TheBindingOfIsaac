@@ -148,6 +148,35 @@ void Camera::Render_PostProcess()
 	m_PostProcess.clear();
 }
 
+void Camera::SetProjType(PROJ_TYPE _type)
+{
+	m_ProjType = _type;
+
+	if (PROJ_TYPE::PERSPECTIVE == m_ProjType)
+	{
+		if (0 == m_FOV)
+		{
+			m_FOV = 60;
+		}
+	}
+}
+
+bool Camera::GetLayerCheck(int _layerType)
+{
+	UINT mask = 0;
+	mask |= (1 << _layerType);
+
+	return (m_LayerCheck & mask);
+}
+
+bool Camera::GetLayerCheck(LAYER_TYPE _layerType)
+{
+	UINT mask = 0;
+	mask |= (1 << (int)_layerType);
+
+	return (m_LayerCheck & mask);
+}
+
 void Camera::LayerCheckAll(bool _check)
 {
 	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)

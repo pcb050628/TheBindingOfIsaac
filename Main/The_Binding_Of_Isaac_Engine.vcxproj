@@ -173,6 +173,8 @@
     <ClInclude Include="Animator2DGUI.h" />
     <ClInclude Include="AnimEditorGUI.h" />
     <ClInclude Include="AnimEditorRenderGUI.h" />
+    <ClInclude Include="CameraGUI.h" />
+    <ClInclude Include="Collider2DGUI.h" />
     <ClInclude Include="ComponentGUI.h" />
     <ClInclude Include="EditorGUI.h" />
     <ClInclude Include="framework.h" />
@@ -187,8 +189,10 @@
     <ClInclude Include="imstb_textedit.h" />
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="InspectorGUI.h" />
+    <ClInclude Include="Light2DGUI.h" />
     <ClInclude Include="ListGUI.h" />
     <ClInclude Include="MeshRendererGUI.h" />
+    <ClInclude Include="OutlinerGUI.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="targetver.h" />
@@ -199,6 +203,8 @@
     <ClCompile Include="Animator2DGUI.cpp" />
     <ClCompile Include="AnimEditorGUI.cpp" />
     <ClCompile Include="AnimEditorRenderGUI.cpp" />
+    <ClCompile Include="CameraGUI.cpp" />
+    <ClCompile Include="Collider2DGUI.cpp" />
     <ClCompile Include="ComponentGUI.cpp" />
     <ClCompile Include="EditorGUI.cpp" />
     <ClCompile Include="GUI.cpp" />
@@ -211,9 +217,11 @@
     <ClCompile Include="imgui_tables.cpp" />
     <ClCompile Include="imgui_widgets.cpp" />
     <ClCompile Include="InspectorGUI.cpp" />
+    <ClCompile Include="Light2DGUI.cpp" />
     <ClCompile Include="ListGUI.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MeshRendererGUI.cpp" />
+    <ClCompile Include="OutlinerGUI.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

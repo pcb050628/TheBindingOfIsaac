@@ -10,10 +10,15 @@ private:
 	Anim*					m_EditAnim;
 	AnimEditorRenderGUI*	m_RenderGUI;
 
+	Vec2					m_AllSliceSize;
+	Vec2					m_AllBackground;
+
 public:
 	virtual void RenderUpdate() override;
 
 public:
+	void SetAll();
+
 	void CreateNewAnim();
 	void DeleteAnim();
 	void SetAnimAtlas(DWORD_PTR _str);

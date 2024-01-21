@@ -88,6 +88,8 @@ public:
 
     void SetEditMode(bool _bValue) { m_bEditMode = _bValue; }
 
+    virtual void GetAllObject(std::vector<GameObject*>& _out);
+
 public:
     Room();
     virtual ~Room() override;

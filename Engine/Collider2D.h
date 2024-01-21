@@ -11,12 +11,14 @@ class Collider2D :
     public Component
 {
 private:
-    Vec3    m_vOffsetPos;
-    Vec3    m_vOffsetScale;
-    bool    m_bAbsolute;
+    Vec3            m_vOffsetPos;
+    Vec3            m_vOffsetScale;
+    bool            m_bAbsolute;
 
     Matrix          m_matColWorld;
     COLLIDER2D_TYPE m_Type;
+
+    bool            m_bDebugDraw;
 
 public:
     void LateUpdate() override;
@@ -32,11 +34,13 @@ public:
     void SetOffsetScale(float _x, float _y) { m_vOffsetScale = Vec3(_x, _y, 1.f); }
     void SetAbsolute(bool _value) { m_bAbsolute = _value; }
     void SetType(COLLIDER2D_TYPE _type) { m_Type = _type; }
+    void SetDeubgDraw(bool _bValue) { m_bDebugDraw = _bValue; }
 
     Vec2 GetOffsetPos() { return Vec2(m_vOffsetPos.x, m_vOffsetPos.y); }
     Vec2 GetOffsetScale() { return Vec2(m_vOffsetScale.x, m_vOffsetScale.y); }
     bool IsAbsolute() { return m_bAbsolute; }
     COLLIDER2D_TYPE GetCollider2DType() { return m_Type; }
+    bool GetDebugDraw() { return m_bDebugDraw; }
 
     const Matrix& GetColliderWorldMat() { return m_matColWorld; }
 

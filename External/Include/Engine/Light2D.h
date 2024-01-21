@@ -29,5 +29,7 @@ public:
 public:
     Light2D();
     ~Light2D();
+
+    friend class Light2DGUI;
 };
 

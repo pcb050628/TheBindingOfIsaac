@@ -388,6 +388,9 @@ namespace DirectX
             Vector4 operator+ () const noexcept { return *this; }
             Vector4 operator- () const noexcept;
 
+            typedef float(&f4)[4];
+            operator f4() const { return (f4)x; }
+
             // Vector operations
             bool InBounds(const Vector4& Bounds) const noexcept;
 

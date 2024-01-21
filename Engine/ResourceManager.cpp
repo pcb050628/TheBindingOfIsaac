@@ -22,6 +22,7 @@ void ResourceManager::Init()
 	CreateDefaultMesh();
 	CreateDefaultShader();
 	CreateDefaultMaterial();
+	LoadAnim();
 	Load<Texture>(L"Rocks.png");
 	Load<Texture>(L"Link.png");
 }
@@ -149,7 +150,8 @@ void ResourceManager::CreateDefaultMaterial()
 
 void ResourceManager::LoadAnim()
 {
-	//Load<Anim>(L"Link_RightAnim_test.txt"); Anim 폴더 전체 돌면서 로드
+	Load<Anim>(L"Link_RightAnim_test.txt");
+	// Anim 폴더 전체 돌면서 로드
 }
 
 Texture* ResourceManager::CreateTexture(const std::wstring& _strKey, UINT _width, UINT _height, DXGI_FORMAT _format, UINT _bindFlags, D3D11_USAGE _usage)

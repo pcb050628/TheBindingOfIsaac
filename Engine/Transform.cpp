@@ -8,7 +8,7 @@
 
 Transform::Transform() : Component(COMPONENT_TYPE::TRANSFORM)
 	, m_vRelativePos(Vec3(0, 0, 0))
-	, m_vRelativeScale(Vec3(100, 100, 0))
+	, m_vRelativeScale(Vec3(100, 100, 1))
 	, m_vRelativeRot(Vec3(0, 0, 0))
 	, m_bAbsolute(true)
 {

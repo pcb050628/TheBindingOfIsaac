@@ -133,17 +133,39 @@ void AnimEditorGUI::RenderUpdate()
 			}
 		}
 
+		//모든 프레임 설정
+		ImGui::Text("Set All Frame"); ImGui::Spacing();
+		ImGui::Text("Slice      :"); ImGui::SameLine(); ImGui::DragFloat2("##Animtor2DGUIAllFrameSliceSizeSet", m_AllSliceSize);
+		ImGui::Text("BackGround :"); ImGui::SameLine(); ImGui::DragFloat2("##Animtor2DGUIAllFrameBackgroundSizeSet", m_AllBackground);
+		ImGui::Spacing(); 
+		if (ImGui::Button("Apply##Animator2DGUIAllFrameSetApplyButton"))
+		{
+			SetAll();
+		}
+
 		m_EditAnim->LateUpdate();
 		
 		if (ImGui::Button("Save##Animtor2DGUICurAnimSaveButton"))
 		{
+			//이 후 m_EditAnim 재할당 하기
 			m_EditAnim->Save();
+			ResourceManager::GetInst()->AddResource(m_EditAnim->GetResourceName(), m_EditAnim);
 		}
 
 		ImGui::EndTabItem();
 	}
 
 	active ? Activate() : Deactivate();
+}
+
+void AnimEditorGUI::SetAll()
+{
+	std::vector<Frame>& frm = m_EditAnim->GetAllFrame();
+	for (int i = 0; i < frm.size(); i++)
+	{
+		frm[i].vSliceSize = m_AllSliceSize;
+		frm[i].vBackground = m_AllBackground;
+	}
 }
 
 void AnimEditorGUI::CreateNewAnim()
@@ -176,6 +198,8 @@ void AnimEditorGUI::SetAnimAtlas(DWORD_PTR _str)
 void AnimEditorGUI::Activate()
 {
 	GUI::Activate();
+	if (m_RenderGUI)
+		m_RenderGUI->Activate();
 	if (nullptr == m_EditAnim)
 	{
 		CreateNewAnim();
@@ -186,4 +210,6 @@ void AnimEditorGUI::Deactivate()
 {
 	GUI::Deactivate();
 	DeleteAnim();
+	if (m_RenderGUI)
+		m_RenderGUI->Deactivate();
 }
