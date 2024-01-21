@@ -12,6 +12,7 @@ private:
 
 	Vec2					m_AllSliceSize;
 	Vec2					m_AllBackground;
+	float					m_AllDuration;
 
 public:
 	virtual void RenderUpdate() override;

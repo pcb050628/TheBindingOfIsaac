@@ -156,14 +156,32 @@ void AnimEditorRenderGUI::RenderUpdate()
 					//현재 프레임이 이미 잘려 있는 경우
 					else
 					{
-						// 새로운 프레임을 만들어서 추가함
-						Frame frm = {};
+						//다음 프레임이 존재하고
+						int nextIdx = anim->GetCurFrameIdx() + 1;
+						if (nextIdx < anim->GetMaxFrameIdx())
+						{
+							//다음 프레임이 잘려있지않다면 
+							Frame& nFrm = anim->GetFrame(nextIdx);
+							if (0 == nFrm.vSliceSize.x || 0 == nFrm.vSliceSize.y)
+							{
+								//다음 프레임을 설정하고 다음 프레임을 현재 프레임으로 변경함
+								nFrm.vLeftTop = rect.LT;
+								nFrm.vSliceSize = rect.RB - rect.LT;
+								nFrm.vBackground = nFrame.vSliceSize;
+								anim->SetCurFrameIdx(nextIdx);
+							}
+						}
+						//새로운 프레임을 만들어서 추가함
+						else
+						{
+							Frame frm = {};
 
-						frm.vLeftTop = rect.LT;
-						frm.vSliceSize = rect.RB - rect.LT;
-						frm.vBackground = nFrame.vSliceSize;
+							frm.vLeftTop = rect.LT;
+							frm.vSliceSize = rect.RB - rect.LT;
+							frm.vBackground = nFrame.vSliceSize;
 
-						anim->AddFrame(frm);
+							anim->AddFrame(frm);
+						}
 					}
 				}
 			}
@@ -194,7 +212,7 @@ void AnimEditorRenderGUI::RenderUpdate()
 			}
 		}
 
-		//우클릭 드래그 끝날때
+		//우클릭 드래그 중 사각형 띄우기
 		if (0 != m_MouseClickPixel.x && 0 != m_MouseClickPixel.y
 			&& 0 != m_MouseReleasePixel.x && 0 != m_MouseReleasePixel.y)
 		{
@@ -206,7 +224,10 @@ void AnimEditorRenderGUI::RenderUpdate()
 
 			ImColor col = ImVec4(1.f, 0.f, 0.f, 1.f);
 			draw_list->AddRect(drawLT, drawRB, col);
-
+		}
+		//우클릭을 때었을 때
+		if (!m_bMouseRightClick)
+		{
 			// image 복사
 			D3D11_TEXTURE2D_DESC desc = image->GetDesc();
 			desc.Usage = D3D11_USAGE_STAGING;
@@ -220,15 +241,13 @@ void AnimEditorRenderGUI::RenderUpdate()
 			Device::GetInst()->GetContext()->CopyResource(pTex->GetTex2D().Get(), image->GetTex2D().Get());
 			Device::GetInst()->GetContext()->Map(pTex->GetTex2D().Get(), 0, D3D11_MAP_READ, 0, &data);
 
-			MekeFramesByDrag(m_MouseClickPixel, m_MouseReleasePixel);
+			//프레임 만들기
+			MakeFramesByDrag(m_MouseClickPixel, m_MouseReleasePixel);
+			m_MouseClickPixel = Vec2(0.f);
+			m_MouseReleasePixel = Vec2(0.f);
 
 			Device::GetInst()->GetContext()->Unmap(pTex->GetTex2D().Get(), 0);
 			delete pTex;
-		}
-
-		if (!m_bMouseRightClick)
-		{
-			//드래그 범위 내의 이미지 확인하기
 		}
 
 		ImGui::Checkbox("left##TESTLEFT", &m_bMouseLeftClick);
@@ -266,6 +285,7 @@ void AnimEditorRenderGUI::RenderUpdate()
 			ImVec2 sliceSize = ImVec2(curFrame.vSliceSize.x, curFrame.vSliceSize.y);
 			ImVec2 offset = ImVec2(curFrame.vOffset.x, curFrame.vOffset.y);
 			ImVec2 background = ImVec2(curFrame.vBackground.x, curFrame.vBackground.y);
+			ImVec2 rightBot = leftTop + sliceSize;
 
 			//UV
 			ImVec2 ImageSize = ImVec2(image->GetWidth(), image->GetHeight());
@@ -289,9 +309,11 @@ void AnimEditorRenderGUI::RenderUpdate()
 			//backgroundUV - LeftTopUV = Delta
 			ImVec2 DeltaLeftTopUV = leftTopUV - BackgroundLeftTopUV;
 			ImVec2 DeltaLeftTop = ImVec2(DeltaLeftTopUV.x * ImageSize.x, DeltaLeftTopUV.y * ImageSize.y);
+			DeltaLeftTop *= imageDelta;
 
 			ImVec2 DeltaRightBotUV = BackgroundRightBotUV - rightBotUV;
 			ImVec2 DeltaRightBot = ImVec2(DeltaRightBotUV.x * ImageSize.x, DeltaRightBotUV.y * ImageSize.y);
+			DeltaRightBot *= imageDelta;
 
 			//final drawPos
 			//offset correction
@@ -384,7 +406,7 @@ void AnimEditorRenderGUI::SizeCheck(ImVec2& _size, ImVec2 _maxSize)
 	}
 }
 
-void AnimEditorRenderGUI::MekeFramesByDrag(Vec2 _pixelLT, Vec2 _pixelRB)
+void AnimEditorRenderGUI::MakeFramesByDrag(Vec2 _pixelLT, Vec2 _pixelRB)
 {
 	//LT 위치의 알파값이 1인경우 -> 현재 픽셀값을 기준으로 프레임만들기 호출
 	//LT 위치의 알파값이 0인경우 -> 우10픽셀 하10픽셀 씩 이동하면서 확인 총 10번 반복후 알파값이 1인 픽셀을 찾지 못하면 리턴

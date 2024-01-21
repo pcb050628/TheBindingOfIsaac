@@ -93,7 +93,7 @@ void AnimEditorGUI::RenderUpdate()
 			m_EditAnim->SetCurFrameIdx(curFrameIdx);
 			
 			// Duration 설정
-			ImGui::Text("CurDuration"); ImGui::SameLine(); ImGui::InputFloat("##Animtor2DGUICreateDuration", &duration);
+			ImGui::Text("Duration"); ImGui::SameLine(); ImGui::InputFloat("##Animtor2DGUICreateDuration", &duration);
 			m_EditAnim->SetDuration(duration);
 			
 			// 현재 프레임 삭제
@@ -137,7 +137,7 @@ void AnimEditorGUI::RenderUpdate()
 		ImGui::Text("Set All Frame"); ImGui::Spacing();
 		ImGui::Text("Slice      :"); ImGui::SameLine(); ImGui::DragFloat2("##Animtor2DGUIAllFrameSliceSizeSet", m_AllSliceSize);
 		ImGui::Text("BackGround :"); ImGui::SameLine(); ImGui::DragFloat2("##Animtor2DGUIAllFrameBackgroundSizeSet", m_AllBackground);
-		ImGui::Spacing(); 
+		ImGui::Spacing();
 		if (ImGui::Button("Apply##Animator2DGUIAllFrameSetApplyButton"))
 		{
 			SetAll();
