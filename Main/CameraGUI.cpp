@@ -66,6 +66,8 @@ void CameraGUI::RenderUpdate()
     //scale
     float scale = targetCamera->GetScale();
     ImGui::Text("Scale"); ImGui::SameLine(); ImGui::DragFloat("##CameraGUIScale", &scale, 0.1f);
+    if (scale <= 0)
+        scale = 0.1f;
     targetCamera->SetScale(scale);
     
     //UINT    m_LayerCheck; // treenode, checkBox

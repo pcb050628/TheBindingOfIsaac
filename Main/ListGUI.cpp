@@ -41,11 +41,14 @@ void ListGUI::RenderUpdate()
                 if (nullptr != m_CallBackFunc)
                 {
                     m_CallBackFunc((DWORD_PTR)m_LatestClickData.c_str());
+                    m_CallBackFunc = nullptr;
                 }
 
                 if (nullptr != m_GUI && nullptr != m_MemberFunc)
                 {
                     (m_GUI->*m_MemberFunc)((DWORD_PTR)m_LatestClickData.c_str());
+                    m_GUI = nullptr;
+                    m_MemberFunc = nullptr;
                 }
 
                 Deactivate();

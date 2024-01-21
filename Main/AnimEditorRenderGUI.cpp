@@ -290,7 +290,7 @@ void AnimEditorRenderGUI::RenderUpdate()
 			ImVec2 DeltaLeftTopUV = leftTopUV - BackgroundLeftTopUV;
 			ImVec2 DeltaLeftTop = ImVec2(DeltaLeftTopUV.x * ImageSize.x, DeltaLeftTopUV.y * ImageSize.y);
 
-			ImVec2 DeltaRightBotUV = BackgroundRightBotUV - (leftTopUV + sliceSizeUV);
+			ImVec2 DeltaRightBotUV = BackgroundRightBotUV - rightBotUV;
 			ImVec2 DeltaRightBot = ImVec2(DeltaRightBotUV.x * ImageSize.x, DeltaRightBotUV.y * ImageSize.y);
 
 			//final drawPos
