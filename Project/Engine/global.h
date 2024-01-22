@@ -18,9 +18,9 @@
 #pragma comment(lib, "d3dcompiler.lib")
 
 #ifdef _DEBUG
-#pragma comment(lib, "..\\External\\Library\\DirectXTex\\DirectXTex_debug")
+#pragma comment(lib, "..\\..\\External\\Library\\DirectXTex\\DirectXTex_debug")
 #else
-#pragma comment(lib, "..\\External\\Library\\DirectXTex\\DirectXTex")
+#pragma comment(lib, "..\\..\\External\\Library\\DirectXTex\\DirectXTex")
 #endif
 
 #include <DirectX/SimpleMath.h>

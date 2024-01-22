@@ -1,2 +1,2 @@
-xcopy /s /y  /exclude:exclude_list.txt ".\Engine\*.h" ".\External\Include\Engine"
-xcopy /s /y  /exclude:exclude_list.txt ".\Engine\*.fx" ".\OutputFile\Content\Shader"
+xcopy /s /y  /exclude:exclude_list.txt ".\Project\Engine\*.h" ".\External\Include\Engine"
+xcopy /s /y  /exclude:exclude_list.txt ".\Project\Engine\*.fx" ".\OutputFile\Content\Shader"
