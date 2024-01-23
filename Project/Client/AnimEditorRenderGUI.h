@@ -30,7 +30,8 @@ public:
 
 private:
     void SizeCheck(ImVec2& _size, ImVec2 _maxSize);
-    void MakeFramesByDrag(Vec2 _pixelLT, Vec2 _pixelRB);
+    //_pixelLT = minLange, _pixelRB = maxRange
+    void MakeFramesByDrag(Vec2 _pixelLT, Vec2 _pixelRB, D3D11_MAPPED_SUBRESOURCE _mappedSub, std::vector<Frame>& _Out);
     void MakeFrameByPixelCoord(Vec2 _pixelPos, FrameRect& _frameOut, D3D11_MAPPED_SUBRESOURCE _mappedSub, std::set<Vec2>& _check);
     void GetLeftByPixelCoord(Vec2 _pixelPos, FrameRect& _frameOut, D3D11_MAPPED_SUBRESOURCE _mappedSub, std::set<Vec2>& _check);
     void GetRightByPixelCoord(Vec2 _pixelPos, FrameRect& _frameOut, D3D11_MAPPED_SUBRESOURCE _mappedSub, std::set<Vec2>& _check);

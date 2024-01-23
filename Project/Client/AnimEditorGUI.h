@@ -19,6 +19,7 @@ public:
 
 public:
 	void SetAll();
+	void ResetCurFrame();
 
 	void CreateNewAnim();
 	void DeleteAnim();

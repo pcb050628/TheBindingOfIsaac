@@ -157,8 +157,9 @@ void AnimEditorRenderGUI::RenderUpdate()
 					else
 					{
 						//다음 프레임이 존재하고
+						bool check = true;
 						int nextIdx = anim->GetCurFrameIdx() + 1;
-						if (nextIdx < anim->GetMaxFrameIdx())
+						while (nextIdx < anim->GetMaxFrameIdx())
 						{
 							//다음 프레임이 잘려있지않다면 
 							Frame& nFrm = anim->GetFrame(nextIdx);
@@ -169,10 +170,21 @@ void AnimEditorRenderGUI::RenderUpdate()
 								nFrm.vSliceSize = rect.RB - rect.LT;
 								nFrm.vBackground = nFrame.vSliceSize;
 								anim->SetCurFrameIdx(nextIdx);
+								break;
+							}
+							else
+							{
+								nextIdx++;
 							}
 						}
+
+						if (!(nextIdx < anim->GetMaxFrameIdx()))
+						{
+							check = false;
+						}
+
 						//새로운 프레임을 만들어서 추가함
-						else
+						if (!check)
 						{
 							Frame frm = {};
 
@@ -225,29 +237,71 @@ void AnimEditorRenderGUI::RenderUpdate()
 			ImColor col = ImVec4(1.f, 0.f, 0.f, 1.f);
 			draw_list->AddRect(drawLT, drawRB, col);
 		}
+
 		//우클릭을 때었을 때
-		if (!m_bMouseRightClick)
+		if (!m_bMouseRightClick
+			&& 0 != m_MouseClickPixel.x   && 0 != m_MouseClickPixel.y
+			&& 0 != m_MouseReleasePixel.x && 0 != m_MouseReleasePixel.y)
 		{
+			//MakeFramesByDrag 함수에 쓰일 Out
+			std::vector<Frame> outFrames;
+
 			// image 복사
 			D3D11_TEXTURE2D_DESC desc = image->GetDesc();
 			desc.Usage = D3D11_USAGE_STAGING;
 			desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
 			desc.BindFlags = 0;
-
+			
 			Texture* pTex = new Texture;
 			pTex->Create(desc.Width, desc.Height, desc.Format, desc.BindFlags, desc.Usage);
-
+			
 			D3D11_MAPPED_SUBRESOURCE data = {};
 			Device::GetInst()->GetContext()->CopyResource(pTex->GetTex2D().Get(), image->GetTex2D().Get());
 			Device::GetInst()->GetContext()->Map(pTex->GetTex2D().Get(), 0, D3D11_MAP_READ, 0, &data);
-
+			
 			//프레임 만들기
-			MakeFramesByDrag(m_MouseClickPixel, m_MouseReleasePixel);
+			MakeFramesByDrag(m_MouseClickPixel, m_MouseReleasePixel, data, outFrames);
 			m_MouseClickPixel = Vec2(0.f);
 			m_MouseReleasePixel = Vec2(0.f);
-
+			
+			//이미지 해제
 			Device::GetInst()->GetContext()->Unmap(pTex->GetTex2D().Get(), 0);
 			delete pTex;
+
+			//outFrame 정보를 AnimFrame으로 옮김
+			std::vector<Frame>& animFrame = anim->GetAllFrame();
+			int idx = 0;
+			for (size_t i = 0; i < outFrames.size(); i++)
+			{
+				bool animfrmcheck = false;
+				//animFrame의 프레임 정보 확인
+				if (idx < animFrame.size())
+				{
+					while (true)
+					{
+						if (!(idx < animFrame.size()))
+						{
+							animfrmcheck = true;
+							break;
+						}
+
+						//SliceSize 의 x 또는 y 의 정보가 0일 경우 만들어진 프레임이 아니라고 판단하여 정보를 그 프레임에 덮어 씌움
+						if (0 == animFrame[idx].vSliceSize.x || 0 == animFrame[idx].vSliceSize.y)
+						{
+							animFrame[idx] = outFrames[i];
+							break;
+						}
+
+						idx++;
+					}
+				}
+
+				//AnimFrame의 모든 정보가 채워져있을 경우
+				if(animfrmcheck)
+				{
+					animFrame.push_back(outFrames[i]);
+				}
+			}
 		}
 
 		ImGui::Checkbox("left##TESTLEFT", &m_bMouseLeftClick);
@@ -406,16 +460,144 @@ void AnimEditorRenderGUI::SizeCheck(ImVec2& _size, ImVec2 _maxSize)
 	}
 }
 
-void AnimEditorRenderGUI::MakeFramesByDrag(Vec2 _pixelLT, Vec2 _pixelRB)
+void AnimEditorRenderGUI::MakeFramesByDrag(Vec2 _pixelLT, Vec2 _pixelRB, D3D11_MAPPED_SUBRESOURCE _mappedSub, std::vector<Frame>& _Out)
 {
 	//LT 위치의 알파값이 1인경우 -> 현재 픽셀값을 기준으로 프레임만들기 호출
 	//LT 위치의 알파값이 0인경우 -> 우10픽셀 하10픽셀 씩 이동하면서 확인 총 10번 반복후 알파값이 1인 픽셀을 찾지 못하면 리턴
-	//찾은경우 반복
+	//찾은경우 Out에 푸시
+	//반복
 	//RB 위치의 도달하거나 넘어간 경우 리턴
+
+	Vec2 LT = _pixelLT;
+	Vec2 RB = _pixelLT;
+
+	int IncreaseXUnit = (_pixelRB - _pixelLT).x / 5;
+	int IncreaseYUnit = (_pixelRB - _pixelLT).y / 5;
+
+	//프레임을 MakeFrameByPixelCoord 호출 할 때 필요한 변수 선언
+	FrameRect outFrameRect;
+	std::set<Vec2> check;
+
+	int x = (int)LT.x; // Pixel x-coordinate
+	int y = (int)LT.y; // Pixel y-coordinate
+
+	if (x < 0 || y < 0 || x >= m_Target->m_EditAnim->GetAtlas()->GetWidth() || y >= m_Target->m_EditAnim->GetAtlas()->GetHeight())
+		return;
+
+	// Assuming a 32-bit RGBA format, calculate the offset
+	UINT rowPitch = _mappedSub.RowPitch; // row pitch 한 행의 간격, image->width * 픽셀의 크기 와 같을 것
+	BYTE* pData = static_cast<BYTE*>(_mappedSub.pData) + (y * rowPitch) + (x * 4); // 데이터 자체가 주소값이기 때문에 값을 더해서 원하는 주소(픽셀)로 이동한다, (y + rowPitch) 행 만큼 이동, (x * 4) 픽셀의 단위만큼(열) 이동
+
+	// Access RGBA values
+	BYTE alpha = pData[3];
+
+	int count = 0;
 	int loop = 0;
-	while (true)
+	bool xyIncreaseValue = false;
+	while (loop < 50)
 	{
-		break;
+		//픽셀의 위치가 최대값에 도달했거나 넘었다면 리턴
+		if (LT.y >= _pixelRB.y /*||  RB.y >= _pixelRB.y*/)
+			return;
+
+		if (xyIncreaseValue)
+		{
+			if (count > 5) 
+			{ 
+				loop++; 
+				count = 0; 
+				xyIncreaseValue = false;
+			}
+		}
+		else
+		{
+			if (LT.x >= _pixelRB.x)
+			{
+				loop++; 
+				count = 0; 
+				xyIncreaseValue = true;
+				LT.x = _pixelLT.x; 
+			}
+		}
+
+		
+
+		//픽셀 데이터 확인
+		x = (int)LT.x;
+		y = (int)LT.y;
+
+		pData = static_cast<BYTE*>(_mappedSub.pData) + (y * rowPitch) + (x * 4);
+		alpha = pData[3];
+
+		//알파가 0이 아닐 때(비어있는 픽셀이 아닐 떄)
+		if (alpha)
+		{
+			//픽셀 위치가 _out에 있는지 확인 있다면 그 부분에 다시 프레임을 만들면 안됨
+			bool OutCheck = false;
+
+			if (_Out.size() > 0)
+			{
+				for (int idx = 0; idx < _Out.size(); idx++)
+				{
+					Vec2 _outlt = _Out[idx].vLeftTop;
+					Vec2 _outrb = _Out[idx].vLeftTop + _Out[idx].vSliceSize;
+
+					if (LT.x > _outlt.x && LT.x < _outrb.x
+						&& LT.y > _outlt.y && LT.y < _outrb.y)
+					{
+						OutCheck = true;
+						break;
+					}
+				}
+			}	
+
+			if (!OutCheck)
+			{
+				//계속 사용될 변수 초기화
+				outFrameRect.LT = LT;
+				outFrameRect.RB = LT;
+				MakeFrameByPixelCoord(LT, outFrameRect, _mappedSub, check);
+				//함수 내에서 위치가 겹치는 것을 피하기 위해 필요한 변수이기 때문에 함수에서 나오면 바로 초기화해도 문제가없음
+				check.clear();
+
+				//새로운 프레임 푸시
+				Frame frm;
+				frm.vLeftTop = outFrameRect.LT;
+				frm.vSliceSize = outFrameRect.RB - outFrameRect.LT;
+				frm.vBackground = frm.vSliceSize;
+				_Out.push_back(frm);
+
+				//좌상단을 가장 최근에 만들어진 프레임의 가장 우측부분으로 설정
+				LT = Vec2(outFrameRect.RB.x, outFrameRect.LT.y);
+				//우하단을 가장 최근에 만들어진 프레임의 우하단으로 설정
+				RB = outFrameRect.RB;
+
+				//카운트 초기화
+				count = 0;
+				xyIncreaseValue = false;
+			}
+			else
+			{
+				//카운트 증가
+				count++;
+				//좌상단(프레임을 만들기 시작할 위치) 증가(우하단으로 1픽셀씩 이동)
+				if (!xyIncreaseValue)
+					LT.x += IncreaseXUnit;
+				else
+					LT.y += IncreaseYUnit;
+			}
+		}
+		//알파가 0이라면
+		else
+		{
+			//카운트 증가
+			count++;
+			//좌상단(프레임을 만들기 시작할 위치) 증가(우하단으로 1픽셀씩 이동)
+			if(!xyIncreaseValue)
+				LT.x += IncreaseXUnit;
+			else
+				LT.y += IncreaseYUnit;
+		}
 	}
 }
 
@@ -428,8 +610,8 @@ void AnimEditorRenderGUI::MakeFrameByPixelCoord(Vec2 _pixelPos, FrameRect& _fram
 		return;
 
 	// Assuming a 32-bit RGBA format, calculate the offset
-	UINT rowPitch = _mappedSub.RowPitch;
-	BYTE* pData = static_cast<BYTE*>(_mappedSub.pData) + (y * rowPitch) + (x * 4);
+	UINT rowPitch = _mappedSub.RowPitch; // row pitch 한 행의 간격, image->width * 픽셀의 크기 와 같을 것
+	BYTE* pData = static_cast<BYTE*>(_mappedSub.pData) + (y * rowPitch) + (x * 4); // 데이터 자체가 주소값이기 때문에 값을 더해서 원하는 주소(픽셀)로 이동한다
 
 	// Access RGBA values
 	BYTE alpha = pData[3];
@@ -440,7 +622,6 @@ void AnimEditorRenderGUI::MakeFrameByPixelCoord(Vec2 _pixelPos, FrameRect& _fram
 		{
 			x += 1;
 
-			UINT rowPitch = _mappedSub.RowPitch;
 			BYTE* pData = static_cast<BYTE*>(_mappedSub.pData) + (y * rowPitch) + (x * 4);
 
 			// Access RGBA values
