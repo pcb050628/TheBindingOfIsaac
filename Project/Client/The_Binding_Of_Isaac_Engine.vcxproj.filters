@@ -67,6 +67,9 @@
     <Filter Include="GUI\Editor\RoomEditor">
       <UniqueIdentifier>{5c6f6c73-db5f-41d0-b8f7-adf4fde38ebc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ImGui\FileDialog">
+      <UniqueIdentifier>{77c23aea-8be5-462b-86be-67cc9f7321fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -153,6 +156,12 @@
     <ClInclude Include="Light2DGUI.h">
       <Filter>GUI\Inspector\Component\Light2D</Filter>
     </ClInclude>
+    <ClInclude Include="ImGuiFileDialog.h">
+      <Filter>ImGui\FileDialog</Filter>
+    </ClInclude>
+    <ClInclude Include="ImGuiFileDialogConfig.h">
+      <Filter>ImGui\FileDialog</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -232,6 +241,9 @@
     </ClCompile>
     <ClCompile Include="Light2DGUI.cpp">
       <Filter>GUI\Inspector\Component\Light2D</Filter>
+    </ClCompile>
+    <ClCompile Include="ImGuiFileDialog.cpp">
+      <Filter>ImGui\FileDialog</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

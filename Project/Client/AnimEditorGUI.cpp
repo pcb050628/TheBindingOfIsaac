@@ -154,6 +154,7 @@ void AnimEditorGUI::RenderUpdate()
 			}
 		}
 
+		ImGui::Spacing();
 		//모든 프레임 설정
 		ImGui::Text("Set All Frame"); ImGui::Spacing();
 		ImGui::Text("Slice      :"); ImGui::SameLine(); ImGui::DragFloat2("##Animtor2DGUIAllFrameSliceSizeSet", m_AllSliceSize);

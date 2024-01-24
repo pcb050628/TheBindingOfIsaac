@@ -10,6 +10,8 @@
 
 AnimEditorRenderGUI::AnimEditorRenderGUI() : GUI("AnimEditorRender", "##AnimEditorRenderGUI")
 	, m_Target(nullptr)
+	, m_bMouseLeftClick(false)
+	, m_bMouseRightClick(false)
 {
 	Deactivate();
 }
