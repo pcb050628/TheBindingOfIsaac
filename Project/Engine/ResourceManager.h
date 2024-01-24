@@ -69,9 +69,9 @@ public:
 		return nullptr;
 	}
 
-	int AddResource(std::wstring _strKey, Resource* _resource)
+	int AddResource(std::wstring _strKey, Resource* _resource, bool _bForceInput = false)
 	{
-		if (IsExist(_strKey, _resource->GetResourceType()))
+		if (IsExist(_strKey, _resource->GetResourceType()) && !_bForceInput)
 		{
 			MessageBoxW(nullptr, L"이미 존재하는 키 값 입니다", L"리소스 추가 실패", MB_OK);
 			return E_FAIL;

@@ -314,20 +314,25 @@ void AnimEditorRenderGUI::RenderUpdate()
 		std::vector<Frame> frames = anim->GetAllFrame();
 		std::vector<Frame>::iterator iter = frames.begin();
 
-		//모든 프레임 가져와서 초록색으로 선 그어주기 / Rect 같이 그려서 안에 넣기 ( 아직 안함 )
-		for (; iter != frames.end(); iter++)
+		//모든 프레임 가져와서 초록색으로 선 그어주기, 현재 프레임일 경우 빨간색으로 선 그어주기
 		{
-			ImVec2 leftTop = ImVec2(iter->vLeftTop.x, iter->vLeftTop.y) * imageDelta;
-			ImVec2 sliceSize = ImVec2(iter->vSliceSize.x, iter->vSliceSize.y) * imageDelta;
-			ImVec2 background = ImVec2(iter->vBackground.x, iter->vBackground.y) * imageDelta;
-			ImVec2 offset = ImVec2(iter->vOffset.x, iter->vOffset.y) * imageDelta;
+			int idx = 0;
+			for (; iter != frames.end(); iter++, idx++)
+			{
+				ImVec2 leftTop = ImVec2(iter->vLeftTop.x, iter->vLeftTop.y) * imageDelta;
+				ImVec2 sliceSize = ImVec2(iter->vSliceSize.x, iter->vSliceSize.y) * imageDelta;
+				ImVec2 background = ImVec2(iter->vBackground.x, iter->vBackground.y) * imageDelta;
+				ImVec2 offset = ImVec2(iter->vOffset.x, iter->vOffset.y) * imageDelta;
 
-			ImColor col = ImVec4(0.f, 1.f, 0.f, 1.f);
-			draw_list->AddRect(LeftTop + windowPos + leftTop, LeftTop + windowPos + leftTop + sliceSize, col);
+				ImColor col = ImVec4(0.f, 1.f, 0.f, 1.f);
+				if (idx == anim->GetCurFrameIdx())
+					col = ImVec4(1.f, 0.f, 0.f, 1.f);
+				draw_list->AddRect(LeftTop + windowPos + leftTop, LeftTop + windowPos + leftTop + sliceSize, col);
 
-			col = ImVec4(1.f, 1.f, 1.f, 1.f);
-			ImVec2 BackgroundLeftTop = leftTop + (sliceSize / 2) - (background / 2);
-			draw_list->AddRect(LeftTop + windowPos + BackgroundLeftTop - offset, LeftTop + windowPos + BackgroundLeftTop + background - offset, col);
+				col = ImVec4(1.f, 1.f, 1.f, 1.f);
+				ImVec2 BackgroundLeftTop = leftTop + (sliceSize / 2) - (background / 2);
+				draw_list->AddRect(LeftTop + windowPos + BackgroundLeftTop - offset, LeftTop + windowPos + BackgroundLeftTop + background - offset, col);
+			}
 		}
 
 		//현재 프레임 띄우기
@@ -363,11 +368,11 @@ void AnimEditorRenderGUI::RenderUpdate()
 			//backgroundUV - LeftTopUV = Delta
 			ImVec2 DeltaLeftTopUV = leftTopUV - BackgroundLeftTopUV;
 			ImVec2 DeltaLeftTop = ImVec2(DeltaLeftTopUV.x * ImageSize.x, DeltaLeftTopUV.y * ImageSize.y);
-			DeltaLeftTop *= imageDelta;
+			//DeltaLeftTop *= imageDelta;
 
 			ImVec2 DeltaRightBotUV = BackgroundRightBotUV - rightBotUV;
 			ImVec2 DeltaRightBot = ImVec2(DeltaRightBotUV.x * ImageSize.x, DeltaRightBotUV.y * ImageSize.y);
-			DeltaRightBot *= imageDelta;
+			//DeltaRightBot *= imageDelta;
 
 			//final drawPos
 			//offset correction
@@ -377,13 +382,13 @@ void AnimEditorRenderGUI::RenderUpdate()
 					drawLeftTop.x += DeltaLeftTop.x;
 				else
 				{
-					leftTopUV.x -= DeltaLeftTopUV.x;
+					//leftTopUV.x -= DeltaLeftTopUV.x;
 				}
 				if (DeltaLeftTop.y > 0)
 					drawLeftTop.y += DeltaLeftTop.y;
 				else
 				{
-					leftTopUV.y -= DeltaLeftTopUV.y;
+					//leftTopUV.y -= DeltaLeftTopUV.y;
 				}
 
 				//rb
@@ -391,13 +396,13 @@ void AnimEditorRenderGUI::RenderUpdate()
 					drawRightBot.x -= DeltaRightBot.x;
 				else
 				{
-					rightBotUV.x += DeltaRightBotUV.x;
+					//rightBotUV.x += DeltaRightBotUV.x;
 				}
 				if (DeltaRightBot.y > 0)
 					drawRightBot.y -= DeltaRightBot.y;
 				else
 				{
-					rightBotUV.y += DeltaRightBotUV.y;
+					//rightBotUV.y += DeltaRightBotUV.y;
 				}
 			}
 

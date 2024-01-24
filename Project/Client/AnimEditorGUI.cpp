@@ -34,7 +34,8 @@ void AnimEditorGUI::RenderUpdate()
 		m_EditAnim->SetResourceName(ToWstring(string(buf)));
 
 		// 아틀라스 고르기
-		if (ImGui::Button("SelectAtlas##Animator2DGUISelectTextureButton"))
+		ImGui::Text("Select Atlas"); ImGui::SameLine();
+		if (ImGui::Button("##Animator2DGUISelectTextureButton", ImVec2(20, 20)))
 		{
 			ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
 		
@@ -43,6 +44,20 @@ void AnimEditorGUI::RenderUpdate()
 		
 			list->AddString(texlist);
 			list->SetDelegate(this, (Delegate_1)&AnimEditorGUI::SetAnimAtlas);
+			list->Activate();
+		}
+		ImGui::SameLine();
+
+		ImGui::Text("Select Anim"); ImGui::SameLine();
+		if (ImGui::Button("##Animator2DGUISelectAnimButton", ImVec2(20, 20)))
+		{
+			ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
+
+			std::vector<std::string> animlist;
+			ResourceManager::GetInst()->GetAssetName(RESOURCE_TYPE::ANIM, animlist);
+
+			list->AddString(animlist);
+			list->SetDelegate(this, (Delegate_1)&AnimEditorGUI::SetAnim);
 			list->Activate();
 		}
 		
@@ -150,12 +165,14 @@ void AnimEditorGUI::RenderUpdate()
 		}
 
 		m_EditAnim->LateUpdate();
-		
+
+		ImGui::Spacing();
 		if (ImGui::Button("Save##Animtor2DGUICurAnimSaveButton"))
 		{
-			//이 후 m_EditAnim 재할당 하기
 			m_EditAnim->Save();
-			ResourceManager::GetInst()->AddResource(m_EditAnim->GetResourceName(), m_EditAnim);
+			ResourceManager::GetInst()->AddResource(m_EditAnim->GetResourceName(), m_EditAnim, true);
+			Anim* an = new Anim(*m_EditAnim);
+			m_EditAnim = an;
 		}
 
 		ImGui::EndTabItem();
@@ -169,8 +186,10 @@ void AnimEditorGUI::SetAll()
 	std::vector<Frame>& frm = m_EditAnim->GetAllFrame();
 	for (int i = 0; i < frm.size(); i++)
 	{
-		frm[i].vSliceSize = m_AllSliceSize;
-		frm[i].vBackground = m_AllBackground;
+		if(0 != m_AllSliceSize.x && 0 != m_AllSliceSize.y)
+			frm[i].vSliceSize = m_AllSliceSize;
+		if (0 != m_AllBackground.x && 0 != m_AllBackground.y)
+			frm[i].vBackground = m_AllBackground;
 	}
 }
 
@@ -205,6 +224,13 @@ void AnimEditorGUI::SetAnimAtlas(DWORD_PTR _str)
 	std::string texName = (char*)_str;
 	Texture* pTex = ResourceManager::GetInst()->Find<Texture>(ToWstring(texName));
 	m_EditAnim->SetAtlas(pTex);
+}
+
+void AnimEditorGUI::SetAnim(DWORD_PTR _str)
+{
+	std::string animName = (char*)_str;
+	Anim* anim = ResourceManager::GetInst()->Find<Anim>(ToWstring(animName));
+	m_EditAnim = anim;
 }
 
 void AnimEditorGUI::Activate()
