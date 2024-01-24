@@ -56,3 +56,8 @@ void ConstantBuffer::UpdateData()
 	Device::GetInst()->GetContext()->GSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());
 	Device::GetInst()->GetContext()->PSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());
 }
+
+void ConstantBuffer::UpdateData_CS()
+{
+	Device::GetInst()->GetContext()->CSSetConstantBuffers((UINT)m_Type, 1, m_CB.GetAddressOf());
+}

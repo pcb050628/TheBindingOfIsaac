@@ -173,6 +173,29 @@ void Texture::UpdateData(int _regiNum)
 	Device::GetInst()->GetContext()->PSSetShaderResources(_regiNum, 1, m_SRView.GetAddressOf());
 }
 
+int Texture::UpdateData_CS_SRV(int _regiNum)
+{
+	if (nullptr == m_SRView)
+		return E_FAIL;
+
+	m_RecentNum_SRV = _regiNum;
+
+	Device::GetInst()->GetContext()->CSSetShaderResources(_regiNum, 1, m_SRView.GetAddressOf());
+	return S_OK;
+}
+
+int Texture::UpdateData_CS_UAV(int _regiNum)
+{
+	if (nullptr == m_UAView)
+		return E_FAIL;
+
+	m_RecentNum_UAV = _regiNum;
+
+	UINT i = -1;
+	Device::GetInst()->GetContext()->CSSetUnorderedAccessViews(_regiNum, 1, m_UAView.GetAddressOf(), &i);
+	return S_OK;
+}
+
 void Texture::Clear(int _regiNum)
 {
 	ID3D11ShaderResourceView* pSRV = nullptr;
@@ -181,4 +204,19 @@ void Texture::Clear(int _regiNum)
 	Device::GetInst()->GetContext()->DSSetShaderResources(_regiNum, 1, &pSRV);
 	Device::GetInst()->GetContext()->GSSetShaderResources(_regiNum, 1, &pSRV);
 	Device::GetInst()->GetContext()->PSSetShaderResources(_regiNum, 1, &pSRV);
+}
+
+void Texture::Clear_CS_SRV(int _regiNum)
+{
+	ID3D11ShaderResourceView* pSRV = nullptr;
+
+	Device::GetInst()->GetContext()->CSSetShaderResources(m_RecentNum_SRV, 1, &pSRV);
+}
+
+void Texture::Clear_CS_UAV(int _regiNum)
+{
+	ID3D11UnorderedAccessView* pUAV = nullptr;
+
+	UINT i = -1;
+	Device::GetInst()->GetContext()->CSSetUnorderedAccessViews(m_RecentNum_UAV, 1, &pUAV, &i);
 }

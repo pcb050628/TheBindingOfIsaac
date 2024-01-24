@@ -16,6 +16,7 @@ public:
     int Create(UINT _Size, UINT _Count);
     void SetData(void* _Src, UINT _ElementCount = 0);
     void UpdateData();
+    void UpdateData_CS();
 
 public:
     Microsoft::WRL::ComPtr<ID3D11Buffer> GetBuffer() { return m_CB; }

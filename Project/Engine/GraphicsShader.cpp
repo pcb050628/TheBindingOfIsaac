@@ -42,12 +42,16 @@ int GraphicsShader::CreateVertexShader(const std::wstring& _strRelativePath, con
 	if (FAILED(D3DCompileFromFile(filePath.c_str(), nullptr
 		, D3D_COMPILE_STANDARD_FILE_INCLUDE
 		, _strFuncName.c_str(), "vs_5_0", D3DCOMPILE_DEBUG, 0
-		, m_pVSBlob.GetAddressOf(), m_pErrBlob.GetAddressOf())))
+		, m_pVSBlob.GetAddressOf(), m_ErrBlob.GetAddressOf())))
 	{
-		if (nullptr != m_pErrBlob)
+		if (nullptr != m_ErrBlob)
 		{
-			char* pErrMsg = (char*)m_pErrBlob->GetBufferPointer();
+			char* pErrMsg = (char*)m_ErrBlob->GetBufferPointer();
 			MessageBoxA(nullptr, pErrMsg, "Shader Compile Failed!!", MB_OK);
+		}
+		else
+		{
+			MessageBoxA(nullptr, "Shader File No Exist", "Shader Compile Failed!!", MB_OK);
 		}
 		return E_FAIL;
 	}
@@ -114,12 +118,16 @@ int GraphicsShader::CreatePixelShader(const std::wstring& _strRelativePath, cons
 	if (FAILED(D3DCompileFromFile(filePath.c_str(), nullptr
 		, D3D_COMPILE_STANDARD_FILE_INCLUDE
 		, _strFuncName.c_str(), "ps_5_0", D3DCOMPILE_DEBUG, 0
-		, m_pPSBlob.GetAddressOf(), m_pErrBlob.GetAddressOf())))
+		, m_pPSBlob.GetAddressOf(), m_ErrBlob.GetAddressOf())))
 	{
-		if (nullptr != m_pErrBlob)
+		if (nullptr != m_ErrBlob)
 		{
-			char* pErrMsg = (char*)m_pErrBlob->GetBufferPointer();
+			char* pErrMsg = (char*)m_ErrBlob->GetBufferPointer();
 			MessageBoxA(nullptr, pErrMsg, "Shader Compile Failed!!", MB_OK);
+		}
+		else
+		{
+			MessageBoxA(nullptr, "Shader File No Exist", "Shader Compile Failed!!", MB_OK);
 		}
 		return E_FAIL;
 	}
@@ -298,7 +306,7 @@ bool GraphicsShader::Save()
 		return false;
 }
 
-void GraphicsShader::UpdateData()
+int GraphicsShader::UpdateData()
 {
 	Device::GetInst()->GetContext()->IASetInputLayout(m_pInputLayout.Get());
 	Device::GetInst()->GetContext()->IASetPrimitiveTopology(m_Topology);
@@ -312,4 +320,6 @@ void GraphicsShader::UpdateData()
 	Device::GetInst()->GetContext()->DSSetShader(m_pDomainShader.Get(), nullptr, 0);
 	Device::GetInst()->GetContext()->GSSetShader(m_pGeometryShader.Get(), nullptr, 0);
 	Device::GetInst()->GetContext()->PSSetShader(m_pPixelShader.Get(), nullptr, 0);
+
+	return S_OK;
 }

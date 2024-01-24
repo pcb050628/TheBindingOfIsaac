@@ -210,7 +210,7 @@ int Device::CreateConstBuffer()
 	m_arrConstantBuffer[(UINT)CB_TYPE::TRANSFORM]->Create(sizeof(tTransform), 1);
 
 	m_arrConstantBuffer[(UINT)CB_TYPE::MATERIAL_CONST] = new ConstantBuffer(CB_TYPE::MATERIAL_CONST);
-	m_arrConstantBuffer[(UINT)CB_TYPE::MATERIAL_CONST]->Create(sizeof(tMaterial), 1);
+	m_arrConstantBuffer[(UINT)CB_TYPE::MATERIAL_CONST]->Create(sizeof(tMtrlData), 1);
 
 	m_arrConstantBuffer[(UINT)CB_TYPE::ANIMATION2D] = new ConstantBuffer(CB_TYPE::ANIMATION2D);
 	m_arrConstantBuffer[(UINT)CB_TYPE::ANIMATION2D]->Create(sizeof(tAnimData), 1);

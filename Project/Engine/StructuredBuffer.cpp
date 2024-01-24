@@ -19,7 +19,7 @@ StructuredBuffer::~StructuredBuffer()
 {
 }
 
-int StructuredBuffer::Create(UINT _elementSize, UINT _elementCount, SB_TYPE _type, bool _bSysMemMove)
+int StructuredBuffer::Create(UINT _elementSize, UINT _elementCount, SB_TYPE _type, bool _bSysMemMove, void* _pSysMem)
 {
 	m_SB = nullptr;
 	m_SRV = nullptr;
@@ -29,7 +29,7 @@ int StructuredBuffer::Create(UINT _elementSize, UINT _elementCount, SB_TYPE _typ
 	HRESULT hr = S_OK;
 
 	m_bSysMemMove = _bSysMemMove;
-
+	m_SBType = _type;
 	m_ElementSize = _elementSize;
 	m_ElementCount = _elementCount;
 
@@ -41,8 +41,18 @@ int StructuredBuffer::Create(UINT _elementSize, UINT _elementCount, SB_TYPE _typ
 	desc.CPUAccessFlags = 0;
 	desc.Usage = D3D11_USAGE_DEFAULT;
 
-	hr = Device::GetInst()->GetDevice()->CreateBuffer(&desc, nullptr, m_SB.GetAddressOf());
-	if (FAILED(hr)) return E_FAIL;
+	if (nullptr == _pSysMem)
+	{
+		hr = Device::GetInst()->GetDevice()->CreateBuffer(&desc, nullptr, m_SB.GetAddressOf());
+		if (FAILED(hr)) return E_FAIL;
+	}
+	else
+	{
+		D3D11_SUBRESOURCE_DATA tSub = {};
+		tSub.pSysMem = _pSysMem;
+		hr = Device::GetInst()->GetDevice()->CreateBuffer(&desc, &tSub, m_SB.GetAddressOf());
+		if (FAILED(hr)) return E_FAIL;
+	}
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC SRVDesc = {};
 	SRVDesc.ViewDimension = D3D11_SRV_DIMENSION_BUFFER;
@@ -51,19 +61,29 @@ int StructuredBuffer::Create(UINT _elementSize, UINT _elementCount, SB_TYPE _typ
 	hr = Device::GetInst()->GetDevice()->CreateShaderResourceView(m_SB.Get(), &SRVDesc, m_SRV.GetAddressOf());
 	if (FAILED(hr)) return E_FAIL;
 
+	if (SB_TYPE::READ_WRITE == m_SBType)
+	{
+		desc.BindFlags |= D3D11_BIND_UNORDERED_ACCESS;
+
+		D3D11_UNORDERED_ACCESS_VIEW_DESC UAVDesc = {};
+		UAVDesc.ViewDimension = D3D11_UAV_DIMENSION_BUFFER;
+		UAVDesc.Buffer.NumElements = m_ElementCount;
+
+		hr = Device::GetInst()->GetDevice()->CreateUnorderedAccessView(m_UA.Get(), &UAVDesc, m_UAV.GetAddressOf());
+		if (FAILED(hr)) return E_FAIL;
+	}
+
 	if (m_bSysMemMove);
 	{
 		// 쓰기 버퍼
 		desc.Usage = D3D11_USAGE_DYNAMIC;
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-
 		hr = Device::GetInst()->GetDevice()->CreateBuffer(&desc, nullptr, m_SB_Write.GetAddressOf());
 		if (FAILED(hr)) return E_FAIL;
 
 		// 읽기 버퍼
 		desc.Usage = D3D11_USAGE_DEFAULT;
 		desc.CPUAccessFlags = D3D11_CPU_ACCESS_READ;
-
 		hr = Device::GetInst()->GetDevice()->CreateBuffer(&desc, nullptr, m_SB_Read.GetAddressOf());
 		if (FAILED(hr)) return E_FAIL;
 	}

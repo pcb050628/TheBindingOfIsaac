@@ -17,6 +17,9 @@ private:
     Microsoft::WRL::ComPtr<ID3D11Buffer>                m_SB_Read;
     Microsoft::WRL::ComPtr<ID3D11Buffer>                m_SB_Write;
 
+    Microsoft::WRL::ComPtr<ID3D11Buffer>                m_UA;
+    Microsoft::WRL::ComPtr<ID3D11UnorderedAccessView>   m_UAV;
+
     UINT                                                m_ElementSize;
     UINT                                                m_ElementCount;
 
@@ -24,12 +27,14 @@ private:
     bool                                                m_bSysMemMove;
 
 public:
-    int Create(UINT _elementSize, UINT _elementCount, SB_TYPE _type, bool _bSysMemMove = false);
+    int Create(UINT _elementSize, UINT _elementCount, SB_TYPE _type, bool _bSysMemMove = false, void* _pSysMem = nullptr);
 
+    void UpdateData(int _regiNum);
     void SetData(void* _data, UINT _elementCount = 0);
     void GetData(void* _destData, UINT _elementCount = 0);
 
-    void UpdateData(int _regiNum);
+    UINT GetElementSize() { return m_ElementSize; }
+    UINT GetElementCount() { return m_ElementCount; }
 
 public:
     StructuredBuffer();

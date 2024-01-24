@@ -49,9 +49,6 @@
     <Filter Include="02_Derived\Resource\Shader\GraphicsShader">
       <UniqueIdentifier>{e73a9598-c32f-4322-b529-2426f9327153}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Resource\Shader\ComputerShader">
-      <UniqueIdentifier>{75779e23-2aea-4d1c-bffa-ae30978887f5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\02_Manager">
       <UniqueIdentifier>{ba5a6859-296a-4bb7-a7d4-3f52267484b5}</UniqueIdentifier>
     </Filter>
@@ -60,9 +57,6 @@
     </Filter>
     <Filter Include="01_Basic\02_Manager\ResourceManager\Resource">
       <UniqueIdentifier>{21aaa8c3-5ce9-4710-854f-edd385ed5d16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\02_Manager\ResourceManager\Resource\Shader">
-      <UniqueIdentifier>{82b62f05-edb6-4eb4-9e10-b9bcadbd364a}</UniqueIdentifier>
     </Filter>
     <Filter Include="01_Basic\02_Manager\LogManager">
       <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
@@ -145,6 +139,12 @@
     <Filter Include="01_Basic\04_Chapter\Layer">
       <UniqueIdentifier>{a7361fe7-1ff0-40a9-8a26-74f1a90b0278}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Derived\Resource\Shader\ComputeShader">
+      <UniqueIdentifier>{75779e23-2aea-4d1c-bffa-ae30978887f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Shader\Shader">
+      <UniqueIdentifier>{82b62f05-edb6-4eb4-9e10-b9bcadbd364a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -197,7 +197,7 @@
       <Filter>0_Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="Shader.h">
-      <Filter>01_Basic\02_Manager\ResourceManager\Resource\Shader</Filter>
+      <Filter>02_Derived\Resource\Shader\Shader</Filter>
     </ClInclude>
     <ClInclude Include="GraphicsShader.h">
       <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
@@ -277,6 +277,9 @@
     <ClInclude Include="Layer.h">
       <Filter>01_Basic\04_Chapter\Layer</Filter>
     </ClInclude>
+    <ClInclude Include="ComputeShader.h">
+      <Filter>02_Derived\Resource\Shader\ComputeShader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -320,7 +323,7 @@
       <Filter>0_Default\Cpp</Filter>
     </ClCompile>
     <ClCompile Include="Shader.cpp">
-      <Filter>01_Basic\02_Manager\ResourceManager\Resource\Shader</Filter>
+      <Filter>02_Derived\Resource\Shader\Shader</Filter>
     </ClCompile>
     <ClCompile Include="GraphicsShader.cpp">
       <Filter>02_Derived\Resource\Shader\GraphicsShader</Filter>
@@ -396,6 +399,9 @@
     </ClCompile>
     <ClCompile Include="Layer.cpp">
       <Filter>01_Basic\04_Chapter\Layer</Filter>
+    </ClCompile>
+    <ClCompile Include="ComputeShader.cpp">
+      <Filter>02_Derived\Resource\Shader\ComputeShader</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

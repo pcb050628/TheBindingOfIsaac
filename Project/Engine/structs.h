@@ -21,7 +21,7 @@ struct tTransform
 };
 extern tTransform g_Transform;
 
-struct tMaterial
+struct tMtrlData
 {
 	int iArr[4];
 	float fArr[4];
@@ -33,7 +33,7 @@ struct tMaterial
 
 	int iPadding[2];
 };
-extern tMaterial g_Material;
+extern tMtrlData g_Material;
 
 struct tAnimData
 {
