@@ -382,13 +382,13 @@ void AnimEditorRenderGUI::RenderUpdate()
 					drawLeftTop.x += DeltaLeftTop.x;
 				else
 				{
-					//leftTopUV.x -= DeltaLeftTopUV.x;
+					leftTopUV.x -= DeltaLeftTopUV.x;
 				}
 				if (DeltaLeftTop.y > 0)
 					drawLeftTop.y += DeltaLeftTop.y;
 				else
 				{
-					//leftTopUV.y -= DeltaLeftTopUV.y;
+					leftTopUV.y -= DeltaLeftTopUV.y;
 				}
 
 				//rb
@@ -396,13 +396,13 @@ void AnimEditorRenderGUI::RenderUpdate()
 					drawRightBot.x -= DeltaRightBot.x;
 				else
 				{
-					//rightBotUV.x += DeltaRightBotUV.x;
+					rightBotUV.x += DeltaRightBotUV.x;
 				}
 				if (DeltaRightBot.y > 0)
 					drawRightBot.y -= DeltaRightBot.y;
 				else
 				{
-					//rightBotUV.y += DeltaRightBotUV.y;
+					rightBotUV.y += DeltaRightBotUV.y;
 				}
 			}
 
