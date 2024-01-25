@@ -61,6 +61,8 @@ public:
     void DisconnectWithParent();
     void DisconnectWithLayer();
 
+    void Save();
+
 private:
     void Destroy() { SetDead(); }
 

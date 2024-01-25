@@ -49,6 +49,8 @@ void ComputeShader::Execute()
 	if (FAILED(UpdateData()))
 		return;
 
+	GroupUpdate();
+
 	static ConstantBuffer* pCB = Device::GetInst()->GetConstBuffer(CB_TYPE::MATERIAL_CONST);
 	pCB->SetData(&m_Const);
 	pCB->UpdateData_CS();

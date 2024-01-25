@@ -8,6 +8,8 @@
 #include "ChapterManager.h"
 #include "Layer.h"
 
+#define ALLOCATE_SCRIPT(Name) new Name;
+
 GameObject::GameObject()
 	: m_Components{}
 	, m_RenderComponent(nullptr)
@@ -24,6 +26,15 @@ GameObject::~GameObject()
 		{
 			delete m_Components[i];
 			m_Components[i] = nullptr;
+		}
+	}
+
+	for (int i = 0; i < m_Scripts.size(); i++)
+	{
+		if (m_Scripts[i] != nullptr)
+		{
+			delete m_Scripts[i];
+			m_Scripts[i] = nullptr;
 		}
 	}
 }
@@ -126,4 +137,12 @@ void GameObject::DisconnectWithLayer()
 {
 	if (m_iLayerIdx == -1)
 		return;
+
+	ChapterManager::GetInst()->GetCurChapter()->DetachGameObject(this);
+	m_iLayerIdx = -1;
+}
+
+void GameObject::Save()
+{
+	
 }

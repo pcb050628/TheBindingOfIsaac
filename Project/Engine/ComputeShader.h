@@ -37,6 +37,7 @@ protected:
 
 private:
     virtual int UpdateData() = 0;
+    virtual void GroupUpdate() = 0;
     virtual void Clear() = 0;
 
 public:

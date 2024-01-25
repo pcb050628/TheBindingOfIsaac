@@ -143,3 +143,41 @@ void StructuredBuffer::UpdateData(int _regiNum)
 	Device::GetInst()->GetContext()->GSSetShaderResources(_regiNum, 1, m_SRV.GetAddressOf());
 	Device::GetInst()->GetContext()->PSSetShaderResources(_regiNum, 1, m_SRV.GetAddressOf());
 }
+
+int StructuredBuffer::UpdateData_CS_SRV(int _regiNum)
+{
+	if (nullptr == m_SRV)
+		return E_FAIL;
+
+	m_RecentNum_SRV = _regiNum;
+
+	Device::GetInst()->GetContext()->CSSetShaderResources(_regiNum, 1, m_SRV.GetAddressOf());
+	return S_OK;
+}
+
+int StructuredBuffer::UpdateData_CS_UAV(int _regiNum)
+{
+	if (nullptr == m_SRV)
+		return E_FAIL;
+
+	m_RecentNum_UAV = _regiNum;
+
+	UINT i = -1;
+	Device::GetInst()->GetContext()->CSSetUnorderedAccessViews(_regiNum, 1, m_UAV.GetAddressOf(), &i);
+	return S_OK;
+}
+
+void StructuredBuffer::Clear_CS_SRV()
+{
+	ID3D11ShaderResourceView* srv = nullptr;
+
+	Device::GetInst()->GetContext()->CSSetShaderResources(m_RecentNum_SRV, 1, &srv);
+}
+
+void StructuredBuffer::Clear_CS_UAV()
+{
+	ID3D11UnorderedAccessView* uav = nullptr;
+
+	UINT i = -1;
+	Device::GetInst()->GetContext()->CSSetUnorderedAccessViews(m_RecentNum_UAV, 1, &uav, &i);
+}
