@@ -13,11 +13,11 @@ ScriptFactory::ScriptFactory()
 ScriptFactory::~ScriptFactory()
 {}
 
-Script* ScriptFactory::Find(size_t _hash)
+Script* ScriptFactory::Find(const std::wstring& _name)
 {
-    if (_hash == typeid(HumanoidScript).hash_code())
+    if (_name == L"HumanoidScript")
         return new HumanoidScript;
-    else if (_hash == typeid(SpotLight2DMove).hash_code())
+    else if (_name == L"SpotLight2DMove")
         return new SpotLight2DMove;
 
     return nullptr;

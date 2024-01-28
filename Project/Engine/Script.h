@@ -25,7 +25,7 @@ public:
     GET_OTHER_COMPONENT(Light2D);
 
 public:
-    Script();
+    Script(const std::wstring& _name);
     ~Script();
 };
 

@@ -2,7 +2,7 @@
 #include "SpotLight2DMove.h"
 
 
-SpotLight2DMove::SpotLight2DMove()
+SpotLight2DMove::SpotLight2DMove() : Script(L"SpotLight2DMove")
 {
 }
 

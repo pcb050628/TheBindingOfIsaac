@@ -6,6 +6,8 @@ enum class CHAPTER_LEVEL;
 enum DIRECTION;
 enum class LAYER_TYPE;
 enum class RESOURCE_TYPE;
+class Component;
+enum class COMPONENT_TYPE;
 
 bool IsValid(Entity* _entity);
 void ChangeChapter(CHAPTER_LEVEL _level);
@@ -24,3 +26,5 @@ void DrawDebugCross(Vec3 _vWorldPos, float _fScale, Vec3 _Color, bool _bDepthTes
 
 std::wstring ToWstring(const std::string& _str);
 std::string ToString(const std::wstring& _str);
+
+Component* GetComponentByComponentType(COMPONENT_TYPE _type);

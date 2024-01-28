@@ -6,7 +6,8 @@
 #include "GameObject.h"
 #include "Layer.h"
 #include "Resource.h"
-
+#include "Component.h"
+#include "components.h"
 bool IsValid(Entity* _entity)
 {
 	if (_entity != nullptr && !_entity->GetIsDead())
@@ -183,6 +184,43 @@ std::wstring ToWstring(const std::string& _str)
 std::string ToString(const std::wstring& _str)
 {
 	return std::string(_str.begin(), _str.end());
+}
+
+Component* GetComponentByComponentType(COMPONENT_TYPE _type)
+{
+	switch (_type)
+	{
+	case COMPONENT_TYPE::TRANSFORM:
+		return new Transform;
+	case COMPONENT_TYPE::COLLIDER2D:
+		return new Collider2D;
+	//case COMPONENT_TYPE::COLLIDER3D:
+	//	break;
+	case COMPONENT_TYPE::ANIMATOR2D:
+		return new Animator2D;
+	//case COMPONENT_TYPE::ANIMATOR3D:
+	//	break;
+	case COMPONENT_TYPE::LIGHT2D:
+		return new Light2D;
+	//case COMPONENT_TYPE::LIGHT3D:
+	//	break;
+	case COMPONENT_TYPE::CAMERA:
+		return new Camera;
+	case COMPONENT_TYPE::MESHRENDERER:
+		return new MeshRenderer;
+	//case COMPONENT_TYPE::TILEMAP:
+	//	break;
+	//case COMPONENT_TYPE::PARTICLESYSTEM:
+	//	break;
+	//case COMPONENT_TYPE::SKYBOX:
+	//	break;
+	//case COMPONENT_TYPE::DECAL:
+	//	break;
+	//case COMPONENT_TYPE::LANDSCAPE:
+	//	break;
+	}
+
+	return nullptr;
 }
 
 void Vec3::ToDegree()

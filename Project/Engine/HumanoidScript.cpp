@@ -2,8 +2,8 @@
 #include "HumanoidScript.h"
 
 
-HumanoidScript::HumanoidScript()
-	: Head(new GameObject(L"Head"))
+HumanoidScript::HumanoidScript() : Script(L"HumanoidScript")
+	, Head(new GameObject(L"Head"))
 	, Body(new GameObject(L"Body"))
 {
 	Head->AddComponent(new Transform);

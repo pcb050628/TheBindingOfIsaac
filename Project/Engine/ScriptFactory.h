@@ -8,6 +8,6 @@ private:
 
 
 public:
-	Script* Find(size_t _hash);
+	Script* Find(const std::wstring& _name);
 };
 

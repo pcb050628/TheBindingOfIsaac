@@ -170,6 +170,7 @@ int GameObject::Save()
 
 	if (fileStream.is_open())
 	{
+		//RenderComonent 또는 Animator 처럼 원래의 에셋들을 모두 가져오는게 좋은 경우가 있는데 이 경우는 스크립트로 커버하기
 		fileStream << L"[COMPONENT]" << std::endl;
 		for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
 		{
@@ -185,7 +186,7 @@ int GameObject::Save()
 		fileStream << L"[SCRIPT]" << std::endl;
 		for (int i = 0; i < m_Scripts.size(); i++)
 		{
-			fileStream << typeid(m_Scripts[i]).hash_code() << std::endl;
+			fileStream << m_Scripts[i]->GetName() << std::endl;
 		}
 
 		fileStream << L"END";
@@ -202,7 +203,7 @@ int GameObject::Save()
 
 int GameObject::Load(const std::wstring& _strFileName)
 {
-	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + GetName();
+	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + _strFileName;
 	std::wifstream fileStream(filePath);
 
 	wchar_t szName[20] = {};
@@ -215,9 +216,12 @@ int GameObject::Load(const std::wstring& _strFileName)
 	{
 		std::wstring line;
 
-		while (line != L"END")
+		while (true)
 		{
 			std::getline(fileStream, line);
+
+			if (line == L"END")
+				break;
 
 			if (line == L"[COMPONENT]")
 			{
@@ -229,14 +233,31 @@ int GameObject::Load(const std::wstring& _strFileName)
 			}
 			else
 			{
+				//RenderComonent 또는 Animator 처럼 원래의 에셋들을 모두 가져오는게 좋은 경우가 있는데 이 경우는 스크립트로 커버하기
 				if (component)
 				{
+					std::wstring comp = line.substr(0, 1);
+					std::wstring active = line.substr(2, 1);
 
+					int iComp = atoi(std::string(comp.begin(), comp.end()).c_str());
+					int iActive = atoi(std::string(active.begin(), active.end()).c_str());
+
+					if (1 == iActive)
+					{
+						AddComponent(GetComponentByComponentType((COMPONENT_TYPE)iComp));
+					}
 				}
 				else
 				{
-					ScriptFactory::GetInst()->Find(atoi(std::string(line.begin(), line.end()).c_str()));
+					Script* scrpt = ScriptFactory::GetInst()->Find(line);
+					if (scrpt != nullptr)
+						AddComponent(scrpt);
+					else
+					{
+						MessageBoxW(nullptr, L"Script Not Exist", L"GameObject Load Error", MB_OK);
+					}
 				}
+
 			}
 		}
 

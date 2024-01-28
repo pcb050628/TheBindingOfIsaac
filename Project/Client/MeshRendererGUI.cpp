@@ -36,10 +36,27 @@ void MeshRendererGUI::RenderUpdate()
 	Mesh* mesh = target->GetMesh();
 	Material* mtrl = target->GetMaterial();
 
-	std::string meshName = ToString(mesh->GetResourceName());
-	std::string mtrlName = ToString(mtrl->GetResourceName());
-	ImGui::Text("Mesh    "); ImGui::SameLine(); ImGui::InputText("##MeshRendererGUIMesh", (char*)meshName.c_str(), meshName.size(), ImGuiInputTextFlags_ReadOnly);
+	if (nullptr != mesh)
+	{
+		std::string meshName = ToString(mesh->GetResourceName());
+		ImGui::Text("Mesh    "); ImGui::SameLine(); ImGui::InputText("##MeshRendererGUIMesh", (char*)meshName.c_str(), meshName.size(), ImGuiInputTextFlags_ReadOnly);
+	}
+	else
+	{
+		ImGui::Text("Mesh    ");
+	}
+
+	if (nullptr != mtrl)
+	{
+		std::string mtrlName = ToString(mtrl->GetResourceName());
+		ImGui::Text("Material"); ImGui::SameLine(); ImGui::InputText("##MeshRendererGUIMaterial", (char*)mtrlName.c_str(), mtrlName.size(), ImGuiInputTextFlags_ReadOnly);
+	}
+	else
+	{
+		ImGui::Text("Material");
+	}
 	ImGui::SameLine();
+
 	if (ImGui::Button("SelectMesh##MeshRendererGUISelectMeshButton"))
 	{
 		ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
@@ -51,8 +68,7 @@ void MeshRendererGUI::RenderUpdate()
 		list->SetCallBack(ChangeMesh);
 		list->Activate();
 	}
-
-	ImGui::Text("Material"); ImGui::SameLine(); ImGui::InputText("##MeshRendererGUIMaterial", (char*)mtrlName.c_str(), mtrlName.size(), ImGuiInputTextFlags_ReadOnly);
+	
 	ImGui::SameLine();
 	if (ImGui::Button("SelectMtrl##MeshRendererGUISelectMaterialButton"))
 	{
