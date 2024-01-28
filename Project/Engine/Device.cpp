@@ -19,7 +19,11 @@ Device::Device()
 
 Device::~Device()
 {
-
+	for (int i = 0; i < (UINT)CB_TYPE::END; i++)
+	{
+		delete m_arrConstantBuffer[i];
+		m_arrConstantBuffer[i] = nullptr;
+	}
 }
 
 int Device::Init(HWND _hwnd, Vec2 _resolution)

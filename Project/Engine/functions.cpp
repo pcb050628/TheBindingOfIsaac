@@ -86,6 +86,9 @@ std::wstring GetResourceFolderPath(RESOURCE_TYPE _type)
 	case RESOURCE_TYPE::GRAPHICS_SHADER:
 		out += L"Shader\\Graphics\\";
 		break;
+	case RESOURCE_TYPE::GAMEOBJECT:
+		out += L"GameObject\\";
+		break;
 		//case RESOURCE_TYPE::SOUND:
 		//	break;
 		//case RESOURCE_TYPE::COMPUTER_SHADER:

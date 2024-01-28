@@ -11,8 +11,6 @@
 #include "GarbageCollection.h"
 #include "TaskManager.h"
 
-#include "Test.h"
-
 Engine::Engine()
 	: m_hWnd(nullptr)
 	, m_DC(nullptr)
@@ -40,7 +38,6 @@ void Engine::Init(HWND _hWnd, const RECT& _Resolution)
 	ResourceManager::GetInst()->Init();
 	ChapterManager::GetInst()->Init();
 	RenderManager::GetInst()->Init();
-	Test::GetInst()->Init();
 }
 
 void Engine::Progress()

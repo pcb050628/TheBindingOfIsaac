@@ -17,14 +17,15 @@ RenderManager::RenderManager()
 	: m_Cams{}
 	, m_DebugObj(nullptr)
 	, m_DebugShapeInfos{}
-	, m_Light2DBuffer()
+	, m_Light2DBuffer(nullptr)
 {
 
 }
 
 RenderManager::~RenderManager()
 {
-
+	delete m_Light2DBuffer;
+	delete m_DebugObj;
 }
 
 void RenderManager::Init()

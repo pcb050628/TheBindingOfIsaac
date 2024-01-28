@@ -12,9 +12,8 @@
 class Script :
     public Component
 {
-private:
-
 public:
+    virtual void Init() {}
     virtual void Update() override {}
     virtual void LateUpdate() final {}
 

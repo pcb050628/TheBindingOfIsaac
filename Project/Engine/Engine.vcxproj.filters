@@ -142,6 +142,15 @@
     <Filter Include="02_Derived\Script\SpotLightTest">
       <UniqueIdentifier>{787dacd8-7900-4b44-9daa-6fc1cebbdbfd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="01_Basic\02_Manager\ScriptFactory">
+      <UniqueIdentifier>{2430bbf1-4b43-4d16-a195-ace015be7245}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Script\Player">
+      <UniqueIdentifier>{f333f8cf-afe4-44ca-9bf2-4dc3fc8c2d99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Script\Humanoid">
+      <UniqueIdentifier>{e55385d0-c07a-4a37-8d88-52b2dbd7aeb1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -189,7 +198,6 @@
     <ClInclude Include="functions.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
-    <ClInclude Include="Test.h" />
     <ClInclude Include="structs.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
@@ -277,6 +285,12 @@
     <ClInclude Include="Shader.h">
       <Filter>02_Derived\Resource\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="ScriptFactory.h">
+      <Filter>01_Basic\02_Manager\ScriptFactory</Filter>
+    </ClInclude>
+    <ClInclude Include="HumanoidScript.h">
+      <Filter>02_Derived\Script\Humanoid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -315,7 +329,6 @@
     <ClCompile Include="TaskManager.cpp">
       <Filter>01_Basic\02_Manager\TaskManager</Filter>
     </ClCompile>
-    <ClCompile Include="Test.cpp" />
     <ClCompile Include="structs.cpp">
       <Filter>0_Default\Cpp</Filter>
     </ClCompile>
@@ -399,6 +412,12 @@
     </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>02_Derived\Resource\Shader</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptFactory.cpp">
+      <Filter>01_Basic\02_Manager\ScriptFactory</Filter>
+    </ClCompile>
+    <ClCompile Include="HumanoidScript.cpp">
+      <Filter>02_Derived\Script\Humanoid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@
 #include "components.h"
 
 #include "SpotLight2DMove.h"
+#include "HumanoidScript.h"
 
 ChapterManager::ChapterManager()
 	: m_CurChapter(nullptr)
@@ -40,6 +41,7 @@ void ChapterManager::Init()
 	gobj->AddComponent(new MeshRenderer);
 	gobj->AddComponent(new Animator2D);
 	gobj->AddComponent(new Collider2D);
+	gobj->AddComponent(new HumanoidScript);
 		
 	gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
 	gobj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
@@ -50,11 +52,7 @@ void ChapterManager::Init()
 
 	gobj->SetName(L"test_rock");
 	AddGameObject(gobj, LAYER_TYPE::Object);
-
-	GameObject* child = new GameObject;
-	child->SetName(L"ChildObj");
-
-	gobj->AttachChild(child);
+	gobj->Save();
 
 	// UI Test obj
 	gobj = new GameObject;
@@ -99,7 +97,7 @@ void ChapterManager::Init()
 	gobj = new GameObject;
 	gobj->AddComponent(new Transform);
 	gobj->AddComponent(new Light2D);
-	//gobj->AddComponent(new SpotLight2DMove);
+	gobj->AddComponent(new SpotLight2DMove);
 
 	gobj->GetTransform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
 
@@ -108,6 +106,7 @@ void ChapterManager::Init()
 
 	gobj->SetName(L"light_test");
 	AddGameObject(gobj, LAYER_TYPE::Light);
+	gobj->Save();
 
 	Device::GetInst()->SetClearColor(Vec4(0.f, 0.f, 0.f, 1.f));
 }

@@ -12,6 +12,11 @@ Chapter::Chapter()
 
 Chapter::~Chapter()
 {
+	for (int i = 0; i < m_Rooms.size(); i++)
+	{
+		delete m_Rooms[i];
+	}
+	m_Rooms.clear();
 }
 
 void Chapter::Update()

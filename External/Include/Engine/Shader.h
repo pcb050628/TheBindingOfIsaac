@@ -4,10 +4,10 @@ class Shader :
     public Resource
 {
 protected:
-    Microsoft::WRL::ComPtr<ID3DBlob> m_pErrBlob;
+    Microsoft::WRL::ComPtr<ID3DBlob> m_ErrBlob;
 
 public:
-    virtual void UpdateData() = 0;
+    virtual int UpdateData() = 0;
 
 public:
     Shader(RESOURCE_TYPE _type);

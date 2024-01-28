@@ -5,7 +5,7 @@ class Material :
     public Resource
 {
 private:
-    tMaterial               m_ConstData;
+    tMtrlData               m_ConstData;
 
     class Texture*          m_Textures[TEX_PARAM::END];
     class GraphicsShader*   m_Shader;

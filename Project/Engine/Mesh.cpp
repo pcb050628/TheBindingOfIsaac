@@ -17,6 +17,8 @@ Mesh::Mesh() : Resource(RESOURCE_TYPE::MESH)
 
 Mesh::~Mesh()
 {
+	delete m_pVtxSysMem;
+	delete m_pIdxSysMem;
 }
 
 int Mesh::Create(void* _vtx, UINT _vtxCount, void* _idx, UINT _idxCount)

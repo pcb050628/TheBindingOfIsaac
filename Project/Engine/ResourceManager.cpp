@@ -14,7 +14,14 @@ ResourceManager::ResourceManager()
 
 ResourceManager::~ResourceManager()
 {
-
+	for (int i = 0; i < (UINT)RESOURCE_TYPE::END; i++)
+	{
+		for (auto iter : m_Resources[i])
+		{
+			delete iter.second;
+		}
+		m_Resources[i].clear();
+	}
 }
 
 void ResourceManager::Init()

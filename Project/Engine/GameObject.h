@@ -61,13 +61,15 @@ public:
     void DisconnectWithParent();
     void DisconnectWithLayer();
 
-    void Save();
+    int Save();
+    int Load(const std::wstring& _strFileName);
 
 private:
     void Destroy() { SetDead(); }
 
 public:
     GameObject();
+    GameObject(const std::wstring& _name);
     virtual ~GameObject() override;
 
     friend class Layer;

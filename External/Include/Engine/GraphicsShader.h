@@ -54,7 +54,7 @@ public:
     SHADER_DOMAIN GetDomain() { return m_Domain; }
 
 private:
-    void UpdateData() override;
+    int UpdateData() override;
 
 
 public:
