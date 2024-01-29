@@ -2,14 +2,6 @@
 #include "Resource.h"
 #include "Layer.h"
 
-enum DIRECTION
-{
-    LeftDir,
-    RightDir,
-    TopDir,
-    BottomDir,
-};
-
 enum class RoomType
 {
     Common,

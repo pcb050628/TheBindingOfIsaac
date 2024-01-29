@@ -16,6 +16,14 @@
 #define PI 3.14159265359
 
 
+enum DIRECTION
+{
+	LeftDir,
+	RightDir,
+	TopDir,
+	BottomDir,
+};
+
 enum class LAYER_TYPE
 {
 	Background,
