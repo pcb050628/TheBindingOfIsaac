@@ -2,15 +2,17 @@
 #include "Room.h"
 
 #include "GameObject.h"
+#include "Transform.h"
 #include "Layer.h"
 
 Room::Room() : Resource(RESOURCE_TYPE::ROOM)
 	, m_Layers()
-	, m_Type(RoomType::Common)
+	, m_RoomType(ROOM_TYPE::Common)
 	, Left(nullptr)
 	, Right(nullptr)
 	, Top(nullptr)
 	, Bottom(nullptr)
+	, m_bEditMode(false)
 {
 	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
 	{
@@ -27,13 +29,91 @@ Room::~Room()
 	}
 }
 
-bool Room::Load(const std::wstring& _strFilePath)
+bool Room::Load(const std::wstring& _strFileName)
 {
-	return false;
+	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + _strFileName;
+	std::wifstream fileStream(filePath);
+
+	wchar_t szName[20] = {};
+	_wsplitpath_s(filePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+
+	SetName(szName);
+
+	if (fileStream.is_open())
+	{
+		std::wstring line;
+
+		GameObject* gobj = nullptr;
+		while (true)
+		{
+			std::getline(fileStream, line);
+
+			if (line == L"END")
+				break;
+
+			//위치 이름 순으로 작성되어 있음
+
+			//타일 위치 얻기
+			std::wstring xstr = line.substr(0, 1);
+			std::wstring ystr = line.substr(2, 1);
+			int x = atoi(std::string(xstr.begin(), xstr.end()).c_str());
+			int y = atoi(std::string(ystr.begin(), ystr.end()).c_str());
+			Vec2 tile(x, y);
+
+			//파일명 얻기
+			std::getline(fileStream, line);
+			std::wstring objName = line + L".txt";
+
+			//레이어 얻기
+			std::getline(fileStream, line);
+			LAYER_TYPE layer = (LAYER_TYPE)atoi(std::string(line.begin(), line.end()).c_str());
+
+			//추가
+			gobj = new GameObject;
+			gobj->Load(objName);
+			gobj->GetTransform()->SetRelativePos((Vec3)GetPosByTile(tile));
+			AddGameObject(gobj, layer);
+		}
+
+		fileStream.close();
+		return true;
+	}
+	else
+		return false;
 }
 
 bool Room::Save()
 {
+	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + GetName();
+	filePath += L".txt";
+	std::wofstream fileStream(filePath);
+
+	if (fileStream.is_open())
+	{
+		//위치 얻어와서 타일위치로 변경 후 타일위치 쓰기
+		//오브젝트 쓰기, 오브젝트 저장이 이름으로 파일명을 만들어서 이름만 얻어와도 될듯
+
+		for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
+		{
+			std::vector<GameObject*> obj = m_Layers[i]->GetParentObjects();
+			for (int j = 0; j < obj.size(); j++)
+			{
+				Vec2 tile = GetTileByPos((Vec2)obj[j]->GetTransform()->GetRelativePos());
+				fileStream <<  (int)tile.x << L"|" << (int)tile.y  << std::endl;
+				fileStream << obj[j]->GetName() << std::endl;
+				fileStream << obj[j]->GetLayer() << std::endl;
+			}
+		}
+
+		fileStream << L"END";
+
+		fileStream.close();
+
+		return true;
+	}
+	else
+		return false;
+
 	return false;
 }
 
@@ -60,7 +140,7 @@ void Room::Update()
 	{
 		//마우스 클릭으로 좌표 받아오고
 		//GetTileByPos 함수로 타일받아오고
-		//GetPosByTile 함수로 정확한 타일 중간위치 받아오고
+		//GetPosByTile 함수로 정확한 타일 위치 받아오고
 		//타일 중간 위치에 오브젝트 생성
 	}
 }

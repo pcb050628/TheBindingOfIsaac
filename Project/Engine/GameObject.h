@@ -61,6 +61,8 @@ public:
     void DisconnectWithParent();
     void DisconnectWithLayer();
 
+    int GetLayer() { return m_iLayerIdx; }
+
     int Save();
     int Load(const std::wstring& _strFileName);
 

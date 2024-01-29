@@ -90,11 +90,12 @@ std::wstring GetResourceFolderPath(RESOURCE_TYPE _type)
 	case RESOURCE_TYPE::GAMEOBJECT:
 		out += L"GameObject\\";
 		break;
+	case RESOURCE_TYPE::ROOM:
+		out += L"Room\\";
+		break;
 		//case RESOURCE_TYPE::SOUND:
 		//	break;
 		//case RESOURCE_TYPE::COMPUTER_SHADER:
-		//	break;
-		//case RESOURCE_TYPE::ROOM:
 		//	break;
 		//case RESOURCE_TYPE::CHAPTER:
 		//	break;

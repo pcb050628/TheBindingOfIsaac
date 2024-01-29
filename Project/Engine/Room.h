@@ -2,7 +2,7 @@
 #include "Resource.h"
 #include "Layer.h"
 
-enum class RoomType
+enum class ROOM_TYPE
 {
     Common,
     Treasure,
@@ -14,10 +14,8 @@ class Room :
     public Resource
 {
 private:
-    RoomType m_Type;
+    ROOM_TYPE m_RoomType;
     Layer* m_Layers[(int)LAYER_TYPE::END];
-
-    // gameobject.prefab 파일로 저장하기
 
     Room* Left;
     Room* Right;
@@ -27,7 +25,7 @@ private:
     bool m_bEditMode;
 
 public:
-    virtual bool Load(const std::wstring& _strFilePath) override;
+    virtual bool Load(const std::wstring& _strFileName) override;
     virtual bool Save() override;
 
     virtual void Clear();
@@ -36,6 +34,8 @@ public:
     virtual void Update();
     virtual void LateUpdate();
     virtual void Exit();
+
+    virtual ROOM_TYPE GetRoomType() { return m_RoomType; }
 
     virtual Layer* GetLayer(int _type) { return m_Layers[_type]; }
     virtual Layer* GetLayer(LAYER_TYPE _type) { return GetLayer((int)_type); }
@@ -48,16 +48,13 @@ public:
         {
         case LeftDir:
             return Left;
-            break;
         case RightDir:
             return Right;
-            break;
         case TopDir:
             return Top;
             break;
         case BottomDir:
             return Bottom;
-            break;
         }
 
         return nullptr;
@@ -71,16 +68,13 @@ public:
     {
         m_Layers[(UINT)_layr]->AddObject(_obj, _bMove);
     }
-
     void AddObjectByTile(GameObject* _obj, LAYER_TYPE _layr, Vec2 _tilePos, bool _bMove);
-
     void DetachGameObject(GameObject* _obj);
 
     GameObject* FindObject(const std::wstring& _strName);
+    virtual void GetAllObject(std::vector<GameObject*>& _out);
 
     void SetEditMode(bool _bValue) { m_bEditMode = _bValue; }
-
-    virtual void GetAllObject(std::vector<GameObject*>& _out);
 
 public:
     Room();

@@ -151,6 +151,12 @@
     <Filter Include="02_Derived\Script\Humanoid">
       <UniqueIdentifier>{e55385d0-c07a-4a37-8d88-52b2dbd7aeb1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Derived\Script\Object">
+      <UniqueIdentifier>{49420dd3-a8a4-4d33-b63e-75ddda9625a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Script\Object\Wall">
+      <UniqueIdentifier>{598caab7-c4ae-45ca-b940-39314136f21d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
