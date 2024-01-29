@@ -24,6 +24,8 @@ public:
     void SetEditMode(bool _bValue);
 
 private:
+    //Room 의 이동시 트랜지션이 있어야 할듯
+    //현재 Room이 _dir 의 반대 방향으로 밀리면서 _dir 방향으로 바뀔 Room 이 밀고 들어오는 식
     void ChangeRoom(DIRECTION _dir)
     {
         Room* room = m_CurRoom->GetRoomByDir(_dir);
