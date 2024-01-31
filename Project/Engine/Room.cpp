@@ -71,7 +71,7 @@ bool Room::Load(const std::wstring& _strFileName)
 			//Ãß°¡
 			gobj = new GameObject;
 			gobj->Load(objName);
-			gobj->GetTransform()->SetRelativePos((Vec3)GetPosByTile(tile));
+			gobj->GetTransform()->SetRelativePos(GetPosByTile(tile));
 			AddGameObject(gobj, layer);
 		}
 
@@ -98,7 +98,7 @@ bool Room::Save()
 			std::vector<GameObject*> obj = m_Layers[i]->GetParentObjects();
 			for (int j = 0; j < obj.size(); j++)
 			{
-				Vec2 tile = GetTileByPos((Vec2)obj[j]->GetTransform()->GetRelativePos());
+				Vec2 tile = GetTileByPos(obj[j]->GetTransform()->GetRelativePos());
 				fileStream <<  (int)tile.x << L"|" << (int)tile.y  << std::endl;
 				fileStream << obj[j]->GetName() << std::endl;
 				fileStream << obj[j]->GetLayerIdx() << std::endl;
@@ -158,12 +158,14 @@ void Room::Exit()
 }
 
 
-Vec2 Room::GetPosByTile(Vec2 _tile)
+Vec3 Room::GetPosByTile(Vec2 _tile)
 {
-	return Vec2(-725 + (100 * _tile.y), 425 - (100 * _tile.x));
+	float x = -725 + (100 * _tile.y);
+	float y = 425 - (100 * _tile.x);
+	return Vec3(x, y, -y);
 }
 
-Vec2 Room::GetTileByPos(Vec2 _pos)
+Vec2 Room::GetTileByPos(Vec3 _pos)
 {
 	return Vec2((_pos.y - 725) / 100, (_pos.x - 425) / 100);
 }

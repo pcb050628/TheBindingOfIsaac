@@ -62,8 +62,8 @@ public:
     }
 
     //x row / y col
-    Vec2 GetPosByTile(Vec2 _tile);
-    Vec2 GetTileByPos(Vec2 _pos);
+    Vec3 GetPosByTile(Vec2 _tile);
+    Vec2 GetTileByPos(Vec3 _pos);
 
     void AddObject(GameObject* _obj, LAYER_TYPE _layr, bool _bMove);
     void AddObjectByTile(GameObject* _obj, LAYER_TYPE _layr, Vec2 _tilePos, bool _bMove);
