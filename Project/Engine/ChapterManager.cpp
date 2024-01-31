@@ -130,10 +130,3 @@ void ChapterManager::RegisterObj(GameObject* _obj, LAYER_TYPE _layerType)
 {
 	m_CurChapter->GetCurRoom()->GetLayer(_layerType)->RegisterObject(_obj);
 }
-
-void ChapterManager::SetEditMode(bool _bValue)
-{
-	m_bEditMode = _bValue;
-	m_CurChapter->SetEditMode(_bValue);
-}
-

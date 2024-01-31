@@ -43,7 +43,7 @@ public:
 
 	void SetClearColor(Vec4 norm_color) { m_vClearColor = norm_color; }
 
-	Vec2 GetResolution() { return m_vRenderResolution; }
+	Vec2 GetRenderResolution() { return m_vRenderResolution; }
 
 private:
 	int CreateSwapChain();

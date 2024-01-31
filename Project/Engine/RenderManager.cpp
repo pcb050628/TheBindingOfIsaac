@@ -40,7 +40,7 @@ void RenderManager::Init()
 	m_DebugObj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"")); 
 	m_DebugObj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L""));
 
-	Vec2 vResol = Device::GetInst()->GetResolution();
+	Vec2 vResol = Device::GetInst()->GetRenderResolution();
 	m_PostProcessTex = ResourceManager::GetInst()->CreateTexture(L"RMPostProcessTexture"
 																, (UINT)vResol.x, (UINT)vResol.y
 																, DXGI_FORMAT_R8G8B8A8_UNORM, D3D11_BIND_SHADER_RESOURCE);

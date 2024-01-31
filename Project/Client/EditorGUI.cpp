@@ -2,10 +2,12 @@
 #include "EditorGUI.h"
 
 #include "AnimEditorGUI.h"
+#include "RoomEditorGUI.h"
 
 EditorGUI::EditorGUI() : GUI("Editor", "##EditorGUI")
 {
 	m_AnimEditor = new AnimEditorGUI;
+	//m_RoomEditor = new RoomEditorGUI;
 }
 
 EditorGUI::~EditorGUI()

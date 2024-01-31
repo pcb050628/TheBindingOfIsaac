@@ -20,6 +20,14 @@ Layer::~Layer()
 	}
 }
 
+void Layer::Enter()
+{
+	for (GameObject* gobj : m_Parents)
+	{
+		gobj->Enter();
+	}
+}
+
 void Layer::Update()
 {
 	for (GameObject* gobj : m_Parents)
@@ -44,6 +52,10 @@ void Layer::Render()
 	}	
 }
 
+void Layer::Exit()
+{
+}
+
 void Layer::Clear()
 {
 	{
@@ -66,6 +78,16 @@ void Layer::Clear()
 			else
 				iter++;
 		}
+	}
+}
+
+void Layer::DeleteAll()
+{
+	auto iter = m_Parents.begin();
+	for (; iter != m_Parents.end();)
+	{
+		GarbageCollection::GetInst()->Add(*iter);
+		iter = m_Parents.erase(iter);
 	}
 }
 

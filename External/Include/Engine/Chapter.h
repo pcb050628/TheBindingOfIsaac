@@ -6,8 +6,10 @@ class Chapter :
     public Entity
 {
 private:
-    vector<Room*> m_Rooms;
-    Room* m_CurRoom;
+    vector<Room*>   m_Rooms;
+    Room*           m_CurRoom;
+    DIRECTION       m_ChangeDir;
+
     //ui cam
 
     bool m_bIsTransitioning;
@@ -25,16 +27,10 @@ public:
 
     void GenerateRooms(CHAPTER_LEVEL _level);
 
-    void SetEditMode(bool _bValue);
-
 private:
-    void ChangeRoom(DIRECTION _dir)
-    {
-        Room* room = m_CurRoom->GetRoomByDir(_dir);
-
-        if (room != nullptr)
-            m_CurRoom = room;
-    }
+    void ChangeRoomStart(DIRECTION _dir);
+    void ChangeRoomTransition();
+    void ChangeRoomEnd();
 
     void AddObject(GameObject* _actr, LAYER_TYPE _layr, bool _bMove)
     {

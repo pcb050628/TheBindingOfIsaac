@@ -2,10 +2,15 @@
 #include "Chapter.h"
 #include "TaskManager.h"
 
+#include "Device.h"
+
+#include "GameObject.h"
+#include "components.h"
 
 Chapter::Chapter()
 	: m_Rooms()
 	, m_CurRoom(nullptr)
+	, m_bIsTransitioning(false)
 	, m_bEditMode(false)
 {
 	m_CurRoom = new Room;
@@ -23,20 +28,25 @@ Chapter::~Chapter()
 
 void Chapter::AddRoom(Room* _room)
 {
-	_room->m_RoomNumber = (UINT)m_Rooms.size();
+	_room->m_Info.RoomNumber = (UINT)m_Rooms.size();
 	m_Rooms.push_back(_room);
 }
 
 void Chapter::Update()
 {
 	m_CurRoom->Clear();
-
-	m_CurRoom->Update();
+	if (!m_bIsTransitioning)
+		m_CurRoom->Update();
+	else
+	{
+		
+	}
 }
 
 void Chapter::LateUpdate()
 {
-	m_CurRoom->LateUpdate();
+	if(!m_bIsTransitioning)
+		m_CurRoom->LateUpdate();
 }
 
 void Chapter::DetachGameObject(GameObject* _obj)
@@ -46,11 +56,82 @@ void Chapter::DetachGameObject(GameObject* _obj)
 
 void Chapter::GenerateRooms(CHAPTER_LEVEL _level)
 {
-	// 만들어진 room 에셋들을 챕터단계에 맞게 랜덤하고 겹치지않게 불러오기
 }
 
-void Chapter::SetEditMode(bool _bValue)
+void Chapter::ChangeRoomStart(DIRECTION _dir)
 {
-	m_bEditMode = _bValue;
-	m_CurRoom->SetEditMode(_bValue);
+	m_CurRoom->Exit();
+	m_bIsTransitioning = true;
+	m_ChangeDir = _dir;
+
+	Room* changeRoom = m_CurRoom->GetRoomByDir(m_ChangeDir);
+	assert(changeRoom);
+	GameObject* cam = changeRoom->GetMainCam();
+
+	Vec3 sub(0.f);
+
+	switch (m_ChangeDir)
+	{
+	case LeftDir:
+		sub = Vec3(RENDER_RESOLUTION.x / 2, 0, 0);
+		break;
+	case RightDir:
+		sub = Vec3(-(RENDER_RESOLUTION.x / 2), 0, 0);
+		break;
+	case TopDir:
+		sub = Vec3(0, -(RENDER_RESOLUTION.y / 2), 0);
+		break;
+	case BottomDir:
+		sub = Vec3(0, RENDER_RESOLUTION.y / 2, 0);
+		break;
+	}
+
+	cam->GetTransform()->AddRelativePos(sub);
+}
+
+void Chapter::ChangeRoomTransition()
+{
+	if (!m_bIsTransitioning)
+		return;
+
+	Room* changeRoom = m_CurRoom->GetRoomByDir(m_ChangeDir); 
+	assert(changeRoom); 
+
+	GameObject* curCam = m_CurRoom->GetMainCam();
+	GameObject* changeCam = changeRoom->GetMainCam(); 
+
+	Vec3 dir(0.f);
+
+	float speed = 100.f;
+
+	switch (m_ChangeDir)
+	{
+	case LeftDir:
+		dir = Vec3(-1, 0, 0);
+		break;
+	case RightDir:
+		dir = Vec3(1, 0, 0);
+		break;
+	case TopDir:
+		dir = Vec3(0, 1, 0);
+		break;
+	case BottomDir:
+		dir = Vec3(0, -1, 0);
+		break;
+	}
+
+	curCam->GetTransform()->AddRelativePos(dir * speed);
+	changeCam->GetTransform()->AddRelativePos(dir * speed);
+
+	if (curCam->GetTransform()->GetRelativePos())
+	{
+		ChangeRoomEnd();
+	}
+}
+
+void Chapter::ChangeRoomEnd()
+{
+	m_bIsTransitioning = false;
+	m_CurRoom = m_CurRoom->GetRoomByDir(m_ChangeDir);
+	m_CurRoom->Enter();
 }

@@ -6,13 +6,13 @@
 #include "Layer.h"
 
 Room::Room() : Resource(RESOURCE_TYPE::ROOM)
+	, m_Info{ NULL, ROOM_TYPE::Common, false, {}, {} }
 	, m_Layers()
-	, m_RoomType(ROOM_TYPE::Common)
+	, m_MainCam(nullptr)
 	, Left(nullptr)
 	, Right(nullptr)
 	, Top(nullptr)
 	, Bottom(nullptr)
-	, m_bEditMode(false)
 {
 	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
 	{
@@ -51,7 +51,7 @@ bool Room::Load(const std::wstring& _strFileName)
 			if (line == L"END")
 				break;
 
-			//위치 이름 순으로 작성되어 있음
+			//위치 -> 이름 순으로 작성되어 있음
 
 			//타일 위치 얻기
 			std::wstring xstr = line.substr(0, 1);
@@ -68,11 +68,8 @@ bool Room::Load(const std::wstring& _strFileName)
 			std::getline(fileStream, line);
 			LAYER_TYPE layer = (LAYER_TYPE)atoi(std::string(line.begin(), line.end()).c_str());
 
-			//추가
-			gobj = new GameObject;
-			gobj->Load(objName);
-			gobj->GetTransform()->SetRelativePos(GetPosByTile(tile));
-			AddGameObject(gobj, layer);
+			m_Info.TileObjectInfo[x][y] = objName;
+			m_Info.TileLayerInfo[x][y] = layer;
 		}
 
 		fileStream.close();
@@ -90,9 +87,6 @@ bool Room::Save()
 
 	if (fileStream.is_open())
 	{
-		//위치 얻어와서 타일위치로 변경 후 타일위치 쓰기
-		//오브젝트 쓰기, 오브젝트 저장이 이름으로 파일명을 만들어서 이름만 얻어와도 될듯
-
 		for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
 		{
 			std::vector<GameObject*> obj = m_Layers[i]->GetParentObjects();
@@ -127,6 +121,29 @@ void Room::Clear()
 
 void Room::Enter()
 {
+	if (!m_Info.IsCompleted)
+	{
+		GameObject* gobj = nullptr;
+
+		for (int row = 0; row < 9; row++)
+		{
+			for (int col = 0; col < 15; col++)
+			{
+				const std::wstring& objName = m_Info.TileObjectInfo[row][col];
+				LAYER_TYPE layer = m_Info.TileLayerInfo[row][col];
+
+				gobj = new GameObject;
+				gobj->Load(objName);
+				gobj->GetTransform()->SetRelativePos(GetPosByTile(row, col));
+				AddGameObject(gobj, layer);
+			}
+		}
+	}
+
+	for (Layer* layer : m_Layers)
+	{
+		layer->Enter();
+	}
 }
 
 void Room::Update()
@@ -134,14 +151,6 @@ void Room::Update()
 	for (Layer* layer : m_Layers)
 	{
 		layer->Update();
-	}
-
-	if (m_bEditMode)
-	{
-		//마우스 클릭으로 좌표 받아오고
-		//GetTileByPos 함수로 타일받아오고
-		//GetPosByTile 함수로 정확한 타일 위치 받아오고
-		//타일 중간 위치에 오브젝트 생성
 	}
 }
 
@@ -151,12 +160,53 @@ void Room::LateUpdate()
 	{
 		layer->LateUpdate();
 	}
+
+	//Room 클리어 체크
+	{
+		std::vector<GameObject*> monsters = GetLayer(LAYER_TYPE::Monster)->GetParentObjects();
+		if (monsters.empty())
+			m_Info.IsCompleted = true;
+		else
+		{
+			UINT check = 0;
+			for (GameObject* monster : monsters)
+			{
+				if (!IsValid(monster))
+				{
+					check++;
+				}
+			}
+
+			if (check == (UINT)monsters.size())
+				m_Info.IsCompleted = true;
+		}
+	}
 }
 
 void Room::Exit()
 {
+	for (Layer* layer : m_Layers)
+	{
+		layer->Exit();
+	}
+
+	for (Layer* layer : m_Layers)
+	{
+		if (m_Info.IsCompleted && layer->m_iLayerIdx == (UINT)LAYER_TYPE::Camera)
+			continue;
+
+		layer->DeleteAll();
+	}
 }
 
+
+Vec3 Room::GetPosByTile(UINT _x, UINT _y)
+{
+	float x = -725 + (100 * _y);
+	float y = 425 - (100 * _x);
+
+	return Vec3(x, y, -y);
+}
 
 Vec3 Room::GetPosByTile(Vec2 _tile)
 {
@@ -173,19 +223,35 @@ Vec2 Room::GetTileByPos(Vec3 _pos)
 void Room::AddObject(GameObject* _obj, LAYER_TYPE _layr, bool _bMove)
 {
 	m_Layers[(UINT)_layr]->AddObject(_obj, _bMove);
-	_obj->m_RoomNumber = m_RoomNumber;
+	_obj->m_RoomNumber = m_Info.RoomNumber;
+
+	if (!m_MainCam && LAYER_TYPE::Camera == _layr)
+		m_MainCam = _obj;
 }
 
 void Room::AddObjectByTile(GameObject* _obj, LAYER_TYPE _layr, Vec2 _tilePos, bool _bMove)
 {
 	m_Layers[(UINT)_layr]->AddObject(_obj, _bMove);
 	_obj->GetTransform()->SetRelativePos(Vec3(GetPosByTile(_tilePos).x, GetPosByTile(_tilePos).y, 0.f));
-	_obj->m_RoomNumber = m_RoomNumber;
+	_obj->m_RoomNumber = m_Info.RoomNumber;
+
+	if (!m_MainCam && LAYER_TYPE::Camera == _layr)
+		m_MainCam = _obj;
 }
 
 void Room::DetachGameObject(GameObject* _obj)
 {
 	m_Layers[_obj->m_iLayerIdx]->DetachGameObject(_obj);
+}
+
+int Room::SetMainCam(GameObject* _cam)
+{
+	if (!_cam || !_cam->GetCamera())
+		return E_FAIL;
+
+	m_MainCam = _cam;
+
+	return S_OK;
 }
 
 GameObject* Room::FindObject(const std::wstring& _strName)

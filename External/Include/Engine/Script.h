@@ -13,9 +13,11 @@ class Script :
     public Component
 {
 public:
+    virtual void Enter() {}
     virtual void Init() {}
     virtual void Update() override {}
     virtual void LateUpdate() final {}
+    virtual void Exit() {}
 
     GET_OTHER_COMPONENT(Transform);
     GET_OTHER_COMPONENT(MeshRenderer);

@@ -38,6 +38,10 @@ public:
     void SetRelativeScale(Vec3 _scale) { m_vRelativeScale = _scale; }
     void SetRelativeRotation(Vec3 _rotate) { m_vRelativeRot = _rotate; }
 
+    void AddRelativePos(Vec3 _pos) { m_vRelativePos += _pos; }
+    void AddRelativeScale(Vec3 _scale) { m_vRelativeScale += _scale; }
+    void AddRelativeRotation(Vec3 _rotate) { m_vRelativeRot += _rotate; }
+
 public:
     Transform();
     ~Transform() override;

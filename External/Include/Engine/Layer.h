@@ -12,11 +12,14 @@ private:
     int                 m_iLayerIdx;
 
 public:
+    void Enter();
     void Update();
     void LateUpdate();
     void Render();
+    void Exit();
 
     void Clear();
+    void DeleteAll();
 
     void AddObject(GameObject* _obj, bool _bMove = false);
     void DetachGameObject(GameObject* _obj);

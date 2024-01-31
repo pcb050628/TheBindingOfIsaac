@@ -25,7 +25,7 @@ Camera::Camera() : Component(COMPONENT_TYPE::CAMERA)\
 	, m_Far(10000.f)
 	, m_LayerCheck()
 {
-	m_AspectRatio = Device::GetInst()->GetResolution().x / Device::GetInst()->GetResolution().y;
+	m_AspectRatio = Device::GetInst()->GetRenderResolution().x / Device::GetInst()->GetRenderResolution().y;
 }
 
 Camera::~Camera()
@@ -62,7 +62,7 @@ void Camera::LateUpdate()
 	//
 	if (m_ProjType == PROJ_TYPE::ORTHOGRAPHICS)
 	{
-		Vec2 vResol = Device::GetInst()->GetResolution();
+		Vec2 vResol = Device::GetInst()->GetRenderResolution();
 		m_matProj = DirectX::XMMatrixOrthographicLH(vResol.x * m_Scale, (vResol.x / m_AspectRatio) * m_Scale, 1.f, m_Far);
 	}
 	else if (m_ProjType == PROJ_TYPE::PERSPECTIVE)

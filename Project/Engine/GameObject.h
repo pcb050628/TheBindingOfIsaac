@@ -25,9 +25,11 @@ private:
     int                         m_iLayerIdx;
 
 public:
+    virtual void Enter();
     virtual void Update(); 
     virtual void LateUpdate();
     virtual void Render();
+    virtual void Exit();
 
     void AddComponent(Component* _comp);
     

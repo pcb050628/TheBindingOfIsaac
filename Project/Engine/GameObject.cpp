@@ -58,6 +58,14 @@ GameObject::~GameObject()
 	}
 }
 
+void GameObject::Enter()
+{
+	for (int i = 0; i < m_Scripts.size(); i++)
+	{
+		m_Scripts[i]->Enter();
+	}
+}
+
 void GameObject::Update()
 {
 	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
@@ -79,12 +87,6 @@ void GameObject::Update()
 
 void GameObject::LateUpdate()
 {
-	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
-	{
-		if (m_Components[i] != nullptr)
-			m_Components[i]->LateUpdate();
-	}
-
 	ChapterManager::GetInst()->RegisterObj(this, (LAYER_TYPE)m_iLayerIdx);
 
 	for (GameObject* child : m_ChildObjs)
@@ -97,6 +99,14 @@ void GameObject::Render()
 {
 	if(m_RenderComponent != nullptr)
 		m_RenderComponent->Render();
+}
+
+void GameObject::Exit()
+{
+	for (int i = 0; i < m_Scripts.size(); i++)
+	{
+		m_Scripts[i]->Exit();
+	}
 }
 
 void GameObject::AddComponent(Component* _comp)

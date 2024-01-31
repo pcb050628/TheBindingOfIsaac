@@ -15,6 +15,7 @@
 
 #define PI 3.14159265359
 
+#define RENDER_RESOLUTION Device::GetInst()->GetRenderResolution()
 
 enum DIRECTION
 {

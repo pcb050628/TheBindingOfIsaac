@@ -10,20 +10,27 @@ enum class ROOM_TYPE
     Boss,
 };
 
+struct RoomInfo
+{
+    UINT            RoomNumber;
+    ROOM_TYPE       RoomType;
+    bool            IsCompleted = false;
+    std::wstring    TileObjectInfo[15][9] = {};
+    LAYER_TYPE      TileLayerInfo[15][9] = {};
+};
+
 class Room :
     public Resource
 {
 private:
-    UINT        m_RoomNumber;
-    ROOM_TYPE   m_RoomType;
+    RoomInfo    m_Info;
     Layer*      m_Layers[(int)LAYER_TYPE::END];
+    GameObject* m_MainCam;
 
     Room*       Left;
     Room*       Right;
     Room*       Top;
     Room*       Bottom;
-
-    bool        m_bEditMode;
 
 public:
     virtual bool Load(const std::wstring& _strFileName) override;
@@ -36,12 +43,12 @@ public:
     virtual void LateUpdate();
     virtual void Exit();
 
-    virtual ROOM_TYPE GetRoomType() { return m_RoomType; }
+    virtual ROOM_TYPE GetRoomType() { return m_Info.RoomType; }
 
     virtual Layer* GetLayer(int _type) { return m_Layers[_type]; }
     virtual Layer* GetLayer(LAYER_TYPE _type) { return GetLayer((int)_type); }
 
-    // 15(14) x 9(8) tile / include walls
+    virtual bool IsComplete() { return m_Info.IsCompleted; }
 
     virtual Room* GetRoomByDir(DIRECTION _dir)
     {
@@ -62,6 +69,7 @@ public:
     }
 
     //x row / y col
+    Vec3 GetPosByTile(UINT _x, UINT _y);
     Vec3 GetPosByTile(Vec2 _tile);
     Vec2 GetTileByPos(Vec3 _pos);
 
@@ -69,10 +77,11 @@ public:
     void AddObjectByTile(GameObject* _obj, LAYER_TYPE _layr, Vec2 _tilePos, bool _bMove);
     void DetachGameObject(GameObject* _obj);
 
+    GameObject* GetMainCam() { return m_MainCam; }
+    int SetMainCam(GameObject* _cam);
+
     GameObject* FindObject(const std::wstring& _strName);
     virtual void GetAllObject(std::vector<GameObject*>& _out);
-
-    void SetEditMode(bool _bValue) { m_bEditMode = _bValue; }
 
 public:
     Room();
