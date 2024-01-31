@@ -21,6 +21,7 @@ private:
 
     GameObject*                 m_Parent;
 
+    int                         m_RoomNumber;
     int                         m_iLayerIdx;
 
 public:
@@ -61,7 +62,8 @@ public:
     void DisconnectWithParent();
     void DisconnectWithLayer();
 
-    int GetLayer() { return m_iLayerIdx; }
+    int GetLayerIdx() { return m_iLayerIdx; }
+    int GetRoomNumber() { return m_RoomNumber; }
 
     int Save();
     int Load(const std::wstring& _strFileName);

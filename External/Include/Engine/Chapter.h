@@ -8,6 +8,9 @@ class Chapter :
 private:
     vector<Room*> m_Rooms;
     Room* m_CurRoom;
+    //ui cam
+
+    bool m_bIsTransitioning;
 
     bool m_bEditMode;
 
@@ -16,6 +19,7 @@ public:
     virtual void LateUpdate();
 
     virtual Room* GetCurRoom() { return m_CurRoom; }
+    virtual Room* GetRoom(int _num) { Room* room = nullptr; (_num < (int)m_Rooms.size()) ? room = m_Rooms[_num] : room = nullptr; return room; }
 
     void DetachGameObject(GameObject* _obj);
 
@@ -36,6 +40,8 @@ private:
     {
         m_CurRoom->AddObject(_actr, _layr, _bMove);
     }
+
+    void AddRoom(Room* _room);
 
 public:
     Chapter();

@@ -73,13 +73,20 @@ void Camera::LateUpdate()
 
 void Camera::SortObject()
 {
+	Room* room = ChapterManager::GetInst()->GetCurChapter()->GetRoom(GetOwner()->GetRoomNumber());
+	if (!room)
+	{
+		assert(nullptr);
+		return;
+	}
+
 	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
 	{
 		if (false == (m_LayerCheck & (1 << i)))
 			continue;
 
 		const std::vector<GameObject*>& objs 
-			= ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetLayer((LAYER_TYPE)i)->GetGameObject();
+			= room->GetLayer((LAYER_TYPE)i)->GetGameObject();
 
 		for (int j = 0; j < objs.size(); j++)
 		{

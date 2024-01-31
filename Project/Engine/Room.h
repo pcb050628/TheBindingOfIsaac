@@ -14,15 +14,16 @@ class Room :
     public Resource
 {
 private:
-    ROOM_TYPE m_RoomType;
-    Layer* m_Layers[(int)LAYER_TYPE::END];
+    UINT        m_RoomNumber;
+    ROOM_TYPE   m_RoomType;
+    Layer*      m_Layers[(int)LAYER_TYPE::END];
 
-    Room* Left;
-    Room* Right;
-    Room* Top;
-    Room* Bottom;
+    Room*       Left;
+    Room*       Right;
+    Room*       Top;
+    Room*       Bottom;
 
-    bool m_bEditMode;
+    bool        m_bEditMode;
 
 public:
     virtual bool Load(const std::wstring& _strFileName) override;
@@ -64,10 +65,7 @@ public:
     Vec2 GetPosByTile(Vec2 _tile);
     Vec2 GetTileByPos(Vec2 _pos);
 
-    void AddObject(GameObject* _obj, LAYER_TYPE _layr, bool _bMove)
-    {
-        m_Layers[(UINT)_layr]->AddObject(_obj, _bMove);
-    }
+    void AddObject(GameObject* _obj, LAYER_TYPE _layr, bool _bMove);
     void AddObjectByTile(GameObject* _obj, LAYER_TYPE _layr, Vec2 _tilePos, bool _bMove);
     void DetachGameObject(GameObject* _obj);
 
@@ -80,5 +78,6 @@ public:
     Room();
     virtual ~Room() override;
 
+    friend class Chapter;
 };
 

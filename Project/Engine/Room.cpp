@@ -101,7 +101,7 @@ bool Room::Save()
 				Vec2 tile = GetTileByPos((Vec2)obj[j]->GetTransform()->GetRelativePos());
 				fileStream <<  (int)tile.x << L"|" << (int)tile.y  << std::endl;
 				fileStream << obj[j]->GetName() << std::endl;
-				fileStream << obj[j]->GetLayer() << std::endl;
+				fileStream << obj[j]->GetLayerIdx() << std::endl;
 			}
 		}
 
@@ -168,10 +168,17 @@ Vec2 Room::GetTileByPos(Vec2 _pos)
 	return Vec2((_pos.y - 725) / 100, (_pos.x - 425) / 100);
 }
 
+void Room::AddObject(GameObject* _obj, LAYER_TYPE _layr, bool _bMove)
+{
+	m_Layers[(UINT)_layr]->AddObject(_obj, _bMove);
+	_obj->m_RoomNumber = m_RoomNumber;
+}
+
 void Room::AddObjectByTile(GameObject* _obj, LAYER_TYPE _layr, Vec2 _tilePos, bool _bMove)
 {
 	m_Layers[(UINT)_layr]->AddObject(_obj, _bMove);
 	_obj->GetTransform()->SetRelativePos(Vec3(GetPosByTile(_tilePos).x, GetPosByTile(_tilePos).y, 0.f));
+	_obj->m_RoomNumber = m_RoomNumber;
 }
 
 void Room::DetachGameObject(GameObject* _obj)

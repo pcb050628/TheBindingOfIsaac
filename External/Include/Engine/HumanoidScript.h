@@ -7,14 +7,19 @@ class HumanoidScript :
 private:
     GameObject* Head;
     GameObject* Body;
-    //머리, 몸통 방향 있어야함
+    DIRECTION   HeadDir;
+    DIRECTION   BodyDir;
 
 public:
     virtual void Init() override;
     virtual void Update() override;
 
 public:
-    //방향 설정 함수 추가
+    void SetHeadDir(DIRECTION _dir) { HeadDir = _dir; }
+    void SetBodyDir(DIRECTION _dir) { BodyDir = _dir; }
+
+    DIRECTION GetHeadDir() { return HeadDir; }
+    DIRECTION GetBodyDir() { return BodyDir; }
 
 public:
     HumanoidScript();

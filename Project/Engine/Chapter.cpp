@@ -2,12 +2,14 @@
 #include "Chapter.h"
 #include "TaskManager.h"
 
+
 Chapter::Chapter()
 	: m_Rooms()
 	, m_CurRoom(nullptr)
+	, m_bEditMode(false)
 {
-	m_CurRoom = new Room();
-	m_Rooms.push_back(m_CurRoom);
+	m_CurRoom = new Room;
+	AddRoom(m_CurRoom);
 }
 
 Chapter::~Chapter()
@@ -17,6 +19,12 @@ Chapter::~Chapter()
 		delete m_Rooms[i];
 	}
 	m_Rooms.clear();
+}
+
+void Chapter::AddRoom(Room* _room)
+{
+	_room->m_RoomNumber = (UINT)m_Rooms.size();
+	m_Rooms.push_back(_room);
 }
 
 void Chapter::Update()
