@@ -2,21 +2,30 @@
 #include "GUI.h"
 
 class Room;
+class RoomEditorRenderGUI;
 class RoomEditorGUI :
     public GUI
 {
 private:
-	Room* m_EditRoom;
+	RoomEditorRenderGUI*	m_RenderGUI;
+
+	Room*					m_EditRoom;
+	std::wstring			m_SelectObject;
+	LAYER_TYPE				m_SelectLayer;
 
 public:
+	void ActivateRenderGUI();
 
+	void SelectObject(DWORD_PTR _str);
 
 public:
-	virtual void RenderUpdate() override;
-	virtual void Activate() override;
+	void RenderUpdate() override;
+	void Activate() override;
 
 public:
 	RoomEditorGUI();
 	~RoomEditorGUI();
+
+	friend class RoomEditorRenderGUI;
 };
 

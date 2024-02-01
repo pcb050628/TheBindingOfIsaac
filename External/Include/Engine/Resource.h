@@ -12,9 +12,9 @@ enum class RESOURCE_TYPE
 	COMPUTE_SHADER,
 	MATERIAL,
 	ROOM,
-	GAMEOBJECT,
 	CHAPTER,
-	END
+	END,
+	GAMEOBJECT,
 };
 
 class Resource : 

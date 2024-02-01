@@ -14,6 +14,7 @@
 #include "ListGUI.h"
 #include "EditorGUI.h"
 #include "AnimEditorRenderGUI.h"
+#include "RoomEditorRenderGUI.h"
 
 ImGuiManager::ImGuiManager()
 {}
@@ -136,5 +137,8 @@ void ImGuiManager::CrateGUI()
     m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 
     gui = new AnimEditorRenderGUI;
+    m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
+
+    gui = new RoomEditorRenderGUI;
     m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 }

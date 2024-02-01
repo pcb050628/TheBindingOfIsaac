@@ -13,6 +13,7 @@ class ResourceManager
 	SINGLETON(ResourceManager);
 private:
 	std::map<std::wstring, Resource*> m_Resources[(UINT)RESOURCE_TYPE::END];
+	std::vector<std::wstring> m_ObjFile;
 	
 public:
 	void Init();

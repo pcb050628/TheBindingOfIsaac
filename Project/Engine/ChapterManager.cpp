@@ -52,7 +52,7 @@ void ChapterManager::Init()
 
 	gobj->SetName(L"test_rock");
 	AddGameObject(gobj, LAYER_TYPE::Object);
-	gobj->Save();
+	//gobj->Save();
 
 	// UI Test obj
 	gobj = new GameObject;
@@ -106,11 +106,11 @@ void ChapterManager::Init()
 
 	gobj->SetName(L"light_test");
 	AddGameObject(gobj, LAYER_TYPE::Light);
-	gobj->Save();
+	//gobj->Save();
 
-	gobj = new GameObject;
-	gobj->Load(L"test_rock.txt");
-	AddGameObject(gobj, LAYER_TYPE::Player);
+	//gobj = new GameObject;
+	//gobj->Load(L"test_rock.txt");
+	//AddGameObject(gobj, LAYER_TYPE::Player);
 
 	Device::GetInst()->SetClearColor(Vec4(0.f, 0.f, 0.f, 1.f));
 }

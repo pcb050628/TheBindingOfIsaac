@@ -9,13 +9,12 @@
 #include "ChapterManager.h"
 #include "Layer.h"
 
-#define ALLOCATE_SCRIPT(Name) new Name;
-
 GameObject::GameObject()
 	: m_Components{}
 	, m_RenderComponent(nullptr)
 	, m_Parent(nullptr)
 	, m_iLayerIdx(-1)
+	, m_RoomNumber(-1)
 {
 }
 
@@ -24,6 +23,7 @@ GameObject::GameObject(const std::wstring& _name)
 	, m_RenderComponent(nullptr)
 	, m_Parent(nullptr)
 	, m_iLayerIdx(-1)
+	, m_RoomNumber(-1)
 {
 	SetName(_name);
 }
@@ -88,6 +88,12 @@ void GameObject::Update()
 void GameObject::LateUpdate()
 {
 	ChapterManager::GetInst()->RegisterObj(this, (LAYER_TYPE)m_iLayerIdx);
+
+	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+	{
+		if (m_Components[i] != nullptr)
+			m_Components[i]->LateUpdate();
+	}
 
 	for (GameObject* child : m_ChildObjs)
 	{

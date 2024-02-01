@@ -165,6 +165,9 @@
     <ClInclude Include="RoomEditorGUI.h">
       <Filter>GUI\Editor\RoomEditor</Filter>
     </ClInclude>
+    <ClInclude Include="RoomEditorRenderGUI.h">
+      <Filter>GUI\Editor\RoomEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -249,6 +252,9 @@
       <Filter>ImGui\FileDialog</Filter>
     </ClCompile>
     <ClCompile Include="RoomEditorGUI.cpp">
+      <Filter>GUI\Editor\RoomEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="RoomEditorRenderGUI.cpp">
       <Filter>GUI\Editor\RoomEditor</Filter>
     </ClCompile>
   </ItemGroup>

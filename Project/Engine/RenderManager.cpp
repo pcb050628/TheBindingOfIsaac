@@ -87,7 +87,7 @@ void RenderManager::Render()
 {
 	for (int i = 0; i < m_Cams.size(); i++)
 	{
-		if (m_Cams[i] != nullptr)
+		if (m_Cams[i] != nullptr && m_Cams[i]->GetOwner()->GetRoomNumber() >= 0)
 		{
 			m_Cams[i]->SortObject();
 			m_Cams[i]->Render();
@@ -138,6 +138,7 @@ void RenderManager::Render_Debug()
 
 void RenderManager::RegisterCamera(Camera* _Cam, int _Idx)
 {
+
 	if (m_Cams.size() <= _Idx + 1)
 	{
 		m_Cams.resize(_Idx + 1);

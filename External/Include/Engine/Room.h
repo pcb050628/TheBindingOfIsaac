@@ -83,10 +83,14 @@ public:
     GameObject* FindObject(const std::wstring& _strName);
     virtual void GetAllObject(std::vector<GameObject*>& _out);
 
+    //void DeleteAll();
+
 public:
     Room();
     virtual ~Room() override;
 
     friend class Chapter;
+    friend class RoomEditorGUI;
+    friend class RoomEditorRenderGUI;
 };
 

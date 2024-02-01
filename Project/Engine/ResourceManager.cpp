@@ -32,6 +32,7 @@ void ResourceManager::Init()
 	LoadAnim();
 	Load<Texture>(L"Rocks.png");
 	Load<Texture>(L"Link.png");
+	m_ObjFile.push_back(L"test_rock.txt");
 }
 
 void ResourceManager::CreateDefaultMesh()
@@ -199,8 +200,18 @@ Texture* ResourceManager::CreateTexture(const std::wstring& _strKey, Microsoft::
 
 void ResourceManager::GetAssetName(RESOURCE_TYPE _type, std::vector<std::string>& _vecStr)
 {
-	for (const auto asset : m_Resources[(UINT)_type])
+	if (_type == RESOURCE_TYPE::GAMEOBJECT)
 	{
-		_vecStr.push_back(ToString(asset.first));
+		for (const std::wstring& file : m_ObjFile)
+		{
+			_vecStr.push_back(ToString(file));
+		}
+	}
+	else
+	{
+		for (const auto asset : m_Resources[(UINT)_type])
+		{
+			_vecStr.push_back(ToString(asset.first));
+		}
 	}
 }
