@@ -7,6 +7,8 @@
 #include "GameObject.h"
 #include "components.h"
 
+#include "rttr\registration.h"
+
 #define GET_OTHER_COMPONENT(Type) Type* Get##Type() { return GetOwner()->Get##Type(); }
 
 class Script :

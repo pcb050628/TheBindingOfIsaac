@@ -26,3 +26,9 @@ public:
     ~HumanoidScript();
 };
 
+
+RTTR_REGISTRATION
+{
+    rttr::registration::class_<HumanoidScript>("HumanoidScript")
+        .constructor<>();
+}
