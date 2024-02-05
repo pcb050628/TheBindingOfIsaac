@@ -109,9 +109,6 @@
     <Filter Include="01_Basic\03_OBJ\Component\04. Animator2D">
       <UniqueIdentifier>{a5873e2d-ab40-4e88-8b2d-a0a278ccb471}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\03_OBJ\Component\04. Animator2D\Anim">
-      <UniqueIdentifier>{9e4eb150-da88-4450-92df-a0961428ee4f}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\03_OBJ\Component\05. Collider2D">
       <UniqueIdentifier>{da20efbe-7ece-4c32-84c1-80428a077ec1}</UniqueIdentifier>
     </Filter>
@@ -156,6 +153,9 @@
     </Filter>
     <Filter Include="02_Derived\Script\Object\Wall">
       <UniqueIdentifier>{598caab7-c4ae-45ca-b940-39314136f21d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Resource\Anim">
+      <UniqueIdentifier>{9e4eb150-da88-4450-92df-a0961428ee4f}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -259,7 +259,7 @@
       <Filter>01_Basic\03_OBJ\Component\04. Animator2D</Filter>
     </ClInclude>
     <ClInclude Include="Anim.h">
-      <Filter>01_Basic\03_OBJ\Component\04. Animator2D\Anim</Filter>
+      <Filter>02_Derived\Resource\Anim</Filter>
     </ClInclude>
     <ClInclude Include="Script.h">
       <Filter>02_Derived\Script</Filter>
@@ -390,7 +390,7 @@
       <Filter>01_Basic\03_OBJ\Component\04. Animator2D</Filter>
     </ClCompile>
     <ClCompile Include="Anim.cpp">
-      <Filter>01_Basic\03_OBJ\Component\04. Animator2D\Anim</Filter>
+      <Filter>02_Derived\Resource\Anim</Filter>
     </ClCompile>
     <ClCompile Include="Script.cpp">
       <Filter>02_Derived\Script</Filter>

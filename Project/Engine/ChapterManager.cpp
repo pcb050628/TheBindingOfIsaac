@@ -61,7 +61,7 @@ void ChapterManager::Init()
 
 	gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"ui_Material")); 
 	gobj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh")); 
-	gobj->GetMeshRenderer()->GetMaterial()->SetTexture(ResourceManager::GetInst()->Find<Texture>(L"Rocks"), TEX_0);
+	gobj->GetMeshRenderer()->GetMaterial()->SetTexture(ResourceManager::GetInst()->Find<Texture>(L"Rocks.png"), TEX_0);
 
 	gobj->SetName(L"test_ui");
 	AddGameObject(gobj, LAYER_TYPE::UI);

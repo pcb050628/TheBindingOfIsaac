@@ -19,10 +19,13 @@ public:
 	void Init();
 
 private:
+	void LoadAllContent(const std::wstring& _path);
 	void CreateDefaultMesh();
 	void CreateDefaultShader();
 	void CreateDefaultMaterial();
 	void LoadAnim();
+
+	int LoadResource(const std::wstring& _path);
 
 public:
 	template <typename T>
@@ -47,8 +50,12 @@ public:
 	T* Load(std::wstring _FileName)
 	{
 		Resource* tmp = new T();
-		tmp->Load(_FileName);
-		if (tmp != nullptr)
+		if (!tmp->Load(_FileName))
+		{
+			delete tmp;
+			return nullptr;
+		}
+		else
 		{
 			if (IsExist(tmp->GetResourceName(), tmp->GetResourceType()))
 			{
@@ -64,8 +71,6 @@ public:
 			m_Resources[(UINT)tmp->GetResourceType()].insert(std::make_pair(tmp->GetResourceName(), tmp));
 			return dynamic_cast<T*>(tmp);
 		}
-		else
-			delete tmp;
 
 		return nullptr;
 	}

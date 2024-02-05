@@ -169,7 +169,7 @@ bool Material::Load(const std::wstring& _FileName)
 bool Material::Save()
 {
 	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + m_ResourceName;
-	filePath += L".txt";
+	filePath += L".mtrl";
 	std::wofstream fileStream(filePath);
 
 	if (fileStream.is_open())

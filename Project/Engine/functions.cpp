@@ -76,22 +76,22 @@ std::wstring GetResourceFolderPath(RESOURCE_TYPE _type)
 	switch (_type)
 	{
 	case RESOURCE_TYPE::TEXTURE:
-		out += L"Image\\";
+		out += L"02_Image\\";
 		break;
 	case RESOURCE_TYPE::ANIM:
-		out += L"Anim\\";
+		out += L"04_Anim\\";
 		break;
 	case RESOURCE_TYPE::MATERIAL:
-		out += L"Material\\";
+		out += L"03_Material\\";
 		break;
 	case RESOURCE_TYPE::GRAPHICS_SHADER:
-		out += L"Shader\\Graphics\\";
+		out += L"01_Shader\\Graphics\\";
 		break;
 	case RESOURCE_TYPE::GAMEOBJECT:
-		out += L"GameObject\\";
+		out += L"05_GameObject\\";
 		break;
 	case RESOURCE_TYPE::ROOM:
-		out += L"Room\\";
+		out += L"06_Room\\";
 		break;
 		//case RESOURCE_TYPE::SOUND:
 		//	break;

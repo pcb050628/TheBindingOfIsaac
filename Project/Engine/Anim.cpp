@@ -242,7 +242,7 @@ bool Anim::Load(const std::wstring& _FileName)
 bool Anim::Save()
 {
 	filesystem::path filePath = GetContentPath() + L"Resource\\Anim\\" + m_ResourceName;
-	filePath += L".txt";
+	filePath += L".anim";
 	std::wofstream fileStream(filePath);
 
 	if (fileStream.is_open())

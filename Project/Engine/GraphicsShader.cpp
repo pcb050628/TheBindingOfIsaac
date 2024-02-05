@@ -268,7 +268,7 @@ bool GraphicsShader::Load(const std::wstring& _relativePath)
 bool GraphicsShader::Save()
 {
 	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + m_ResourceName;
-	filePath += ".txt";
+	filePath += ".gs";
 	std::wofstream fileStream(filePath);
 
 	if (fileStream.is_open())

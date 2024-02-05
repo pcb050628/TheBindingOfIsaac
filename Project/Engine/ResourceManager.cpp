@@ -7,6 +7,10 @@
 #include "GraphicsShader.h"
 #include "ChapterManager.h"
 
+#include "fstream"
+#include "istream"
+#include "filesystem"
+
 ResourceManager::ResourceManager()
 {
 
@@ -27,12 +31,32 @@ ResourceManager::~ResourceManager()
 void ResourceManager::Init()
 {
 	CreateDefaultMesh();
-	CreateDefaultShader();
-	CreateDefaultMaterial();
-	LoadAnim();
-	Load<Texture>(L"Rocks.png");
-	Load<Texture>(L"Link.png");
-	m_ObjFile.push_back(L"test_rock.txt");
+	//CreateDefaultShader();
+	//CreateDefaultMaterial();
+	//LoadAnim();
+	//Load<Texture>(L"Rocks.png");
+	//Load<Texture>(L"Link.png");
+	//m_ObjFile.push_back(L"test_rock.txt");
+	std::wstring path = GetContentPath() + L"Resource\\";
+	LoadAllContent(path);
+}
+
+void ResourceManager::LoadAllContent(const std::wstring& _path)
+{
+	if (filesystem::exists(_path))
+	{
+		if (filesystem::is_directory(_path))
+		{
+			for (const auto& entry : filesystem::directory_iterator(_path))
+			{
+				LoadAllContent(entry.path());
+			}
+		}
+		else if (filesystem::is_regular_file(_path))
+		{
+			LoadResource(_path);
+		}
+	}
 }
 
 void ResourceManager::CreateDefaultMesh()
@@ -159,7 +183,50 @@ void ResourceManager::CreateDefaultMaterial()
 void ResourceManager::LoadAnim()
 {
 	Load<Anim>(L"Link_RightAnim_test.txt");
-	// Anim 폴더 전체 돌면서 로드
+}
+
+int ResourceManager::LoadResource(const std::wstring& _path)
+{
+	wchar_t szExt[20] = {};
+	_wsplitpath_s(_path.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 20);
+
+	wchar_t szName[100] = {};
+	_wsplitpath_s(_path.c_str(), nullptr, 0, nullptr, 0, szName, 100, nullptr, 0);
+
+	std::wstring file(szName);
+	file += szExt;
+
+	std::wstring ext(szExt);
+
+	Resource* r = nullptr;
+
+	if (L".anim" == ext)
+	{
+		r = Load<Anim>(file);
+		if (nullptr == r) return E_FAIL; else return S_OK;
+	}
+	else if (L".gobj" == ext)
+	{
+		m_ObjFile.push_back(file);
+		return S_OK;
+	}
+	else if (L".mtrl" == ext)
+	{
+		r = Load<Material>(file);
+		if (nullptr == r) return E_FAIL; else return S_OK; 
+	}
+	else if (L".gs" == ext)
+	{
+		r = Load<GraphicsShader>(file);
+		if (nullptr == r) return E_FAIL; else return S_OK; 
+	}
+	else
+	{
+		r = Load<Texture>(file);
+		if (nullptr == r) return E_FAIL; else return S_OK; 
+	}
+
+	return E_FAIL;
 }
 
 Texture* ResourceManager::CreateTexture(const std::wstring& _strKey, UINT _width, UINT _height, DXGI_FORMAT _format, UINT _bindFlags, D3D11_USAGE _usage)

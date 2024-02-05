@@ -181,7 +181,7 @@ void GameObject::DisconnectWithLayer()
 int GameObject::Save()
 {
 	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + GetName();
-	filePath += L".txt";
+	filePath += L".gobj";
 	std::wofstream fileStream(filePath);
 
 	if (fileStream.is_open())
