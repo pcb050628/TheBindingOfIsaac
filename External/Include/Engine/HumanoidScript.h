@@ -1,5 +1,6 @@
 #pragma once
 #include "Script.h"
+#include <rttr/type>
 
 class HumanoidScript :
     public Script
@@ -9,6 +10,9 @@ private:
     GameObject* Body;
     DIRECTION   HeadDir;
     DIRECTION   BodyDir;
+
+    RTTR_ENABLE()
+    RTTR_REGISTRATION_FRIEND
 
 public:
     virtual void Init() override;
@@ -26,9 +30,3 @@ public:
     ~HumanoidScript();
 };
 
-
-RTTR_REGISTRATION
-{
-    rttr::registration::class_<HumanoidScript>("HumanoidScript")
-        .constructor<>();
-}

@@ -2,7 +2,7 @@
 #include "HumanoidScript.h"
 
 
-HumanoidScript::HumanoidScript() : Script(L"HumanoidScript")
+HumanoidScript::HumanoidScript() : Script(L"Humanoid")
 	, Head(new GameObject(L"Head"))
 	, Body(new GameObject(L"Body"))
 	, HeadDir(DIRECTION::BottomDir)
@@ -29,4 +29,8 @@ void HumanoidScript::Init()
 
 void HumanoidScript::Update()
 {
+}
+
+RTTR_REGISTRATION {
+	rttr::registration::class_<HumanoidScript>("Humanoid");
 }
