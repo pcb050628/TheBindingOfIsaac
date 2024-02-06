@@ -108,9 +108,9 @@ void ChapterManager::Init()
 	AddGameObject(gobj, LAYER_TYPE::Light);
 	//gobj->Save();
 
-	//gobj = new GameObject;
-	//gobj->Load(L"test_rock.txt");
-	//AddGameObject(gobj, LAYER_TYPE::Player);
+	gobj = new GameObject;
+	gobj->Load(L"test_rock.gobj");
+	AddGameObject(gobj, LAYER_TYPE::Player);
 
 	Device::GetInst()->SetClearColor(Vec4(0.f, 0.f, 0.f, 1.f));
 }

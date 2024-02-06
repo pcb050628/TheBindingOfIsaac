@@ -6,15 +6,16 @@ class ScriptFactory
 	SINGLETON(ScriptFactory)
 private:
 	std::map<std::wstring, Script*> m_map;
+	void Register(Script* _scrpt);
 
 public:
+	void Init();
 	Script* Find(const std::wstring& _name);
-	void Register(Script* _scrpt);
+
+	template <typename T>
+	void RegisterScript()
+	{
+		Register(new T);
+	}
 };
 
-
-template <typename T>
-void RegistScript()
-{
-	ScriptFactory::GetInst()->Register(new T);
-}

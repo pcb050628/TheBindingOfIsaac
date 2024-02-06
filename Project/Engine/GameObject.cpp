@@ -155,6 +155,9 @@ void GameObject::AttachChild(GameObject* _objChild)
 
 void GameObject::DisconnectWithParent()
 {
+	if (!m_Parent)
+		return;
+
 	std::vector<GameObject*>::iterator iter = m_Parent->m_ChildObjs.begin();
 	for (; iter != m_ChildObjs.end(); iter++)
 	{
