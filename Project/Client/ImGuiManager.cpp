@@ -19,7 +19,16 @@
 ImGuiManager::ImGuiManager()
 {}
 ImGuiManager::~ImGuiManager()
-{}
+{
+    for (auto pair : m_mapGUI)
+    {
+        if (nullptr != pair.second)
+        {
+            delete pair.second;
+        }
+    }
+    m_mapGUI.clear();
+}
 
 void ImGuiManager::Init(HWND _hMainWnd, Microsoft::WRL::ComPtr<ID3D11Device> _Device, Microsoft::WRL::ComPtr<ID3D11DeviceContext> _Context)
 {
@@ -27,11 +36,11 @@ void ImGuiManager::Init(HWND _hMainWnd, Microsoft::WRL::ComPtr<ID3D11Device> _De
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
-    io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-    io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
-    io.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
+    //ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;     // Enable Keyboard Controls
+    ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
+    ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_DockingEnable;         // Enable Docking
+    ImGui::GetIO().ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;       // Enable Multi-Viewport / Platform Windows
     //io.ConfigViewportsNoAutoMerge = true;
     //io.ConfigViewportsNoTaskBarIcon = true;
     //io.ConfigViewportsNoDefaultParent = true;
@@ -46,7 +55,7 @@ void ImGuiManager::Init(HWND _hMainWnd, Microsoft::WRL::ComPtr<ID3D11Device> _De
 
     // When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
     ImGuiStyle& style = ImGui::GetStyle();
-    if (io.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
+    if (ImGui::GetIO().ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
     {
         style.WindowRounding = 0.0f;
         style.Colors[ImGuiCol_WindowBg].w = 1.0f;
@@ -88,12 +97,6 @@ void ImGuiManager::Update()
     ImGui::NewFrame();
 
     ImGui::ShowDemoWindow();
-
-    //if (!((InspectorGUI*)FindGUI("##InspectorGUI"))->GetTargetObject())
-    //{
-    //    GameObject* gobj = ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->FindObject(L"test_rock");
-    //    ((InspectorGUI*)FindGUI("##InspectorGUI"))->SetTargetObject(gobj);
-    //}
 
     std::map<std::string, GUI*>::iterator iter = m_mapGUI.begin();
     for (; iter != m_mapGUI.end(); iter++)

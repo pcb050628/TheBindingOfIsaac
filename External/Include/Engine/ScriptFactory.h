@@ -1,21 +1,23 @@
 #pragma once
 
+#define REGISTER_SCRIPT(className) \
+    namespace { \
+        const bool className##Registered = []() { \
+            ScriptFactory::GetInst()->Register(new className); \
+            return true; \
+        }(); \
+    }
+
 class Script;
 class ScriptFactory
 {
 	SINGLETON(ScriptFactory)
 private:
 	std::map<std::wstring, Script*> m_map;
-	void Register(Script* _scrpt);
 
 public:
 	void Init();
 	Script* Find(const std::wstring& _name);
 
-	template <typename T>
-	void RegisterScript()
-	{
-		Register(new T);
-	}
+	void Register(Script* _scrpt);
 };
-

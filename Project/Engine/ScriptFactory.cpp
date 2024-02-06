@@ -15,8 +15,6 @@ ScriptFactory::~ScriptFactory()
 
 void ScriptFactory::Init()
 {
-    RegisterScript<HumanoidScript>();
-    RegisterScript<SpotLight2DMove>();
 }
 
 Script* ScriptFactory::Find(const std::wstring& _name)
@@ -39,6 +37,6 @@ void ScriptFactory::Register(Script* _scrpt)
     }
     else
     {
-        
+        int a = 0;
     }
 }

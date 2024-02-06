@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "HumanoidScript.h"
 
+
+REGISTER_SCRIPT(HumanoidScript);
 HumanoidScript::HumanoidScript() : Script(L"Humanoid")
 	, Head(nullptr)
 	, Body(nullptr)
@@ -45,9 +47,4 @@ void HumanoidScript::Init()
 
 void HumanoidScript::Update()
 {
-}
-
-Script* HumanoidScript::Instance()
-{
-	return new HumanoidScript;
 }

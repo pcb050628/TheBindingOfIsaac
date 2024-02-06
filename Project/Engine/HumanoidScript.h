@@ -4,6 +4,7 @@
 class HumanoidScript :
     public Script
 {
+    SCRIPT(HumanoidScript)
 private:
     GameObject* Head;
     GameObject* Body;
@@ -13,7 +14,6 @@ private:
 public:
     virtual void Init() override;
     virtual void Update() override;
-    Script* Instance() override;
 
 public:
     void SetHeadDir(DIRECTION _dir) { HeadDir = _dir; }
@@ -26,4 +26,3 @@ public:
     HumanoidScript();
     ~HumanoidScript();
 };
-

@@ -45,8 +45,3 @@ void SpotLight2DMove::Update()
 	GetTransform()->SetRelativeRotation(vRot);
 	GetTransform()->SetRelativePos(vPos);
 }
-
-Script* SpotLight2DMove::Instance()
-{
-	return new SpotLight2DMove;
-}
