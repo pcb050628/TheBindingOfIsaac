@@ -70,6 +70,9 @@
     <Filter Include="ImGui\FileDialog">
       <UniqueIdentifier>{77c23aea-8be5-462b-86be-67cc9f7321fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\Editor\ObjectEditor">
+      <UniqueIdentifier>{f7d8b67a-f246-4450-bd24-de894d819d0b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
