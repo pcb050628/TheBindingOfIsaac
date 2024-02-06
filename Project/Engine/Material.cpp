@@ -49,9 +49,15 @@ void Material::UpdateData()
 	pCB->UpdateData();
 }
 
-bool Material::Load(const std::wstring& _FileName)
+bool Material::Load(const std::wstring& _FileName, bool _isFullPath)
 {
-	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
+	filesystem::path filePath;
+
+	if (_isFullPath)
+		filePath = _FileName;
+	else
+		filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
+
 	std::wifstream fileStream(filePath);
 
 	wchar_t szName[20] = {};

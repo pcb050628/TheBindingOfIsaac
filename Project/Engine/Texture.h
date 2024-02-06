@@ -18,7 +18,7 @@ private:
     UINT                                                m_RecentNum_UAV;
 
 private:
-    bool Load(const std::wstring& _FileName) override;
+    bool Load(const std::wstring& _FileName, bool _isFullPath) override;
     int Create(UINT _Width, UINT _Height
         , DXGI_FORMAT _Format, UINT _BindFlag
         , D3D11_USAGE _Usage = D3D11_USAGE_DEFAULT);

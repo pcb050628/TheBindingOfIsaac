@@ -14,7 +14,6 @@ private:
 public:
     virtual void Init() override;
     virtual void Update() override;
-    //Script* Instance() override;
 
 public:
     void SetHeadDir(DIRECTION _dir) { HeadDir = _dir; }

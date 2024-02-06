@@ -11,8 +11,8 @@ private:
     class GraphicsShader*   m_Shader;
 
 public:
-    virtual bool Load(const std::wstring& _strFilePath);
-    virtual bool Save();
+    virtual bool Load(const std::wstring& _strFilePath, bool _isFullPath) override;
+    virtual bool Save() override;
 
     void UpdateData();
 

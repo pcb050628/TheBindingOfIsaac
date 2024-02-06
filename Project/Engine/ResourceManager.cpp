@@ -193,36 +193,35 @@ int ResourceManager::LoadResource(const std::wstring& _path)
 	wchar_t szName[100] = {};
 	_wsplitpath_s(_path.c_str(), nullptr, 0, nullptr, 0, szName, 100, nullptr, 0);
 
-	std::wstring file(szName);
-	file += szExt;
-
 	std::wstring ext(szExt);
 
 	Resource* r = nullptr;
 
 	if (L".anim" == ext)
 	{
-		r = Load<Anim>(file);
+		r = Load<Anim>(_path, true);
 		if (nullptr == r) return E_FAIL; else return S_OK;
 	}
 	else if (L".gobj" == ext)
 	{
+		std::wstring file(szName);
+		file += szExt;
 		m_ObjFile.push_back(file);
 		return S_OK;
 	}
 	else if (L".mtrl" == ext)
 	{
-		r = Load<Material>(file);
+		r = Load<Material>(_path, true);
 		if (nullptr == r) return E_FAIL; else return S_OK; 
 	}
 	else if (L".gs" == ext)
 	{
-		r = Load<GraphicsShader>(file);
+		r = Load<GraphicsShader>(_path, true);
 		if (nullptr == r) return E_FAIL; else return S_OK; 
 	}
 	else
 	{
-		r = Load<Texture>(file);
+		r = Load<Texture>(_path, true);
 		if (nullptr == r) return E_FAIL; else return S_OK; 
 	}
 

@@ -142,9 +142,15 @@ bool Anim::RemoveCurFrame()
 	return true;
 }
 
-bool Anim::Load(const std::wstring& _FileName)
+bool Anim::Load(const std::wstring& _FileName, bool _isFullPath)
 {
-	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
+	filesystem::path filePath;
+
+	if (_isFullPath)
+		filePath = _FileName;
+	else
+		filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
+
 	std::wifstream fileStream(filePath);
 
 	wchar_t szName[20] = {};
@@ -241,7 +247,7 @@ bool Anim::Load(const std::wstring& _FileName)
 
 bool Anim::Save()
 {
-	filesystem::path filePath = GetContentPath() + L"Resource\\Anim\\" + m_ResourceName;
+	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + m_ResourceName;
 	filePath += L".anim";
 	std::wofstream fileStream(filePath);
 

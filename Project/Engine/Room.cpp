@@ -29,9 +29,13 @@ Room::~Room()
 	}
 }
 
-bool Room::Load(const std::wstring& _strFileName)
+bool Room::Load(const std::wstring& _strFileName, bool _isFullPath)
 {
-	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + _strFileName;
+	filesystem::path filePath;
+	if (_isFullPath)
+		filePath = _strFileName;
+	else
+		filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _strFileName;
 	std::wifstream fileStream(filePath);
 
 	wchar_t szName[20] = {};

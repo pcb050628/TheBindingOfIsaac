@@ -48,7 +48,7 @@ public:
     int CreateGeometryShader(const std::wstring& _strRelativePath, const std::string& _strFuncName); 
     int CreatePixelShader(const std::wstring& _strRelativePath, const std::string& _strFuncName);
 
-    bool Load(const std::wstring& _relativePath) override;
+    bool Load(const std::wstring& _relativePath, bool _isFullPath) override;
     bool Save() override;
 
     SHADER_DOMAIN GetDomain() { return m_Domain; }

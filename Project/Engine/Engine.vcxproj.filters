@@ -55,9 +55,6 @@
     <Filter Include="01_Basic\02_Manager\ResourceManager">
       <UniqueIdentifier>{623d8b65-a4ce-4ee1-a1f9-b96f13044a83}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\02_Manager\ResourceManager\Resource">
-      <UniqueIdentifier>{21aaa8c3-5ce9-4710-854f-edd385ed5d16}</UniqueIdentifier>
-    </Filter>
     <Filter Include="01_Basic\02_Manager\LogManager">
       <UniqueIdentifier>{86e99935-ad43-4b0e-9f4d-83fc5ece99f6}</UniqueIdentifier>
     </Filter>
@@ -231,9 +228,6 @@
     <ClInclude Include="Mesh.h">
       <Filter>02_Derived\Resource\Mesh</Filter>
     </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>01_Basic\02_Manager\ResourceManager\Resource</Filter>
-    </ClInclude>
     <ClInclude Include="resources.h">
       <Filter>0_Default\Header</Filter>
     </ClInclude>
@@ -297,6 +291,9 @@
     <ClInclude Include="HumanoidScript.h">
       <Filter>02_Derived\Script\Humanoid</Filter>
     </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>02_Derived\Resource</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -358,9 +355,6 @@
     </ClCompile>
     <ClCompile Include="Mesh.cpp">
       <Filter>02_Derived\Resource\Mesh</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>01_Basic\02_Manager\ResourceManager\Resource</Filter>
     </ClCompile>
     <ClCompile Include="externs.cpp">
       <Filter>0_Default\Header</Filter>
@@ -424,6 +418,9 @@
     </ClCompile>
     <ClCompile Include="HumanoidScript.cpp">
       <Filter>02_Derived\Script\Humanoid</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>02_Derived\Resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -47,10 +47,10 @@ public:
 	}
 
 	template <typename T>
-	T* Load(std::wstring _FileName)
+	T* Load(std::wstring _FileName, bool _isFullPath = false)
 	{
 		Resource* tmp = new T();
-		if (!tmp->Load(_FileName))
+		if (!tmp->Load(_FileName, _isFullPath))
 		{
 			delete tmp;
 			return nullptr;

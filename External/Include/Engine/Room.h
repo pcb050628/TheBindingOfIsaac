@@ -33,7 +33,7 @@ private:
     Room*       Bottom;
 
 public:
-    virtual bool Load(const std::wstring& _strFileName) override;
+    virtual bool Load(const std::wstring& _strFileName, bool _isFullPath) override;
     virtual bool Save() override;
 
     virtual void Clear();

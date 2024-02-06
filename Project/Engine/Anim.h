@@ -39,7 +39,7 @@ public:
     bool IsRepeat() { return m_bIsRepeat; }
 
 public:
-    bool Load(const std::wstring& _FileName) override;
+    bool Load(const std::wstring& _FileName, bool _isFullPath) override;
     bool Save() override;
 
     void Create(Texture* _atlas, Vec2 _leftTop, Vec2 _sliceSize, Vec2 _offset, Vec2 _background, int _frmCount, int _FPS);

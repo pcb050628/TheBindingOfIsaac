@@ -37,7 +37,7 @@ void OutlinerGUI::VectorTreeNode(std::vector<GameObject*>& _vector)
 		std::string Label = ToString(_vector[i]->GetName());
 		Label += "##";
 		Label += ToString(_vector[i]->GetName()) + buf;
-		if (ImGui::TreeNodeEx(Label.c_str()))
+		if (ImGui::TreeNode(Label.c_str()))
 		{
 			if (ImGui::IsItemClicked(ImGuiMouseButton_Right))
 			{

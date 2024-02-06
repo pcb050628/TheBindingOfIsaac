@@ -142,11 +142,15 @@ int GraphicsShader::CreatePixelShader(const std::wstring& _strRelativePath, cons
 	return S_OK;
 }
 
-bool GraphicsShader::Load(const std::wstring& _relativePath)
+bool GraphicsShader::Load(const std::wstring& _relativePath, bool _isFullPath)
 {
 	filesystem::path filePath = GetContentPath(); 
-	filePath += GetResourceFolderPath(m_Type);
-	filePath += _relativePath;
+
+	if (_isFullPath)
+		filePath = _relativePath;
+	else
+		filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _relativePath;
+
 	std::wifstream fileStream(filePath);
 
 	wchar_t szName[20] = {};

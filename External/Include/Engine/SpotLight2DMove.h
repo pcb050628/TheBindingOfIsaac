@@ -4,9 +4,9 @@
 class SpotLight2DMove :
     public Script
 {
+    SCRIPT(SpotLight2DMove)
 public:
     void Update() override;
-    Script* Instance() override;
 
 public:
     SpotLight2DMove();

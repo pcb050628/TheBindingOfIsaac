@@ -18,17 +18,19 @@ Texture::~Texture()
 {
 }
 
-bool Texture::Load(const std::wstring& _FileName)
+bool Texture::Load(const std::wstring& _FileName, bool _isFullPath)
 {
-	std::wstring fullPath = GetContentPath();
-	fullPath += GetResourceFolderPath(m_Type);
-	fullPath += _FileName;
+	std::wstring fullPath;
+	if (_isFullPath)
+		fullPath = _FileName;
+	else
+		fullPath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
 
 	wchar_t szExt[20] = {};
 	_wsplitpath_s(_FileName.c_str(), nullptr, 0, nullptr, 0, nullptr, 0, szExt, 20);
 
-	wchar_t szName[20] = {};
-	_wsplitpath_s(_FileName.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+	wchar_t szName[100] = {};
+	_wsplitpath_s(_FileName.c_str(), nullptr, 0, nullptr, 0, szName, 100, nullptr, 0);
 
 	m_ResourceName = szName;
 
