@@ -23,7 +23,7 @@ public:
 
     GameObject* GetTargetObject() { return m_TargetObject; }
 
-    GUI* GetComponentGUI(COMPONENT_TYPE _type) { return m_ComGUI[(UINT)_type]; }
+    GUI* GetComponentGUI(COMPONENT_TYPE _type) { return (GUI*)m_ComGUI[(UINT)_type]; }
 
 public:
     InspectorGUI();

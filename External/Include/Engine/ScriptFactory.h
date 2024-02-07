@@ -8,7 +8,8 @@
         }(); \
     }
 
-class Script;
+#include "Script.h"
+
 class ScriptFactory
 {
 	SINGLETON(ScriptFactory)
@@ -20,4 +21,5 @@ public:
 	Script* Find(const std::wstring& _name);
 
 	void Register(Script* _scrpt);
+
 };

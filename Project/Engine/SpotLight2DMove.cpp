@@ -3,12 +3,10 @@
 
 
 SpotLight2DMove::SpotLight2DMove() : Script(L"SpotLight2DMove")
-{
-}
+{}
 
 SpotLight2DMove::~SpotLight2DMove()
-{
-}
+{}
 
 void SpotLight2DMove::Update()
 {

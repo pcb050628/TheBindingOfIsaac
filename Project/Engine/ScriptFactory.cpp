@@ -1,17 +1,18 @@
 #include "pch.h"
 #include "ScriptFactory.h"
 
-#include "Script.h"
-//typeid(Script).name();
-
-#include "HumanoidScript.h"
-#include "SpotLight2DMove.h"
 
 ScriptFactory::ScriptFactory()
 {}
 
 ScriptFactory::~ScriptFactory()
-{}
+{
+    for (auto pair : m_map)
+    {
+        delete pair.second;
+    }
+    m_map.clear();
+}
 
 void ScriptFactory::Init()
 {

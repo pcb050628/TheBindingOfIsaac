@@ -42,6 +42,8 @@ void ChapterManager::Init()
 	gobj->AddComponent(new Animator2D);
 	gobj->AddComponent(new Collider2D);
 	gobj->AddComponent(new HumanoidScript);
+
+	//Script* script = ScriptFactory::GetInst()->Find(L"Humanoid");
 		
 	gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
 	gobj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
@@ -108,9 +110,9 @@ void ChapterManager::Init()
 	AddGameObject(gobj, LAYER_TYPE::Light);
 	//gobj->Save();
 
-	gobj = new GameObject;
-	gobj->Load(L"test_rock.gobj");
-	AddGameObject(gobj, LAYER_TYPE::Player);
+	//gobj = new GameObject;
+	//gobj->Load(L"test_rock.gobj");
+	//AddGameObject(gobj, LAYER_TYPE::Player);
 
 	Device::GetInst()->SetClearColor(Vec4(0.f, 0.f, 0.f, 1.f));
 }

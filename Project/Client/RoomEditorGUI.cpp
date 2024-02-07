@@ -29,6 +29,14 @@ void RoomEditorGUI::RenderUpdate()
 		if (!m_RenderGUI || !m_RenderGUI->IsActive())
 			ActivateRenderGUI();
 
+		std::string roomname = ToString(m_EditRoom->GetResourceName());
+		char* buf = (char*)roomname.data();
+		std::string roomlabel = "##RoomEditorGUIRoomNameInputText";
+		ImGui::Text("Room Name"); ImGui::SameLine(); ImGui::InputText(roomlabel.c_str(), (char*)roomname.data(), roomname.capacity());
+		std::wstring room = ToWstring(buf);
+		m_EditRoom->SetResourceName(room);
+
+
 		ImGui::Text("Object"); ImGui::SameLine(); 
 		if (ImGui::Button("##ObjectSelectCheckBox", ImVec2(20, 20)))
 		{
@@ -46,6 +54,13 @@ void RoomEditorGUI::RenderUpdate()
 		std::string name = ToString(m_SelectObject);
 		std::string label = "##RoomEditorGUISelectObjectInputText";
 		ImGui::Text("SelectObject"); ImGui::SameLine(); ImGui::InputText(label.c_str(), (char*)name.data(), name.size(), ImGuiInputTextFlags_ReadOnly);
+
+		ImGui::Text("Save"); ImGui::SameLine();
+		if (ImGui::Button("##RoomEditorGUISaveButton", ImVec2(20, 20)) && m_EditRoom->GetResourceName() != L"")
+		{
+			m_EditRoom->Save();
+		}
+		ImGui::Spacing();
 
 		ImGui::EndTabItem();
 	}

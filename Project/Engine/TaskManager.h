@@ -25,12 +25,16 @@ class TaskManager
 {
 	SINGLETON(TaskManager)
 private:
-	std::queue<Task> m_TaskQueue;
+	std::queue<Task>	m_TaskQueue;
+
+	bool				m_bDoSomething;
 
 public:
 	void Update();
 
 	void AddTask(const Task& _task) { m_TaskQueue.push(_task); }
 
+	bool IsDoSomething() { return m_bDoSomething; }
+	void SetDoSomething(bool _value) { m_bDoSomething = _value; }
 };
 

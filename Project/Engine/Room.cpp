@@ -85,21 +85,19 @@ bool Room::Load(const std::wstring& _strFileName, bool _isFullPath)
 
 bool Room::Save()
 {
-	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + GetName();
+	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + GetResourceName();
 	filePath += L".txt";
 	std::wofstream fileStream(filePath);
 
 	if (fileStream.is_open())
 	{
-		for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
+		for (int row = 0; row < 9; row++)
 		{
-			std::vector<GameObject*> obj = m_Layers[i]->GetParentObjects();
-			for (int j = 0; j < obj.size(); j++)
+			for (int col = 0; col < 15; col++)
 			{
-				Vec2 tile = GetTileByPos(obj[j]->GetTransform()->GetRelativePos());
-				fileStream <<  (int)tile.x << L"|" << (int)tile.y  << std::endl;
-				fileStream << obj[j]->GetName() << std::endl;
-				fileStream << obj[j]->GetLayerIdx() << std::endl;
+				fileStream << row << L"|" << col << std::endl;
+				fileStream << m_Info.TileObjectInfo[row][col] << std::endl;
+				fileStream << (UINT)m_Info.TileLayerInfo[row][col] << std::endl;
 			}
 		}
 
@@ -135,6 +133,9 @@ void Room::Enter()
 			{
 				const std::wstring& objName = m_Info.TileObjectInfo[row][col];
 				LAYER_TYPE layer = m_Info.TileLayerInfo[row][col];
+
+				if (objName == L"")
+					continue;
 
 				gobj = new GameObject;
 				gobj->Load(objName);
@@ -296,7 +297,7 @@ void Room::GetAllObject(std::vector<GameObject*>& _out)
 {
 	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)
 	{
-		if (0 < m_Layers[i]->m_Parents.size())
+		if (!m_Layers[i]->m_Parents.empty())
 		{
 			_out.insert(_out.end(), m_Layers[i]->m_Parents.begin(), m_Layers[i]->m_Parents.end());
 		}

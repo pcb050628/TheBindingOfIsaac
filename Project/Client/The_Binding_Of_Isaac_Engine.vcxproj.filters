@@ -73,6 +73,30 @@
     <Filter Include="GUI\Editor\ObjectEditor">
       <UniqueIdentifier>{f7d8b67a-f246-4450-bd24-de894d819d0b}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\Tree">
+      <UniqueIdentifier>{d6b7e89a-8698-472f-8e32-a4145d713e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Content\ResourceGUI">
+      <UniqueIdentifier>{dbfe7d76-e767-4e03-9725-bfd269f52626}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Content\ResourceGUI\Texture">
+      <UniqueIdentifier>{76342493-d34d-4753-9ae7-f4dce9ae2f22}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Content\ResourceGUI\Anim">
+      <UniqueIdentifier>{ab69679e-9546-440e-b5bb-79994cb94828}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Content\ResourceGUI\Materal">
+      <UniqueIdentifier>{1c359c0e-91ee-4ace-842e-da4bf18b5aa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Content\ResourceGUI\Mesh">
+      <UniqueIdentifier>{30872d44-c4a1-4de3-a298-213598c4e961}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Content\ResourceGUI\GraphicsShader">
+      <UniqueIdentifier>{9551028a-e305-42cf-8333-441664861a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\Content\ResourceGUI\ComputeShader">
+      <UniqueIdentifier>{b578feea-591e-41a5-bdcd-c09647f9e15c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -171,6 +195,18 @@
     <ClInclude Include="RoomEditorRenderGUI.h">
       <Filter>GUI\Editor\RoomEditor</Filter>
     </ClInclude>
+    <ClInclude Include="TreeGUI.h">
+      <Filter>GUI\Tree</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentGUI.h">
+      <Filter>GUI\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceGUI.h">
+      <Filter>GUI\Content\ResourceGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureGUI.h">
+      <Filter>GUI\Content\ResourceGUI\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -259,6 +295,18 @@
     </ClCompile>
     <ClCompile Include="RoomEditorRenderGUI.cpp">
       <Filter>GUI\Editor\RoomEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="TreeGUI.cpp">
+      <Filter>GUI\Tree</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentGUI.cpp">
+      <Filter>GUI\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceGUI.cpp">
+      <Filter>GUI\Content\ResourceGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureGUI.cpp">
+      <Filter>GUI\Content\ResourceGUI\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

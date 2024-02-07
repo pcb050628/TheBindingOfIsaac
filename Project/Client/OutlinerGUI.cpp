@@ -4,15 +4,22 @@
 #include "ImGuiManager.h"
 #include "InspectorGUI.h"
 
+#include "TreeGUI.h"
+
+#include <Engine/TaskManager.h>
 #include <Engine/ChapterManager.h>
 #include <Engine/Chapter.h>
 #include <Engine/Room.h>
 #include <Engine/GameObject.h>
 
 OutlinerGUI::OutlinerGUI() : GUI("Outliner", "##OutlinerGUI")
-	, m_SelectObject(nullptr)
 	, m_ObjList{}
 {
+	m_TreeGUI = new TreeGUI("##OutlinerTreeGUI");
+	AddChild(m_TreeGUI);
+
+
+	m_TreeGUI->SetDelegate(this, (Delegate_1)&OutlinerGUI::SetSelectObj);
 }
 
 OutlinerGUI::~OutlinerGUI()
@@ -21,50 +28,39 @@ OutlinerGUI::~OutlinerGUI()
 
 void OutlinerGUI::RenderUpdate()
 {
+	if (TaskManager::GetInst()->IsDoSomething())
+	{
+		ResetTree();
+		TaskManager::GetInst()->SetDoSomething(false);
+	}
+}
+
+void OutlinerGUI::ResetTree()
+{
+	m_TreeGUI->ClearNode();
+
 	ChapterManager::GetInst()->GetCurChapter()->GetCurRoom()->GetAllObject(m_ObjList);
-
-	VectorTreeNode(m_ObjList);
-
-	m_ObjList.clear();
+	TreeNode* root = m_TreeGUI->AddNode(nullptr, "RootNode");
+	SetObjectNode(root, m_ObjList);
 }
 
-void OutlinerGUI::VectorTreeNode(std::vector<GameObject*>& _vector)
+void OutlinerGUI::SetObjectNode(TreeNode* _parent, std::vector<GameObject*>& m_objList)
 {
-	for (int i = 0; i < _vector.size(); i++)
+	for (GameObject* obj : m_objList)
 	{
-		char buf[100];
-		itoa(i, buf, 10);
-		std::string Label = ToString(_vector[i]->GetName());
-		Label += "##";
-		Label += ToString(_vector[i]->GetName()) + buf;
-		if (ImGui::TreeNode(Label.c_str()))
+		TreeNode* node = m_TreeGUI->AddNode(_parent, ToString(obj->GetName()), (DWORD_PTR)obj);
+		if (!obj->GetChild().empty())
 		{
-			if (ImGui::IsItemClicked(ImGuiMouseButton_Right))
-			{
-				SetSelectObj(_vector[i]);
-			}
-
-			std::vector<GameObject*> vecChild = _vector[i]->GetChild();
-			VectorTreeNode(vecChild);
-
-			ImGui::TreePop();
-		}
-		else
-		{
-			if (ImGui::IsItemClicked(ImGuiMouseButton_Right))
-			{
-				SetSelectObj(_vector[i]);
-			}
+			SetObjectNode(node, obj->GetChild());
 		}
 	}
 }
 
-void OutlinerGUI::SetSelectObj(GameObject* _obj)
+void OutlinerGUI::SetSelectObj(DWORD_PTR _tree)
 {
-	if (_obj != m_SelectObject)
-	{
-		m_SelectObject = _obj;
-		InspectorGUI* inspector = (InspectorGUI*)ImGuiManager::GetInst()->FindGUI("##InspectorGUI");
-		inspector->SetTargetObject(m_SelectObject);
-	}
+	if (((TreeNode*)_tree)->GetData() == NULL)
+		return;
+
+	InspectorGUI* inspector = (InspectorGUI*)ImGuiManager::GetInst()->FindGUI("##InspectorGUI");
+	inspector->SetTargetObject((GameObject*)((TreeNode*)_tree)->GetData());
 }

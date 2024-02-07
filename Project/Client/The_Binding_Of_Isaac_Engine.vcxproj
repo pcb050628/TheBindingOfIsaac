@@ -176,6 +176,7 @@
     <ClInclude Include="CameraGUI.h" />
     <ClInclude Include="Collider2DGUI.h" />
     <ClInclude Include="ComponentGUI.h" />
+    <ClInclude Include="ContentGUI.h" />
     <ClInclude Include="EditorGUI.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GUI.h" />
@@ -197,11 +198,14 @@
     <ClInclude Include="OutlinerGUI.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ResourceGUI.h" />
     <ClInclude Include="RoomEditorGUI.h" />
     <ClInclude Include="RoomEditorRenderGUI.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="TextureGUI.h" />
     <ClInclude Include="TransformGUI.h" />
+    <ClInclude Include="TreeGUI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Animator2DGUI.cpp" />
@@ -210,6 +214,7 @@
     <ClCompile Include="CameraGUI.cpp" />
     <ClCompile Include="Collider2DGUI.cpp" />
     <ClCompile Include="ComponentGUI.cpp" />
+    <ClCompile Include="ContentGUI.cpp" />
     <ClCompile Include="EditorGUI.cpp" />
     <ClCompile Include="GUI.cpp" />
     <ClCompile Include="imgui.cpp" />
@@ -233,9 +238,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="ResourceGUI.cpp" />
     <ClCompile Include="RoomEditorGUI.cpp" />
     <ClCompile Include="RoomEditorRenderGUI.cpp" />
+    <ClCompile Include="TextureGUI.cpp" />
     <ClCompile Include="TransformGUI.cpp" />
+    <ClCompile Include="TreeGUI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="The_Binding_Of_Isaac_Engine.rc" />
