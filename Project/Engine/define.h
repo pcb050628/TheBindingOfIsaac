@@ -17,6 +17,8 @@
 
 #define RENDER_RESOLUTION Device::GetInst()->GetRenderResolution()
 
+#define DEFAULT_CAMERA_POS Vec3(0, 0, -100)
+
 enum DIRECTION
 {
 	LeftDir,

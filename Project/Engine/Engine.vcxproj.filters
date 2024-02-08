@@ -154,6 +154,18 @@
     <Filter Include="02_Derived\Resource\Anim">
       <UniqueIdentifier>{9e4eb150-da88-4450-92df-a0961428ee4f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Derived\Script\Object\Door">
+      <UniqueIdentifier>{b43383bf-1a7f-4f9e-989d-961b8c905d99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Script\Object\Door\DoorFrame">
+      <UniqueIdentifier>{3e4c9b76-e662-4dd0-bacf-dfb74fc253cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Script\Object\Door\Door">
+      <UniqueIdentifier>{0c40ea3e-9d00-4045-809d-2413064eff9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="02_Derived\Script\Object\Spike">
+      <UniqueIdentifier>{1cbe8aa2-0c54-40e2-81a5-2f13019251d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

@@ -29,7 +29,6 @@ void TaskManager::Update()
 		{
 		case TASKTYPE::CHANGE_ROOM:
 			ChapterManager::GetInst()->GetCurChapter()->ChangeRoomStart((DIRECTION)task.Param_1);
-			m_bDoSomething = true;
 			break;
 
 		case TASKTYPE::CHANGE_CHAPTER:

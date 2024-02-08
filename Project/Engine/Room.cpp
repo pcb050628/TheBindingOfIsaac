@@ -55,25 +55,38 @@ bool Room::Load(const std::wstring& _strFileName, bool _isFullPath)
 			if (line == L"END")
 				break;
 
-			//위치 -> 이름 순으로 작성되어 있음
+			if (line == L"[RoomType]")
+			{
+				std::getline(fileStream, line);
+				m_Info.RoomType = (ROOM_TYPE)atoi(ToString(line).c_str());
+			}
+			else if (line == L"[ChapterLevel]")
+			{
+				std::getline(fileStream, line);
+				m_Info.ChapterLevel = (CHAPTER_LEVEL)atoi(ToString(line).c_str());
+			}
+			else
+			{
+				//위치 -> 이름 순으로 작성되어 있음
 
-			//타일 위치 얻기
-			std::wstring xstr = line.substr(0, 1);
-			std::wstring ystr = line.substr(2, 1);
-			int x = atoi(std::string(xstr.begin(), xstr.end()).c_str());
-			int y = atoi(std::string(ystr.begin(), ystr.end()).c_str());
-			Vec2 tile(x, y);
+				//타일 위치 얻기
+				std::wstring xstr = line.substr(0, 1);
+				std::wstring ystr = line.substr(2, 1);
+				int x = atoi(std::string(xstr.begin(), xstr.end()).c_str());
+				int y = atoi(std::string(ystr.begin(), ystr.end()).c_str());
+				Vec2 tile(x, y);
 
-			//파일명 얻기
-			std::getline(fileStream, line);
-			std::wstring objName = line + L".txt";
+				//파일명 얻기
+				std::getline(fileStream, line);
+				std::wstring objName = line + L".txt";
 
-			//레이어 얻기
-			std::getline(fileStream, line);
-			LAYER_TYPE layer = (LAYER_TYPE)atoi(std::string(line.begin(), line.end()).c_str());
+				//레이어 얻기
+				std::getline(fileStream, line);
+				LAYER_TYPE layer = (LAYER_TYPE)atoi(std::string(line.begin(), line.end()).c_str());
 
-			m_Info.TileObjectInfo[x][y] = objName;
-			m_Info.TileLayerInfo[x][y] = layer;
+				m_Info.TileObjectInfo[x][y] = objName;
+				m_Info.TileLayerInfo[x][y] = layer;
+			}
 		}
 
 		fileStream.close();
@@ -86,11 +99,14 @@ bool Room::Load(const std::wstring& _strFileName, bool _isFullPath)
 bool Room::Save()
 {
 	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + GetResourceName();
-	filePath += L".txt";
+	filePath += L".room";
 	std::wofstream fileStream(filePath);
 
 	if (fileStream.is_open())
 	{
+		fileStream << L"[RoomType]\n" << (UINT)m_Info.RoomType << std::endl;
+		fileStream << L"[ChapterLevel]\n" << (UINT)m_Info.ChapterLevel << std::endl;
+
 		for (int row = 0; row < 9; row++)
 		{
 			for (int col = 0; col < 15; col++)

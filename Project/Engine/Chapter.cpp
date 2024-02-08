@@ -39,7 +39,7 @@ void Chapter::Update()
 		m_CurRoom->Update();
 	else
 	{
-		
+		ChangeRoomTransition();
 	}
 }
 
@@ -56,6 +56,7 @@ void Chapter::DetachGameObject(GameObject* _obj)
 
 void Chapter::GenerateRooms(CHAPTER_LEVEL _level)
 {
+
 }
 
 void Chapter::ChangeRoomStart(DIRECTION _dir)
@@ -120,10 +121,11 @@ void Chapter::ChangeRoomTransition()
 		break;
 	}
 
-	curCam->GetTransform()->AddRelativePos(dir * speed);
-	changeCam->GetTransform()->AddRelativePos(dir * speed);
+	Vec3 vel = dir * speed;
+	curCam->GetTransform()->AddRelativePos(vel);
+	changeCam->GetTransform()->AddRelativePos(vel);
 
-	if (curCam->GetTransform()->GetRelativePos())
+	if (changeCam->GetTransform()->GetRelativePos().x <= 0.f)
 	{
 		ChangeRoomEnd();
 	}
@@ -133,5 +135,8 @@ void Chapter::ChangeRoomEnd()
 {
 	m_bIsTransitioning = false;
 	m_CurRoom = m_CurRoom->GetRoomByDir(m_ChangeDir);
+	m_CurRoom->GetMainCam()->GetTransform()->SetRelativePos(DEFAULT_CAMERA_POS);
 	m_CurRoom->Enter();
+
+	TaskManager::GetInst()->SetDoSomething(true);
 }

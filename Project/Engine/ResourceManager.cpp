@@ -219,6 +219,11 @@ int ResourceManager::LoadResource(const std::wstring& _path)
 		r = Load<GraphicsShader>(_path, true);
 		if (nullptr == r) return E_FAIL; else return S_OK; 
 	}
+	else if (L".room" == ext)
+	{
+		r = Load<Room>(_path, true);
+		if (nullptr == r) return E_FAIL; else return S_OK;
+	}
 	else
 	{
 		r = Load<Texture>(_path, true);
