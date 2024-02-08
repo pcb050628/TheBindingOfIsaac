@@ -19,8 +19,6 @@ private:
 	Chapter* m_Chapters[(UINT)CHAPTER_LEVEL::END];
 	Chapter* m_CurChapter;
 
-	bool m_bEditMode;
-
 public:
 	void Init();
 	void Update();
@@ -31,8 +29,6 @@ public:
 	void DetachGameObject(class GameObject* _obj);
 
 	void RegisterObj(GameObject* _obj, LAYER_TYPE _layerType);
-
-	void SetEditMode(bool _bValue);
 
 private:
 	void ChangeChapter(CHAPTER_LEVEL _level) { m_CurChapter = m_Chapters[(UINT)_level]; }

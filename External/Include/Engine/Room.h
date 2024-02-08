@@ -13,7 +13,8 @@ enum class ROOM_TYPE
 struct RoomInfo
 {
     UINT            RoomNumber;
-    ROOM_TYPE       RoomType;
+    ROOM_TYPE       RoomType = ROOM_TYPE::Common;
+    UINT            ChapterLevel = 0;
     bool            IsCompleted = false;
     std::wstring    TileObjectInfo[15][9] = {};
     LAYER_TYPE      TileLayerInfo[15][9] = {};

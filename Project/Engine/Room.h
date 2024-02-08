@@ -2,8 +2,6 @@
 #include "Resource.h"
 #include "Layer.h"
 
-#include "ChapterManager.h"
-
 enum class ROOM_TYPE
 {
     Common,
@@ -16,7 +14,7 @@ struct RoomInfo
 {
     UINT            RoomNumber;
     ROOM_TYPE       RoomType = ROOM_TYPE::Common;
-    CHAPTER_LEVEL   ChapterLevel = CHAPTER_LEVEL::BASEMENT;
+    UINT            ChapterLevel = 0;
     bool            IsCompleted = false;
     std::wstring    TileObjectInfo[15][9] = {};
     LAYER_TYPE      TileLayerInfo[15][9] = {};

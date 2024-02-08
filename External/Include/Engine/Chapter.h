@@ -12,9 +12,8 @@ private:
 
     //ui cam
 
+    bool m_bChange;
     bool m_bIsTransitioning;
-
-    bool m_bEditMode;
 
 public:
     virtual void Update();

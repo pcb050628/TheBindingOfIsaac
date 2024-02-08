@@ -63,7 +63,7 @@ bool Room::Load(const std::wstring& _strFileName, bool _isFullPath)
 			else if (line == L"[ChapterLevel]")
 			{
 				std::getline(fileStream, line);
-				m_Info.ChapterLevel = (CHAPTER_LEVEL)atoi(ToString(line).c_str());
+				m_Info.ChapterLevel = (UINT)atoi(ToString(line).c_str());
 			}
 			else
 			{
@@ -105,7 +105,7 @@ bool Room::Save()
 	if (fileStream.is_open())
 	{
 		fileStream << L"[RoomType]\n" << (UINT)m_Info.RoomType << std::endl;
-		fileStream << L"[ChapterLevel]\n" << (UINT)m_Info.ChapterLevel << std::endl;
+		fileStream << L"[ChapterLevel]\n" << m_Info.ChapterLevel << std::endl;
 
 		for (int row = 0; row < 9; row++)
 		{

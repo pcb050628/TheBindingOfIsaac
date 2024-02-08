@@ -11,7 +11,6 @@ Chapter::Chapter()
 	: m_Rooms()
 	, m_CurRoom(nullptr)
 	, m_bIsTransitioning(false)
-	, m_bEditMode(false)
 {
 	m_CurRoom = new Room;
 	AddRoom(m_CurRoom);

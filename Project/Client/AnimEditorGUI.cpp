@@ -18,6 +18,8 @@ AnimEditorGUI::AnimEditorGUI() : GUI("AnimEditor", "##AnimEditorGUI")
 
 AnimEditorGUI::~AnimEditorGUI()
 {
+	if (m_EditAnim)
+		delete m_EditAnim;
 }
 
 void AnimEditorGUI::RenderUpdate()
@@ -171,7 +173,7 @@ void AnimEditorGUI::RenderUpdate()
 		if (ImGui::Button("Save##Animtor2DGUICurAnimSaveButton"))
 		{
 			m_EditAnim->Save();
-			ResourceManager::GetInst()->AddResource(m_EditAnim->GetResourceName(), m_EditAnim, true);
+			ResourceManager::GetInst()->AddResource(m_EditAnim);
 			Anim* an = new Anim(*m_EditAnim);
 			m_EditAnim = an;
 		}
