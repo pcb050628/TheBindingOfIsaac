@@ -40,6 +40,7 @@ enum class LAYER_TYPE
 	Camera,
 	END,
 };
+extern std::string LAYER_TYPE_STRING[(UINT)LAYER_TYPE::END];
 
 enum class COMPONENT_TYPE
 {
@@ -68,6 +69,7 @@ enum class COMPONENT_TYPE
 
 	SCRIPT,
 };
+extern std::string COMPONENT_TYPE_STRING[(UINT)COMPONENT_TYPE::END];
 
 enum class CB_TYPE
 {

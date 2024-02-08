@@ -207,6 +207,9 @@
     <ClInclude Include="TextureGUI.h">
       <Filter>GUI\Content\ResourceGUI\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="ObjectEditorGUI.h">
+      <Filter>GUI\Editor\ObjectEditor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -307,6 +310,9 @@
     </ClCompile>
     <ClCompile Include="TextureGUI.cpp">
       <Filter>GUI\Content\ResourceGUI\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectEditorGUI.cpp">
+      <Filter>GUI\Editor\ObjectEditor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

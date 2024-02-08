@@ -166,6 +166,9 @@
     <Filter Include="02_Derived\Script\Object\Spike">
       <UniqueIdentifier>{1cbe8aa2-0c54-40e2-81a5-2f13019251d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="02_Derived\Script\Humanoid\Player">
+      <UniqueIdentifier>{88dbd8bb-dfee-4f70-87a9-2f2c0eb6c2f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">

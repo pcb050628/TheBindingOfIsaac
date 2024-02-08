@@ -221,8 +221,10 @@ int ResourceManager::LoadResource(const std::wstring& _path)
 	}
 	else if (L".room" == ext)
 	{
-		r = Load<Room>(_path, true);
-		if (nullptr == r) return E_FAIL; else return S_OK;
+		std::wstring file(szName);
+		file += szExt;
+		m_RoomFile.push_back(file);
+		return S_OK;
 	}
 	else
 	{

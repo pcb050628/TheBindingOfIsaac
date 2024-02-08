@@ -39,13 +39,11 @@ GameObject::~GameObject()
 		}
 	}
 
-	for (int i = 0; i < m_Scripts.size(); i++)
+	auto pair = m_Scripts.begin();
+	for (; pair != m_Scripts.end(); )
 	{
-		if (m_Scripts[i] != nullptr)
-		{
-			delete m_Scripts[i];
-			m_Scripts[i] = nullptr;
-		}
+		delete pair->second;
+		pair = m_Scripts.erase(pair);
 	}
 
 	for (int i = 0; i < m_ChildObjs.size(); i++)
@@ -60,9 +58,9 @@ GameObject::~GameObject()
 
 void GameObject::Enter()
 {
-	for (int i = 0; i < m_Scripts.size(); i++)
+	for (auto pair : m_Scripts)
 	{
-		m_Scripts[i]->Enter();
+		pair.second->Enter();
 	}
 }
 
@@ -74,9 +72,9 @@ void GameObject::Update()
 			m_Components[i]->Update();
 	}
 
-	for (int i = 0; i < m_Scripts.size(); i++)
+	for (auto pair : m_Scripts)
 	{
-		m_Scripts[i]->Update();
+		pair.second->Update();
 	}
 
 	for (GameObject* child : m_ChildObjs)
@@ -109,9 +107,9 @@ void GameObject::Render()
 
 void GameObject::Exit()
 {
-	for (int i = 0; i < m_Scripts.size(); i++)
+	for (auto pair : m_Scripts)
 	{
-		m_Scripts[i]->Exit();
+		pair.second->Exit();
 	}
 }
 
@@ -128,7 +126,7 @@ void GameObject::AddComponent(Component* _comp)
 	if (type == COMPONENT_TYPE::SCRIPT)
 	{
 		((Script*)_comp)->Init();
-		m_Scripts.push_back((Script*)_comp);
+		m_Scripts.insert(make_pair(_comp->GetName(), (Script*)_comp));
 	}
 	else
 	{
@@ -140,6 +138,28 @@ void GameObject::AddComponent(Component* _comp)
 			m_RenderComponent = (RenderComponent*)_comp;
 		}
 	}
+}
+
+void GameObject::DeleteComponent(COMPONENT_TYPE _type)
+{
+	if (nullptr == m_Components[(UINT)_type])
+		return;
+
+	if (m_Components[(UINT)_type] == m_RenderComponent)
+		m_RenderComponent = nullptr;
+	delete m_Components[(UINT)_type];
+	m_Components[(UINT)_type] = nullptr;
+
+}
+
+void GameObject::DeleteScript(const std::wstring& _name)
+{
+	auto iter = m_Scripts.find(_name);
+	if (m_Scripts.end() == iter)
+		return;
+
+	delete iter->second;
+	m_Scripts.erase(iter);
 }
 
 void GameObject::AttachChild(GameObject* _objChild)
@@ -181,6 +201,17 @@ void GameObject::DisconnectWithLayer()
 	m_iLayerIdx = -1;
 }
 
+void GameObject::GetScriptName(std::vector<std::string>& _out)
+{
+	if (m_Scripts.empty())
+		return;
+
+	for (auto pair : m_Scripts)
+	{
+		_out.push_back(ToString(pair.first));
+	}
+}
+
 int GameObject::Save()
 {
 	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + GetName();
@@ -203,9 +234,9 @@ int GameObject::Save()
 		}
 
 		fileStream << L"[SCRIPT]" << std::endl;
-		for (int i = 0; i < m_Scripts.size(); i++)
+		for (auto pair : m_Scripts)
 		{
-			fileStream << m_Scripts[i]->GetName() << std::endl;
+			fileStream << pair.first << std::endl;
 		}
 
 		fileStream << L"END";

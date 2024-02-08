@@ -14,6 +14,7 @@ class ResourceManager
 private:
 	std::map<std::wstring, Resource*> m_Resources[(UINT)RESOURCE_TYPE::END];
 	std::vector<std::wstring> m_ObjFile;
+	std::vector<std::wstring> m_RoomFile;
 	
 public:
 	void Init();

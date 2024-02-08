@@ -13,16 +13,16 @@ class GameObject :
     public Entity
 {
 private:
-    Component*                  m_Components[(UINT)COMPONENT_TYPE::END];
-    std::vector<Script*>        m_Scripts;
-    RenderComponent*            m_RenderComponent;
+    Component*                      m_Components[(UINT)COMPONENT_TYPE::END];
+    std::map<std::wstring, Script*> m_Scripts;
+    RenderComponent*                m_RenderComponent;
 
-    std::vector<GameObject*>    m_ChildObjs;
+    std::vector<GameObject*>        m_ChildObjs;
 
-    GameObject*                 m_Parent;
+    GameObject*                     m_Parent;
 
-    int                         m_RoomNumber;
-    int                         m_iLayerIdx;
+    int                             m_RoomNumber;
+    int                             m_iLayerIdx;
 
 public:
     virtual void Enter();
@@ -32,6 +32,8 @@ public:
     virtual void Exit();
 
     void AddComponent(Component* _comp);
+    void DeleteComponent(COMPONENT_TYPE _type);
+    void DeleteScript(const std::wstring& _name);
     
     Component* GetComponent(COMPONENT_TYPE _type)
     {
@@ -66,6 +68,8 @@ public:
 
     int GetLayerIdx() { return m_iLayerIdx; }
     int GetRoomNumber() { return m_RoomNumber; }
+
+    void GetScriptName(std::vector<std::string>& _out);
 
     int Save();
     int Load(const std::wstring& _strFileName);
