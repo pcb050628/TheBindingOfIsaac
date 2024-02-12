@@ -20,6 +20,9 @@ public:
 	void Init();
 	Script* Find(const std::wstring& _name);
 
+    void GetAllScriptName(std::vector<std::string>& _out);
+    void GetAllScriptName(std::vector<std::wstring>& _out);
+
 	void Register(Script* _scrpt);
 
 };

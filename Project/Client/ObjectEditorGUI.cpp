@@ -1,7 +1,11 @@
 #include "pch.h"
 #include "ObjectEditorGUI.h"
 
+#include <Engine\ScriptFactory.h>
 #include <Engine\components.h>
+
+#include "ImGuiManager.h"
+#include "ListGUI.h"
 
 ObjectEditorGUI::ObjectEditorGUI() : GUI("ObjectEditor", "ObjectEditorGUI")
 	, m_EditObject(nullptr)
@@ -58,6 +62,15 @@ void ObjectEditorGUI::RenderUpdate()
 	if (ImGui::Button("##ObjectEditorScriptAddButton", ImVec2(20, 20)))
 	{
 		//리스트 열기
+
+		ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
+
+		std::vector<std::string> scriptlist;
+		ScriptFactory::GetInst()->GetAllScriptName(scriptlist);
+
+		list->AddString(scriptlist);
+		list->SetDelegate(this, (Delegate_1)&ObjectEditorGUI::AddScript);
+		list->Activate();
 	}
 
 	std::vector<std::string> list;
@@ -73,6 +86,17 @@ void ObjectEditorGUI::RenderUpdate()
 			m_EditObject->DeleteScript(ToWstring(label));
 		}
 	}
+}
+
+void ObjectEditorGUI::AddScript(DWORD_PTR _str)
+{
+	string str((char*)_str);
+
+	Script* scrpt = ScriptFactory::GetInst()->Find(ToWstring(str));
+	if (nullptr == scrpt)
+		return;
+
+	m_EditObject->AddComponent(scrpt);
 }
 
 void ObjectEditorGUI::AddComponent(COMPONENT_TYPE _type)

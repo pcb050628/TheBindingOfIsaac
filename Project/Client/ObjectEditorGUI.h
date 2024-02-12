@@ -10,10 +10,13 @@ private:
     GameObject* m_EditObject;
 
 public:
-    void RenderUpdate() override;
+    void AddScript(DWORD_PTR _str);
 
 private:
     void AddComponent(COMPONENT_TYPE _type);
+
+public:
+    void RenderUpdate() override;
 
 public:
     ObjectEditorGUI();

@@ -119,8 +119,6 @@ void GameObject::AddComponent(Component* _comp)
 
 	COMPONENT_TYPE type = _comp->GetType();
 
-	assert(!m_Components[(UINT)type]);
-
 	_comp->m_Owner = this;
 
 	if (type == COMPONENT_TYPE::SCRIPT)
@@ -130,6 +128,7 @@ void GameObject::AddComponent(Component* _comp)
 	}
 	else
 	{
+		assert(!m_Components[(UINT)type]);
 		m_Components[(UINT)type] = _comp;
 
 		if (nullptr != dynamic_cast<RenderComponent*>(_comp))
