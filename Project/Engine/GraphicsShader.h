@@ -1,5 +1,17 @@
 #pragma once
 #include "Shader.h"
+
+struct ScalarParamDesc
+{
+    SCALAR_PARAM    type;
+    string          desc;
+};
+struct TexParamDesc
+{
+    TEX_PARAM   type;
+    string      desc;
+};
+
 class GraphicsShader :
     public Shader
 {
@@ -41,6 +53,9 @@ private:
 
     SHADER_DOMAIN                                   m_Domain;
 
+    vector<ScalarParamDesc>                         m_ScalarParam;
+    vector<TexParamDesc>                            m_TexParam;
+
 public:
     int CreateVertexShader(const std::wstring& _strRelativePath, const std::string& _strFuncName);
     int CreateHullShader(const std::wstring& _strRelativePath, const std::string& _strFuncName);
@@ -52,6 +67,12 @@ public:
     bool Save() override;
 
     SHADER_DOMAIN GetDomain() { return m_Domain; }
+
+    void AddScalarParam(SCALAR_PARAM _type, const string& _desc) { m_ScalarParam.push_back({ _type, _desc }); }
+    void AddTexParam(TEX_PARAM _type, const string& _desc) { m_TexParam.push_back({ _type, _desc }); }
+
+    const vector<ScalarParamDesc>& GetScalarParam() { return m_ScalarParam; }
+    const vector<TexParamDesc>& GetTexParam() { return m_TexParam; }
 
 private:
     int UpdateData() override;

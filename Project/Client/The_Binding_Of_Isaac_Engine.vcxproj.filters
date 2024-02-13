@@ -97,6 +97,9 @@
     <Filter Include="GUI\Content\ResourceGUI\ComputeShader">
       <UniqueIdentifier>{b578feea-591e-41a5-bdcd-c09647f9e15c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\PrarmGUI">
+      <UniqueIdentifier>{c5e1c6df-a5e1-4135-aae5-7ce6a99818fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -210,6 +213,9 @@
     <ClInclude Include="ObjectEditorGUI.h">
       <Filter>GUI\Editor\ObjectEditor</Filter>
     </ClInclude>
+    <ClInclude Include="ParamGUI.h">
+      <Filter>GUI\PrarmGUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -313,6 +319,9 @@
     </ClCompile>
     <ClCompile Include="ObjectEditorGUI.cpp">
       <Filter>GUI\Editor\ObjectEditor</Filter>
+    </ClCompile>
+    <ClCompile Include="ParamGUI.cpp">
+      <Filter>GUI\PrarmGUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

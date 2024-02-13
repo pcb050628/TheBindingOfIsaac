@@ -38,24 +38,33 @@ private:
     TreeNode*   m_Root;
     TreeNode*   m_Selected;
 
-    bool        m_bShowRoot;
-    bool        m_bSelect;
-    bool        m_bMouseClickButton;
+    TreeNode*   m_DragNode;
+    TreeNode*   m_DropNode;
 
-    GUI*        m_Inst;
-    Delegate_1  m_Func;
+    bool        m_bShowRoot;
+
+    GUI*        m_SelectInst;
+    Delegate_1  m_SelectFunc;
+    bool        m_bSelect;
+
+    GUI*        m_DragDropInst;
+    Delegate_1  m_DragDropFunc;
+    bool        m_bDragDrop;
 
 public:
     TreeNode* AddNode(TreeNode* _parent, const std::string& _name, DWORD_PTR _data = NULL);
-    void SetDelegate(GUI* _inst, Delegate_1 _func) { m_Inst = _inst; m_Func = _func; }
+    void SetDelegate(GUI* _inst, Delegate_1 _func) { m_SelectInst = _inst; m_SelectFunc = _func; }
 
     void ClearNode() { if (m_Root) delete m_Root; m_Root = nullptr; }
 
-    //0 : left , 1 : right
-    void SetClickButton(bool _value) { m_bMouseClickButton = _value; }
+
 
 private:
     void SelectCall(TreeNode* _node);
+
+
+    void SetDragNode(TreeNode* _node) { m_DragNode = _node; }
+    void SetDropNode(TreeNode* _node) { m_DropNode = _node; }
 
 public:
     virtual void RenderUpdate() override;

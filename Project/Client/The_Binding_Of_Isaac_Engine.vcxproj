@@ -197,6 +197,7 @@
     <ClInclude Include="MeshRendererGUI.h" />
     <ClInclude Include="ObjectEditorGUI.h" />
     <ClInclude Include="OutlinerGUI.h" />
+    <ClInclude Include="ParamGUI.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ResourceGUI.h" />
@@ -234,6 +235,7 @@
     <ClCompile Include="MeshRendererGUI.cpp" />
     <ClCompile Include="ObjectEditorGUI.cpp" />
     <ClCompile Include="OutlinerGUI.cpp" />
+    <ClCompile Include="ParamGUI.cpp" />
     <ClCompile Include="pch.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>

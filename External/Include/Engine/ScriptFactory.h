@@ -1,8 +1,10 @@
 #pragma once
 
 #define REGISTER_SCRIPT(className) \
-    namespace { \
-        const bool className##Registered = []() { \
+    namespace \
+    { \
+        const bool className##Registered = []() \
+        { \
             ScriptFactory::GetInst()->Register(new className); \
             return true; \
         }(); \

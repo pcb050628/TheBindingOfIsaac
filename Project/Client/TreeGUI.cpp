@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "TreeGUI.h"
 
+#include <Engine/Input.h>
+
 TreeNode::TreeNode()
 	: m_Owner(nullptr)
 	, m_ParentNode(nullptr)
@@ -30,11 +32,27 @@ void TreeNode::RenderUpdate()
 
 	if (ImGui::TreeNodeEx(label.c_str(), flag))
 	{
-		UINT MouseButton = ImGuiMouseButton_Left;
-		if (m_Owner->m_bMouseClickButton)
-			MouseButton = ImGuiMouseButton_Right;
+		if (ImGui::BeginDragDropSource())
+		{
+			ImGui::SetDragDropPayload(m_Owner->GetID().c_str(), &m_Data, sizeof(DWORD_PTR));
+			ImGui::Text(m_Name.c_str());
+			ImGui::EndDragDropSource();
 
-		if (ImGui::IsItemClicked(MouseButton))
+			// Tree 에 자신이 Drag 된 노드임을 알린다.
+			m_Owner->SetDragNode(this);
+		}
+
+		else if (ImGui::BeginDragDropTarget())
+		{
+			const ImGuiPayload* payload = ImGui::AcceptDragDropPayload(m_Owner->GetID().c_str());
+			if (payload)
+			{
+				m_Owner->SetDropNode(this);
+			}
+			ImGui::EndDragDropTarget();
+		}
+
+		if (KEY_PRESSED(MLBTN) && ImGui::IsItemHovered())
 		{
 			m_Owner->SelectCall(this);
 		}
@@ -48,11 +66,7 @@ void TreeNode::RenderUpdate()
 	}
 	else
 	{
-		UINT MouseButton = ImGuiMouseButton_Left;
-		if (m_Owner->m_bMouseClickButton)
-			MouseButton = ImGuiMouseButton_Right;
-
-		if (ImGui::IsItemClicked(MouseButton))
+		if (KEY_PRESSED(MLBTN) && ImGui::IsItemHovered())
 		{
 			m_Owner->SelectCall(this);
 		}
@@ -63,7 +77,6 @@ TreeGUI::TreeGUI(const std::string& _ID) : GUI("TreeGUI", "##" + _ID)
 	, m_Root(nullptr)
 	, m_bShowRoot(false)
 	, m_Selected(nullptr)
-	, m_bMouseClickButton(true)
 {}
 
 UINT TreeGUI::m_ID = 0;
@@ -134,8 +147,8 @@ void TreeGUI::SelectCall(TreeNode* _node)
 	m_Selected->m_bIsSelected = true;
 	m_bSelect = true;
 
-	if (m_Inst && m_Func)
+	if (m_SelectInst && m_SelectFunc)
 	{
-		(m_Inst->*m_Func)((DWORD_PTR)m_Selected);
+		(m_SelectInst->*m_SelectFunc)((DWORD_PTR)m_Selected);
 	}
 }

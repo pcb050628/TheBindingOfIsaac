@@ -249,6 +249,22 @@ bool GraphicsShader::Load(const std::wstring& _relativePath, bool _isFullPath)
 					std::getline(fileStream, line);
 					m_Domain = (SHADER_DOMAIN)std::stoi(line);
 				}
+
+				else if (line == L"[SCALAR_PARAM]")
+				{
+					std::getline(fileStream, line);
+					SCALAR_PARAM type = (SCALAR_PARAM)stoi(line.c_str());
+					std::getline(fileStream, line);
+					AddScalarParam(type, ToString(line));
+				}
+
+				else if (line == L"[TEX_PARAM]")
+				{
+					std::getline(fileStream, line); 
+					TEX_PARAM type = (TEX_PARAM)stoi(line.c_str());
+					std::getline(fileStream, line);
+					AddTexParam(type, ToString(line));
+				}
 			}
 		}
 
@@ -298,7 +314,18 @@ bool GraphicsShader::Save()
 		fileStream << L"[DSS_TYPE]\n" << (UINT)m_DSSType << std::endl;
 		fileStream << L"[BS_TYPE]\n" << (UINT)m_BSType << std::endl;
 
-		fileStream << L"[SHADER_DOMAIN]" << (UINT)m_Domain << std::endl;
+		fileStream << L"[SHADER_DOMAIN]\n" << (UINT)m_Domain << std::endl;
+
+		for (int i = 0; i < m_ScalarParam.size(); i++)
+		{
+			fileStream << L"[SCALAR_PARAM]" << std::endl;
+			fileStream << m_ScalarParam[i].type << std::endl << m_ScalarParam[i].desc.c_str() << std::endl;
+		}
+		for (int i = 0; i < m_TexParam.size(); i++)
+		{
+			fileStream << L"[TEX_PARAM]" << std::endl;
+			fileStream << m_TexParam[i].type << std::endl << m_TexParam[i].desc.c_str() << std::endl;
+		}
 
 		fileStream << L"END";
 
