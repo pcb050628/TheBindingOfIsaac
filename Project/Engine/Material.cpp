@@ -8,6 +8,7 @@
 #include "GraphicsShader.h"
 #include "Texture.h"
 
+
 Material::Material()
 	: Resource(RESOURCE_TYPE::MATERIAL)
 	, m_ConstData()

@@ -38,6 +38,8 @@ public:
 
 	virtual RESOURCE_TYPE GetResourceType() { return m_Type; }
 
+	virtual Resource* Clone() { return nullptr; }
+
 public:
 	Resource(RESOURCE_TYPE _type);
 	virtual ~Resource() override;

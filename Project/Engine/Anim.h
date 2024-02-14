@@ -63,6 +63,7 @@ public:
     }
     void SetDuration(float _duration) { m_fDuration = _duration; }
 
+    virtual Anim* Clone() override { return new Anim(*this); }
 
 public:
     Anim();

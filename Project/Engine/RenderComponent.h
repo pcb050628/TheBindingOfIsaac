@@ -6,7 +6,10 @@ class RenderComponent :
 {
 private:
     class Mesh*         m_Mesh;
-    class Material*     m_Material;
+
+    class Material*     m_CurMaterial;
+    class Material*     m_SharedMaterial;
+    class Material*     m_DynamicMaterial;
 
 public:
     virtual void Update() {}
@@ -16,10 +19,11 @@ public:
 
 public:
     void SetMesh(Mesh* _mesh) { m_Mesh = _mesh; }
-    void SetMaterial(Material* _material) { m_Material = _material; }
+    void SetMaterial(Material* _material);
 
     Mesh* GetMesh() { return m_Mesh; }
-    Material* GetMaterial() { return m_Material; }
+    Material* GetMaterial() { return m_CurMaterial; }
+    Material* GetDynamicMaterial();
 
 public:
     RenderComponent(COMPONENT_TYPE _type);

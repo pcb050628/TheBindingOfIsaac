@@ -66,6 +66,8 @@ public:
         }
     }
 
+    virtual Material* Clone() override { return new Material(*this); }
+
 public:
     Material();
     ~Material();
