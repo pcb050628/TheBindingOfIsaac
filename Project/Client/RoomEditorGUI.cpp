@@ -5,6 +5,7 @@
 #include <Engine\Room.h>
 
 #include "ImGuiManager.h"
+#include "ModalBoxGUI.h"
 #include "DockSpaceGUI.h"
 #include "ListGUI.h"
 #include "RoomEditorRenderGUI.h"
@@ -31,8 +32,6 @@ RoomEditorGUI::~RoomEditorGUI()
 
 void RoomEditorGUI::RenderUpdate()
 {
-	m_DockSpace->IsActive() ? Activate() : Deactivate();
-
 	if (!m_RenderGUI || !m_RenderGUI->IsActive())
 		ActivateRenderGUI();
 
@@ -63,9 +62,16 @@ void RoomEditorGUI::RenderUpdate()
 	ImGui::Text("SelectObject"); ImGui::SameLine(); ImGui::InputText(label.c_str(), (char*)name.data(), name.size(), ImGuiInputTextFlags_ReadOnly);
 
 	ImGui::Text("Save"); ImGui::SameLine();
-	if (ImGui::Button("##RoomEditorGUISaveButton", ImVec2(20, 20)) && m_EditRoom->GetResourceName() != L"")
+	if (ImGui::Button("##RoomEditorGUISaveButton", ImVec2(20, 20)))
 	{
-		m_EditRoom->Save();
+		if(m_EditRoom->GetResourceName() != L"")
+			m_EditRoom->Save();
+		else
+		{
+			ModalBoxGUI* modalBox = (ModalBoxGUI*)ImGuiManager::GetInst()->FindGUI("##ModalBoxGUI");
+			modalBox->Set("Warning", "There is No Room Name!");
+			modalBox->Activate();
+		}
 	}
 	ImGui::Spacing();
 

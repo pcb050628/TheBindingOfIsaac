@@ -91,9 +91,6 @@
     <Filter Include="GUI\05_Editor\ObjectEditor">
       <UniqueIdentifier>{f7d8b67a-f246-4450-bd24-de894d819d0b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\05_Editor\DockSpace">
-      <UniqueIdentifier>{93934ab2-35ac-476e-af08-561b65a18883}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI\04_Util">
       <UniqueIdentifier>{ecf58b8d-fbf1-4b73-953c-d1f615943f49}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,9 @@
     </Filter>
     <Filter Include="GUI\04_Util\MenuGUI">
       <UniqueIdentifier>{dbaa1d5f-7780-4f51-8b7c-eeb5e3811b9e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Util\DockSpace">
+      <UniqueIdentifier>{93934ab2-35ac-476e-af08-561b65a18883}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -232,7 +232,7 @@
       <Filter>GUI\04_Util\ModalBox</Filter>
     </ClInclude>
     <ClInclude Include="DockSpaceGUI.h">
-      <Filter>GUI\05_Editor\DockSpace</Filter>
+      <Filter>GUI\04_Util\DockSpace</Filter>
     </ClInclude>
     <ClInclude Include="MenuGUI.h">
       <Filter>GUI\04_Util\MenuGUI</Filter>
@@ -348,7 +348,7 @@
       <Filter>GUI\04_Util\ModalBox</Filter>
     </ClCompile>
     <ClCompile Include="DockSpaceGUI.cpp">
-      <Filter>GUI\05_Editor\DockSpace</Filter>
+      <Filter>GUI\04_Util\DockSpace</Filter>
     </ClCompile>
     <ClCompile Include="MenuGUI.cpp">
       <Filter>GUI\04_Util\MenuGUI</Filter>
