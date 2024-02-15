@@ -195,6 +195,7 @@
     <ClInclude Include="InspectorGUI.h" />
     <ClInclude Include="Light2DGUI.h" />
     <ClInclude Include="ListGUI.h" />
+    <ClInclude Include="MenuGUI.h" />
     <ClInclude Include="MeshRendererGUI.h" />
     <ClInclude Include="ModalBoxGUI.h" />
     <ClInclude Include="ObjectEditorGUI.h" />
@@ -235,6 +236,7 @@
     <ClCompile Include="Light2DGUI.cpp" />
     <ClCompile Include="ListGUI.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuGUI.cpp" />
     <ClCompile Include="MeshRendererGUI.cpp" />
     <ClCompile Include="ModalBoxGUI.cpp" />
     <ClCompile Include="ObjectEditorGUI.cpp" />

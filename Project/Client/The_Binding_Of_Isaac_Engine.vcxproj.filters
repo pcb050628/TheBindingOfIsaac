@@ -79,21 +79,6 @@
     <Filter Include="GUI\03_Inspector\Resource">
       <UniqueIdentifier>{3522cb50-7cdf-4fcb-bc87-aa6f95315c43}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\04_Module">
-      <UniqueIdentifier>{ecf58b8d-fbf1-4b73-953c-d1f615943f49}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\04_Module\PrarmGUI">
-      <UniqueIdentifier>{c5e1c6df-a5e1-4135-aae5-7ce6a99818fe}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\04_Module\Tree">
-      <UniqueIdentifier>{d6b7e89a-8698-472f-8e32-a4145d713e6b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\04_Module\ModalBox">
-      <UniqueIdentifier>{5e7dc957-9865-42b0-95a1-01fea023be57}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\04_Module\List">
-      <UniqueIdentifier>{03a39e9e-b57f-4273-9e85-dbd712dd554c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI\05_Editor">
       <UniqueIdentifier>{135cccb1-9de6-4095-9eba-938d9e70f17b}</UniqueIdentifier>
     </Filter>
@@ -108,6 +93,24 @@
     </Filter>
     <Filter Include="GUI\05_Editor\DockSpace">
       <UniqueIdentifier>{93934ab2-35ac-476e-af08-561b65a18883}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Util">
+      <UniqueIdentifier>{ecf58b8d-fbf1-4b73-953c-d1f615943f49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Util\PrarmGUI">
+      <UniqueIdentifier>{c5e1c6df-a5e1-4135-aae5-7ce6a99818fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Util\Tree">
+      <UniqueIdentifier>{d6b7e89a-8698-472f-8e32-a4145d713e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Util\ModalBox">
+      <UniqueIdentifier>{5e7dc957-9865-42b0-95a1-01fea023be57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Util\List">
+      <UniqueIdentifier>{03a39e9e-b57f-4273-9e85-dbd712dd554c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Util\MenuGUI">
+      <UniqueIdentifier>{dbaa1d5f-7780-4f51-8b7c-eeb5e3811b9e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -169,7 +172,7 @@
       <Filter>GUI\03_Inspector\Component\Animator2D</Filter>
     </ClInclude>
     <ClInclude Include="ListGUI.h">
-      <Filter>GUI\04_Module\List</Filter>
+      <Filter>GUI\04_Util\List</Filter>
     </ClInclude>
     <ClInclude Include="MeshRendererGUI.h">
       <Filter>GUI\03_Inspector\Component\MeshRenderer</Filter>
@@ -208,7 +211,7 @@
       <Filter>GUI\05_Editor\RoomEditor</Filter>
     </ClInclude>
     <ClInclude Include="TreeGUI.h">
-      <Filter>GUI\04_Module\Tree</Filter>
+      <Filter>GUI\04_Util\Tree</Filter>
     </ClInclude>
     <ClInclude Include="ContentGUI.h">
       <Filter>GUI\02_Content</Filter>
@@ -223,13 +226,16 @@
       <Filter>GUI\05_Editor\ObjectEditor</Filter>
     </ClInclude>
     <ClInclude Include="ParamGUI.h">
-      <Filter>GUI\04_Module\PrarmGUI</Filter>
+      <Filter>GUI\04_Util\PrarmGUI</Filter>
     </ClInclude>
     <ClInclude Include="ModalBoxGUI.h">
-      <Filter>GUI\04_Module\ModalBox</Filter>
+      <Filter>GUI\04_Util\ModalBox</Filter>
     </ClInclude>
     <ClInclude Include="DockSpaceGUI.h">
       <Filter>GUI\05_Editor\DockSpace</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuGUI.h">
+      <Filter>GUI\04_Util\MenuGUI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,7 +291,7 @@
       <Filter>GUI\03_Inspector\Component\Animator2D</Filter>
     </ClCompile>
     <ClCompile Include="ListGUI.cpp">
-      <Filter>GUI\04_Module\List</Filter>
+      <Filter>GUI\04_Util\List</Filter>
     </ClCompile>
     <ClCompile Include="MeshRendererGUI.cpp">
       <Filter>GUI\03_Inspector\Component\MeshRenderer</Filter>
@@ -321,7 +327,7 @@
       <Filter>GUI\05_Editor\RoomEditor</Filter>
     </ClCompile>
     <ClCompile Include="TreeGUI.cpp">
-      <Filter>GUI\04_Module\Tree</Filter>
+      <Filter>GUI\04_Util\Tree</Filter>
     </ClCompile>
     <ClCompile Include="ContentGUI.cpp">
       <Filter>GUI\02_Content</Filter>
@@ -336,13 +342,16 @@
       <Filter>GUI\05_Editor\ObjectEditor</Filter>
     </ClCompile>
     <ClCompile Include="ParamGUI.cpp">
-      <Filter>GUI\04_Module\PrarmGUI</Filter>
+      <Filter>GUI\04_Util\PrarmGUI</Filter>
     </ClCompile>
     <ClCompile Include="ModalBoxGUI.cpp">
-      <Filter>GUI\04_Module\ModalBox</Filter>
+      <Filter>GUI\04_Util\ModalBox</Filter>
     </ClCompile>
     <ClCompile Include="DockSpaceGUI.cpp">
       <Filter>GUI\05_Editor\DockSpace</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuGUI.cpp">
+      <Filter>GUI\04_Util\MenuGUI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

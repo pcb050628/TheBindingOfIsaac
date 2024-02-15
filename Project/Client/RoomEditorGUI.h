@@ -24,6 +24,7 @@ public:
 public:
 	void RenderUpdate() override;
 	void Activate() override;
+	void Deactivate() override;
 
 public:
 	RoomEditorGUI();

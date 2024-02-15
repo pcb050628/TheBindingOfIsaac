@@ -14,6 +14,7 @@
 #include "OutlinerGUI.h"
 #include "ListGUI.h"
 #include "EditorGUI.h"
+#include "MenuGUI.h"
 #include "AnimEditorRenderGUI.h"
 #include "RoomEditorGUI.h"
 #include "RoomEditorRenderGUI.h"
@@ -139,6 +140,9 @@ void ImGuiManager::CrateGUI()
     m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 
     gui = new RoomEditorGUI;
+    m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
+
+    gui = new MenuGUI;
     m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 
     //gui = new EditorGUI;

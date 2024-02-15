@@ -16,6 +16,8 @@ RoomEditorGUI::RoomEditorGUI() : GUI("RoomEditor", "##RoomEditorGUI")
 {
 	m_DockSpace = new DockSpaceGUI("RoomEditor Space", ImVec2(1800, 900));
 	m_RenderGUI = new RoomEditorRenderGUI;
+
+	Deactivate();
 }
 
 RoomEditorGUI::~RoomEditorGUI()
@@ -97,4 +99,15 @@ void RoomEditorGUI::Activate()
 
 	if (!m_EditRoom)
 		m_EditRoom = new Room;
+
+	if (m_DockSpace) m_DockSpace->Activate();
+	if (m_RenderGUI) m_RenderGUI->Activate();
+}
+
+void RoomEditorGUI::Deactivate()
+{
+	GUI::Deactivate();
+
+	if (m_DockSpace) m_DockSpace->Deactivate();
+	if (m_RenderGUI) m_RenderGUI->Deactivate();
 }
