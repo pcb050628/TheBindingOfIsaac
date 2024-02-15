@@ -26,3 +26,4 @@ public:
     HumanoidScript();
     ~HumanoidScript();
 };
+REGISTER_SCRIPT(HumanoidScript);

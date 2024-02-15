@@ -2,7 +2,6 @@
 #include "HumanoidScript.h"
 
 
-REGISTER_SCRIPT(HumanoidScript);
 HumanoidScript::HumanoidScript() : Script(L"Humanoid")
 	, Head(nullptr)
 	, Body(nullptr)

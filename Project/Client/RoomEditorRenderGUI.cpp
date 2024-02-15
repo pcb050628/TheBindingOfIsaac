@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "RoomEditorRenderGUI.h"
 
+#include <Engine\Device.h>
 #include <Engine\ResourceManager.h>
 #include <Engine\GameObject.h>
 #include <Engine\Room.h>
@@ -17,6 +18,8 @@ RoomEditorRenderGUI::RoomEditorRenderGUI() : GUI("RoomEditorRender", "##RoomEdit
 {
 	Deactivate();
 	SetSize(ImVec2(1050, 630));
+
+	//ResourceManager::GetInst()->CreateTexture()
 }
 
 RoomEditorRenderGUI::~RoomEditorRenderGUI()

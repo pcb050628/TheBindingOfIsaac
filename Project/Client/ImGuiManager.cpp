@@ -23,6 +23,11 @@ ImGuiManager::ImGuiManager()
 {}
 ImGuiManager::~ImGuiManager()
 {
+    // ImGui Clear       
+    ImGui_ImplDX11_Shutdown();
+    ImGui_ImplWin32_Shutdown();
+    ImGui::DestroyContext();
+
     for (auto pair : m_mapGUI)
     {
         if (nullptr != pair.second)
