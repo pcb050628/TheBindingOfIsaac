@@ -174,23 +174,23 @@ void ResourceManager::CreateDefaultShader()
 
 void ResourceManager::CreateDefaultMaterial()
 {
-	Material* mtrl = new Material;
-	mtrl->SetResourceName(L"default_Material");
-	mtrl->SetShader(Find<GraphicsShader>(L"default_Shader"));
-	mtrl->SetScalarParam<int>(10, INT_0);
-	mtrl->Save();
+	//Material* mtrl = new Material;
+	//mtrl->SetResourceName(L"default_Material");
+	//mtrl->SetShader(Find<GraphicsShader>(L"default_Shader"));
+	//mtrl->SetScalarParam<int>(10, INT_0);
+	//mtrl->Save();
 
 	//mtrl->Load(L"default_Material.mtrl", false);
 
-	mtrl = new Material;
-	mtrl->SetResourceName(L"debug_Material");
-	mtrl->SetShader(Find<GraphicsShader>(L"debug_Shader"));
-	mtrl->Save(); 
-
-	mtrl = new Material;
-	mtrl->SetResourceName(L"ui_Material");
-	mtrl->SetShader(Find<GraphicsShader>(L"ui_Shader"));
-	mtrl->Save();
+	//mtrl = new Material;
+	//mtrl->SetResourceName(L"debug_Material");
+	//mtrl->SetShader(Find<GraphicsShader>(L"debug_Shader"));
+	//mtrl->Save(); 
+	//
+	//mtrl = new Material;
+	//mtrl->SetResourceName(L"ui_Material");
+	//mtrl->SetShader(Find<GraphicsShader>(L"ui_Shader"));
+	//mtrl->Save();
 }
 
 void ResourceManager::LoadAnim()

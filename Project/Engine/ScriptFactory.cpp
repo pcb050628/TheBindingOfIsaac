@@ -30,6 +30,18 @@ Script* ScriptFactory::Find(const std::wstring& _name)
     return nullptr;
 }
 
+bool ScriptFactory::IsExistance(const std::wstring& _name)
+{
+    auto iter = m_map.find(_name);
+
+    if (m_map.end() == iter)
+        return false;
+    else
+        return true;
+
+    return false;
+}
+
 void ScriptFactory::GetAllScriptName(std::vector<std::string>& _out)
 {
     std::transform(m_map.begin(), m_map.end(), std::back_inserter(_out), [](const auto& pair) { return ToString(pair.first); });
@@ -42,12 +54,12 @@ void ScriptFactory::GetAllScriptName(std::vector<std::wstring>& _out)
 
 void ScriptFactory::Register(Script* _scrpt)
 {
-    if (Find(_scrpt->GetName()) == nullptr)
+    if (!IsExistance(_scrpt->GetName()))
     {
         m_map.insert(make_pair(_scrpt->GetName(), _scrpt));
     }
     else
     {
-        int a = 0;
+        delete _scrpt;
     }
 }
