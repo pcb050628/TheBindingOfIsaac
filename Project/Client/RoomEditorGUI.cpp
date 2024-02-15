@@ -31,6 +31,8 @@ RoomEditorGUI::~RoomEditorGUI()
 
 void RoomEditorGUI::RenderUpdate()
 {
+	m_DockSpace->IsActive() ? Activate() : Deactivate();
+
 	if (!m_RenderGUI || !m_RenderGUI->IsActive())
 		ActivateRenderGUI();
 
