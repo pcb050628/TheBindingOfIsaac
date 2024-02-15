@@ -71,7 +71,7 @@ bool Material::Load(const std::wstring& _FileName, bool _isFullPath)
 	{
 		std::wstring line;
 
-		while (line != L"END")
+		while (!fileStream.eof())
 		{
 			std::getline(fileStream, line);
 
@@ -80,88 +80,14 @@ bool Material::Load(const std::wstring& _FileName, bool _isFullPath)
 				std::getline(fileStream, line);
 				m_Shader = ResourceManager::GetInst()->Find<GraphicsShader>(line);
 			}
-			else if (line == L"[Texture0_Name]")
+			else if (line == L"[Texture]")
 			{
+				std::getline(fileStream, line);
+				int idx = stoi(line.c_str());
 				std::getline(fileStream, line);
 				if (line != L"NULL")
 				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM::TEX_0);
-				}
-			}
-			else if (line == L"[Texture1_Name]")
-			{
-				std::getline(fileStream, line);
-				if (line != L"NULL")
-				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM::TEX_0);
-				}
-			}
-			else if (line == L"[Texture2_Name]")
-			{
-				std::getline(fileStream, line);
-				if (line != L"NULL")
-				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM::TEX_0);
-				}
-			}
-			else if (line == L"[Texture3_Name]")
-			{
-				std::getline(fileStream, line);
-				if (line != L"NULL")
-				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM::TEX_0);
-				}
-			}
-			else if (line == L"[Texture4_Name]")
-			{
-				std::getline(fileStream, line);
-				if (line != L"NULL")
-				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM::TEX_0);
-				}
-			}
-			else if (line == L"[Texture5_Name]")
-			{
-				std::getline(fileStream, line);
-				if (line != L"NULL")
-				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM::TEX_0);
-				}
-			}
-
-
-			else if (line == L"[Texture6_Name]")
-			{
-				std::getline(fileStream, line);
-				if (line != L"NULL")
-				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM::TEX_0);
-				}
-			}
-			else if (line == L"[Texture7_Name]")
-			{
-				std::getline(fileStream, line);
-				if (line != L"NULL")
-				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM::TEX_0);
-				}
-			}
-
-
-			else if (line == L"[Texture8_Name]")
-			{
-				std::getline(fileStream, line);
-				if (line != L"NULL")
-				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM::TEX_0);
-				}
-			}
-			else if (line == L"[Texture9_Name]")
-			{
-				std::getline(fileStream, line);
-				if (line != L"NULL")
-				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM::TEX_0);
+					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM(idx));
 				}
 			}
 		}
@@ -189,12 +115,10 @@ bool Material::Save()
 		for (int i = 0; i < TEX_PARAM::END; i++)
 		{
 			if (m_Textures[i] != nullptr)
-				fileStream << L"[Texture" << i << "_Name]\n" << m_Textures[i]->GetResourceName() << std::endl;
+				fileStream << L"[Texture]\n" << i << std::endl << m_Textures[i]->GetResourceName() << std::endl;
 			else
-				fileStream << L"[Texture" << i << "_Name]\n" << "NULL" << std::endl;
+				fileStream << L"[Texture]\n" << i << std::endl << "NULL" << std::endl;
 		}
-
-		fileStream << L"END";
 
 		fileStream.close();
 

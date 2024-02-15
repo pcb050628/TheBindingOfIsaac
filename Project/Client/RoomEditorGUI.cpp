@@ -5,6 +5,7 @@
 #include <Engine\Room.h>
 
 #include "ImGuiManager.h"
+#include "DockSpaceGUI.h"
 #include "ListGUI.h"
 #include "RoomEditorRenderGUI.h"
 
@@ -13,59 +14,63 @@ RoomEditorGUI::RoomEditorGUI() : GUI("RoomEditor", "##RoomEditorGUI")
 	, m_RenderGUI(nullptr)
 	, m_SelectLayer(LAYER_TYPE::Object)
 {
+	m_DockSpace = new DockSpaceGUI("RoomEditor Space", ImVec2(1800, 900));
+	m_RenderGUI = new RoomEditorRenderGUI;
 }
 
 RoomEditorGUI::~RoomEditorGUI()
 {
 	if (m_EditRoom)
 		delete m_EditRoom;
+
+	if (m_RenderGUI)
+		delete m_RenderGUI;
 }
 
 void RoomEditorGUI::RenderUpdate()
 {
-	bool active = IsActive();
-	if (active && ImGui::BeginTabItem("RoomEditor##RoomEditorGUITabBar", &active))
+	if (!m_RenderGUI || !m_RenderGUI->IsActive())
+		ActivateRenderGUI();
+
+	std::string roomname = ToString(m_EditRoom->GetResourceName());
+	char* buf = (char*)roomname.data();
+	std::string roomlabel = "##RoomEditorGUIRoomNameInputText";
+	ImGui::Text("Room Name"); ImGui::SameLine(); ImGui::InputText(roomlabel.c_str(), (char*)roomname.data(), roomname.capacity());
+	std::wstring room = ToWstring(buf);
+	m_EditRoom->SetResourceName(room);
+
+
+	ImGui::Text("Object"); ImGui::SameLine();
+	if (ImGui::Button("##ObjectSelectCheckBox", ImVec2(20, 20)))
 	{
-		if (!m_RenderGUI || !m_RenderGUI->IsActive())
-			ActivateRenderGUI();
+		ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
 
-		std::string roomname = ToString(m_EditRoom->GetResourceName());
-		char* buf = (char*)roomname.data();
-		std::string roomlabel = "##RoomEditorGUIRoomNameInputText";
-		ImGui::Text("Room Name"); ImGui::SameLine(); ImGui::InputText(roomlabel.c_str(), (char*)roomname.data(), roomname.capacity());
-		std::wstring room = ToWstring(buf);
-		m_EditRoom->SetResourceName(room);
+		std::vector<std::string> objlist;
+		ResourceManager::GetInst()->GetAssetName(RESOURCE_TYPE::GAMEOBJECT, objlist);
 
-
-		ImGui::Text("Object"); ImGui::SameLine(); 
-		if (ImGui::Button("##ObjectSelectCheckBox", ImVec2(20, 20)))
-		{
-			ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
-
-			std::vector<std::string> objlist;
-			ResourceManager::GetInst()->GetAssetName(RESOURCE_TYPE::GAMEOBJECT, objlist);
-
-			list->AddString(objlist);
-			list->SetDelegate(this, (Delegate_1)&RoomEditorGUI::SelectObject);
-			list->Activate();
-		}
-		ImGui::Spacing();
-
-		std::string name = ToString(m_SelectObject);
-		std::string label = "##RoomEditorGUISelectObjectInputText";
-		ImGui::Text("SelectObject"); ImGui::SameLine(); ImGui::InputText(label.c_str(), (char*)name.data(), name.size(), ImGuiInputTextFlags_ReadOnly);
-
-		ImGui::Text("Save"); ImGui::SameLine();
-		if (ImGui::Button("##RoomEditorGUISaveButton", ImVec2(20, 20)) && m_EditRoom->GetResourceName() != L"")
-		{
-			m_EditRoom->Save();
-		}
-		ImGui::Spacing();
-
-		ImGui::EndTabItem();
+		list->AddString(objlist);
+		list->SetDelegate(this, (Delegate_1)&RoomEditorGUI::SelectObject);
+		list->Activate();
 	}
+	ImGui::Spacing();
 
-	active ? Activate() : Deactivate();
+	std::string name = ToString(m_SelectObject);
+	std::string label = "##RoomEditorGUISelectObjectInputText";
+	ImGui::Text("SelectObject"); ImGui::SameLine(); ImGui::InputText(label.c_str(), (char*)name.data(), name.size(), ImGuiInputTextFlags_ReadOnly);
+
+	ImGui::Text("Save"); ImGui::SameLine();
+	if (ImGui::Button("##RoomEditorGUISaveButton", ImVec2(20, 20)) && m_EditRoom->GetResourceName() != L"")
+	{
+		m_EditRoom->Save();
+	}
+	ImGui::Spacing();
+
+	if (m_RenderGUI)
+	{
+		ImGui::SetNextWindowSizeConstraints(ImVec2(1050, 630), ImVec2(1050, 630));
+		//ImGui::SetNextWindowSize(ImVec2(1050, 630));
+		m_RenderGUI->Render();
+	}
 }
 
 void RoomEditorGUI::ActivateRenderGUI()

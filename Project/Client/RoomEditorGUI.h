@@ -3,10 +3,13 @@
 
 class Room;
 class RoomEditorRenderGUI;
+class DockSpaceGUI;
 class RoomEditorGUI :
     public GUI
 {
 private:
+	DockSpaceGUI*			m_DockSpace;
+
 	RoomEditorRenderGUI*	m_RenderGUI;
 
 	Room*					m_EditRoom;

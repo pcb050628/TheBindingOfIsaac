@@ -100,6 +100,36 @@ void TreeGUI::RenderUpdate()
 			node->RenderUpdate();
 		}
 	}
+
+	if (m_bSelect)
+	{
+		if (m_SelectInst && m_SelectFunc)
+		{
+			(m_SelectInst->*m_SelectFunc)((DWORD_PTR)m_Selected);
+		}
+	}
+
+	if (KEY_RELEASE(MLBTN) && m_DragNode && !m_DropNode)
+	{
+		if (m_DragDropInst && m_DragDropFunc)
+		{
+			(m_DragDropInst->*m_DragDropFunc)((DWORD_PTR)m_DropNode, (DWORD_PTR)m_DragNode);
+		}
+		m_DragNode = nullptr;
+	}
+	else if (m_bDragDrop)
+	{
+		if (m_DragDropInst && m_DragDropFunc)
+		{
+			(m_DragDropInst->*m_DragDropFunc)((DWORD_PTR)m_DropNode, (DWORD_PTR)m_DragNode);
+		}
+
+		m_DropNode = nullptr;
+		m_DragNode = nullptr;
+	}
+
+	m_bSelect = false;
+	m_bDragDrop = false;	
 }
 
 
@@ -146,9 +176,4 @@ void TreeGUI::SelectCall(TreeNode* _node)
 	m_Selected = _node;
 	m_Selected->m_bIsSelected = true;
 	m_bSelect = true;
-
-	if (m_SelectInst && m_SelectFunc)
-	{
-		(m_SelectInst->*m_SelectFunc)((DWORD_PTR)m_Selected);
-	}
 }

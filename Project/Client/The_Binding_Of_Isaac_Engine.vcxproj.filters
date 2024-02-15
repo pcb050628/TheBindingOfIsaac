@@ -22,83 +22,92 @@
     <Filter Include="GUI">
       <UniqueIdentifier>{e33c2fae-01b9-49b6-a627-d829672f9758}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\Inspector">
-      <UniqueIdentifier>{010163e1-b70c-4de4-b171-3ac14110ff77}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Outliner">
-      <UniqueIdentifier>{d631dd2c-d92a-4722-9061-67414ddbb305}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Content">
-      <UniqueIdentifier>{990191bd-873e-4fbe-9532-ccb18d0ea019}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Inspector\Component">
-      <UniqueIdentifier>{19e4c36d-bfa3-41ea-acd7-a127dad84adb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Inspector\Resource">
-      <UniqueIdentifier>{3522cb50-7cdf-4fcb-bc87-aa6f95315c43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Inspector\Component\Transform">
-      <UniqueIdentifier>{d269db0c-60bb-4b98-b7ee-b8da3990cd43}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Inspector\Component\MeshRenderer">
-      <UniqueIdentifier>{8236df18-1e23-4cf8-bbbd-3c86694f75a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Inspector\Component\Camera">
-      <UniqueIdentifier>{830168cc-ef12-4573-984f-194b0cf570a2}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Inspector\Component\Animator2D">
-      <UniqueIdentifier>{c3eefe1b-3044-44bc-a3c4-296bf7e20b23}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Inspector\Component\Collider2D">
-      <UniqueIdentifier>{dfd586dc-b44f-43b5-a753-0e634aa3105b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Inspector\Component\Light2D">
-      <UniqueIdentifier>{6a9ba4cd-8533-42b0-80d0-cec6e6ee1a01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\List">
-      <UniqueIdentifier>{03a39e9e-b57f-4273-9e85-dbd712dd554c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Editor">
-      <UniqueIdentifier>{135cccb1-9de6-4095-9eba-938d9e70f17b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Editor\AnimEditor">
-      <UniqueIdentifier>{bf73d609-ab70-4e50-b28d-1c414c5c9086}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="GUI\Editor\RoomEditor">
-      <UniqueIdentifier>{5c6f6c73-db5f-41d0-b8f7-adf4fde38ebc}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ImGui\FileDialog">
       <UniqueIdentifier>{77c23aea-8be5-462b-86be-67cc9f7321fa}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\Editor\ObjectEditor">
-      <UniqueIdentifier>{f7d8b67a-f246-4450-bd24-de894d819d0b}</UniqueIdentifier>
+    <Filter Include="GUI\01_Outliner">
+      <UniqueIdentifier>{d631dd2c-d92a-4722-9061-67414ddbb305}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\Tree">
-      <UniqueIdentifier>{d6b7e89a-8698-472f-8e32-a4145d713e6b}</UniqueIdentifier>
+    <Filter Include="GUI\02_Content">
+      <UniqueIdentifier>{990191bd-873e-4fbe-9532-ccb18d0ea019}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\Content\ResourceGUI">
+    <Filter Include="GUI\02_Content\ResourceGUI">
       <UniqueIdentifier>{dbfe7d76-e767-4e03-9725-bfd269f52626}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\Content\ResourceGUI\Texture">
+    <Filter Include="GUI\02_Content\ResourceGUI\Texture">
       <UniqueIdentifier>{76342493-d34d-4753-9ae7-f4dce9ae2f22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\Content\ResourceGUI\Anim">
+    <Filter Include="GUI\02_Content\ResourceGUI\Anim">
       <UniqueIdentifier>{ab69679e-9546-440e-b5bb-79994cb94828}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\Content\ResourceGUI\Materal">
+    <Filter Include="GUI\02_Content\ResourceGUI\Materal">
       <UniqueIdentifier>{1c359c0e-91ee-4ace-842e-da4bf18b5aa3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\Content\ResourceGUI\Mesh">
+    <Filter Include="GUI\02_Content\ResourceGUI\Mesh">
       <UniqueIdentifier>{30872d44-c4a1-4de3-a298-213598c4e961}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\Content\ResourceGUI\GraphicsShader">
+    <Filter Include="GUI\02_Content\ResourceGUI\GraphicsShader">
       <UniqueIdentifier>{9551028a-e305-42cf-8333-441664861a4b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\Content\ResourceGUI\ComputeShader">
+    <Filter Include="GUI\02_Content\ResourceGUI\ComputeShader">
       <UniqueIdentifier>{b578feea-591e-41a5-bdcd-c09647f9e15c}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\PrarmGUI">
+    <Filter Include="GUI\03_Inspector">
+      <UniqueIdentifier>{010163e1-b70c-4de4-b171-3ac14110ff77}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\03_Inspector\Component">
+      <UniqueIdentifier>{19e4c36d-bfa3-41ea-acd7-a127dad84adb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\03_Inspector\Component\Transform">
+      <UniqueIdentifier>{d269db0c-60bb-4b98-b7ee-b8da3990cd43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\03_Inspector\Component\MeshRenderer">
+      <UniqueIdentifier>{8236df18-1e23-4cf8-bbbd-3c86694f75a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\03_Inspector\Component\Camera">
+      <UniqueIdentifier>{830168cc-ef12-4573-984f-194b0cf570a2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\03_Inspector\Component\Animator2D">
+      <UniqueIdentifier>{c3eefe1b-3044-44bc-a3c4-296bf7e20b23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\03_Inspector\Component\Collider2D">
+      <UniqueIdentifier>{dfd586dc-b44f-43b5-a753-0e634aa3105b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\03_Inspector\Component\Light2D">
+      <UniqueIdentifier>{6a9ba4cd-8533-42b0-80d0-cec6e6ee1a01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\03_Inspector\Resource">
+      <UniqueIdentifier>{3522cb50-7cdf-4fcb-bc87-aa6f95315c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Module">
+      <UniqueIdentifier>{ecf58b8d-fbf1-4b73-953c-d1f615943f49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Module\PrarmGUI">
       <UniqueIdentifier>{c5e1c6df-a5e1-4135-aae5-7ce6a99818fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Module\Tree">
+      <UniqueIdentifier>{d6b7e89a-8698-472f-8e32-a4145d713e6b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Module\ModalBox">
+      <UniqueIdentifier>{5e7dc957-9865-42b0-95a1-01fea023be57}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\04_Module\List">
+      <UniqueIdentifier>{03a39e9e-b57f-4273-9e85-dbd712dd554c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\05_Editor">
+      <UniqueIdentifier>{135cccb1-9de6-4095-9eba-938d9e70f17b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\05_Editor\AnimEditor">
+      <UniqueIdentifier>{bf73d609-ab70-4e50-b28d-1c414c5c9086}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\05_Editor\RoomEditor">
+      <UniqueIdentifier>{5c6f6c73-db5f-41d0-b8f7-adf4fde38ebc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\05_Editor\ObjectEditor">
+      <UniqueIdentifier>{f7d8b67a-f246-4450-bd24-de894d819d0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GUI\05_Editor\DockSpace">
+      <UniqueIdentifier>{93934ab2-35ac-476e-af08-561b65a18883}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -148,43 +157,43 @@
       <Filter>GUI</Filter>
     </ClInclude>
     <ClInclude Include="InspectorGUI.h">
-      <Filter>GUI\Inspector</Filter>
+      <Filter>GUI\03_Inspector</Filter>
     </ClInclude>
     <ClInclude Include="TransformGUI.h">
-      <Filter>GUI\Inspector\Component\Transform</Filter>
+      <Filter>GUI\03_Inspector\Component\Transform</Filter>
     </ClInclude>
     <ClInclude Include="ComponentGUI.h">
-      <Filter>GUI\Inspector\Component</Filter>
+      <Filter>GUI\03_Inspector\Component</Filter>
     </ClInclude>
     <ClInclude Include="Animator2DGUI.h">
-      <Filter>GUI\Inspector\Component\Animator2D</Filter>
+      <Filter>GUI\03_Inspector\Component\Animator2D</Filter>
     </ClInclude>
     <ClInclude Include="ListGUI.h">
-      <Filter>GUI\List</Filter>
+      <Filter>GUI\04_Module\List</Filter>
     </ClInclude>
     <ClInclude Include="MeshRendererGUI.h">
-      <Filter>GUI\Inspector\Component\MeshRenderer</Filter>
+      <Filter>GUI\03_Inspector\Component\MeshRenderer</Filter>
     </ClInclude>
     <ClInclude Include="EditorGUI.h">
-      <Filter>GUI\Editor</Filter>
+      <Filter>GUI\05_Editor</Filter>
     </ClInclude>
     <ClInclude Include="AnimEditorGUI.h">
-      <Filter>GUI\Editor\AnimEditor</Filter>
+      <Filter>GUI\05_Editor\AnimEditor</Filter>
     </ClInclude>
     <ClInclude Include="AnimEditorRenderGUI.h">
-      <Filter>GUI\Editor\AnimEditor</Filter>
+      <Filter>GUI\05_Editor\AnimEditor</Filter>
     </ClInclude>
     <ClInclude Include="OutlinerGUI.h">
-      <Filter>GUI\Outliner</Filter>
+      <Filter>GUI\01_Outliner</Filter>
     </ClInclude>
     <ClInclude Include="Collider2DGUI.h">
-      <Filter>GUI\Inspector\Component\Collider2D</Filter>
+      <Filter>GUI\03_Inspector\Component\Collider2D</Filter>
     </ClInclude>
     <ClInclude Include="CameraGUI.h">
-      <Filter>GUI\Inspector\Component\Camera</Filter>
+      <Filter>GUI\03_Inspector\Component\Camera</Filter>
     </ClInclude>
     <ClInclude Include="Light2DGUI.h">
-      <Filter>GUI\Inspector\Component\Light2D</Filter>
+      <Filter>GUI\03_Inspector\Component\Light2D</Filter>
     </ClInclude>
     <ClInclude Include="ImGuiFileDialog.h">
       <Filter>ImGui\FileDialog</Filter>
@@ -193,28 +202,34 @@
       <Filter>ImGui\FileDialog</Filter>
     </ClInclude>
     <ClInclude Include="RoomEditorGUI.h">
-      <Filter>GUI\Editor\RoomEditor</Filter>
+      <Filter>GUI\05_Editor\RoomEditor</Filter>
     </ClInclude>
     <ClInclude Include="RoomEditorRenderGUI.h">
-      <Filter>GUI\Editor\RoomEditor</Filter>
+      <Filter>GUI\05_Editor\RoomEditor</Filter>
     </ClInclude>
     <ClInclude Include="TreeGUI.h">
-      <Filter>GUI\Tree</Filter>
+      <Filter>GUI\04_Module\Tree</Filter>
     </ClInclude>
     <ClInclude Include="ContentGUI.h">
-      <Filter>GUI\Content</Filter>
+      <Filter>GUI\02_Content</Filter>
     </ClInclude>
     <ClInclude Include="ResourceGUI.h">
-      <Filter>GUI\Content\ResourceGUI</Filter>
+      <Filter>GUI\02_Content\ResourceGUI</Filter>
     </ClInclude>
     <ClInclude Include="TextureGUI.h">
-      <Filter>GUI\Content\ResourceGUI\Texture</Filter>
+      <Filter>GUI\02_Content\ResourceGUI\Texture</Filter>
     </ClInclude>
     <ClInclude Include="ObjectEditorGUI.h">
-      <Filter>GUI\Editor\ObjectEditor</Filter>
+      <Filter>GUI\05_Editor\ObjectEditor</Filter>
     </ClInclude>
     <ClInclude Include="ParamGUI.h">
-      <Filter>GUI\PrarmGUI</Filter>
+      <Filter>GUI\04_Module\PrarmGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="ModalBoxGUI.h">
+      <Filter>GUI\04_Module\ModalBox</Filter>
+    </ClInclude>
+    <ClInclude Include="DockSpaceGUI.h">
+      <Filter>GUI\05_Editor\DockSpace</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -258,70 +273,76 @@
       <Filter>GUI</Filter>
     </ClCompile>
     <ClCompile Include="InspectorGUI.cpp">
-      <Filter>GUI\Inspector</Filter>
+      <Filter>GUI\03_Inspector</Filter>
     </ClCompile>
     <ClCompile Include="TransformGUI.cpp">
-      <Filter>GUI\Inspector\Component\Transform</Filter>
+      <Filter>GUI\03_Inspector\Component\Transform</Filter>
     </ClCompile>
     <ClCompile Include="ComponentGUI.cpp">
-      <Filter>GUI\Inspector\Component</Filter>
+      <Filter>GUI\03_Inspector\Component</Filter>
     </ClCompile>
     <ClCompile Include="Animator2DGUI.cpp">
-      <Filter>GUI\Inspector\Component\Animator2D</Filter>
+      <Filter>GUI\03_Inspector\Component\Animator2D</Filter>
     </ClCompile>
     <ClCompile Include="ListGUI.cpp">
-      <Filter>GUI\List</Filter>
+      <Filter>GUI\04_Module\List</Filter>
     </ClCompile>
     <ClCompile Include="MeshRendererGUI.cpp">
-      <Filter>GUI\Inspector\Component\MeshRenderer</Filter>
+      <Filter>GUI\03_Inspector\Component\MeshRenderer</Filter>
     </ClCompile>
     <ClCompile Include="EditorGUI.cpp">
-      <Filter>GUI\Editor</Filter>
+      <Filter>GUI\05_Editor</Filter>
     </ClCompile>
     <ClCompile Include="AnimEditorGUI.cpp">
-      <Filter>GUI\Editor\AnimEditor</Filter>
+      <Filter>GUI\05_Editor\AnimEditor</Filter>
     </ClCompile>
     <ClCompile Include="AnimEditorRenderGUI.cpp">
-      <Filter>GUI\Editor\AnimEditor</Filter>
+      <Filter>GUI\05_Editor\AnimEditor</Filter>
     </ClCompile>
     <ClCompile Include="OutlinerGUI.cpp">
-      <Filter>GUI\Outliner</Filter>
+      <Filter>GUI\01_Outliner</Filter>
     </ClCompile>
     <ClCompile Include="Collider2DGUI.cpp">
-      <Filter>GUI\Inspector\Component\Collider2D</Filter>
+      <Filter>GUI\03_Inspector\Component\Collider2D</Filter>
     </ClCompile>
     <ClCompile Include="CameraGUI.cpp">
-      <Filter>GUI\Inspector\Component\Camera</Filter>
+      <Filter>GUI\03_Inspector\Component\Camera</Filter>
     </ClCompile>
     <ClCompile Include="Light2DGUI.cpp">
-      <Filter>GUI\Inspector\Component\Light2D</Filter>
+      <Filter>GUI\03_Inspector\Component\Light2D</Filter>
     </ClCompile>
     <ClCompile Include="ImGuiFileDialog.cpp">
       <Filter>ImGui\FileDialog</Filter>
     </ClCompile>
     <ClCompile Include="RoomEditorGUI.cpp">
-      <Filter>GUI\Editor\RoomEditor</Filter>
+      <Filter>GUI\05_Editor\RoomEditor</Filter>
     </ClCompile>
     <ClCompile Include="RoomEditorRenderGUI.cpp">
-      <Filter>GUI\Editor\RoomEditor</Filter>
+      <Filter>GUI\05_Editor\RoomEditor</Filter>
     </ClCompile>
     <ClCompile Include="TreeGUI.cpp">
-      <Filter>GUI\Tree</Filter>
+      <Filter>GUI\04_Module\Tree</Filter>
     </ClCompile>
     <ClCompile Include="ContentGUI.cpp">
-      <Filter>GUI\Content</Filter>
+      <Filter>GUI\02_Content</Filter>
     </ClCompile>
     <ClCompile Include="ResourceGUI.cpp">
-      <Filter>GUI\Content\ResourceGUI</Filter>
+      <Filter>GUI\02_Content\ResourceGUI</Filter>
     </ClCompile>
     <ClCompile Include="TextureGUI.cpp">
-      <Filter>GUI\Content\ResourceGUI\Texture</Filter>
+      <Filter>GUI\02_Content\ResourceGUI\Texture</Filter>
     </ClCompile>
     <ClCompile Include="ObjectEditorGUI.cpp">
-      <Filter>GUI\Editor\ObjectEditor</Filter>
+      <Filter>GUI\05_Editor\ObjectEditor</Filter>
     </ClCompile>
     <ClCompile Include="ParamGUI.cpp">
-      <Filter>GUI\PrarmGUI</Filter>
+      <Filter>GUI\04_Module\PrarmGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="ModalBoxGUI.cpp">
+      <Filter>GUI\04_Module\ModalBox</Filter>
+    </ClCompile>
+    <ClCompile Include="DockSpaceGUI.cpp">
+      <Filter>GUI\05_Editor\DockSpace</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

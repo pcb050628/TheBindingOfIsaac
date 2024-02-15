@@ -19,6 +19,7 @@ private:
 
 public:
     void SetSelectObj(DWORD_PTR _tree);
+    void AddObjectChild(DWORD_PTR _str);
 
 public:
     OutlinerGUI();

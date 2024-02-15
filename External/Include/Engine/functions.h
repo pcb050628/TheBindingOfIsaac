@@ -28,3 +28,42 @@ std::wstring ToWstring(const std::string& _str);
 std::string ToString(const std::wstring& _str);
 
 Component* GetComponentByComponentType(COMPONENT_TYPE _type);
+
+#include "ResourceManager.h"
+#include "Resource.h"
+
+template <typename T>
+void WriteData(void* data, std::wofstream& _file)
+{
+	_file.write(reinterpret_cast<const wchar_t*>(data), sizeof(T));
+}
+
+template <typename T>
+void ReadData(void* data, std::wifstream& _file)
+{
+	_file.read(reinterpret_cast<wchar_t*>(data), sizeof(T));
+}
+
+//save resource's existance, name
+void SaveResourceRef(Resource* _resource, std::wofstream& _file);
+
+template<typename T>
+int LoadResourceRef(Resource* _resouce, std::wifstream& _file)
+{
+	bool bAssetExist = false;
+	_file.read(reinterpret_cast<wchar_t*>(bAssetExist), sizeof(bool));
+
+	if (bAssetExist)
+	{
+		int len = 0;
+		wstring name;
+		_file.read(reinterpret_cast<wchar_t*>(len), sizeof(int));
+		_file.read(name.data(), len);
+
+		if (L"NULL" == name)
+			return E_FAIL;
+
+		_resouce = ResourceManager::GetInst()->Load<T>(name);
+		return S_OK;
+	}
+}

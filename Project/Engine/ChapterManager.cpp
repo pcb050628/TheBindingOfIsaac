@@ -45,7 +45,7 @@ void ChapterManager::Init()
 
 	//Script* script = ScriptFactory::GetInst()->Find(L"Humanoid");
 		
-	gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
+	//gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"default_Material"));
 	gobj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh"));
 
 	//gobj->GetAnimator2D()->CreateAnim(L"test_anim", ResourceManager::GetInst()->Find<Texture>(L"Rocks"), Vec2(0.f, 0.f), Vec2(32.f, 32.f), Vec2(0.f, 0.f), Vec2(40.f, 40.f), 6, 1);
@@ -61,9 +61,9 @@ void ChapterManager::Init()
 	gobj->AddComponent(new Transform);
 	gobj->AddComponent(new MeshRenderer);
 
-	gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"ui_Material")); 
+	//gobj->GetMeshRenderer()->SetMaterial(ResourceManager::GetInst()->Find<Material>(L"ui_Material")); 
 	gobj->GetMeshRenderer()->SetMesh(ResourceManager::GetInst()->Find<Mesh>(L"RectMesh")); 
-	gobj->GetMeshRenderer()->GetMaterial()->SetTexture(ResourceManager::GetInst()->Find<Texture>(L"Rocks.png"), TEX_0);
+	//gobj->GetMeshRenderer()->GetMaterial()->SetTexture(ResourceManager::GetInst()->Find<Texture>(L"Rocks.png"), TEX_0);
 
 	gobj->SetName(L"test_ui");
 	AddGameObject(gobj, LAYER_TYPE::UI);

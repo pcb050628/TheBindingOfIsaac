@@ -29,6 +29,14 @@ public:
 		return iter->second;
 	}
 
+	void AddGUI(GUI* _gui)
+	{
+		if (nullptr != FindGUI(_gui->GetID()))
+			return;
+
+		m_mapGUI.insert(make_pair(_gui->GetID(), _gui));
+	}
+
 private:
 	void Update();
 	void Render();

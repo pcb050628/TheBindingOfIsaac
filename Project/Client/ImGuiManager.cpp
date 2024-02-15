@@ -9,11 +9,13 @@
 
 #include "GUI.h"
 
+#include "DockSpaceGUI.h"
 #include "InspectorGUI.h"
 #include "OutlinerGUI.h"
 #include "ListGUI.h"
 #include "EditorGUI.h"
 #include "AnimEditorRenderGUI.h"
+#include "RoomEditorGUI.h"
 #include "RoomEditorRenderGUI.h"
 
 ImGuiManager::ImGuiManager()
@@ -136,12 +138,12 @@ void ImGuiManager::CrateGUI()
     gui = new ListGUI;
     m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 
-    gui = new EditorGUI;
+    gui = new RoomEditorGUI;
     m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 
-    gui = new AnimEditorRenderGUI;
-    m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
-
-    gui = new RoomEditorRenderGUI;
-    m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
+    //gui = new EditorGUI;
+    //m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
+    //
+    //gui = new AnimEditorRenderGUI;
+    //m_mapGUI.insert(std::make_pair(gui->GetID(), gui));
 }

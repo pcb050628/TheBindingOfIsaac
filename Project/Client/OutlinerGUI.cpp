@@ -19,7 +19,7 @@ OutlinerGUI::OutlinerGUI() : GUI("Outliner", "##OutlinerGUI")
 	AddChild(m_TreeGUI);
 
 
-	m_TreeGUI->SetDelegate(this, (Delegate_1)&OutlinerGUI::SetSelectObj);
+	m_TreeGUI->SetSelectDelegate(this, (Delegate_1)&OutlinerGUI::SetSelectObj);
 }
 
 OutlinerGUI::~OutlinerGUI()
