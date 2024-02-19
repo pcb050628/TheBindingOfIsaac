@@ -213,106 +213,169 @@ void GameObject::GetScriptName(std::vector<std::string>& _out)
 
 int GameObject::Save()
 {
-	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + GetName();
+	wstring filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + GetName();
 	filePath += L".gobj";
-	std::wofstream fileStream(filePath);
 
-	if (fileStream.is_open())
-	{
-		//RenderComonent 또는 Animator 처럼 원래의 에셋들을 모두 가져오는게 좋은 경우가 있는데 이 경우는 스크립트로 커버하기
-		fileStream << L"[COMPONENT]" << std::endl;
-		for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
-		{
-			fileStream << i << L"|";
-			if (nullptr == m_Components[i])
-				fileStream << 0;
-			else
-				fileStream << 1;
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, filePath.c_str(), L"wb");
 
-			fileStream << std::endl;
-		}
-
-		fileStream << L"[SCRIPT]" << std::endl;
-		for (auto pair : m_Scripts)
-		{
-			fileStream << pair.first << std::endl;
-		}
-
-		fileStream << L"END";
-
-		fileStream.close();
-
-		return S_OK;
-	}
-	else
+	if (nullptr == pFile)
 		return E_FAIL;
 
-	return E_FAIL;
+	//컴포넌트
+	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+	{
+		bool isExist = false;
+		if (nullptr != m_Components[i]) isExist = true;
+		fwrite(&isExist, sizeof(bool), 1, pFile);
+	}
+
+	//스크립트
+	size_t size = m_Scripts.size();
+	fwrite(&size, sizeof(size_t), 1, pFile);
+	for (auto pair : m_Scripts)
+	{
+		size_t len = pair.first.size();
+		fwrite(&len, sizeof(size_t), 1, pFile);
+		fwrite(pair.first.c_str(), sizeof(wchar_t), len, pFile);
+	}
+
+	return S_OK;
+
+	//std::wofstream fileStream(filePath);
+	//
+	//if (fileStream.is_open())
+	//{
+	//	//RenderComonent 또는 Animator 처럼 원래의 에셋들을 모두 가져오는게 좋은 경우가 있는데 이 경우는 스크립트로 커버하기
+	//	fileStream << L"[COMPONENT]" << std::endl;
+	//	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+	//	{
+	//		fileStream << i << L"|";
+	//		if (nullptr == m_Components[i])
+	//			fileStream << 0;
+	//		else
+	//			fileStream << 1;
+	//
+	//		fileStream << std::endl;
+	//	}
+	//
+	//	fileStream << L"[SCRIPT]" << std::endl;
+	//	for (auto pair : m_Scripts)
+	//	{
+	//		fileStream << pair.first << std::endl;
+	//	}
+	//
+	//	fileStream << L"END";
+	//
+	//	fileStream.close();
+	//
+	//	return S_OK;
+	//}
+	//else
+	//	return E_FAIL;
+	//
+	//return E_FAIL;
 }
 
 int GameObject::Load(const std::wstring& _strFileName)
 {
-	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + _strFileName;
-	std::wifstream fileStream(filePath);
+	wstring filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + _strFileName;
 
 	wchar_t szName[20] = {};
 	_wsplitpath_s(filePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
 
 	SetName(szName);
 
-	bool component = true;
-	if (fileStream.is_open())
+	FILE* pFile = nullptr; 
+	_wfopen_s(&pFile, filePath.c_str(), L"rb"); 
+
+	if (nullptr == pFile) 
+		return E_FAIL; 
+
+	//컴포넌트
+	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
 	{
-		std::wstring line;
-
-		while (true)
-		{
-			std::getline(fileStream, line);
-
-			if (line == L"END")
-				break;
-
-			if (line == L"[COMPONENT]")
-			{
-				component = true;
-			}
-			else if (line == L"[SCRIPT]")
-			{
-				component = false;
-			}
-			else
-			{
-				//RenderComonent 또는 Animator 처럼 원래의 에셋들을 모두 가져오는게 좋은 경우가 있는데 이 경우는 스크립트로 커버하기
-				if (component)
-				{
-					std::wstring comp = line.substr(0, 1);
-					std::wstring active = line.substr(2, 1);
-
-					int iComp = atoi(std::string(comp.begin(), comp.end()).c_str());
-					int iActive = atoi(std::string(active.begin(), active.end()).c_str());
-
-					if (1 == iActive)
-					{
-						AddComponent(GetComponentByComponentType((COMPONENT_TYPE)iComp));
-					}
-				}
-				else
-				{
-					Script* scrpt = ScriptFactory::GetInst()->Find(line);
-					if (scrpt != nullptr)
-						AddComponent(scrpt);
-					else
-					{
-						MessageBoxW(nullptr, L"Script Not Exist", L"GameObject Load Error", MB_OK);
-					}
-				}
-
-			}
-		}
-
-		fileStream.close();
-		return S_OK;
+		bool isExist = false;
+		fread(&isExist, sizeof(bool), 1, pFile);
+		if(isExist) AddComponent(GetComponentByComponentType((COMPONENT_TYPE)i));
 	}
-	else
-		return E_FAIL;
+
+	//스크립트
+	size_t size = 0;
+	fread(&size, sizeof(size_t), 1, pFile);
+	for (int i = 0; i < size; i++)
+	{
+		size_t len = 0;
+		fread(&len, sizeof(size_t), 1, pFile);
+		wstring name;
+		name.resize(len);
+		fread(name.data(), sizeof(wchar_t), len, pFile);
+
+		Script* scrpt = ScriptFactory::GetInst()->Find(name);
+		if (scrpt != nullptr)
+			AddComponent(scrpt);
+		else
+		{
+			MessageBoxW(nullptr, L"Script Not Exist", L"GameObject Load Error", MB_OK);
+		}
+	}
+
+	return S_OK;
+
+	//std::wifstream fileStream(filePath);
+	//bool component = true;
+	//if (fileStream.is_open())
+	//{
+	//	std::wstring line;
+	//
+	//	while (true)
+	//	{
+	//		std::getline(fileStream, line);
+	//
+	//		if (line == L"END")
+	//			break;
+	//
+	//		if (line == L"[COMPONENT]")
+	//		{
+	//			component = true;
+	//		}
+	//		else if (line == L"[SCRIPT]")
+	//		{
+	//			component = false;
+	//		}
+	//		else
+	//		{
+	//			//RenderComonent 또는 Animator 처럼 원래의 에셋들을 모두 가져오는게 좋은 경우가 있는데 이 경우는 스크립트로 커버하기
+	//			if (component)
+	//			{
+	//				std::wstring comp = line.substr(0, 1);
+	//				std::wstring active = line.substr(2, 1);
+	//
+	//				int iComp = atoi(std::string(comp.begin(), comp.end()).c_str());
+	//				int iActive = atoi(std::string(active.begin(), active.end()).c_str());
+	//
+	//				if (1 == iActive)
+	//				{
+	//					AddComponent(GetComponentByComponentType((COMPONENT_TYPE)iComp));
+	//				}
+	//			}
+	//			else
+	//			{
+	//				Script* scrpt = ScriptFactory::GetInst()->Find(line);
+	//				if (scrpt != nullptr)
+	//					AddComponent(scrpt);
+	//				else
+	//				{
+	//					MessageBoxW(nullptr, L"Script Not Exist", L"GameObject Load Error", MB_OK);
+	//				}
+	//			}
+	//
+	//		}
+	//	}
+	//
+	//	fileStream.close();
+	//	return S_OK;
+	//}
+	//else
+	//	return E_FAIL;
 }
