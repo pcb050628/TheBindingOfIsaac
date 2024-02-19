@@ -18,6 +18,7 @@ RenderManager::RenderManager()
 	, m_DebugObj(nullptr)
 	, m_DebugShapeInfos{}
 	, m_Light2DBuffer(nullptr)
+	, m_PostProcessTex(nullptr)
 {
 
 }
@@ -72,7 +73,7 @@ void RenderManager::UpdateData()
 		infos.push_back(m_Light2D[i]->GetLightInfo());
 	}
 
-	m_Light2DBuffer->SetData(infos.data(), infos.size());
+	m_Light2DBuffer->SetData(infos.data(), (UINT)(infos.size()));
 	m_Light2DBuffer->UpdateData(11);
 
 	infos.clear();

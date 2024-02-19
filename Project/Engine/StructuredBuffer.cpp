@@ -73,7 +73,7 @@ int StructuredBuffer::Create(UINT _elementSize, UINT _elementCount, SB_TYPE _typ
 		if (FAILED(hr)) return E_FAIL;
 	}
 
-	if (m_bSysMemMove);
+	if (m_bSysMemMove)
 	{
 		// 쓰기 버퍼
 		desc.Usage = D3D11_USAGE_DYNAMIC;

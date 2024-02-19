@@ -59,73 +59,115 @@ bool Material::Load(const std::wstring& _FileName, bool _isFullPath)
 	else
 		filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
 
-	std::wifstream fileStream(filePath);
-
 	wchar_t szName[20] = {};
 	_wsplitpath_s(filePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
 
 	m_ResourceName = szName;
 	m_ResourcePath = _FileName;
 
-	if (fileStream.is_open())
+	FILE* pFile = nullptr; 
+	_wfopen_s(&pFile, filePath.c_str(), L"rb"); 
+
+	if (nullptr == pFile) 
+		return false; 
+
+	// 재질 상수값 저장
+	fread(&m_ConstData, sizeof(tMtrlData), 1, pFile); 
+
+	// 재질이 참조하는 텍스쳐 정보를 로드
+	for (UINT i = 0; i < (UINT)TEX_PARAM::END; ++i)
 	{
-		std::wstring line;
-
-		while (!fileStream.eof())
-		{
-			std::getline(fileStream, line);
-
-			if (line == L"[Shader_Name]")
-			{
-				std::getline(fileStream, line);
-				m_Shader = ResourceManager::GetInst()->Find<GraphicsShader>(line);
-			}
-			else if (line == L"[Texture]")
-			{
-				std::getline(fileStream, line);
-				int idx = stoi(line.c_str());
-				std::getline(fileStream, line);
-				if (line != L"NULL")
-				{
-					SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM(idx));
-				}
-			}
-		}
-
-		fileStream.close();
-		return true;
+		LOADRESOURCEREF(Texture, m_Textures[i], pFile)
 	}
-	else
-		return false;
+
+	// 재질이 참조하는 쉐이더 정보를 저장
+	LOADRESOURCEREF(GraphicsShader, m_Shader, pFile)
+
+	return true;
+
+	//std::wifstream fileStream(filePath);
+	//
+	//if (fileStream.is_open())
+	//{
+	//	std::wstring line;
+	//
+	//	while (!fileStream.eof())
+	//	{
+	//		std::getline(fileStream, line);
+	//
+	//		if (line == L"[Shader_Name]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			m_Shader = ResourceManager::GetInst()->Find<GraphicsShader>(line);
+	//		}
+	//		else if (line == L"[Texture]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			int idx = stoi(line.c_str());
+	//			std::getline(fileStream, line);
+	//			if (line != L"NULL")
+	//			{
+	//				SetTexture(ResourceManager::GetInst()->Find<Texture>(line), TEX_PARAM(idx));
+	//			}
+	//		}
+	//	}
+	//
+	//	fileStream.close();
+	//	return true;
+	//}
+	//else
+	//	return false;
 }
 
 bool Material::Save()
 {
 	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + m_ResourceName;
 	filePath += L".mtrl";
-	std::wofstream fileStream(filePath);
 
-	if (fileStream.is_open())
-	{
-		if (m_Shader != nullptr)
-			fileStream << L"[Shader_Name]\n" << m_Shader->GetResourceName().c_str() << std::endl;
-		else
-			fileStream << L"[Shader_Name]\n" << L"NULL" << std::endl;
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, filePath.c_str(), L"wb");
 
-		for (int i = 0; i < TEX_PARAM::END; i++)
-		{
-			if (m_Textures[i] != nullptr)
-				fileStream << L"[Texture]\n" << i << std::endl << m_Textures[i]->GetResourceName() << std::endl;
-			else
-				fileStream << L"[Texture]\n" << i << std::endl << "NULL" << std::endl;
-		}
-
-		fileStream.close();
-
-		return true;
-	}
-	else
+	if (nullptr == pFile)
 		return false;
 
-	return false;
+	// 재질 상수값 저장
+	fwrite(&m_ConstData, sizeof(tMtrlData), 1, pFile);
+
+	//texture
+	for (int i = 0; i < TEX_PARAM::END; i++)
+	{
+		//SaveResourceRef(m_Textures[i], pFile);
+		SAVERESOURCEREF(m_Textures[i], pFile);
+	}
+
+	//shader
+	SAVERESOURCEREF(m_Shader, pFile);
+
+	return true;
+
+	//std::wofstream fileStream(filePath);
+	//
+	//if (fileStream.is_open())
+	//{
+	//	if (m_Shader != nullptr)
+	//		fileStream << L"[Shader_Name]\n" << m_Shader->GetResourceName().c_str() << std::endl;
+	//	else
+	//		fileStream << L"[Shader_Name]\n" << L"NULL" << std::endl;
+	//
+	//	for (int i = 0; i < TEX_PARAM::END; i++)
+	//	{
+	//		if (m_Textures[i] != nullptr)
+	//			fileStream << L"[Texture]\n" << i << std::endl << m_Textures[i]->GetResourceName() << std::endl;
+	//		else
+	//			fileStream << L"[Texture]\n" << i << std::endl << "NULL" << std::endl;
+	//	}
+	//
+	//	fileStream.close();
+	//
+	//	return true;
+	//}
+	//else
+	//	return false;
+	//
+	//return false;
 }

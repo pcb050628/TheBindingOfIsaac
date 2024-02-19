@@ -4,6 +4,7 @@
 #include "ImGuiManager.h"
 
 #include "RoomEditorGUI.h"
+#include "AnimEditorGUI.h"
 
 MenuGUI::MenuGUI() : GUI("Menu", "##MenuGUI")
 {
@@ -31,11 +32,11 @@ void MenuGUI::RenderUpdate()
     //}
     if (ImGui::BeginMenu("Edit"))
     {
-        //if (ImGui::MenuItem("AnimEditor", nullptr))
-        //{
-        //    RoomEditorGUI* roomeditor = (RoomEditorGUI*)ImGuiManager::GetInst()->FindGUI("##RoomEditorGUI");
-        //    roomeditor->Activate();
-        //}
+        if (ImGui::MenuItem("AnimEditor", nullptr))
+        {
+            AnimEditorGUI* animeditor = (AnimEditorGUI*)ImGuiManager::GetInst()->FindGUI("##AnimEditorGUI");
+            animeditor->Activate();
+        }
 
         if (ImGui::MenuItem("RoomEditor", nullptr))
         {

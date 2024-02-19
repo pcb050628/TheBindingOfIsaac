@@ -26,6 +26,8 @@ public:
 	void SetAnimAtlas(DWORD_PTR _str);
 	void SetAnim(DWORD_PTR _str);
 
+	void CreateRenderGUI();
+
 	virtual void Activate() override;
 	virtual void Deactivate() override;
 

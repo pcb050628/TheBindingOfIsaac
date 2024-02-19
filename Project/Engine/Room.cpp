@@ -74,7 +74,7 @@ bool Room::Load(const std::wstring& _strFileName, bool _isFullPath)
 				std::wstring ystr = line.substr(2, 1);
 				int x = atoi(std::string(xstr.begin(), xstr.end()).c_str());
 				int y = atoi(std::string(ystr.begin(), ystr.end()).c_str());
-				Vec2 tile(x, y);
+				Vec2 tile((float)x, (float)y);
 
 				//파일명 얻기
 				std::getline(fileStream, line);
@@ -223,8 +223,8 @@ void Room::Exit()
 
 Vec3 Room::GetPosByTile(UINT _x, UINT _y)
 {
-	float x = -725 + (100 * _y);
-	float y = 425 - (100 * _x);
+	float x = (float)(-725 + (100 * _y));
+	float y = (float)(425 - (100 * _x));
 
 	return Vec3(x, y, -y);
 }

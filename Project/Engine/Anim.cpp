@@ -151,139 +151,187 @@ bool Anim::Load(const std::wstring& _FileName, bool _isFullPath)
 	else
 		filePath = GetContentPath() + GetResourceFolderPath(m_Type) + _FileName;
 
-	std::wifstream fileStream(filePath);
-
 	wchar_t szName[20] = {};
 	_wsplitpath_s(_FileName.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
 
 	m_ResourceName = szName;
 	m_ResourcePath = _FileName;
 
-	if (fileStream.is_open())
-	{
-		std::wstring line;
-		int count = 0;
-		int frmCount = -1;
-		Frame frm = {};
-		while (true)
-		{
-			std::getline(fileStream, line);
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, filePath.c_str(), L"rb");
 
-			if (line == L"END")
-				break;
-
-			if (frmCount != -1 && count >= frmCount)
-			{
-				MessageBoxW(nullptr, L"Anim ·Îµå Áß ¹º°¡ Àß¸øµÊ", L"Anim Load Failed", MB_OK);
-				return false;
-			}
-
-			if (line == L"[ATLAS_PATH]")
-			{
-				std::getline(fileStream, line);
-				m_Atlas = ResourceManager::GetInst()->Load<Texture>(line);
-			}
-			else if (line == L"[DURATION]")
-			{
-				std::getline(fileStream, line);
-				m_fDuration = stof(line);
-			}
-			else if (line == L"[FRAME_COUNT]")
-			{
-				std::getline(fileStream, line);
-				frmCount = std::stoi(line);
-			}
-			else if (line == L"[LEFT_TOP_X]")
-			{
-				std::getline(fileStream, line);
-				frm.vLeftTop.x = std::stoi(line);
-			}
-			else if (line == L"[LEFT_TOP_Y]")
-			{
-				std::getline(fileStream, line);
-				frm.vLeftTop.y = std::stoi(line);
-			}
-			else if (line == L"[SLICE_X]")
-			{
-				std::getline(fileStream, line);
-				frm.vSliceSize.x = std::stoi(line);
-			}
-			else if (line == L"[SLICE_Y]")
-			{
-				std::getline(fileStream, line);
-				frm.vSliceSize.y = std::stoi(line);
-			}
-			else if (line == L"[OFFSET_X]")
-			{
-				std::getline(fileStream, line);
-				frm.vOffset.x = std::stoi(line);
-			}
-			else if (line == L"[OFFSET_Y]")
-			{
-				std::getline(fileStream, line);
-				frm.vOffset.y = std::stoi(line);
-			}
-			else if (line == L"[BACKGROUND_X]")
-			{
-				std::getline(fileStream, line);
-				frm.vBackground.x = std::stoi(line);
-			}
-			else if (line == L"[BACKGROUND_Y]")
-			{
-				std::getline(fileStream, line);
-				frm.vBackground.y = std::stoi(line);
-
-				m_Frames.push_back(frm);
-				count++;
-			}
-		}
-
-		fileStream.close();
-		return true;
-	}
-	else
+	if (nullptr == pFile)
 		return false;
+
+	//frames
+	int frameCount = 0;
+	fread(&frameCount, sizeof(int), 1, pFile);
+	m_Frames.resize(frameCount);
+	fread(m_Frames.data(), sizeof(Frame), frameCount, pFile);
+
+	//info
+	fread(&m_CurFrameIdx, sizeof(int)  , 1, pFile);
+	fread(&m_fDuration  , sizeof(int)  , 1, pFile);
+	fread(&m_fAccTime   , sizeof(float), 1, pFile);
+
+	fread(&m_bIsPlaying, sizeof(bool), 1, pFile);
+	fread(&m_bIsRepeat , sizeof(bool), 1, pFile);
+
+	//atlas
+	LOADRESOURCEREF(Texture, m_Atlas, pFile)
+
+	return true;
+
+	//std::wifstream fileStream(filePath);
+	//
+	//if (fileStream.is_open())
+	//{
+	//	std::wstring line;
+	//	int count = 0;
+	//	int frmCount = -1;
+	//	Frame frm = {};
+	//	while (true)
+	//	{
+	//		std::getline(fileStream, line);
+	//
+	//		if (line == L"END")
+	//			break;
+	//
+	//		if (frmCount != -1 && count >= frmCount)
+	//		{
+	//			MessageBoxW(nullptr, L"Anim ·Îµå Áß ¹º°¡ Àß¸øµÊ", L"Anim Load Failed", MB_OK);
+	//			return false;
+	//		}
+	//
+	//		if (line == L"[ATLAS_PATH]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			m_Atlas = ResourceManager::GetInst()->Load<Texture>(line);
+	//		}
+	//		else if (line == L"[DURATION]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			m_fDuration = stof(line);
+	//		}
+	//		else if (line == L"[FRAME_COUNT]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			frmCount = std::stoi(line);
+	//		}
+	//		else if (line == L"[LEFT_TOP_X]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			frm.vLeftTop.x = std::stoi(line);
+	//		}
+	//		else if (line == L"[LEFT_TOP_Y]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			frm.vLeftTop.y = std::stoi(line);
+	//		}
+	//		else if (line == L"[SLICE_X]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			frm.vSliceSize.x = std::stoi(line);
+	//		}
+	//		else if (line == L"[SLICE_Y]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			frm.vSliceSize.y = std::stoi(line);
+	//		}
+	//		else if (line == L"[OFFSET_X]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			frm.vOffset.x = std::stoi(line);
+	//		}
+	//		else if (line == L"[OFFSET_Y]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			frm.vOffset.y = std::stoi(line);
+	//		}
+	//		else if (line == L"[BACKGROUND_X]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			frm.vBackground.x = std::stoi(line);
+	//		}
+	//		else if (line == L"[BACKGROUND_Y]")
+	//		{
+	//			std::getline(fileStream, line);
+	//			frm.vBackground.y = std::stoi(line);
+	//
+	//			m_Frames.push_back(frm);
+	//			count++;
+	//		}
+	//	}
+	//
+	//	fileStream.close();
+	//	return true;
+	//}
+	//else
+	//	return false;
 }
 
 bool Anim::Save()
 {
 	filesystem::path filePath = GetContentPath() + GetResourceFolderPath(m_Type) + m_ResourceName;
 	filePath += L".anim";
-	std::wofstream fileStream(filePath);
 
-	if (fileStream.is_open())
-	{
-		assert(m_Atlas);
+	FILE* pFile = nullptr;
+	_wfopen_s(&pFile, filePath.c_str(), L"wb");
 
-		fileStream << L"[ATLAS_PATH]\n" << m_Atlas->GetResourcePath() << std::endl;
-
-		fileStream << L"[DURATION]\n" << m_fDuration << std::endl;
-
-		fileStream << L"[FRAME_COUNT]\n" << m_Frames.size() << std::endl;
-
-		for (int i = 0; i < m_Frames.size(); i++)
-		{
-			fileStream << L"[LEFT_TOP_X]\n" << m_Frames[i].vLeftTop.x << std::endl;
-			fileStream << L"[LEFT_TOP_Y]\n" << m_Frames[i].vLeftTop.y << std::endl;
-
-			fileStream << L"[SLICE_X]\n" << m_Frames[i].vSliceSize.x << std::endl;
-			fileStream << L"[SLICE_Y]\n" << m_Frames[i].vSliceSize.y << std::endl;
-
-			fileStream << L"[OFFSET_X]\n" << m_Frames[i].vOffset.x << std::endl;
-			fileStream << L"[OFFSET_Y]\n" << m_Frames[i].vOffset.y << std::endl;
-
-			fileStream << L"[BACKGROUND_X]\n" << m_Frames[i].vBackground.x << std::endl;
-			fileStream << L"[BACKGROUND_Y]\n" << m_Frames[i].vBackground.y << std::endl;
-		}
-
-		fileStream << L"END";
-
-		fileStream.close();
-
-		return true;
-	}
-	else
+	if (nullptr == pFile)
 		return false;
 
-	return false;
+	//frames
+	int FramesCount = (int)m_Frames.size();
+	fwrite(&FramesCount, sizeof(int), 1, pFile);
+	fwrite(m_Frames.data(), sizeof(Frame), FramesCount, pFile);
+
+	//info
+	fwrite(&m_CurFrameIdx, sizeof(int)  , 1, pFile);
+	fwrite(&m_fDuration  , sizeof(int)  , 1, pFile);
+	fwrite(&m_fAccTime   , sizeof(float), 1, pFile);
+
+	fwrite(&m_bIsPlaying, sizeof(bool), 1, pFile);
+	fwrite(&m_bIsRepeat , sizeof(bool), 1, pFile);
+
+	//atlas
+	SAVERESOURCEREF(m_Atlas, pFile)
+
+	return true;
+
+	//std::wofstream fileStream(filePath);
+	//
+	//if (fileStream.is_open())
+	//{
+	//	assert(m_Atlas);
+	//
+	//	fileStream << L"[ATLAS_PATH]\n" << m_Atlas->GetResourcePath() << std::endl;
+	//
+	//	fileStream << L"[DURATION]\n" << m_fDuration << std::endl;
+	//
+	//	fileStream << L"[FRAME_COUNT]\n" << m_Frames.size() << std::endl;
+	//
+	//	for (int i = 0; i < m_Frames.size(); i++)
+	//	{
+	//		fileStream << L"[LEFT_TOP_X]\n" << m_Frames[i].vLeftTop.x << std::endl;
+	//		fileStream << L"[LEFT_TOP_Y]\n" << m_Frames[i].vLeftTop.y << std::endl;
+	//
+	//		fileStream << L"[SLICE_X]\n" << m_Frames[i].vSliceSize.x << std::endl;
+	//		fileStream << L"[SLICE_Y]\n" << m_Frames[i].vSliceSize.y << std::endl;
+	//
+	//		fileStream << L"[OFFSET_X]\n" << m_Frames[i].vOffset.x << std::endl;
+	//		fileStream << L"[OFFSET_Y]\n" << m_Frames[i].vOffset.y << std::endl;
+	//
+	//		fileStream << L"[BACKGROUND_X]\n" << m_Frames[i].vBackground.x << std::endl;
+	//		fileStream << L"[BACKGROUND_Y]\n" << m_Frames[i].vBackground.y << std::endl;
+	//	}
+	//
+	//	fileStream << L"END";
+	//
+	//	fileStream.close();
+	//
+	//	return true;
+	//}
+	//else
+	//	return false;
 }

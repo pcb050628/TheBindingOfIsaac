@@ -28,3 +28,97 @@ std::wstring ToWstring(const std::string& _str);
 std::string ToString(const std::wstring& _str);
 
 Component* GetComponentByComponentType(COMPONENT_TYPE _type);
+
+#include "ResourceManager.h"
+
+template <typename T>
+void SaveResourceRef(T* _resource, FILE* _file)
+{
+	bool bAssetExist = false;
+	_resource == nullptr ? bAssetExist = false : bAssetExist = true;
+
+	fwrite(&bAssetExist, sizeof(bool), 1, _file);
+
+	if (bAssetExist)
+	{
+		std::wstring strKey = _resource->GetResourceName(); 
+		size_t len = strKey.length(); 
+		fwrite(&len, sizeof(size_t), 1, _file); 
+		fwrite(strKey.c_str(), sizeof(wchar_t), strKey.length(), _file);
+
+		std::wstring strRelativePath = _resource->GetResourcePath();
+		len = strRelativePath.length(); 
+		fwrite(&len, sizeof(size_t), 1, _file); 
+		fwrite(strRelativePath.c_str(), sizeof(wchar_t), strRelativePath.length(), _file);
+	}
+}
+
+#define SAVERESOURCEREF(_resource, _file) \
+						bool bAssetExist = false;\
+						_resource == nullptr ? bAssetExist = false : bAssetExist = true;\
+						\
+						fwrite(&bAssetExist, sizeof(bool), 1, _file);\
+						\
+						if (bAssetExist)\
+						{\
+							std::wstring strKey = _resource->GetResourceName();\
+							size_t len = strKey.length();\
+							fwrite(&len, sizeof(size_t), 1, _file);\
+							fwrite(strKey.c_str(), sizeof(wchar_t), len, _file);\
+						\
+							std::wstring strRelativePath = _resource->GetResourcePath();\
+							len = strRelativePath.length();\
+							fwrite(&len, sizeof(size_t), 1, _file);\
+							fwrite(strRelativePath.c_str(), sizeof(wchar_t), len, _file);\
+						}\
+
+template <typename T>
+void LoadResourceRef(T* _resource, FILE* _file)
+{
+	bool bAssetExist = false;
+	fread(&bAssetExist, sizeof(bool), 1, _file);
+
+	if (bAssetExist)
+	{
+		std::wstring strKey, strRelativePath;
+		size_t len = 0; 
+		wchar_t szBuff[256] = {}; 
+
+		fread(&len, sizeof(size_t), 1, _file); 
+		fread(szBuff, sizeof(wchar_t), len, _file); 
+		strKey = szBuff; 
+
+		wmemset(szBuff, 0, 256); 
+
+		fread(&len, sizeof(size_t), 1, _file); 
+		fread(szBuff, sizeof(wchar_t), len, _file); 
+		strRelativePath = szBuff; 
+
+		_resource = ResourceManager::GetInst()->Load<T>(strKey);
+	}
+}
+
+#define LOADRESOURCEREF(_type, _resource, _file)\
+			{\
+				bool bAssetExist = false;\
+				fread(&bAssetExist, sizeof(bool), 1, _file);\
+				\
+				if (bAssetExist)\
+				{\
+					std::wstring strKey, strRelativePath;\
+					size_t len = 0;\
+					wchar_t szBuff[256] = {};\
+				\
+					fread(&len, sizeof(size_t), 1, _file);\
+					fread(szBuff, sizeof(wchar_t), len, _file);\
+					strKey = szBuff;\
+				\
+					wmemset(szBuff, 0, 256);\
+				\
+					fread(&len, sizeof(size_t), 1, _file);\
+					fread(szBuff, sizeof(wchar_t), len, _file);\
+					strRelativePath = szBuff;\
+				\
+					_resource = ResourceManager::GetInst()->Load<_type>(strKey);\
+				}\
+			}

@@ -36,7 +36,7 @@ void ResourceManager::Init()
 	//m_ObjFile.push_back(L"test_rock.txt");
 	std::wstring path = GetContentPath() + L"Resource\\";
 	LoadAllContent(path);
-	CreateDefaultMaterial();
+	//CreateDefaultMaterial();
 }
 
 void ResourceManager::LoadAllContent(const std::wstring& _path)
@@ -174,23 +174,20 @@ void ResourceManager::CreateDefaultShader()
 
 void ResourceManager::CreateDefaultMaterial()
 {
-	//Material* mtrl = new Material;
-	//mtrl->SetResourceName(L"default_Material");
-	//mtrl->SetShader(Find<GraphicsShader>(L"default_Shader"));
-	//mtrl->SetScalarParam<int>(10, INT_0);
-	//mtrl->Save();
+	Material* mtrl = new Material;
+	mtrl->SetResourceName(L"default_Material");
+	mtrl->SetShader(Find<GraphicsShader>(L"default_Shader"));
+	mtrl->Save();
 
-	//mtrl->Load(L"default_Material.mtrl", false);
-
-	//mtrl = new Material;
-	//mtrl->SetResourceName(L"debug_Material");
-	//mtrl->SetShader(Find<GraphicsShader>(L"debug_Shader"));
-	//mtrl->Save(); 
-	//
-	//mtrl = new Material;
-	//mtrl->SetResourceName(L"ui_Material");
-	//mtrl->SetShader(Find<GraphicsShader>(L"ui_Shader"));
-	//mtrl->Save();
+	mtrl = new Material;
+	mtrl->SetResourceName(L"debug_Material");
+	mtrl->SetShader(Find<GraphicsShader>(L"debug_Shader"));
+	mtrl->Save(); 
+	
+	mtrl = new Material;
+	mtrl->SetResourceName(L"ui_Material");
+	mtrl->SetShader(Find<GraphicsShader>(L"ui_Shader"));
+	mtrl->Save();
 }
 
 void ResourceManager::LoadAnim()
@@ -224,8 +221,8 @@ int ResourceManager::LoadResource(const std::wstring& _path)
 	}
 	else if (L".mtrl" == ext)
 	{
-		//r = Load<Material>(_path, true);
-		//if (nullptr == r) return E_FAIL; else return S_OK; 
+		r = Load<Material>(_path, true);
+		if (nullptr == r) return E_FAIL; else return S_OK; 
 	}
 	else if (L".gs" == ext)
 	{
