@@ -12,6 +12,22 @@ struct TexParamDesc
     string      desc;
 };
 
+enum class ShaderOrder 
+{
+    VS,
+    HS,
+    DS,
+    GS,
+    PS,
+    END,
+};
+
+struct ShaderInfo
+{
+    std::wstring path = L"NULL";
+    std::string func = "NULL";
+};
+
 class GraphicsShader :
     public Shader
 {
@@ -36,25 +52,12 @@ private:
     DSS_TYPE                                        m_DSSType;
     BS_TYPE                                         m_BSType;
 
-    std::wstring                                    m_VSPath;
-    std::string                                     m_VSFuncName;
-
-    std::wstring                                    m_HSPath;
-    std::string                                     m_HSFuncName;
-
-    std::wstring                                    m_DSPath;
-    std::string                                     m_DSFuncName;
-
-    std::wstring                                    m_GSPath;
-    std::string                                     m_GSFuncName;
-
-    std::wstring                                    m_PSPath;
-    std::string                                     m_PSFuncName;
+    ShaderInfo                                      m_ShaderInfos[(UINT)ShaderOrder::END];
 
     SHADER_DOMAIN                                   m_Domain;
-
-    vector<ScalarParamDesc>                         m_ScalarParam;
-    vector<TexParamDesc>                            m_TexParam;
+     
+    std::vector<ScalarParamDesc>                    m_ScalarParam;
+    std::vector<TexParamDesc>                       m_TexParam;
 
 public:
     int CreateVertexShader(const std::wstring& _strRelativePath, const std::string& _strFuncName);
@@ -83,5 +86,6 @@ public:
     ~GraphicsShader();
 
     friend class Material;
+    friend class ResourceManager;
 };
 

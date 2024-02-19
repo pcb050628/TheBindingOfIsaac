@@ -166,10 +166,37 @@ void ResourceManager::CreateDefaultMesh()
 
 void ResourceManager::CreateDefaultShader()
 {
+	GraphicsShader* gs = nullptr;
+	
+	gs = new GraphicsShader;
+	gs->CreateVertexShader(L"Shader\\std2d.fx", "VS_Std2D");
+	gs->CreatePixelShader(L"Shader\\std2d.fx", "PS_Std2D");
+	gs->m_RSType = RS_TYPE::CULL_NONE;
+	gs->m_Domain = SHADER_DOMAIN::DOMAIN_MASKED;
+	gs->SetResourceName(L"default_Shader");
+	gs->Save();
+	delete gs;
 
-	//Load<GraphicsShader>(L"default_Shader.txt");
-	//Load<GraphicsShader>(L"debug_Shader.txt");
-	//Load<GraphicsShader>(L"ui_Shader.txt");
+	gs = new GraphicsShader;
+	gs->CreateVertexShader(L"Shader\\std2d.fx", "VS_Std2D");
+	gs->CreatePixelShader(L"Shader\\std2d.fx", "PS_UI2D");
+	gs->m_RSType = RS_TYPE::CULL_NONE;
+	gs->m_BSType = BS_TYPE::ALPHABLEND;
+	gs->m_Domain = SHADER_DOMAIN::DOMAIN_MASKED;
+	gs->SetResourceName(L"ui_Shader");
+	gs->Save();
+	delete gs;
+	
+	gs = new GraphicsShader;
+	gs->CreateVertexShader(L"Shader\\debug.fx", "VS_DebugShape");
+	gs->CreatePixelShader(L"Shader\\debug.fx", "PS_DebugShape");
+	gs->m_Topology = D3D11_PRIMITIVE_TOPOLOGY::D3D_PRIMITIVE_TOPOLOGY_LINESTRIP;
+	gs->m_RSType = RS_TYPE::CULL_NONE;
+	gs->m_DSSType = DSS_TYPE::NO_TEST_NO_WRITE;
+	gs->m_Domain = SHADER_DOMAIN::DOMAIN_DEBUG;
+	gs->SetResourceName(L"debug_Shader");
+	gs->Save();
+	delete gs;
 }
 
 void ResourceManager::CreateDefaultMaterial()
