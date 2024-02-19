@@ -77,7 +77,7 @@ void RoomEditorGUI::RenderUpdate()
 
 	if (m_RenderGUI)
 	{
-		ImGui::SetNextWindowSizeConstraints(ImVec2(1050, 630), ImVec2(1050, 630));
+		//ImGui::SetNextWindowSizeConstraints(ImVec2(1050, 630), ImVec2(1050, 630));
 		//ImGui::SetNextWindowSize(ImVec2(1050, 630));
 		m_RenderGUI->Render();
 	}
