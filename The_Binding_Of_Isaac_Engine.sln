@@ -4,8 +4,16 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 17.7.34221.43
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "01_Main", "Project\Client\The_Binding_Of_Isaac_Engine.vcxproj", "{B16F3971-6F3B-4489-B301-4995D5A5A713}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A0584A6E-90C1-4ECB-810A-D2BDC80AE557} = {A0584A6E-90C1-4ECB-810A-D2BDC80AE557}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "02_Engine", "Project\Engine\Engine.vcxproj", "{F04BFEF5-6CEB-4092-BEE2-B6322A89AC9C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "03_Scripts", "Project\Scripts\Scripts.vcxproj", "{A0584A6E-90C1-4ECB-810A-D2BDC80AE557}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F04BFEF5-6CEB-4092-BEE2-B6322A89AC9C} = {F04BFEF5-6CEB-4092-BEE2-B6322A89AC9C}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +39,14 @@ Global
 		{F04BFEF5-6CEB-4092-BEE2-B6322A89AC9C}.Release|x64.Build.0 = Release|x64
 		{F04BFEF5-6CEB-4092-BEE2-B6322A89AC9C}.Release|x86.ActiveCfg = Release|Win32
 		{F04BFEF5-6CEB-4092-BEE2-B6322A89AC9C}.Release|x86.Build.0 = Release|Win32
+		{A0584A6E-90C1-4ECB-810A-D2BDC80AE557}.Debug|x64.ActiveCfg = Debug|x64
+		{A0584A6E-90C1-4ECB-810A-D2BDC80AE557}.Debug|x64.Build.0 = Debug|x64
+		{A0584A6E-90C1-4ECB-810A-D2BDC80AE557}.Debug|x86.ActiveCfg = Debug|Win32
+		{A0584A6E-90C1-4ECB-810A-D2BDC80AE557}.Debug|x86.Build.0 = Debug|Win32
+		{A0584A6E-90C1-4ECB-810A-D2BDC80AE557}.Release|x64.ActiveCfg = Release|x64
+		{A0584A6E-90C1-4ECB-810A-D2BDC80AE557}.Release|x64.Build.0 = Release|x64
+		{A0584A6E-90C1-4ECB-810A-D2BDC80AE557}.Release|x86.ActiveCfg = Release|Win32
+		{A0584A6E-90C1-4ECB-810A-D2BDC80AE557}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

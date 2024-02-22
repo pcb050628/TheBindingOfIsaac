@@ -8,9 +8,6 @@
 #include "GameObject.h"
 #include "components.h"
 
-#include "SpotLight2DMove.h"
-#include "HumanoidScript.h"
-
 ChapterManager::ChapterManager()
 	: m_CurChapter(nullptr)
 	, m_Chapters{}
@@ -41,7 +38,6 @@ void ChapterManager::Init()
 	gobj->AddComponent(new MeshRenderer);
 	gobj->AddComponent(new Animator2D);
 	gobj->AddComponent(new Collider2D);
-	gobj->AddComponent(new HumanoidScript);
 
 	//Script* script = ScriptFactory::GetInst()->Find(L"Humanoid");
 		
@@ -99,7 +95,6 @@ void ChapterManager::Init()
 	gobj = new GameObject;
 	gobj->AddComponent(new Transform);
 	gobj->AddComponent(new Light2D);
-	gobj->AddComponent(new SpotLight2DMove);
 
 	gobj->GetTransform()->SetRelativePos(Vec3(0.f, 0.f, 0.f));
 

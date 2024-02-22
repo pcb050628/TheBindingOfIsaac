@@ -210,7 +210,6 @@ call EngineCopy.bat</Command>
     <ClInclude Include="GarbageCollection.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="GraphicsShader.h" />
-    <ClInclude Include="HumanoidScript.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Layer.h" />
     <ClInclude Include="Light2D.h" />
@@ -229,7 +228,6 @@ call EngineCopy.bat</Command>
     <ClInclude Include="Script.h" />
     <ClInclude Include="ScriptFactory.h" />
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="SpotLight2DMove.h" />
     <ClInclude Include="structs.h" />
     <ClInclude Include="StructuredBuffer.h" />
     <ClInclude Include="TaskManager.h" />
@@ -255,7 +253,6 @@ call EngineCopy.bat</Command>
     <ClCompile Include="Entity.cpp" />
     <ClCompile Include="GarbageCollection.cpp" />
     <ClCompile Include="GraphicsShader.cpp" />
-    <ClCompile Include="HumanoidScript.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Layer.cpp" />
     <ClCompile Include="Light2D.cpp" />
@@ -278,7 +275,6 @@ call EngineCopy.bat</Command>
     <ClCompile Include="Script.cpp" />
     <ClCompile Include="ScriptFactory.cpp" />
     <ClCompile Include="Shader.cpp" />
-    <ClCompile Include="SpotLight2DMove.cpp" />
     <ClCompile Include="structs.cpp" />
     <ClCompile Include="StructuredBuffer.cpp" />
     <ClCompile Include="TaskManager.cpp" />

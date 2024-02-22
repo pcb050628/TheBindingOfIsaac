@@ -1,14 +1,11 @@
 #pragma once
 
 #define REGISTER_SCRIPT(className) \
-    namespace \
-    { \
-        const bool className##Registered = []() \
+        const bool CallRegisteredBoolValue = []() \
         { \
             ScriptFactory::GetInst()->Register(new className); \
             return true; \
         }(); \
-    }
 
 #include "Script.h"
 

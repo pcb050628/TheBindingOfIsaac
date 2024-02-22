@@ -1,0 +1,66 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Default">
+      <UniqueIdentifier>{0280ef03-c986-430d-8dfd-d9ea90df4e50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{f19d6e8e-c245-437e-8370-a86311fccb69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\03_etc">
+      <UniqueIdentifier>{ec794040-3de5-443a-acbf-ce7123288079}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\01_Object">
+      <UniqueIdentifier>{0e3b51f9-6e13-4198-8968-6d72c78ae68f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\01_Object\Wall">
+      <UniqueIdentifier>{229dffe9-9e62-4f59-884e-2f87df16dc8f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\01_Object\Door">
+      <UniqueIdentifier>{4e4b5aed-1d85-4312-9711-c59e99eb936a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\01_Object\Door\DoorFrame">
+      <UniqueIdentifier>{f17d76e4-1165-4b1a-a8ae-4a752f11ad04}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\01_Object\Door\Door">
+      <UniqueIdentifier>{b6ae019a-d750-4d51-81d0-102037c119bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\01_Object\Spike">
+      <UniqueIdentifier>{d8b72306-99a7-497e-8985-76a549f8d938}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\02_Humanoid">
+      <UniqueIdentifier>{faca0e92-d97f-4d48-96eb-178c004fb176}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\02_Humanoid\Player">
+      <UniqueIdentifier>{97c78206-ad39-4416-9bd7-f3d7e4e1a299}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="HumanoidScript.h">
+      <Filter>Scripts\02_Humanoid</Filter>
+    </ClInclude>
+    <ClInclude Include="SpotLight2DMove.h">
+      <Filter>Scripts\03_etc</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Scripts.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="HumanoidScript.cpp">
+      <Filter>Scripts\02_Humanoid</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight2DMove.cpp">
+      <Filter>Scripts\03_etc</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

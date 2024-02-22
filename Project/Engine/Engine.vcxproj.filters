@@ -130,44 +130,14 @@
     <Filter Include="02_Derived\Resource\Shader\ComputeShader">
       <UniqueIdentifier>{75779e23-2aea-4d1c-bffa-ae30978887f5}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Script">
-      <UniqueIdentifier>{936676bd-e3dc-435e-9b23-e8af07f9030f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Script\SpotLightTest">
-      <UniqueIdentifier>{787dacd8-7900-4b44-9daa-6fc1cebbdbfd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="01_Basic\02_Manager\ScriptFactory">
-      <UniqueIdentifier>{2430bbf1-4b43-4d16-a195-ace015be7245}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Script\Player">
-      <UniqueIdentifier>{f333f8cf-afe4-44ca-9bf2-4dc3fc8c2d99}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Script\Humanoid">
-      <UniqueIdentifier>{e55385d0-c07a-4a37-8d88-52b2dbd7aeb1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Script\Object">
-      <UniqueIdentifier>{49420dd3-a8a4-4d33-b63e-75ddda9625a0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Script\Object\Wall">
-      <UniqueIdentifier>{598caab7-c4ae-45ca-b940-39314136f21d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_Derived\Resource\Anim">
       <UniqueIdentifier>{9e4eb150-da88-4450-92df-a0961428ee4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Script\Object\Door">
-      <UniqueIdentifier>{b43383bf-1a7f-4f9e-989d-961b8c905d99}</UniqueIdentifier>
+    <Filter Include="01_Basic\02_Manager\ScriptFactory">
+      <UniqueIdentifier>{d84261d4-0575-45af-a4f1-f177db5c4e5e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Derived\Script\Object\Door\DoorFrame">
-      <UniqueIdentifier>{3e4c9b76-e662-4dd0-bacf-dfb74fc253cb}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Script\Object\Door\Door">
-      <UniqueIdentifier>{0c40ea3e-9d00-4045-809d-2413064eff9f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Script\Object\Spike">
-      <UniqueIdentifier>{1cbe8aa2-0c54-40e2-81a5-2f13019251d8}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Derived\Script\Humanoid\Player">
-      <UniqueIdentifier>{88dbd8bb-dfee-4f70-87a9-2f2c0eb6c2f2}</UniqueIdentifier>
+    <Filter Include="02_Derived\Script">
+      <UniqueIdentifier>{d653c73a-61fb-4513-aef1-f212e98a998d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -270,17 +240,11 @@
     <ClInclude Include="Anim.h">
       <Filter>02_Derived\Resource\Anim</Filter>
     </ClInclude>
-    <ClInclude Include="Script.h">
-      <Filter>02_Derived\Script</Filter>
-    </ClInclude>
     <ClInclude Include="StructuredBuffer.h">
       <Filter>01_Basic\01_Device\StructuredBuffer</Filter>
     </ClInclude>
     <ClInclude Include="Light2D.h">
       <Filter>01_Basic\03_OBJ\Component\06. Light2D</Filter>
-    </ClInclude>
-    <ClInclude Include="SpotLight2DMove.h">
-      <Filter>02_Derived\Script\SpotLightTest</Filter>
     </ClInclude>
     <ClInclude Include="global.h">
       <Filter>0_Default\Header</Filter>
@@ -300,14 +264,14 @@
     <ClInclude Include="Shader.h">
       <Filter>02_Derived\Resource\Shader</Filter>
     </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>02_Derived\Resource</Filter>
+    </ClInclude>
     <ClInclude Include="ScriptFactory.h">
       <Filter>01_Basic\02_Manager\ScriptFactory</Filter>
     </ClInclude>
-    <ClInclude Include="HumanoidScript.h">
-      <Filter>02_Derived\Script\Humanoid</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>02_Derived\Resource</Filter>
+    <ClInclude Include="Script.h">
+      <Filter>02_Derived\Script</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -401,17 +365,11 @@
     <ClCompile Include="Anim.cpp">
       <Filter>02_Derived\Resource\Anim</Filter>
     </ClCompile>
-    <ClCompile Include="Script.cpp">
-      <Filter>02_Derived\Script</Filter>
-    </ClCompile>
     <ClCompile Include="StructuredBuffer.cpp">
       <Filter>01_Basic\01_Device\StructuredBuffer</Filter>
     </ClCompile>
     <ClCompile Include="Light2D.cpp">
       <Filter>01_Basic\03_OBJ\Component\06. Light2D</Filter>
-    </ClCompile>
-    <ClCompile Include="SpotLight2DMove.cpp">
-      <Filter>02_Derived\Script\SpotLightTest</Filter>
     </ClCompile>
     <ClCompile Include="Chapter.cpp">
       <Filter>01_Basic\04_Chapter\Chapter</Filter>
@@ -428,14 +386,14 @@
     <ClCompile Include="Shader.cpp">
       <Filter>02_Derived\Resource\Shader</Filter>
     </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>02_Derived\Resource</Filter>
+    </ClCompile>
     <ClCompile Include="ScriptFactory.cpp">
       <Filter>01_Basic\02_Manager\ScriptFactory</Filter>
     </ClCompile>
-    <ClCompile Include="HumanoidScript.cpp">
-      <Filter>02_Derived\Script\Humanoid</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource.cpp">
-      <Filter>02_Derived\Resource</Filter>
+    <ClCompile Include="Script.cpp">
+      <Filter>02_Derived\Script</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
