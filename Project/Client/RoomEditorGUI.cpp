@@ -1,8 +1,12 @@
 #include "pch.h"
 #include "RoomEditorGUI.h"
 
+#include <Engine\Device.h>
+
+#include <Engine\RenderManager.h>
 #include <Engine\ResourceManager.h>
 #include <Engine\Room.h>
+#include <Engine\GameObject.h>
 
 #include "ImGuiManager.h"
 #include "ModalBoxGUI.h"
@@ -82,11 +86,23 @@ void RoomEditorGUI::RenderUpdate()
 			}
 		}
 		ImGui::Spacing();
+
+
+		m_EditRoom->Update();
+		m_EditRoom->LateUpdate();
+
+		RenderManager::GetInst()->EditRender(m_EditRoom->GetMainCam()->GetCamera());
+
+		ImVec2 windowSize = ImGui::GetWindowSize();
+		windowSize.y -= 150;
+
+		ImGui::Image(Device::GetInst()->GetEditRenderTarget()->GetSRV().Get(), windowSize);
 	}
+
 
 	if (m_RenderGUI)
 	{
-		m_RenderGUI->Render();
+		//m_RenderGUI->Render();
 	}
 }
 
@@ -106,6 +122,15 @@ void RoomEditorGUI::CreateNewRoom()
 		delete m_EditRoom;
 	m_EditRoom = new Room;
 	m_EditRoom->SetResourceName(L"New_Room");
+
+	GameObject* obj = new GameObject;
+	obj->AddComponent(new Transform);
+	obj->AddComponent(new Camera);
+
+	m_EditRoom->AddObject(obj, LAYER_TYPE::Camera, false);
+
+	obj = new GameObject;
+	obj->Load(L"test_rock.gobj");
 }
 
 void RoomEditorGUI::SelectObject(DWORD_PTR _str)
@@ -117,9 +142,6 @@ void RoomEditorGUI::SelectObject(DWORD_PTR _str)
 void RoomEditorGUI::Activate()
 {
 	GUI::Activate();
-
-	if (!m_EditRoom)
-		m_EditRoom = new Room;
 
 	if (m_DockSpace) m_DockSpace->Activate();
 	if (m_RenderGUI) m_RenderGUI->Activate();

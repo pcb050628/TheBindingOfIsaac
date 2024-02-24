@@ -5,9 +5,10 @@
 
 #include "RenderComponent.h"
 
-#include "ScriptFactory.h"
 #include "ChapterManager.h"
 #include "Layer.h"
+
+#include "ScriptFactory.h"
 
 GameObject::GameObject()
 	: m_Components{}

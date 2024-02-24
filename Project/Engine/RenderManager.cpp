@@ -137,9 +137,21 @@ void RenderManager::Render_Debug()
 	}
 }
 
+void RenderManager::EditRender(Camera* _editCam)
+{
+	Device::GetInst()->StartEditRender();
+
+	UpdateData();
+	_editCam->SortObject();
+	_editCam->Render();
+
+	Render_Debug();
+
+	Device::GetInst()->SetOriginRenderTargetView();
+}
+
 void RenderManager::RegisterCamera(Camera* _Cam, int _Idx)
 {
-
 	if (m_Cams.size() <= _Idx + 1)
 	{
 		m_Cams.resize(_Idx + 1);

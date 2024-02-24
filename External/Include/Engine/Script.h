@@ -7,8 +7,6 @@
 #include "GameObject.h"
 #include "components.h"
 
-#include "ScriptFactory.h"
-
 #define GET_OTHER_COMPONENT(Type) Type* Get##Type() { return GetOwner()->Get##Type(); }
 #define SCRIPT(SCRIPTNAME) public: class Script* Instance() override { return new SCRIPTNAME; }
 

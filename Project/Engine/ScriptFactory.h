@@ -1,7 +1,7 @@
 #pragma once
 
 #define REGISTER_SCRIPT(className) \
-        const bool CallRegisteredBoolValue = []() \
+        const bool className##Registered = []() \
         { \
             ScriptFactory::GetInst()->Register(new className); \
             return true; \

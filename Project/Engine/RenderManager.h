@@ -31,6 +31,7 @@ public:
 
 	void Render();
 	void Render_Debug();
+	void EditRender(Camera* _editCam);
 
 	void RegisterCamera(Camera* _Cam, int _Idx);
 	void RegisterLight2D(Light2D* _light2d);

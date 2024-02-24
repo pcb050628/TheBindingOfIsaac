@@ -13,6 +13,7 @@ private:
 	Microsoft::WRL::ComPtr<IDXGISwapChain>			m_pSwapChain;
 
 	Texture*										m_pRTTex;
+	Texture*										m_pEditRTTex;
 	Texture*										m_pDSTex;
 
 	ConstantBuffer*									m_arrConstantBuffer[(UINT)CB_TYPE::END];
@@ -35,10 +36,14 @@ public:
 	Microsoft::WRL::ComPtr<ID3D11DepthStencilState> GetDepthStencilState(DSS_TYPE _type) { return m_arrDSS[(UINT)_type]; }
 	Microsoft::WRL::ComPtr<ID3D11BlendState> GetBlendState(BS_TYPE _type) { return m_arrBS[(UINT)_type]; }
 
+	Texture* GetEditRenderTarget() { return m_pEditRTTex; }
+
 public:
 	int Init(HWND _hwnd, Vec2 _resolution);
 	
 	void DrawStart();
+	void StartEditRender();
+	void SetOriginRenderTargetView();
 	void Present() { m_pSwapChain->Present(0, 0); }
 
 	void SetClearColor(Vec4 norm_color) { m_vClearColor = norm_color; }
@@ -48,6 +53,7 @@ public:
 private:
 	int CreateSwapChain();
 	int CreateRenderTargetView();
+	int CreateEditRenderTargetView();
 	int CreateDepthStencilView();
 	int CreateRasterizerState();
 	int CreateDepthStencilState();

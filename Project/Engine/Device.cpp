@@ -61,6 +61,12 @@ int Device::Init(HWND _hwnd, Vec2 _resolution)
 		return E_FAIL;
 	}
 
+	if (FAILED(CreateEditRenderTargetView()))
+	{
+		MessageBoxW(nullptr, L"Edit Render Target View 생성 실패", L"Device 초기화 실패", MB_OK);
+		return E_FAIL;
+	}
+
 	if (FAILED(CreateDepthStencilView()))
 	{
 		MessageBoxW(nullptr, L"Depth Stencil View 생성 실패", L"Device 초기화 실패", MB_OK);
@@ -123,6 +129,25 @@ void Device::DrawStart()
 	m_pContext->OMSetRenderTargets(1, m_pRTTex->GetRTV().GetAddressOf(), m_pDSTex->GetDSV().Get());
 }
 
+void Device::StartEditRender()
+{
+	FLOAT color[4];
+	color[0] = m_vClearColor.x;
+	color[1] = m_vClearColor.y;
+	color[2] = m_vClearColor.z;
+	color[3] = m_vClearColor.w;
+
+	m_pContext->ClearRenderTargetView(m_pEditRTTex->GetRTV().Get(), color);
+	m_pContext->ClearDepthStencilView(m_pDSTex->GetDSV().Get(), D3D11_CLEAR_FLAG::D3D11_CLEAR_DEPTH | D3D11_CLEAR_FLAG::D3D11_CLEAR_STENCIL, 1.f, 0);
+
+	m_pContext->OMSetRenderTargets(1, m_pEditRTTex->GetRTV().GetAddressOf(), m_pDSTex->GetDSV().Get());
+}
+
+void Device::SetOriginRenderTargetView()
+{
+	m_pContext->OMSetRenderTargets(1, m_pRTTex->GetRTV().GetAddressOf(), m_pDSTex->GetDSV().Get());
+}
+
 int Device::CreateSwapChain()
 {
 	DXGI_SWAP_CHAIN_DESC swapChainDesc = {};
@@ -170,6 +195,19 @@ int Device::CreateRenderTargetView()
 	m_pRTTex = ResourceManager::GetInst()->CreateTexture(L"DeviceRenderTargetTexture", pTex);
 
 	if (!m_pRTTex)
+		return E_FAIL;
+
+	return S_OK;
+}
+
+int Device::CreateEditRenderTargetView()
+{
+	D3D11_TEXTURE2D_DESC desc = m_pRTTex->GetDesc();
+
+	UINT flag = D3D11_BIND_RENDER_TARGET | D3D11_BIND_SHADER_RESOURCE;
+	m_pEditRTTex = ResourceManager::GetInst()->CreateTexture(L"EditRenderTargetTexture", desc.Width, desc.Height, desc.Format, flag);
+
+	if (!m_pEditRTTex)
 		return E_FAIL;
 
 	return S_OK;

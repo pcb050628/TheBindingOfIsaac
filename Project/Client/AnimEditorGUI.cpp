@@ -13,7 +13,7 @@ AnimEditorGUI::AnimEditorGUI() : GUI("AnimEditor", "##AnimEditorGUI")
 	, m_EditAnim(nullptr)
 	, m_RenderGUI(nullptr)
 {
-	Activate();
+	Deactivate();
 }
 
 AnimEditorGUI::~AnimEditorGUI()

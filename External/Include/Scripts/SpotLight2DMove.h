@@ -12,4 +12,3 @@ public:
     SpotLight2DMove();
     ~SpotLight2DMove();
 };
-REGISTER_SCRIPT(SpotLight2DMove);

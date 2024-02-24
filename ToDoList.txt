@@ -1,4 +1,8 @@
-1-Room 생성 함수 만들기
-2- RoomEditor에 현재 편집중인 Room 상태 렌더하기 : RoomEditor 전용 렌더타겟을 만들어 렌더링 후 렌더타겟을 imgui::image 같은 함수로 그려줄 수 있을거같음
-3-Inspector 에 Chapter, Room 정보 띄우기
+1- Room 생성 함수 만들기
+
+2- RoomEditor에 현재 편집중인 Room 상태 렌더하기 : EditMode 전용 렌더타겟 만들기 -> RenderManager에서 EditRender 만들기 -> 다른 모든 렌더링이 끝난 후 EditRender 에서 OMSetRenderTarget 함수를 사용해서 렌더타겟을 바꾸고 렌더 -> Editor에서 Imgui::Image 함수로 렌더타겟을 가져와서 다시 창에 띄움
+
+동시에 두곳을 렌더하는건 일단 하지 않기로 하고 editmode 일 경우에는 roomeditor에 렌더링을 하도록 변경
+
+3- Inspector 에 Chapter, Room 정보 띄우기
 

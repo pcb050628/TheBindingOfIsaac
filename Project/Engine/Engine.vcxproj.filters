@@ -133,11 +133,11 @@
     <Filter Include="02_Derived\Resource\Anim">
       <UniqueIdentifier>{9e4eb150-da88-4450-92df-a0961428ee4f}</UniqueIdentifier>
     </Filter>
-    <Filter Include="01_Basic\02_Manager\ScriptFactory">
-      <UniqueIdentifier>{d84261d4-0575-45af-a4f1-f177db5c4e5e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="02_Derived\Script">
       <UniqueIdentifier>{d653c73a-61fb-4513-aef1-f212e98a998d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="01_Basic\02_Manager\ScriptFactory">
+      <UniqueIdentifier>{3404252a-a3d1-4c05-8e1b-55e1c43229f0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -267,11 +267,11 @@
     <ClInclude Include="Resource.h">
       <Filter>02_Derived\Resource</Filter>
     </ClInclude>
-    <ClInclude Include="ScriptFactory.h">
-      <Filter>01_Basic\02_Manager\ScriptFactory</Filter>
-    </ClInclude>
     <ClInclude Include="Script.h">
       <Filter>02_Derived\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="ScriptFactory.h">
+      <Filter>01_Basic\02_Manager\ScriptFactory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -389,11 +389,11 @@
     <ClCompile Include="Resource.cpp">
       <Filter>02_Derived\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="ScriptFactory.cpp">
-      <Filter>01_Basic\02_Manager\ScriptFactory</Filter>
-    </ClCompile>
     <ClCompile Include="Script.cpp">
       <Filter>02_Derived\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="ScriptFactory.cpp">
+      <Filter>01_Basic\02_Manager\ScriptFactory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

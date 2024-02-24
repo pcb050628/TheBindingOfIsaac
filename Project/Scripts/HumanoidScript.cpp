@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "HumanoidScript.h"
 
-
 HumanoidScript::HumanoidScript() : Script(L"Humanoid")
 	, Head(nullptr)
 	, Body(nullptr)
