@@ -113,19 +113,17 @@ public:
 template <typename T>
 RESOURCE_TYPE GetResourceType()
 {
-	const type_info& type = typeid(T);
-
 	RESOURCE_TYPE value = RESOURCE_TYPE::END;
 
-	if (&type == &typeid(Mesh))
+	if constexpr (std::is_same_v<T, Mesh>)
 		return RESOURCE_TYPE::MESH;
-	else if (&type == &typeid(GraphicsShader))
+	if constexpr (std::is_same_v<T, GraphicsShader>)
 		return RESOURCE_TYPE::GRAPHICS_SHADER;
-	else if (&type == &typeid(Material))
+	if constexpr (std::is_same_v<T, Material>)
 		return RESOURCE_TYPE::MATERIAL;
-	else if (&type == &typeid(Texture))
+	if constexpr (std::is_same_v<T, Texture>)
 		return RESOURCE_TYPE::TEXTURE;
-	else if (&type == &typeid(Anim))
+	if constexpr (std::is_same_v<T, Anim>) 
 		return RESOURCE_TYPE::ANIM;
 
 	return value;

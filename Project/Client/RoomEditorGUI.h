@@ -16,9 +16,11 @@ private:
 	std::wstring			m_SelectObject;
 	LAYER_TYPE				m_SelectLayer;
 
-public:
+private:
 	void ActivateRenderGUI();
+	void CreateNewRoom();
 
+public:
 	void SelectObject(DWORD_PTR _str);
 
 public:
