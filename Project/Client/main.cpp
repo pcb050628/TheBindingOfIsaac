@@ -13,6 +13,12 @@
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
 
+#ifdef _DEBUG
+#pragma comment(lib, "Engine\\02_Engine_d")
+#else
+#pragma comment(lib, "Engine\\02_Engine")
+#endif
+
 #define MAX_LOADSTRING 100
 
 // 전역 변수:

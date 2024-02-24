@@ -30,12 +30,6 @@ typedef Vector2 Vec2;
 typedef Vector3 Vec3;
 typedef Vector4 Vec4;
 
-//#ifdef _DEBUG
-//#pragma comment(lib, "..\\..\\External\\Include\\Scripts\\03_Scripts_d")
-//#else
-//#pragma comment(lib, "..\\..\\External\\Include\\Scripts\\03_Scripts")
-//#endif
-
 #include "define.h"
 #include "structs.h"
 #include "functions.h"

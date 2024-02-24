@@ -10,7 +10,6 @@
 #include "RenderManager.h"
 #include "GarbageCollection.h"
 #include "TaskManager.h"
-#include "ScriptFactory.h"
 
 Engine::Engine()
 	: m_hWnd(nullptr)
@@ -37,7 +36,7 @@ void Engine::Init(HWND _hWnd, const RECT& _Resolution)
 	Input::GetInst()->Init();
 	Device::GetInst()->Init(m_hWnd, res);
 	ResourceManager::GetInst()->Init();
-	ScriptFactory::GetInst()->Init();
+	//ScriptFactory::GetInst()->Init();
 	ChapterManager::GetInst()->Init();
 	RenderManager::GetInst()->Init();
 }

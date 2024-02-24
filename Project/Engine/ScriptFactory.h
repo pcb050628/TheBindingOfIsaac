@@ -7,8 +7,7 @@
             return true; \
         }(); \
 
-#include "Script.h"
-
+class Script;
 class ScriptFactory
 {
 	SINGLETON(ScriptFactory)

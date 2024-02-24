@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "ScriptFactory.h"
 
+#include "Script.h"
 
 ScriptFactory::ScriptFactory()
 {}

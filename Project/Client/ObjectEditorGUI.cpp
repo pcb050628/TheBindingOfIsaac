@@ -96,7 +96,7 @@ void ObjectEditorGUI::AddScript(DWORD_PTR _str)
 	if (nullptr == scrpt)
 		return;
 
-	m_EditObject->AddComponent(scrpt);
+	m_EditObject->AddComponent((Component*)scrpt);
 }
 
 void ObjectEditorGUI::AddComponent(COMPONENT_TYPE _type)

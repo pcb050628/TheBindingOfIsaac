@@ -181,6 +181,7 @@
     <ClInclude Include="EditorGUI.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GUI.h" />
+    <ClInclude Include="HumanoidScript.h" />
     <ClInclude Include="imconfig.h" />
     <ClInclude Include="imgui.h" />
     <ClInclude Include="ImGuiFileDialog.h" />
@@ -206,6 +207,7 @@
     <ClInclude Include="ResourceGUI.h" />
     <ClInclude Include="RoomEditorGUI.h" />
     <ClInclude Include="RoomEditorRenderGUI.h" />
+    <ClInclude Include="SpotLight2DMove.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="TextureGUI.h" />
@@ -223,6 +225,7 @@
     <ClCompile Include="DockSpaceGUI.cpp" />
     <ClCompile Include="EditorGUI.cpp" />
     <ClCompile Include="GUI.cpp" />
+    <ClCompile Include="HumanoidScript.cpp" />
     <ClCompile Include="imgui.cpp" />
     <ClCompile Include="ImGuiFileDialog.cpp" />
     <ClCompile Include="ImGuiManager.cpp" />
@@ -251,6 +254,7 @@
     <ClCompile Include="ResourceGUI.cpp" />
     <ClCompile Include="RoomEditorGUI.cpp" />
     <ClCompile Include="RoomEditorRenderGUI.cpp" />
+    <ClCompile Include="SpotLight2DMove.cpp" />
     <ClCompile Include="TextureGUI.cpp" />
     <ClCompile Include="TransformGUI.cpp" />
     <ClCompile Include="TreeGUI.cpp" />

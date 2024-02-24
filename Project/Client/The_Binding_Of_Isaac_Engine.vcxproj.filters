@@ -10,20 +10,11 @@
     <Filter Include="Default\Resource">
       <UniqueIdentifier>{0c4c32c0-6d1c-4a87-9898-0d02159cca59}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ImGui">
-      <UniqueIdentifier>{c358980b-941b-489b-8e9c-6ebacc65f959}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Default\pch">
       <UniqueIdentifier>{43ab4c61-1f19-4121-bfdc-ecdf461825c0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ImGuiManager">
-      <UniqueIdentifier>{8992aaa4-cbc7-4d6c-9f1b-a5291683b3dd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI">
       <UniqueIdentifier>{e33c2fae-01b9-49b6-a627-d829672f9758}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ImGui\FileDialog">
-      <UniqueIdentifier>{77c23aea-8be5-462b-86be-67cc9f7321fa}</UniqueIdentifier>
     </Filter>
     <Filter Include="GUI\01_Outliner">
       <UniqueIdentifier>{d631dd2c-d92a-4722-9061-67414ddbb305}</UniqueIdentifier>
@@ -112,6 +103,24 @@
     <Filter Include="GUI\04_Util\DockSpace">
       <UniqueIdentifier>{93934ab2-35ac-476e-af08-561b65a18883}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Default\ImGui">
+      <UniqueIdentifier>{c358980b-941b-489b-8e9c-6ebacc65f959}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default\ImGui\FileDialog">
+      <UniqueIdentifier>{77c23aea-8be5-462b-86be-67cc9f7321fa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ImGuiManager">
+      <UniqueIdentifier>{8992aaa4-cbc7-4d6c-9f1b-a5291683b3dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts">
+      <UniqueIdentifier>{ab0ce175-c92b-40a3-97e9-e3e2bbd72f70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Object">
+      <UniqueIdentifier>{d1248e1a-f118-409d-a1f4-eaed749f3eff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scripts\Humanoid">
+      <UniqueIdentifier>{7c5c1a93-0215-4818-8b0d-2b42125c6658}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -127,28 +136,28 @@
       <Filter>Default\Header</Filter>
     </ClInclude>
     <ClInclude Include="imgui.h">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imgui_impl_dx11.h">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imgui_impl_win32.h">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imgui_internal.h">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imstb_rectpack.h">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imstb_textedit.h">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imstb_truetype.h">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="imconfig.h">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>Default\pch</Filter>
@@ -199,10 +208,10 @@
       <Filter>GUI\03_Inspector\Component\Light2D</Filter>
     </ClInclude>
     <ClInclude Include="ImGuiFileDialog.h">
-      <Filter>ImGui\FileDialog</Filter>
+      <Filter>Default\ImGui\FileDialog</Filter>
     </ClInclude>
     <ClInclude Include="ImGuiFileDialogConfig.h">
-      <Filter>ImGui\FileDialog</Filter>
+      <Filter>Default\ImGui\FileDialog</Filter>
     </ClInclude>
     <ClInclude Include="RoomEditorGUI.h">
       <Filter>GUI\05_Editor\RoomEditor</Filter>
@@ -237,6 +246,12 @@
     <ClInclude Include="MenuGUI.h">
       <Filter>GUI\04_Util\MenuGUI</Filter>
     </ClInclude>
+    <ClInclude Include="SpotLight2DMove.h">
+      <Filter>Scripts</Filter>
+    </ClInclude>
+    <ClInclude Include="HumanoidScript.h">
+      <Filter>Scripts\Humanoid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -248,25 +263,25 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="imgui.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_demo.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_draw.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_impl_dx11.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_impl_win32.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_tables.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="imgui_widgets.cpp">
-      <Filter>ImGui</Filter>
+      <Filter>Default\ImGui</Filter>
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Default\pch</Filter>
@@ -318,7 +333,7 @@
       <Filter>GUI\03_Inspector\Component\Light2D</Filter>
     </ClCompile>
     <ClCompile Include="ImGuiFileDialog.cpp">
-      <Filter>ImGui\FileDialog</Filter>
+      <Filter>Default\ImGui\FileDialog</Filter>
     </ClCompile>
     <ClCompile Include="RoomEditorGUI.cpp">
       <Filter>GUI\05_Editor\RoomEditor</Filter>
@@ -352,6 +367,12 @@
     </ClCompile>
     <ClCompile Include="MenuGUI.cpp">
       <Filter>GUI\04_Util\MenuGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SpotLight2DMove.cpp">
+      <Filter>Scripts</Filter>
+    </ClCompile>
+    <ClCompile Include="HumanoidScript.cpp">
+      <Filter>Scripts\Humanoid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

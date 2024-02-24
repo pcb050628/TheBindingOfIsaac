@@ -19,8 +19,8 @@ RoomEditorGUI::RoomEditorGUI() : GUI("RoomEditor", "##RoomEditorGUI")
 	, m_RenderGUI(nullptr)
 	, m_SelectLayer(LAYER_TYPE::Object)
 {
-	m_DockSpace = new DockSpaceGUI("RoomEditor Space", ImVec2(1800, 900));
-	m_RenderGUI = new RoomEditorRenderGUI;
+	//m_DockSpace = new DockSpaceGUI("RoomEditor Space", ImVec2(1800, 900));
+	//m_RenderGUI = new RoomEditorRenderGUI;
 
 	Deactivate();
 }
@@ -131,6 +131,8 @@ void RoomEditorGUI::CreateNewRoom()
 
 	obj = new GameObject;
 	obj->Load(L"test_rock.gobj");
+
+	m_EditRoom->AddObject(obj, LAYER_TYPE::Object, false);
 }
 
 void RoomEditorGUI::SelectObject(DWORD_PTR _str)
@@ -143,14 +145,14 @@ void RoomEditorGUI::Activate()
 {
 	GUI::Activate();
 
-	if (m_DockSpace) m_DockSpace->Activate();
-	if (m_RenderGUI) m_RenderGUI->Activate();
+	//if (m_DockSpace) m_DockSpace->Activate();
+	//if (m_RenderGUI) m_RenderGUI->Activate();
 }
 
 void RoomEditorGUI::Deactivate()
 {
 	GUI::Deactivate();
 
-	if (m_DockSpace) m_DockSpace->Deactivate();
-	if (m_RenderGUI) m_RenderGUI->Deactivate();
+	//if (m_DockSpace) m_DockSpace->Deactivate();
+	//if (m_RenderGUI) m_RenderGUI->Deactivate();
 }
