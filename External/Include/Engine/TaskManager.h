@@ -2,10 +2,11 @@
 
 enum TASKTYPE
 {
-	CHANGE_ROOM,
-	CHANGE_CHAPTER,
-	CREATE_OBJECT,
-	DELETE_OBJECT,
+	CHANGE_ROOM, // param 1 : DIRECTION
+	CHANGE_CHAPTER, // param 1 : CHAPTER_LEVEL
+	CREATE_OBJECT, // param 1 : object, param 2 : layer
+	DELETE_OBJECT, // param 1 : object
+	CHANGE_ROOMSTATE, // param 1 : room, param 2 : state
 };
 
 struct Task
@@ -27,14 +28,14 @@ class TaskManager
 private:
 	std::queue<Task>	m_TaskQueue;
 
-	bool				m_bDoSomething;
+	bool				m_bCreateObject;
+	bool				m_bDeleteObject;
 
 public:
 	void Update();
 
 	void AddTask(const Task& _task) { m_TaskQueue.push(_task); }
 
-	bool IsDoSomething() { return m_bDoSomething; }
-	void SetDoSomething(bool _value) { m_bDoSomething = _value; }
+	bool ObjectEvent() { return m_bCreateObject || m_bDeleteObject; }
 };
 

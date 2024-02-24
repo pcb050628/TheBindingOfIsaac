@@ -6,7 +6,6 @@
 #include "GameObject.h"
 
 TaskManager::TaskManager()
-	: m_bDoSomething(false)
 {
 
 }
@@ -21,6 +20,9 @@ TaskManager::~TaskManager()
 
 void TaskManager::Update()
 {
+	m_bCreateObject = false;
+	m_bDeleteObject = false;
+
 	while (!m_TaskQueue.empty())
 	{
 		Task& task = m_TaskQueue.front();
@@ -33,12 +35,11 @@ void TaskManager::Update()
 
 		case TASKTYPE::CHANGE_CHAPTER:
 			ChapterManager::GetInst()->ChangeChapter((CHAPTER_LEVEL)task.Param_1);
-			m_bDoSomething = true;
 			break;
 
 		case TASKTYPE::CREATE_OBJECT:
 			ChapterManager::GetInst()->GetCurChapter()->AddObject((GameObject*)task.Param_1, (LAYER_TYPE)task.Param_2, false);
-			m_bDoSomething = true;
+			m_bCreateObject = true;
 			break;
 
 		case TASKTYPE::DELETE_OBJECT:
@@ -58,7 +59,13 @@ void TaskManager::Update()
 				queueObj.pop();
 			}
 		}
-		m_bDoSomething = true;
+		m_bDeleteObject = true;
+			break;
+
+		case TASKTYPE::CHANGE_ROOMSTATE:
+			Room* room = (Room*)task.Param_1;
+			ROOM_STATE state = (ROOM_STATE)task.Param_2;
+			room->ChangeState(state);
 			break;
 		}
 

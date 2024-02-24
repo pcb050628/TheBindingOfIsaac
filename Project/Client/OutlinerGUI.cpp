@@ -28,10 +28,9 @@ OutlinerGUI::~OutlinerGUI()
 
 void OutlinerGUI::RenderUpdate()
 {
-	if (TaskManager::GetInst()->IsDoSomething())
+	if (TaskManager::GetInst()->ObjectEvent())
 	{
 		ResetTree();
-		TaskManager::GetInst()->SetDoSomething(false);
 	}
 }
 

@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "Room.h"
 
+#include "Time.h"
+
 #include "GameObject.h"
 #include "Transform.h"
 #include "Layer.h"
@@ -167,6 +169,10 @@ void Room::Enter()
 	}
 }
 
+void Room::Begin()
+{
+}
+
 void Room::Update()
 {
 	for (Layer* layer : m_Layers)
@@ -202,6 +208,10 @@ void Room::LateUpdate()
 				m_Info.IsCompleted = true;
 		}
 	}
+}
+
+void Room::Stop()
+{
 }
 
 void Room::Exit()
@@ -317,5 +327,30 @@ void Room::GetAllObject(std::vector<GameObject*>& _out)
 		{
 			_out.insert(_out.end(), m_Layers[i]->m_Parents.begin(), m_Layers[i]->m_Parents.end());
 		}
+	}
+}
+
+void Room::ChangeState(ROOM_STATE _state)
+{
+	if (m_State == _state)
+		return;
+
+	if (ROOM_STATE::PLAY == _state)
+	{
+		Time::GetInst()->LockDeltaTime(false);
+		if (m_State == ROOM_STATE::EDIT)
+			m_bEditMode = false;
+
+		Begin();
+	}
+	else if (ROOM_STATE::STOP == _state)
+	{
+		Time::GetInst()->LockDeltaTime(true);
+		Stop();
+	}
+	else if (ROOM_STATE::EDIT == _state)
+	{
+		m_bEditMode = true;
+		Time::GetInst()->LockDeltaTime(true);
 	}
 }

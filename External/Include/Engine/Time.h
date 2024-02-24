@@ -12,6 +12,9 @@ private:
 	LARGE_INTEGER	m_PrevCount;
 	LARGE_INTEGER	m_CurCount;
 	float			m_DeltaTime;
+	float			m_EngineDeltaTime;
+
+	bool			m_bLockDeltaTime;
 
 public:
 	void Init();
@@ -19,5 +22,6 @@ public:
 
 	float GetDeltaTime() { return m_DeltaTime; }
 
+	void LockDeltaTime(bool _value) { m_bLockDeltaTime = _value; }
 };
 

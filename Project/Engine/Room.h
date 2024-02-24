@@ -2,6 +2,14 @@
 #include "Resource.h"
 #include "Layer.h"
 
+enum class ROOM_STATE
+{
+    PLAY, // play or continue
+    STOP, // STOP like pause
+    EDIT, // editMode
+    NONE, // none
+};
+
 enum class ROOM_TYPE
 {
     Common,
@@ -25,6 +33,7 @@ class Room :
 {
 private:
     RoomInfo    m_Info;
+    ROOM_STATE  m_State;
     Layer*      m_Layers[(int)LAYER_TYPE::END];
     GameObject* m_MainCam;
 
@@ -33,6 +42,8 @@ private:
     Room*       Top;
     Room*       Bottom;
 
+    bool        m_bEditMode;
+
 public:
     virtual bool Load(const std::wstring& _strFileName, bool _isFullPath) override;
     virtual bool Save() override;
@@ -40,8 +51,10 @@ public:
     virtual void Clear();
 
     virtual void Enter();
+    virtual void Begin();
     virtual void Update();
     virtual void LateUpdate();
+    virtual void Stop();
     virtual void Exit();
 
     virtual ROOM_TYPE GetRoomType() { return m_Info.RoomType; }
@@ -84,7 +97,7 @@ public:
     GameObject* FindObject(const std::wstring& _strName);
     virtual void GetAllObject(std::vector<GameObject*>& _out);
 
-    //void DeleteAll();
+    void ChangeState(ROOM_STATE _state);
 
 public:
     Room();

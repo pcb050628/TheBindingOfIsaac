@@ -136,6 +136,4 @@ void Chapter::ChangeRoomEnd()
 	m_CurRoom = m_CurRoom->GetRoomByDir(m_ChangeDir);
 	m_CurRoom->GetMainCam()->GetTransform()->SetRelativePos(DEFAULT_CAMERA_POS);
 	m_CurRoom->Enter();
-
-	TaskManager::GetInst()->SetDoSomething(true);
 }

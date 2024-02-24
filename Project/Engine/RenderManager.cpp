@@ -158,5 +158,6 @@ void RenderManager::RegisterLight2D(Light2D* _light2d)
 
 void RenderManager::CopyRenderTargetToPostProcessTex()
 {
-
+	Texture* pRTTex = ResourceManager::GetInst()->Find<Texture>(L"DeviceRenderTargetTexture");
+	Device::GetInst()->GetContext()->CopyResource(m_PostProcessTex->GetTex2D().Get(), pRTTex->GetTex2D().Get());
 }

@@ -12,7 +12,6 @@ private:
 
     //ui cam
 
-    bool m_bChange;
     bool m_bIsTransitioning;
 
 public:
@@ -20,6 +19,8 @@ public:
     virtual void LateUpdate();
 
     virtual Room* GetCurRoom() { return m_CurRoom; }
+
+    //this function could return nullptr
     virtual Room* GetRoom(int _num) { Room* room = nullptr; (_num < (int)m_Rooms.size()) ? room = m_Rooms[_num] : room = nullptr; return room; }
 
     void DetachGameObject(GameObject* _obj);
@@ -42,6 +43,7 @@ public:
     Chapter();
     virtual ~Chapter() override;
 
+    friend class ChapterManager;
     friend class TaskManager;
 };
 

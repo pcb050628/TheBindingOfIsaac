@@ -31,6 +31,7 @@ public:
 	void RegisterObj(GameObject* _obj, LAYER_TYPE _layerType);
 
 private:
+	//수정해야함
 	void ChangeChapter(CHAPTER_LEVEL _level) { m_CurChapter = m_Chapters[(UINT)_level]; }
 
 	friend class TaskManager;
