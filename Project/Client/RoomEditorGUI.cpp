@@ -36,8 +36,8 @@ RoomEditorGUI::~RoomEditorGUI()
 
 void RoomEditorGUI::RenderUpdate()
 {
-	if (!m_RenderGUI || !m_RenderGUI->IsActive())
-		ActivateRenderGUI();
+	//if (!m_RenderGUI || !m_RenderGUI->IsActive())
+	//	ActivateRenderGUI();
 
 	if (!m_EditRoom)
 	{

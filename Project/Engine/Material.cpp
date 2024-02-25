@@ -77,11 +77,11 @@ bool Material::Load(const std::wstring& _FileName, bool _isFullPath)
 	// 재질이 참조하는 텍스쳐 정보를 로드
 	for (UINT i = 0; i < (UINT)TEX_PARAM::END; ++i)
 	{
-		m_Textures[i] = LoadResourceRef<Texture>(pFile);
+		LoadResourceRef<Texture>(m_Textures[i], pFile);
 	}
 
 	// 재질이 참조하는 쉐이더 정보를 저장
-	m_Shader = LoadResourceRef<GraphicsShader>(pFile);
+    LoadResourceRef<GraphicsShader>(m_Shader, pFile);
 
 	return true;
 
