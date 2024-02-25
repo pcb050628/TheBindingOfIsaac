@@ -205,16 +205,19 @@ void ResourceManager::CreateDefaultMaterial()
 	mtrl->SetResourceName(L"default_Material");
 	mtrl->SetShader(Find<GraphicsShader>(L"default_Shader"));
 	mtrl->Save();
+	delete mtrl;
 
 	mtrl = new Material;
 	mtrl->SetResourceName(L"debug_Material");
 	mtrl->SetShader(Find<GraphicsShader>(L"debug_Shader"));
-	mtrl->Save(); 
+	mtrl->Save();
+	delete mtrl;
 	
 	mtrl = new Material;
 	mtrl->SetResourceName(L"ui_Material");
 	mtrl->SetShader(Find<GraphicsShader>(L"ui_Shader"));
 	mtrl->Save();
+	delete mtrl;
 }
 
 void ResourceManager::LoadAnim()

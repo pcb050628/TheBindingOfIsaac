@@ -50,6 +50,14 @@ public:
 	template <typename T>
 	T* Load(std::wstring _FileName, bool _isFullPath = false)
 	{
+		RESOURCE_TYPE type = GetResourceType<T>();
+
+		if (IsExist(_FileName, type))
+		{
+			T* tmp = Find<T>(_FileName);
+			return tmp;
+		}
+
 		Resource* tmp = new T();
 		if (!tmp->Load(_FileName, _isFullPath))
 		{

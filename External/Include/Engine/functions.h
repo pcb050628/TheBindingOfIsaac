@@ -73,7 +73,7 @@ void SaveResourceRef(T* _resource, FILE* _file)
 						}\
 
 template <typename T>
-void LoadResourceRef(T* _resource, FILE* _file)
+T* LoadResourceRef(FILE* _file)
 {
 	bool bAssetExist = false;
 	fread(&bAssetExist, sizeof(bool), 1, _file);
@@ -94,7 +94,7 @@ void LoadResourceRef(T* _resource, FILE* _file)
 		fread(szBuff, sizeof(wchar_t), len, _file); 
 		strRelativePath = szBuff; 
 
-		_resource = ResourceManager::GetInst()->Load<T>(strKey);
+		return ResourceManager::GetInst()->Load<T>(strKey);
 	}
 }
 

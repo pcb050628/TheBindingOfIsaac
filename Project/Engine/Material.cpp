@@ -13,7 +13,7 @@ Material::Material()
 	: Resource(RESOURCE_TYPE::MATERIAL)
 	, m_ConstData()
 	, m_Textures{}
-	, m_Shader()
+	, m_Shader(nullptr)
 {
 }
 
@@ -77,11 +77,11 @@ bool Material::Load(const std::wstring& _FileName, bool _isFullPath)
 	// 재질이 참조하는 텍스쳐 정보를 로드
 	for (UINT i = 0; i < (UINT)TEX_PARAM::END; ++i)
 	{
-		LOADRESOURCEREF(Texture, m_Textures[i], pFile)
+		m_Textures[i] = LoadResourceRef<Texture>(pFile);
 	}
 
 	// 재질이 참조하는 쉐이더 정보를 저장
-	LOADRESOURCEREF(GraphicsShader, m_Shader, pFile)
+	m_Shader = LoadResourceRef<GraphicsShader>(pFile);
 
 	return true;
 
@@ -137,11 +137,11 @@ bool Material::Save()
 	for (int i = 0; i < TEX_PARAM::END; i++)
 	{
 		//SaveResourceRef(m_Textures[i], pFile);
-		SAVERESOURCEREF(m_Textures[i], pFile);
+		SaveResourceRef<Texture>(m_Textures[i], pFile);
 	}
 
 	//shader
-	SAVERESOURCEREF(m_Shader, pFile);
+	SaveResourceRef<GraphicsShader>(m_Shader, pFile);
 
 	return true;
 
