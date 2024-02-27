@@ -8,7 +8,7 @@
 #include "ChapterManager.h"
 #include "Layer.h"
 
-#include <Scripts\ScriptManager.h>
+#include "ScriptFactory.h"
 
 GameObject::GameObject()
 	: m_Components{}
@@ -338,7 +338,7 @@ int GameObject::Load(const std::wstring& _strFileName)
 		name.resize(len);
 		fread(name.data(), sizeof(wchar_t), len, pFile);
 
-		Script* scrpt = ScriptManager::GetScript(name);
+		Script* scrpt = ScriptFactory::GetInst()->Find(name);
 		if (scrpt != nullptr)
 			AddComponent(scrpt);
 		else

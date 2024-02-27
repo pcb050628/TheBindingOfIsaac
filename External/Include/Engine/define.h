@@ -134,7 +134,7 @@ enum class GOBJ_TYPE
 	TRAPDOOR,
 };
 
-enum class SCALAR_PARAM
+enum SCALAR_PARAM
 {
 	INT_0,
 	INT_1,
@@ -162,7 +162,7 @@ enum class SCALAR_PARAM
 	MAT_3,
 };
 
-enum class TEX_PARAM
+enum TEX_PARAM
 {
 	TEX_0,
 	TEX_1,

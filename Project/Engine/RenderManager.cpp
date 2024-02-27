@@ -122,7 +122,7 @@ void RenderManager::Render_Debug()
 		//	break;
 		}
 
-		m_DebugObj->GetMeshRenderer()->GetMaterial()->SetScalarParam((*iter).vColor, SCALAR_PARAM::VEC4_0);
+		m_DebugObj->GetMeshRenderer()->GetMaterial()->SetScalarParam((*iter).vColor, VEC4_0);
 
 		m_DebugObj->GetTransform()->SetWorldMat((*iter).matWorld);
 		m_DebugObj->GetTransform()->UpdateData();

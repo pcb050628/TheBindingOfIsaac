@@ -1,2 +1,0 @@
-HumanoidScript
-SpotLight2DMove

@@ -1,9 +1,8 @@
 #include "pch.h"
 #include "ObjectEditorGUI.h"
 
+#include <Engine\ScriptFactory.h>
 #include <Engine\components.h>
-
-#include <Scripts\ScriptManager.h>
 
 #include "ImGuiManager.h"
 #include "ListGUI.h"
@@ -67,7 +66,7 @@ void ObjectEditorGUI::RenderUpdate()
 		ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
 
 		std::vector<std::string> scriptlist;
-		//ScriptFactory::GetInst()->GetAllScriptName(scriptlist);
+		ScriptFactory::GetInst()->GetAllScriptName(scriptlist);
 
 		list->AddString(scriptlist);
 		list->SetDelegate(this, (Delegate_1)&ObjectEditorGUI::AddScript);
@@ -93,7 +92,7 @@ void ObjectEditorGUI::AddScript(DWORD_PTR _str)
 {
 	string str((char*)_str);
 
-	Script* scrpt = ScriptManager::GetScript(ToWstring(str));
+	Script* scrpt = ScriptFactory::GetInst()->Find(ToWstring(str));
 	if (nullptr == scrpt)
 		return;
 

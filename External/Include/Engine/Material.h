@@ -7,7 +7,7 @@ class Material :
 private:
     tMtrlData               m_ConstData;
 
-    class Texture*          m_Textures[(UINT)TEX_PARAM::END];
+    class Texture*          m_Textures[TEX_PARAM::END];
     class GraphicsShader*   m_Shader;
 
 public:
@@ -18,7 +18,7 @@ public:
 
 public:
     void SetShader(GraphicsShader* _shader) { m_Shader = _shader; }
-    void SetTexture(Texture* _tex, TEX_PARAM _param) { m_Textures[(UINT)_param] = _tex; }
+    void SetTexture(Texture* _tex, TEX_PARAM _param) { m_Textures[_param] = _tex; }
 
     GraphicsShader* GetShader() { return m_Shader; }
 
@@ -29,39 +29,39 @@ public:
 
         switch (_param)
         {
-        case SCALAR_PARAM::INT_0:
-        case SCALAR_PARAM::INT_1:
-        case SCALAR_PARAM::INT_2:
-        case SCALAR_PARAM::INT_3:
-            m_ConstData.iArr[(UINT)_param] = *((int*)pValue);
+        case INT_0:
+        case INT_1:
+        case INT_2:
+        case INT_3:
+            m_ConstData.iArr[_param] = *((int*)pValue);
             break;
 
-        case SCALAR_PARAM::FLOAT_0:
-        case SCALAR_PARAM::FLOAT_1:
-        case SCALAR_PARAM::FLOAT_2:
-        case SCALAR_PARAM::FLOAT_3:
-            m_ConstData.fArr[(UINT)_param - (UINT)SCALAR_PARAM::FLOAT_0] = *((float*)pValue);
+        case FLOAT_0:
+        case FLOAT_1:
+        case FLOAT_2:
+        case FLOAT_3:
+            m_ConstData.fArr[_param - FLOAT_0] = *((float*)pValue);
             break;
 
-        case SCALAR_PARAM::VEC2_0:
-        case SCALAR_PARAM::VEC2_1:
-        case SCALAR_PARAM::VEC2_2:
-        case SCALAR_PARAM::VEC2_3:
-            m_ConstData.v2Arr[(UINT)_param - (UINT)SCALAR_PARAM::VEC2_0] = *((Vec2*)pValue);
+        case VEC2_0:
+        case VEC2_1:
+        case VEC2_2:
+        case VEC2_3:
+            m_ConstData.v2Arr[_param - VEC2_0] = *((Vec2*)pValue);
             break;
 
-        case SCALAR_PARAM::VEC4_0:
-        case SCALAR_PARAM::VEC4_1:
-        case SCALAR_PARAM::VEC4_2:
-        case SCALAR_PARAM::VEC4_3:
-            m_ConstData.v4Arr[(UINT)_param - (UINT)SCALAR_PARAM::VEC4_0] = *((Vec4*)pValue);
+        case VEC4_0:
+        case VEC4_1:
+        case VEC4_2:
+        case VEC4_3:
+            m_ConstData.v4Arr[_param - VEC4_0] = *((Vec4*)pValue);
             break;
 
-        case SCALAR_PARAM::MAT_0:
-        case SCALAR_PARAM::MAT_1:
-        case SCALAR_PARAM::MAT_2:
-        case SCALAR_PARAM::MAT_3:
-            m_ConstData.matArr[(UINT)_param - (UINT)SCALAR_PARAM::MAT_0] = *((Matrix*)pValue);
+        case MAT_0:
+        case MAT_1:
+        case MAT_2:
+        case MAT_3:
+            m_ConstData.matArr[_param - MAT_0] = *((Matrix*)pValue);
             break;
         }
     }
