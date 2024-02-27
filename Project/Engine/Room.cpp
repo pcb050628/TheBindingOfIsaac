@@ -23,6 +23,24 @@ Room::Room() : Resource(RESOURCE_TYPE::ROOM)
 	}
 }
 
+Room::Room(const Room& _origin)
+	: Resource(_origin)
+	, m_Info(_origin.m_Info)
+	, m_State(ROOM_STATE::NONE)
+	, Left(nullptr)
+	, Right(nullptr)
+	, Top(nullptr)
+	, Bottom(nullptr)
+	, m_bEditMode(false)
+{
+	for (int i = 0; i < (int)LAYER_TYPE::END; i++)
+	{
+		m_Layers[i] = _origin.m_Layers[i]->Clone();
+	}
+
+	m_MainCam = m_Layers[_origin.m_MainCam->m_iLayerIdx]->GetGameObject(_origin.m_MainCam->GetName());
+}
+
 Room::~Room()
 {
 	for (int i = 0; i < (UINT)LAYER_TYPE::END; i++)

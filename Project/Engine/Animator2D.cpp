@@ -16,6 +16,20 @@ Animator2D::Animator2D() : Component(COMPONENT_TYPE::ANIMATOR2D)
 {
 }
 
+Animator2D::Animator2D(const Animator2D& _origin)
+	: Component(_origin)
+	, m_CurAnim(nullptr)
+{
+	map<wstring, Anim*>::const_iterator iter = _origin.m_Anims.begin();
+	for (; iter != _origin.m_Anims.end(); iter++)
+	{
+		Anim* anim = iter->second->Clone();
+		AddAnim(anim);
+	}
+
+	SetCurAnim(_origin.m_CurAnim->GetResourceName());
+}
+
 Animator2D::~Animator2D()
 {
 }
@@ -71,6 +85,15 @@ void Animator2D::GetAllAnim(std::vector<std::string>& _Out)
 	{
 		_Out.push_back(ToString(iter->first));
 	}
+}
+
+void Animator2D::SetCurAnim(const std::wstring& _key)
+{
+	auto iter = m_Anims.find(_key);
+	if (iter == m_Anims.end())
+		return;
+
+	m_CurAnim = iter->second;
 }
 
 void Animator2D::Play(const std::wstring& _key, bool _repeat)

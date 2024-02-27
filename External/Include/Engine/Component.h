@@ -20,8 +20,10 @@ public:
 
     virtual const COMPONENT_TYPE GetType() { return m_Type; }
 
+    virtual Component* Clone() = 0;
 public:
     Component(COMPONENT_TYPE _type);
+    Component(const Component& _origin);
     virtual ~Component();
 
     friend GameObject;

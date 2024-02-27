@@ -8,6 +8,7 @@ class SpotLight2DMove :
 public:
     void Update() override;
 
+    CLONE(SpotLight2DMove)
 public:
     SpotLight2DMove();
     ~SpotLight2DMove();

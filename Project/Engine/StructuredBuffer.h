@@ -45,8 +45,10 @@ public:
     UINT GetElementSize() { return m_ElementSize; }
     UINT GetElementCount() { return m_ElementCount; }
 
+    CLONE(StructuredBuffer)
 public:
     StructuredBuffer();
+    StructuredBuffer(const StructuredBuffer& _origin);
     ~StructuredBuffer();
 
 };

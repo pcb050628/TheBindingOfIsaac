@@ -3,11 +3,24 @@
 #include "GameObject.h"
 #include "GarbageCollection.h"
 
+
 Layer::Layer()
 	: m_Parents()
 	, m_Gobjs()
 	, m_iLayerIdx(-1)
 {
+}
+
+Layer::Layer(const Layer& _origin)
+	: Entity(_origin)
+	, m_iLayerIdx(_origin.m_iLayerIdx)
+{
+	size_t objCount = _origin.m_Parents.size();
+	for (size_t i = 0; i < objCount; i++)
+	{
+		GameObject* obj = _origin.m_Parents[i]->Clone();
+		AddObject(obj);
+	}
 }
 
 Layer::~Layer()
@@ -156,4 +169,29 @@ void Layer::DetachGameObject(GameObject* _obj)
 void Layer::RegisterObject(GameObject* _obj)
 {
 	m_Gobjs.push_back(_obj);
+}
+
+GameObject* Layer::GetGameObject(GameObject* _obj)
+{
+	for (size_t i = 0; i < m_Parents.size(); i++)
+	{
+		if (_obj == m_Parents[i])
+		{
+			return m_Parents[i];
+		}
+	}
+
+	return nullptr;
+}
+
+GameObject* Layer::GetGameObject(const wstring& _name)
+{
+	for (size_t i = 0; i < m_Parents.size(); i++)
+	{
+		if (_name == m_Parents[i]->GetName())
+		{
+			return m_Parents[i];
+		}
+	}
+	return nullptr;
 }

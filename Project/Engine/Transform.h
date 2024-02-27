@@ -42,6 +42,7 @@ public:
     void AddRelativeScale(Vec3 _scale) { m_vRelativeScale += _scale; }
     void AddRelativeRotation(Vec3 _rotate) { m_vRelativeRot += _rotate; }
 
+    CLONE(Transform)
 public:
     Transform();
     ~Transform() override;

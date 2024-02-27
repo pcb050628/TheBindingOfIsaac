@@ -25,17 +25,21 @@ public:
     Anim* GetCurAnim() { return m_CurAnim; }
     void GetAllAnim(std::vector<std::string>& _Out);
 
+    void SetCurAnim(const std::wstring& _key);
+
     void Play(const std::wstring& _key, bool _repeat = false);
 
     void Play();
     void Pause(bool _reset);
     void SetRepeat(bool _repeat);
 
+    CLONE(Animator2D)
 public:
     //void CreateAnim(Texture* _atlas, );
 
 public:
     Animator2D();
+    Animator2D(const Animator2D& _origin);
     ~Animator2D();
 };
 

@@ -99,8 +99,10 @@ public:
 
     void ChangeState(ROOM_STATE _state);
 
+    CLONE(Room)
 public:
     Room();
+    Room(const Room& _origin);
     virtual ~Room() override;
 
     friend class Chapter;

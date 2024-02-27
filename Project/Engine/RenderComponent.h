@@ -25,8 +25,10 @@ public:
     Material* GetMaterial() { return m_CurMaterial; }
     Material* GetDynamicMaterial();
 
+    virtual RenderComponent* Clone() = 0;
 public:
     RenderComponent(COMPONENT_TYPE _type);
+    RenderComponent(const RenderComponent& _origin);
     virtual ~RenderComponent();
 };
 

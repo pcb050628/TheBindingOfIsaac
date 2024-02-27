@@ -20,6 +20,18 @@ Anim::Anim() : Resource(RESOURCE_TYPE::ANIM)
 {
 }
 
+Anim::Anim(const Anim& _origin)
+	: Resource(_origin)
+	, m_CurFrameIdx(_origin.m_CurFrameIdx)
+	, m_fDuration(_origin.m_fDuration)
+	, m_fAccTime(0.f)
+	, m_bIsPlaying(false)
+	, m_bIsRepeat(_origin.m_bIsRepeat)
+{
+	m_Atlas = ResourceManager::GetInst()->Find<Texture>(_origin.m_Atlas->GetResourceName());
+	m_Frames.insert(m_Frames.end(), _origin.m_Frames.begin(), _origin.m_Frames.end());
+}
+
 Anim::~Anim()
 {
 }

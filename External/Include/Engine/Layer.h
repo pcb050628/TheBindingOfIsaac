@@ -29,8 +29,13 @@ public:
     vector<GameObject*> GetParentObjects() { return m_Parents; }
     const vector<GameObject*>& GetGameObject() { return m_Gobjs; }
 
+    GameObject* GetGameObject(GameObject* _obj);
+    GameObject* GetGameObject(const wstring& _name);
+
+    CLONE(Layer)
 public:
     Layer();
+    Layer(const Layer& _origin);
     ~Layer() override;
 
     friend class Room;

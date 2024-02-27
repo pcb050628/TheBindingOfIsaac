@@ -31,7 +31,7 @@ public:
     GET_OTHER_COMPONENT(Collider2D);
     GET_OTHER_COMPONENT(Light2D);
 
-
+    virtual Script* Clone() = 0;
 public:
     Script(const std::wstring& _name);
     ~Script();

@@ -15,6 +15,15 @@ StructuredBuffer::StructuredBuffer()
 {
 }
 
+StructuredBuffer::StructuredBuffer(const StructuredBuffer& _origin)
+	: Entity(_origin)
+	, m_RecentNum_SRV(-1)
+	, m_RecentNum_UAV(-1)
+
+{
+	Create(_origin.m_ElementSize, _origin.m_ElementCount, _origin.m_SBType, _origin.m_bSysMemMove);
+}
+
 StructuredBuffer::~StructuredBuffer()
 {
 }

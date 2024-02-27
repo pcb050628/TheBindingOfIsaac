@@ -26,6 +26,7 @@ public:
     float GetRadius() { return m_Info.fRadius; }
     float GetAngle() { return m_Info.fAngle; }
 
+    CLONE(Light2D)
 public:
     Light2D();
     ~Light2D();

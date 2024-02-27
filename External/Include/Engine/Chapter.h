@@ -39,8 +39,10 @@ private:
 
     void AddRoom(Room* _room);
 
+    CLONE(Chapter)
 public:
     Chapter();
+    Chapter(const Chapter& _origin);
     virtual ~Chapter() override;
 
     friend class ChapterManager;

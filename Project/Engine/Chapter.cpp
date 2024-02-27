@@ -16,6 +16,19 @@ Chapter::Chapter()
 	AddRoom(m_CurRoom);
 }
 
+Chapter::Chapter(const Chapter& _origin)
+	: Entity(_origin)
+	, m_bIsTransitioning(false)
+{
+	size_t roomCount = _origin.m_Rooms.size();
+	for (size_t i = 0; i < roomCount; i++)
+	{
+		AddRoom(_origin.m_Rooms[i]->Clone());
+	}
+
+	m_CurRoom = m_Rooms[_origin.m_CurRoom->m_Info.RoomNumber];
+}
+
 Chapter::~Chapter()
 {
 	for (int i = 0; i < m_Rooms.size(); i++)

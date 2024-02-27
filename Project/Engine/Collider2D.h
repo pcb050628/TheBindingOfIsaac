@@ -44,6 +44,7 @@ public:
 
     const Matrix& GetColliderWorldMat() { return m_matColWorld; }
 
+    CLONE(Collider2D)
 public:
     Collider2D();
     ~Collider2D();

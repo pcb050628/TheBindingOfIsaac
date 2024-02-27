@@ -29,6 +29,32 @@ GameObject::GameObject(const std::wstring& _name)
 	SetName(_name);
 }
 
+GameObject::GameObject(const GameObject& _origin)
+	: Entity(_origin)
+	, m_Parent(nullptr)
+	, m_iLayerIdx(-1)
+	, m_RoomNumber(-1)
+{
+	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+	{
+		AddComponent(_origin.m_Components[i]->Clone());
+	}
+
+	map<wstring, Script*>::const_iterator iter = _origin.m_Scripts.begin();
+	for (; iter != _origin.m_Scripts.end(); iter++)
+	{
+		AddComponent(iter->second->Clone());
+	}
+
+	size_t childCount = _origin.m_ChildObjs.size();
+	for (size_t i = 0; i < childCount; i++)
+	{
+		GameObject* childObj = _origin.m_ChildObjs[i]->Clone();
+		AttachChild(childObj);
+		childObj->m_iLayerIdx = _origin.m_ChildObjs[i]->m_iLayerIdx;
+	}
+}
+
 GameObject::~GameObject()
 {
 	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)

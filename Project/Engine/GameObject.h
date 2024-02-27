@@ -74,12 +74,14 @@ public:
     int Save();
     int Load(const std::wstring& _strFileName);
 
+    CLONE(GameObject)
 private:
     void Destroy() { SetDead(); }
 
 public:
     GameObject();
     GameObject(const std::wstring& _name);
+    GameObject(const GameObject& _origin);
     virtual ~GameObject() override;
 
     friend class Layer;

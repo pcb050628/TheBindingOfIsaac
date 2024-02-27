@@ -10,6 +10,14 @@ Entity::Entity()
 {
 }
 
+Entity::Entity(const Entity& _origin)
+	: m_ID(m_NextID++)
+	, m_Name(_origin.m_Name)
+	, m_bIsDead(false)
+{
+
+}
+
 Entity::~Entity()
 {
 }

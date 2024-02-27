@@ -71,6 +71,7 @@ public:
     // Camera Register
     void SetCameraPriority(int _Priority);
 
+    CLONE(Camera)
 public:
     Camera();
     ~Camera();

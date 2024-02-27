@@ -18,6 +18,7 @@ public:
     void UpdateData();
     void UpdateData_CS();   
 
+    CLONE_DISABLE(ConstantBuffer)
 public:
     Microsoft::WRL::ComPtr<ID3D11Buffer> GetBuffer() { return m_CB; }
 

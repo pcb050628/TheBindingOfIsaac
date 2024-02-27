@@ -10,6 +10,7 @@ public:
     void UpdateData() override;
     void Render() override;
 
+    CLONE(MeshRenderer)
 public:
     MeshRenderer();
     ~MeshRenderer();

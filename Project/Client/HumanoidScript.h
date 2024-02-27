@@ -22,8 +22,10 @@ public:
     DIRECTION GetHeadDir() { return HeadDir; }
     DIRECTION GetBodyDir() { return BodyDir; }
 
+    CLONE(HumanoidScript)
 public:
     HumanoidScript();
+    HumanoidScript(const HumanoidScript& _origin);
     ~HumanoidScript();
 };
 REGISTER_SCRIPT(HumanoidScript);

@@ -6,8 +6,15 @@ HumanoidScript::HumanoidScript() : Script(L"Humanoid")
 	, Body(nullptr)
 	, HeadDir(DIRECTION::BottomDir)
 	, BodyDir(DIRECTION::BottomDir)
-{
-}
+{}
+
+HumanoidScript::HumanoidScript(const HumanoidScript& _origin)
+	: Script(_origin)
+	, Head(nullptr)
+	, Body(nullptr)
+	, HeadDir(DIRECTION::BottomDir)
+	, BodyDir(DIRECTION::BottomDir)
+{}
 
 HumanoidScript::~HumanoidScript()
 {
