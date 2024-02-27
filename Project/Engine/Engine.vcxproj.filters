@@ -43,12 +43,6 @@
     <Filter Include="02_Manager\Input">
       <UniqueIdentifier>{3002f376-0cdf-4a02-a532-f84a4eee8483}</UniqueIdentifier>
     </Filter>
-    <Filter Include="02_Manager\ScriptFactory">
-      <UniqueIdentifier>{3404252a-a3d1-4c05-8e1b-55e1c43229f0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="02_Manager\ScriptFactory\Script">
-      <UniqueIdentifier>{d653c73a-61fb-4513-aef1-f212e98a998d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="03_OBJ">
       <UniqueIdentifier>{5aaf40f6-0afe-4b69-b2e5-fdca117409aa}</UniqueIdentifier>
     </Filter>
@@ -132,6 +126,9 @@
     </Filter>
     <Filter Include="Default\ShaderCode\Render">
       <UniqueIdentifier>{f3c83fc9-74e1-4932-8d77-2153930604fe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="03_OBJ\Component\Script">
+      <UniqueIdentifier>{d653c73a-61fb-4513-aef1-f212e98a998d}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -259,10 +256,7 @@
       <Filter>Resource</Filter>
     </ClInclude>
     <ClInclude Include="Script.h">
-      <Filter>02_Manager\ScriptFactory\Script</Filter>
-    </ClInclude>
-    <ClInclude Include="ScriptFactory.h">
-      <Filter>02_Manager\ScriptFactory</Filter>
+      <Filter>03_OBJ\Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h" />
   </ItemGroup>
@@ -379,10 +373,7 @@
       <Filter>Resource</Filter>
     </ClCompile>
     <ClCompile Include="Script.cpp">
-      <Filter>02_Manager\ScriptFactory\Script</Filter>
-    </ClCompile>
-    <ClCompile Include="ScriptFactory.cpp">
-      <Filter>02_Manager\ScriptFactory</Filter>
+      <Filter>03_OBJ\Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp" />
   </ItemGroup>

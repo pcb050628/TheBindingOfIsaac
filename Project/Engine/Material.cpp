@@ -30,7 +30,7 @@ void Material::UpdateData()
 	m_Shader->UpdateData();
 
 	// Texture Update(Register Binding)
-	for (UINT i = 0; i < TEX_PARAM::END; ++i)
+	for (UINT i = 0; i < (UINT)TEX_PARAM::END; ++i)
 	{
 		if (nullptr != m_Textures[i])
 		{
@@ -134,7 +134,7 @@ bool Material::Save()
 	fwrite(&m_ConstData, sizeof(tMtrlData), 1, pFile);
 
 	//texture
-	for (int i = 0; i < TEX_PARAM::END; i++)
+	for (int i = 0; i < (UINT)TEX_PARAM::END; i++)
 	{
 		//SaveResourceRef(m_Textures[i], pFile);
 		SaveResourceRef<Texture>(m_Textures[i], pFile);
