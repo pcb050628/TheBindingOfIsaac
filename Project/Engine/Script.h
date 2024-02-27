@@ -7,22 +7,20 @@
 #include "GameObject.h"
 #include "components.h"
 
-#include "ScriptFactory.h"
-
 #define GET_OTHER_COMPONENT(Type) Type* Get##Type() { return GetOwner()->Get##Type(); }
-#define SCRIPT(SCRIPTNAME) public: class Script* Instance() override { return new SCRIPTNAME; }
 
 class Script :
     public Component
 {
+private:
+    const UINT m_ScriptType;
+
 public:
     virtual void Enter() {}
     virtual void Init() {}
     virtual void Update() override {}
     virtual void LateUpdate() final {}
     virtual void Exit() {}
-
-    virtual Script* Instance() = 0;
 
     GET_OTHER_COMPONENT(Transform);
     GET_OTHER_COMPONENT(MeshRenderer);
@@ -31,9 +29,11 @@ public:
     GET_OTHER_COMPONENT(Collider2D);
     GET_OTHER_COMPONENT(Light2D);
 
+    UINT GetScriptType() { return m_ScriptType; }
+
     virtual Script* Clone() = 0;
 public:
-    Script(const std::wstring& _name);
+    Script(const std::wstring& _name, UINT _scriptType);
     ~Script();
 };
 

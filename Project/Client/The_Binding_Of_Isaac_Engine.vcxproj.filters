@@ -112,15 +112,6 @@
     <Filter Include="ImGuiManager">
       <UniqueIdentifier>{8992aaa4-cbc7-4d6c-9f1b-a5291683b3dd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scripts">
-      <UniqueIdentifier>{ab0ce175-c92b-40a3-97e9-e3e2bbd72f70}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scripts\Object">
-      <UniqueIdentifier>{d1248e1a-f118-409d-a1f4-eaed749f3eff}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Scripts\Humanoid">
-      <UniqueIdentifier>{7c5c1a93-0215-4818-8b0d-2b42125c6658}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -246,12 +237,6 @@
     <ClInclude Include="MenuGUI.h">
       <Filter>GUI\04_Util\MenuGUI</Filter>
     </ClInclude>
-    <ClInclude Include="SpotLight2DMove.h">
-      <Filter>Scripts</Filter>
-    </ClInclude>
-    <ClInclude Include="HumanoidScript.h">
-      <Filter>Scripts\Humanoid</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Image Include="small.ico">
@@ -367,12 +352,6 @@
     </ClCompile>
     <ClCompile Include="MenuGUI.cpp">
       <Filter>GUI\04_Util\MenuGUI</Filter>
-    </ClCompile>
-    <ClCompile Include="SpotLight2DMove.cpp">
-      <Filter>Scripts</Filter>
-    </ClCompile>
-    <ClCompile Include="HumanoidScript.cpp">
-      <Filter>Scripts\Humanoid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
