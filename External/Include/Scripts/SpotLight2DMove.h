@@ -7,6 +7,9 @@ class SpotLight2DMove :
 public:
     void Update() override;
 
+    void SaveToFile(FILE* _file) override;
+    void LoadFromFile(FILE* _file) override;
+
     CLONE(SpotLight2DMove)
 public:
     SpotLight2DMove();

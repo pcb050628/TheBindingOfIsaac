@@ -20,6 +20,9 @@ public:
 
     virtual const COMPONENT_TYPE GetType() { return m_Type; }
 
+    virtual void SaveToFile(FILE* _file) = 0;
+    virtual void LoadFromFile(FILE* _file) = 0;
+
     virtual Component* Clone() = 0;
 public:
     Component(COMPONENT_TYPE _type);

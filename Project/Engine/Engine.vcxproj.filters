@@ -130,6 +130,9 @@
     <Filter Include="03_OBJ\Component\Script">
       <UniqueIdentifier>{d653c73a-61fb-4513-aef1-f212e98a998d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource\Prefab">
+      <UniqueIdentifier>{cf078ded-5b1e-49ea-9e42-6e46f3e99489}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h">
@@ -259,6 +262,9 @@
       <Filter>03_OBJ\Component\Script</Filter>
     </ClInclude>
     <ClInclude Include="Entity.h" />
+    <ClInclude Include="Prefab.h">
+      <Filter>Resource\Prefab</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -376,6 +382,9 @@
       <Filter>03_OBJ\Component\Script</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp" />
+    <ClCompile Include="Prefab.cpp">
+      <Filter>Resource\Prefab</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="func.fx">

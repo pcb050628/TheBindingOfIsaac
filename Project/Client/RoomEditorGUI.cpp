@@ -55,23 +55,23 @@ void RoomEditorGUI::RenderUpdate()
 		m_EditRoom->SetResourceName(ToWstring(roomname));
 
 
-		ImGui::Text("Object"); ImGui::SameLine();
-		if (ImGui::Button("##ObjectSelectCheckBox", ImVec2(20, 20)))
-		{
-			ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
-
-			std::vector<std::string> objlist;
-			ResourceManager::GetInst()->GetAssetName(RESOURCE_TYPE::GAMEOBJECT, objlist);
-
-			list->AddString(objlist);
-			list->SetDelegate(this, (Delegate_1)&RoomEditorGUI::SelectObject);
-			list->Activate();
-		}
-		ImGui::Spacing();
-
-		std::string name = ToString(m_SelectObject);
-		std::string label = "##RoomEditorGUISelectObjectInputText";
-		ImGui::Text("SelectObject"); ImGui::SameLine(); ImGui::InputText(label.c_str(), (char*)name.data(), name.size(), ImGuiInputTextFlags_ReadOnly);
+		//ImGui::Text("Object"); ImGui::SameLine();
+		//if (ImGui::Button("##ObjectSelectCheckBox", ImVec2(20, 20)))
+		//{
+		//	ListGUI* list = (ListGUI*)ImGuiManager::GetInst()->FindGUI("##ListGUI");
+		//
+		//	std::vector<std::string> objlist;
+		//	ResourceManager::GetInst()->GetAssetName(RESOURCE_TYPE::GAMEOBJECT, objlist);
+		//
+		//	list->AddString(objlist);
+		//	list->SetDelegate(this, (Delegate_1)&RoomEditorGUI::SelectObject);
+		//	list->Activate();
+		//}
+		//ImGui::Spacing();
+		//
+		//std::string name = ToString(m_SelectObject);
+		//std::string label = "##RoomEditorGUISelectObjectInputText";
+		//ImGui::Text("SelectObject"); ImGui::SameLine(); ImGui::InputText(label.c_str(), (char*)name.data(), name.size(), ImGuiInputTextFlags_ReadOnly);
 
 		ImGui::Text("Save"); ImGui::SameLine();
 		if (ImGui::Button("##RoomEditorGUISaveButton", ImVec2(20, 20)))
@@ -129,10 +129,10 @@ void RoomEditorGUI::CreateNewRoom()
 
 	m_EditRoom->AddObject(obj, LAYER_TYPE::Camera, false);
 
-	obj = new GameObject;
-	obj->Load(L"test_rock.gobj");
-
-	m_EditRoom->AddObject(obj, LAYER_TYPE::Object, false);
+	//obj = new GameObject;
+	//obj->Load(L"test_rock.gobj");
+	//
+	//m_EditRoom->AddObject(obj, LAYER_TYPE::Object, false);
 }
 
 void RoomEditorGUI::SelectObject(DWORD_PTR _str)

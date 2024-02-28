@@ -26,6 +26,9 @@ public:
     float GetRadius() { return m_Info.fRadius; }
     float GetAngle() { return m_Info.fAngle; }
 
+    virtual void SaveToFile(FILE* _file) override;
+    virtual void LoadFromFile(FILE* _file) override;
+
     CLONE(Light2D)
 public:
     Light2D();

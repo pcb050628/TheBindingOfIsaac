@@ -79,9 +79,6 @@
     <Filter Include="GUI\05_Editor\RoomEditor">
       <UniqueIdentifier>{5c6f6c73-db5f-41d0-b8f7-adf4fde38ebc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GUI\05_Editor\ObjectEditor">
-      <UniqueIdentifier>{f7d8b67a-f246-4450-bd24-de894d819d0b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GUI\04_Util">
       <UniqueIdentifier>{ecf58b8d-fbf1-4b73-953c-d1f615943f49}</UniqueIdentifier>
     </Filter>
@@ -111,6 +108,9 @@
     </Filter>
     <Filter Include="ImGuiManager">
       <UniqueIdentifier>{8992aaa4-cbc7-4d6c-9f1b-a5291683b3dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="SaveLoadManager">
+      <UniqueIdentifier>{32fef23c-84d9-418c-abf1-e2db21ce816b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -222,9 +222,6 @@
     <ClInclude Include="TextureGUI.h">
       <Filter>GUI\02_Content\ResourceGUI\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectEditorGUI.h">
-      <Filter>GUI\05_Editor\ObjectEditor</Filter>
-    </ClInclude>
     <ClInclude Include="ParamGUI.h">
       <Filter>GUI\04_Util\PrarmGUI</Filter>
     </ClInclude>
@@ -236,6 +233,9 @@
     </ClInclude>
     <ClInclude Include="MenuGUI.h">
       <Filter>GUI\04_Util\MenuGUI</Filter>
+    </ClInclude>
+    <ClInclude Include="SaveLoadManager.h">
+      <Filter>SaveLoadManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -338,9 +338,6 @@
     <ClCompile Include="TextureGUI.cpp">
       <Filter>GUI\02_Content\ResourceGUI\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectEditorGUI.cpp">
-      <Filter>GUI\05_Editor\ObjectEditor</Filter>
-    </ClCompile>
     <ClCompile Include="ParamGUI.cpp">
       <Filter>GUI\04_Util\PrarmGUI</Filter>
     </ClCompile>
@@ -352,6 +349,9 @@
     </ClCompile>
     <ClCompile Include="MenuGUI.cpp">
       <Filter>GUI\04_Util\MenuGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SaveLoadManager.cpp">
+      <Filter>SaveLoadManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

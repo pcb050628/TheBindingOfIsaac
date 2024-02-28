@@ -4,3 +4,4 @@
 #include "Material.h"
 #include "Texture.h"
 #include "Anim.h"
+#include "Prefab.h"

@@ -8,8 +8,6 @@
 #include "ChapterManager.h"
 #include "Layer.h"
 
-#include <Scripts\ScriptManager.h>
-
 GameObject::GameObject()
 	: m_Components{}
 	, m_RenderComponent(nullptr)
@@ -40,10 +38,9 @@ GameObject::GameObject(const GameObject& _origin)
 		AddComponent(_origin.m_Components[i]->Clone());
 	}
 
-	map<wstring, Script*>::const_iterator iter = _origin.m_Scripts.begin();
-	for (; iter != _origin.m_Scripts.end(); iter++)
+	for (size_t i = 0; i < m_Scripts.size(); i++)
 	{
-		AddComponent(iter->second->Clone());
+		AddComponent(_origin.m_Scripts[i]->Clone());
 	}
 
 	size_t childCount = _origin.m_ChildObjs.size();
@@ -66,11 +63,13 @@ GameObject::~GameObject()
 		}
 	}
 
-	auto pair = m_Scripts.begin();
-	for (; pair != m_Scripts.end(); )
+	for (size_t i = 0; i < m_Scripts.size(); i++)
 	{
-		delete pair->second;
-		pair = m_Scripts.erase(pair);
+		if (m_Scripts[i] != nullptr)
+		{
+			delete m_Scripts[i];
+			m_Scripts[i] = nullptr;
+		}
 	}
 
 	for (int i = 0; i < m_ChildObjs.size(); i++)
@@ -85,9 +84,9 @@ GameObject::~GameObject()
 
 void GameObject::Enter()
 {
-	for (auto pair : m_Scripts)
+	for (size_t i = 0; i < m_Scripts.size(); i++)
 	{
-		pair.second->Enter();
+		m_Scripts[i]->Enter();
 	}
 }
 
@@ -99,9 +98,9 @@ void GameObject::Update()
 			m_Components[i]->Update();
 	}
 
-	for (auto pair : m_Scripts)
+	for (size_t i = 0; i < m_Scripts.size(); i++)
 	{
-		pair.second->Update();
+		m_Scripts[i]->Update();
 	}
 
 	for (GameObject* child : m_ChildObjs)
@@ -134,9 +133,33 @@ void GameObject::Render()
 
 void GameObject::Exit()
 {
-	for (auto pair : m_Scripts)
+	for (size_t i = 0; i < m_Scripts.size(); i++)
 	{
-		pair.second->Exit();
+		m_Scripts[i]->Exit();
+	}
+}
+
+void GameObject::BeginOverlap(Collider2D* _other)
+{
+	for (size_t i = 0; i < m_Scripts.size(); i++)
+	{
+		m_Scripts[i]->BeginOverlap(_other);
+	}
+}
+
+void GameObject::Overlap(Collider2D* _other)
+{
+	for (size_t i = 0; i < m_Scripts.size(); i++)
+	{
+		m_Scripts[i]->Overlap(_other);
+	}
+}
+
+void GameObject::EndOverlap(Collider2D* _other)
+{
+	for (size_t i = 0; i < m_Scripts.size(); i++)
+	{
+		m_Scripts[i]->EndOverlap(_other);
 	}
 }
 
@@ -151,7 +174,7 @@ void GameObject::AddComponent(Component* _comp)
 	if (type == COMPONENT_TYPE::SCRIPT)
 	{
 		((Script*)_comp)->Init();
-		m_Scripts.insert(make_pair(_comp->GetName(), (Script*)_comp));
+		m_Scripts.push_back((Script*)_comp);
 	}
 	else
 	{
@@ -176,16 +199,6 @@ void GameObject::DeleteComponent(COMPONENT_TYPE _type)
 	delete m_Components[(UINT)_type];
 	m_Components[(UINT)_type] = nullptr;
 
-}
-
-void GameObject::DeleteScript(const std::wstring& _name)
-{
-	auto iter = m_Scripts.find(_name);
-	if (m_Scripts.end() == iter)
-		return;
-
-	delete iter->second;
-	m_Scripts.erase(iter);
 }
 
 void GameObject::AttachChild(GameObject* _objChild)
@@ -226,183 +239,172 @@ void GameObject::DisconnectWithLayer()
 	ChapterManager::GetInst()->GetCurChapter()->DetachGameObject(this);
 	m_iLayerIdx = -1;
 }
-
-void GameObject::GetScriptName(std::vector<std::string>& _out)
-{
-	if (m_Scripts.empty())
-		return;
-
-	for (auto pair : m_Scripts)
-	{
-		_out.push_back(ToString(pair.first));
-	}
-}
-
-int GameObject::Save()
-{
-	wstring filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + GetName();
-	filePath += L".gobj";
-
-	FILE* pFile = nullptr;
-	_wfopen_s(&pFile, filePath.c_str(), L"wb");
-
-	if (nullptr == pFile)
-		return E_FAIL;
-
-	//컴포넌트
-	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
-	{
-		bool isExist = false;
-		if (nullptr != m_Components[i]) isExist = true;
-		fwrite(&isExist, sizeof(bool), 1, pFile);
-	}
-
-	//스크립트
-	size_t size = m_Scripts.size();
-	fwrite(&size, sizeof(size_t), 1, pFile);
-	for (auto pair : m_Scripts)
-	{
-		size_t len = pair.first.size();
-		fwrite(&len, sizeof(size_t), 1, pFile);
-		fwrite(pair.first.c_str(), sizeof(wchar_t), len, pFile);
-	}
-
-	return S_OK;
-
-	//std::wofstream fileStream(filePath);
-	//
-	//if (fileStream.is_open())
-	//{
-	//	//RenderComonent 또는 Animator 처럼 원래의 에셋들을 모두 가져오는게 좋은 경우가 있는데 이 경우는 스크립트로 커버하기
-	//	fileStream << L"[COMPONENT]" << std::endl;
-	//	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
-	//	{
-	//		fileStream << i << L"|";
-	//		if (nullptr == m_Components[i])
-	//			fileStream << 0;
-	//		else
-	//			fileStream << 1;
-	//
-	//		fileStream << std::endl;
-	//	}
-	//
-	//	fileStream << L"[SCRIPT]" << std::endl;
-	//	for (auto pair : m_Scripts)
-	//	{
-	//		fileStream << pair.first << std::endl;
-	//	}
-	//
-	//	fileStream << L"END";
-	//
-	//	fileStream.close();
-	//
-	//	return S_OK;
-	//}
-	//else
-	//	return E_FAIL;
-	//
-	//return E_FAIL;
-}
-
-int GameObject::Load(const std::wstring& _strFileName)
-{
-	wstring filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + _strFileName;
-
-	wchar_t szName[20] = {};
-	_wsplitpath_s(filePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
-
-	SetName(szName);
-
-	FILE* pFile = nullptr; 
-	_wfopen_s(&pFile, filePath.c_str(), L"rb"); 
-
-	if (nullptr == pFile) 
-		return E_FAIL; 
-
-	//컴포넌트
-	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
-	{
-		bool isExist = false;
-		fread(&isExist, sizeof(bool), 1, pFile);
-		if(isExist) AddComponent(GetComponentByComponentType((COMPONENT_TYPE)i));
-	}
-
-	//스크립트
-	size_t size = 0;
-	fread(&size, sizeof(size_t), 1, pFile);
-	for (int i = 0; i < size; i++)
-	{
-		size_t len = 0;
-		fread(&len, sizeof(size_t), 1, pFile);
-		wstring name;
-		name.resize(len);
-		fread(name.data(), sizeof(wchar_t), len, pFile);
-
-		Script* scrpt = ScriptManager::GetScript(name);
-		if (scrpt != nullptr)
-			AddComponent(scrpt);
-		else
-		{
-			MessageBoxW(nullptr, L"Script Not Exist", L"GameObject Load Error", MB_OK);
-		}
-	}
-
-	return S_OK;
-
-	//std::wifstream fileStream(filePath);
-	//bool component = true;
-	//if (fileStream.is_open())
-	//{
-	//	std::wstring line;
-	//
-	//	while (true)
-	//	{
-	//		std::getline(fileStream, line);
-	//
-	//		if (line == L"END")
-	//			break;
-	//
-	//		if (line == L"[COMPONENT]")
-	//		{
-	//			component = true;
-	//		}
-	//		else if (line == L"[SCRIPT]")
-	//		{
-	//			component = false;
-	//		}
-	//		else
-	//		{
-	//			//RenderComonent 또는 Animator 처럼 원래의 에셋들을 모두 가져오는게 좋은 경우가 있는데 이 경우는 스크립트로 커버하기
-	//			if (component)
-	//			{
-	//				std::wstring comp = line.substr(0, 1);
-	//				std::wstring active = line.substr(2, 1);
-	//
-	//				int iComp = atoi(std::string(comp.begin(), comp.end()).c_str());
-	//				int iActive = atoi(std::string(active.begin(), active.end()).c_str());
-	//
-	//				if (1 == iActive)
-	//				{
-	//					AddComponent(GetComponentByComponentType((COMPONENT_TYPE)iComp));
-	//				}
-	//			}
-	//			else
-	//			{
-	//				Script* scrpt = ScriptFactory::GetInst()->Find(line);
-	//				if (scrpt != nullptr)
-	//					AddComponent(scrpt);
-	//				else
-	//				{
-	//					MessageBoxW(nullptr, L"Script Not Exist", L"GameObject Load Error", MB_OK);
-	//				}
-	//			}
-	//
-	//		}
-	//	}
-	//
-	//	fileStream.close();
-	//	return S_OK;
-	//}
-	//else
-	//	return E_FAIL;
-}
+//
+//int GameObject::Save()
+//{
+//	wstring filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + GetName();
+//	filePath += L".gobj";
+//
+//	FILE* pFile = nullptr;
+//	_wfopen_s(&pFile, filePath.c_str(), L"wb");
+//
+//	if (nullptr == pFile)
+//		return E_FAIL;
+//
+//	//컴포넌트
+//	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+//	{
+//		bool isExist = false;
+//		if (nullptr != m_Components[i]) isExist = true;
+//		fwrite(&isExist, sizeof(bool), 1, pFile);
+//	}
+//
+//	//스크립트
+//	size_t size = m_Scripts.size();
+//	fwrite(&size, sizeof(size_t), 1, pFile);
+//	for (auto pair : m_Scripts)
+//	{
+//		size_t len = pair.first.size();
+//		fwrite(&len, sizeof(size_t), 1, pFile);
+//		fwrite(pair.first.c_str(), sizeof(wchar_t), len, pFile);
+//	}
+//
+//	return S_OK;
+//
+//	//std::wofstream fileStream(filePath);
+//	//
+//	//if (fileStream.is_open())
+//	//{
+//	//	//RenderComonent 또는 Animator 처럼 원래의 에셋들을 모두 가져오는게 좋은 경우가 있는데 이 경우는 스크립트로 커버하기
+//	//	fileStream << L"[COMPONENT]" << std::endl;
+//	//	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+//	//	{
+//	//		fileStream << i << L"|";
+//	//		if (nullptr == m_Components[i])
+//	//			fileStream << 0;
+//	//		else
+//	//			fileStream << 1;
+//	//
+//	//		fileStream << std::endl;
+//	//	}
+//	//
+//	//	fileStream << L"[SCRIPT]" << std::endl;
+//	//	for (auto pair : m_Scripts)
+//	//	{
+//	//		fileStream << pair.first << std::endl;
+//	//	}
+//	//
+//	//	fileStream << L"END";
+//	//
+//	//	fileStream.close();
+//	//
+//	//	return S_OK;
+//	//}
+//	//else
+//	//	return E_FAIL;
+//	//
+//	//return E_FAIL;
+//}
+//
+//int GameObject::Load(const std::wstring& _strFileName)
+//{
+//	wstring filePath = GetContentPath() + GetResourceFolderPath(RESOURCE_TYPE::GAMEOBJECT) + _strFileName;
+//
+//	wchar_t szName[20] = {};
+//	_wsplitpath_s(filePath.c_str(), nullptr, 0, nullptr, 0, szName, 20, nullptr, 0);
+//
+//	SetName(szName);
+//
+//	FILE* pFile = nullptr; 
+//	_wfopen_s(&pFile, filePath.c_str(), L"rb"); 
+//
+//	if (nullptr == pFile) 
+//		return E_FAIL; 
+//
+//	//컴포넌트
+//	for (int i = 0; i < (UINT)COMPONENT_TYPE::END; i++)
+//	{
+//		bool isExist = false;
+//		fread(&isExist, sizeof(bool), 1, pFile);
+//		if(isExist) AddComponent(GetComponentByComponentType((COMPONENT_TYPE)i));
+//	}
+//
+//	//스크립트
+//	size_t size = 0;
+//	fread(&size, sizeof(size_t), 1, pFile);
+//	for (int i = 0; i < size; i++)
+//	{
+//		size_t len = 0;
+//		fread(&len, sizeof(size_t), 1, pFile);
+//		wstring name;
+//		name.resize(len);
+//		fread(name.data(), sizeof(wchar_t), len, pFile);
+//
+//		//Script* scrpt = ScriptManager::GetScript(name);
+//		//if (scrpt != nullptr)
+//		//	AddComponent(scrpt);
+//		//else
+//		//{
+//		//	MessageBoxW(nullptr, L"Script Not Exist", L"GameObject Load Error", MB_OK);
+//		//}
+//	}
+//
+//	return S_OK;
+//
+//	//std::wifstream fileStream(filePath);
+//	//bool component = true;
+//	//if (fileStream.is_open())
+//	//{
+//	//	std::wstring line;
+//	//
+//	//	while (true)
+//	//	{
+//	//		std::getline(fileStream, line);
+//	//
+//	//		if (line == L"END")
+//	//			break;
+//	//
+//	//		if (line == L"[COMPONENT]")
+//	//		{
+//	//			component = true;
+//	//		}
+//	//		else if (line == L"[SCRIPT]")
+//	//		{
+//	//			component = false;
+//	//		}
+//	//		else
+//	//		{
+//	//			//RenderComonent 또는 Animator 처럼 원래의 에셋들을 모두 가져오는게 좋은 경우가 있는데 이 경우는 스크립트로 커버하기
+//	//			if (component)
+//	//			{
+//	//				std::wstring comp = line.substr(0, 1);
+//	//				std::wstring active = line.substr(2, 1);
+//	//
+//	//				int iComp = atoi(std::string(comp.begin(), comp.end()).c_str());
+//	//				int iActive = atoi(std::string(active.begin(), active.end()).c_str());
+//	//
+//	//				if (1 == iActive)
+//	//				{
+//	//					AddComponent(GetComponentByComponentType((COMPONENT_TYPE)iComp));
+//	//				}
+//	//			}
+//	//			else
+//	//			{
+//	//				Script* scrpt = ScriptFactory::GetInst()->Find(line);
+//	//				if (scrpt != nullptr)
+//	//					AddComponent(scrpt);
+//	//				else
+//	//				{
+//	//					MessageBoxW(nullptr, L"Script Not Exist", L"GameObject Load Error", MB_OK);
+//	//				}
+//	//			}
+//	//
+//	//		}
+//	//	}
+//	//
+//	//	fileStream.close();
+//	//	return S_OK;
+//	//}
+//	//else
+//	//	return E_FAIL;
+//}

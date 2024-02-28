@@ -242,12 +242,10 @@ int ResourceManager::LoadResource(const std::wstring& _path)
 		r = Load<Anim>(_path, true);
 		if (nullptr == r) return E_FAIL; else return S_OK;
 	}
-	else if (L".gobj" == ext)
+	else if (L".pref" == ext)
 	{
-		std::wstring file(szName);
-		file += szExt;
-		m_ObjFile.push_back(file);
-		return S_OK;
+		r = Load<Prefab>(_path, true);
+		if (nullptr == r) return E_FAIL; else return S_OK;
 	}
 	else if (L".mtrl" == ext)
 	{
@@ -313,18 +311,8 @@ Texture* ResourceManager::CreateTexture(const std::wstring& _strKey, Microsoft::
 
 void ResourceManager::GetAssetName(RESOURCE_TYPE _type, std::vector<std::string>& _vecStr)
 {
-	if (_type == RESOURCE_TYPE::GAMEOBJECT)
+	for (const auto asset : m_Resources[(UINT)_type])
 	{
-		for (const std::wstring& file : m_ObjFile)
-		{
-			_vecStr.push_back(ToString(file));
-		}
-	}
-	else
-	{
-		for (const auto asset : m_Resources[(UINT)_type])
-		{
-			_vecStr.push_back(ToString(asset.first));
-		}
+		_vecStr.push_back(ToString(asset.first));
 	}
 }

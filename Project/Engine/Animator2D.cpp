@@ -125,3 +125,37 @@ void Animator2D::SetRepeat(bool _repeat)
 {
 	if (m_CurAnim) m_CurAnim->SetRepeat(_repeat);
 }
+
+void Animator2D::SaveToFile(FILE* _file)
+{
+	//anim 개수
+	size_t animCount = m_Anims.size();
+	fwrite(&animCount, sizeof(size_t), 1, _file);
+
+	map<wstring, Anim*>::iterator iter = m_Anims.begin();
+	for (; iter != m_Anims.end(); iter++)
+	{
+		SaveResourceRef(iter->second, _file);
+	}
+
+	//현재 애니메이션 이름 저장
+	SaveWString(m_CurAnim->GetResourceName(), _file);
+}
+
+void Animator2D::LoadFromFile(FILE* _file)
+{
+	//anim 개수
+	size_t animCount = 0;
+	fread(&animCount, sizeof(size_t), 1, _file);
+
+	for (size_t i = 0; i < animCount; i++)
+	{
+		Anim* anim = nullptr;
+		LoadResourceRef(anim, _file);
+	}
+
+	//현재 애니메이션 이름 저장
+	wstring curAnimName;
+	LoadWString(curAnimName, _file);
+	SetCurAnim(curAnimName);
+}

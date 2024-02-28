@@ -219,6 +219,7 @@ call EngineCopy.bat</Command>
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="Device.h" />
+    <ClInclude Include="Prefab.h" />
     <ClInclude Include="RenderComponent.h" />
     <ClInclude Include="RenderManager.h" />
     <ClInclude Include="Resource.h" />
@@ -266,6 +267,7 @@ call EngineCopy.bat</Command>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Device.cpp" />
+    <ClCompile Include="Prefab.cpp" />
     <ClCompile Include="RenderComponent.cpp" />
     <ClCompile Include="RenderManager.cpp" />
     <ClCompile Include="Resource.cpp" />

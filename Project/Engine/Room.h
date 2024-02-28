@@ -24,6 +24,7 @@ struct RoomInfo
     ROOM_TYPE       RoomType = ROOM_TYPE::Common;
     UINT            ChapterLevel = 0;
     bool            IsCompleted = false;
+    //prefab info
     std::wstring    TileObjectInfo[15][9] = {};
     LAYER_TYPE      TileLayerInfo[15][9] = {};
 };

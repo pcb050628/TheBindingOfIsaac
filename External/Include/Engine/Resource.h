@@ -11,11 +11,12 @@ enum class RESOURCE_TYPE
 	GRAPHICS_SHADER,
 	COMPUTE_SHADER,
 	MATERIAL,
+	PREFAB,
 	ROOM,
 	CHAPTER,
 	END,
-	GAMEOBJECT,
 };
+extern std::string RESOURCE_TYPE_STRING[(UINT)RESOURCE_TYPE::END];
 
 class Resource : 
 	public Entity

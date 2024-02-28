@@ -42,6 +42,10 @@ public:
     void AddRelativeScale(Vec3 _scale) { m_vRelativeScale += _scale; }
     void AddRelativeRotation(Vec3 _rotate) { m_vRelativeRot += _rotate; }
 
+
+    virtual void SaveToFile(FILE* _file) override;
+    virtual void LoadFromFile(FILE* _file) override;
+
     CLONE(Transform)
 public:
     Transform();

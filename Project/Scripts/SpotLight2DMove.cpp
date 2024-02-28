@@ -42,3 +42,11 @@ void SpotLight2DMove::Update()
 	GetTransform()->SetRelativeRotation(vRot);
 	GetTransform()->SetRelativePos(vPos);
 }
+
+void SpotLight2DMove::SaveToFile(FILE* _file)
+{
+}
+
+void SpotLight2DMove::LoadFromFile(FILE* _file)
+{
+}

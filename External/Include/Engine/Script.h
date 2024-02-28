@@ -22,6 +22,10 @@ public:
     virtual void LateUpdate() final {}
     virtual void Exit() {}
 
+    void BeginOverlap(Collider2D* _other) {}
+    void Overlap(Collider2D* _other) {}
+    void EndOverlap(Collider2D* _other) {}
+
     GET_OTHER_COMPONENT(Transform);
     GET_OTHER_COMPONENT(MeshRenderer);
     GET_OTHER_COMPONENT(Camera);
@@ -30,6 +34,9 @@ public:
     GET_OTHER_COMPONENT(Light2D);
 
     UINT GetScriptType() { return m_ScriptType; }
+
+    virtual void SaveToFile(FILE* _file) = 0;
+    virtual void LoadFromFile(FILE* _file) = 0;
 
     virtual Script* Clone() = 0;
 public:

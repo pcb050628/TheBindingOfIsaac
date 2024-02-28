@@ -16,6 +16,7 @@ void ChangeRoom(DIRECTION _dir);
 void Destroy(GameObject* _obj);
 std::wstring GetContentPath();
 std::wstring GetResourceFolderPath(RESOURCE_TYPE _type);
+std::wstring GetResourceExt(RESOURCE_TYPE _type);
 
 void DrawDebugRect(const Matrix& _WorldMat, Vec3 _Color, bool _bDepthTest, float _Duration = 0.f);
 void DrawDebugRect(Vec3 _vWorldPos, Vec3 _vWorldScale, Vec3 _vWorldRot, Vec3 _Color, bool _bDepthTest, float _Duration = 0.f);
@@ -122,3 +123,8 @@ void LoadResourceRef(T*& _resource, FILE* _file)
 					_resource = ResourceManager::GetInst()->Load<_type>(strKey);\
 				}\
 			}
+
+
+
+void SaveWString(const wstring& _str, FILE* _File);
+void LoadWString(wstring& _str, FILE* _FILE);
