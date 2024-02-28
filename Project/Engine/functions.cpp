@@ -87,11 +87,43 @@ std::wstring GetResourceFolderPath(RESOURCE_TYPE _type)
 	case RESOURCE_TYPE::GRAPHICS_SHADER:
 		out += L"01_Shader\\Graphics\\";
 		break;
-	case RESOURCE_TYPE::GAMEOBJECT:
-		out += L"05_GameObject\\";
+	case RESOURCE_TYPE::PREFAB:
+		out += L"05_Prefab\\";
 		break;
 	case RESOURCE_TYPE::ROOM:
 		out += L"06_Room\\";
+		break;
+		//case RESOURCE_TYPE::SOUND:
+		//	break;
+		//case RESOURCE_TYPE::COMPUTER_SHADER:
+		//	break;
+		//case RESOURCE_TYPE::CHAPTER:
+		//	break;
+	}
+
+	return out;
+}
+
+std::wstring GetResourceExt(RESOURCE_TYPE _type)
+{
+	std::wstring out = L".";
+
+	switch (_type)
+	{
+	case RESOURCE_TYPE::ANIM:
+		out += L"anim";
+		break;
+	case RESOURCE_TYPE::MATERIAL:
+		out += L"mtrl";
+		break;
+	case RESOURCE_TYPE::GRAPHICS_SHADER:
+		out += L"gs";
+		break;
+	case RESOURCE_TYPE::PREFAB:
+		out += L"pref";
+		break;
+	case RESOURCE_TYPE::ROOM:
+		out += L"room";
 		break;
 		//case RESOURCE_TYPE::SOUND:
 		//	break;
@@ -236,4 +268,20 @@ void Vec3::ToRadian()
 	x = x * (PI / 180);
 	y = y * (PI / 180);
 	z = z * (PI / 180);
+}
+
+void SaveWString(const wstring& _str, FILE* _File)
+{
+	size_t len = _str.length();
+	fwrite(&len, sizeof(size_t), 1, _File);
+	fwrite(_str.c_str(), sizeof(wchar_t), _str.length(), _File);
+}
+
+void LoadWString(wstring& _str, FILE* _FILE)
+{
+	size_t len = 0;
+	wchar_t szBuff[256] = {};
+	fread(&len, sizeof(size_t), 1, _FILE);
+	fread(szBuff, sizeof(wchar_t), len, _FILE);
+	_str = szBuff;
 }

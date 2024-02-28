@@ -24,3 +24,13 @@ void Light2D::LateUpdate()
 
 	RenderManager::GetInst()->RegisterLight2D(this);
 }
+
+void Light2D::SaveToFile(FILE* _file)
+{
+	fwrite(&m_Info, sizeof(tLightInfo), 1, _file);
+}
+
+void Light2D::LoadFromFile(FILE* _file)
+{
+	fread(&m_Info, sizeof(tLightInfo), 1, _file);
+}

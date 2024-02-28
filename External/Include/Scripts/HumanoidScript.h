@@ -21,6 +21,10 @@ public:
     DIRECTION GetHeadDir() { return HeadDir; }
     DIRECTION GetBodyDir() { return BodyDir; }
 
+    //수정 필요함
+    void SaveToFile(FILE* _file) override;
+    void LoadFromFile(FILE* _file) override;
+
     CLONE(HumanoidScript)
 public:
     HumanoidScript();

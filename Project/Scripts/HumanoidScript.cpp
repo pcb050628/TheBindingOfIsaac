@@ -1,6 +1,14 @@
 #include "pch.h"
 #include "HumanoidScript.h"
 
+void HumanoidScript::SaveToFile(FILE* _file)
+{
+}
+
+void HumanoidScript::LoadFromFile(FILE* _file)
+{
+}
+
 HumanoidScript::HumanoidScript() : Script(L"HumanoidScript", HUMANOIDSCRIPT)
 	, Head(nullptr)
 	, Body(nullptr)

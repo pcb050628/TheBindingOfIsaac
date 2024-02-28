@@ -43,3 +43,18 @@ Material* RenderComponent::GetDynamicMaterial()
 	m_CurMaterial = m_DynamicMaterial = m_SharedMaterial->Clone();
 	return m_DynamicMaterial;
 }
+
+void RenderComponent::SaveToFile(FILE* _file)
+{
+	SaveResourceRef(m_Mesh, _file);
+	SaveResourceRef(m_SharedMaterial, _file);
+}
+
+void RenderComponent::LoadFromFile(FILE* _file)
+{
+	LoadResourceRef(m_Mesh, _file);
+
+	Material* mtrl = nullptr;
+	LoadResourceRef(mtrl, _file);
+	SetMaterial(mtrl);
+}

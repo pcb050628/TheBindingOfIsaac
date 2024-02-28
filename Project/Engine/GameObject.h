@@ -8,13 +8,14 @@
 #define GET_COMPONENT(Type, TYPE) Type* Get##Type() { return (Type*)m_Components[(UINT)COMPONENT_TYPE::##TYPE]; }  
 
 class Script;
+class Collider2D;
 
 class GameObject :
     public Entity
 {
 private:
     Component*                      m_Components[(UINT)COMPONENT_TYPE::END];
-    std::map<std::wstring, Script*> m_Scripts;
+    std::vector<Script*>            m_Scripts;
     RenderComponent*                m_RenderComponent;
 
     std::vector<GameObject*>        m_ChildObjs;
@@ -31,9 +32,12 @@ public:
     virtual void Render();
     virtual void Exit();
 
+    void BeginOverlap(Collider2D* _other);
+    void Overlap(Collider2D* _other);
+    void EndOverlap(Collider2D* _other);
+
     void AddComponent(Component* _comp);
     void DeleteComponent(COMPONENT_TYPE _type);
-    void DeleteScript(const std::wstring& _name);
     
     Component* GetComponent(COMPONENT_TYPE _type)
     {
@@ -57,6 +61,8 @@ public:
         }
     }
 
+    const std::vector<Script*>& GetScript() { return m_Scripts; }
+
     RenderComponent* GetRenderCom() { return m_RenderComponent; }
 
     GameObject* GetParent() { return m_Parent; }
@@ -68,11 +74,6 @@ public:
 
     int GetLayerIdx() { return m_iLayerIdx; }
     int GetRoomNumber() { return m_RoomNumber; }
-
-    void GetScriptName(std::vector<std::string>& _out);
-
-    int Save();
-    int Load(const std::wstring& _strFileName);
 
     CLONE(GameObject)
 private:

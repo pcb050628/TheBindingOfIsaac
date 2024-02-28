@@ -173,10 +173,10 @@ void Room::Enter()
 				if (objName == L"")
 					continue;
 
-				gobj = new GameObject;
-				gobj->Load(objName);
-				gobj->GetTransform()->SetRelativePos(GetPosByTile(row, col));
-				AddGameObject(gobj, layer);
+				//gobj = new GameObject;
+				//gobj->Load(objName);
+				//gobj->GetTransform()->SetRelativePos(GetPosByTile(row, col));
+				//AddGameObject(gobj, layer);
 			}
 		}
 	}

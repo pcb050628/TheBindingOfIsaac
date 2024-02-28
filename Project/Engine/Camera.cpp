@@ -220,3 +220,25 @@ void Camera::SetCameraPriority(int _Priority)
 {
 	RenderManager::GetInst()->RegisterCamera(this, _Priority);
 }
+
+void Camera::SaveToFile(FILE* _file)
+{
+	fwrite(&m_ProjType, sizeof(PROJ_TYPE), 1, _file);
+	fwrite(&m_FOV, sizeof(float), 1, _file);
+	fwrite(&m_Width, sizeof(float), 1, _file);
+	fwrite(&m_Scale, sizeof(float), 1, _file);
+	fwrite(&m_AspectRatio, sizeof(float), 1, _file);
+	fwrite(&m_Far, sizeof(float), 1, _file);
+	fwrite(&m_LayerCheck, sizeof(UINT), 1, _file);
+}
+
+void Camera::LoadFromFile(FILE* _file)
+{
+	fread(&m_ProjType, sizeof(PROJ_TYPE), 1, _file);
+	fread(&m_FOV, sizeof(float), 1, _file);
+	fread(&m_Width, sizeof(float), 1, _file);
+	fread(&m_Scale, sizeof(float), 1, _file);
+	fread(&m_AspectRatio, sizeof(float), 1, _file);
+	fread(&m_Far, sizeof(float), 1, _file);
+	fread(&m_LayerCheck, sizeof(UINT), 1, _file);
+}

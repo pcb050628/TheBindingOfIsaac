@@ -13,9 +13,9 @@
 #include <Engine\global.h>
 
 #ifdef _DEBUG
-#pragma comment(lib, "Engine\\Engine_d.lib")
+#pragma comment(lib, "Engine\\02_Engine_d.lib")
 #else
-#pragma comment(lib, "Engine\\Engine.lib")
+#pragma comment(lib, "Engine\\02_Engine.lib")
 #endif
 
 

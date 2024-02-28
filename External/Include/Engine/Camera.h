@@ -71,6 +71,9 @@ public:
     // Camera Register
     void SetCameraPriority(int _Priority);
 
+    virtual void SaveToFile(FILE* _file) override;
+    virtual void LoadFromFile(FILE* _file) override;
+
     CLONE(Camera)
 public:
     Camera();

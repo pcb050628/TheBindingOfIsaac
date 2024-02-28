@@ -20,12 +20,14 @@ private:
 
     bool            m_bDebugDraw;
 
+    int             m_iCollisionCount;
+
 public:
     void LateUpdate() override;
     
-    void BeginOverlap(Collider2D* _other) {}
-    void Overlap(Collider2D* _other) {}
-    void EndOverlap(Collider2D* _other) {}
+    void BeginOverlap(Collider2D* _other);
+    void Overlap(Collider2D* _other);
+    void EndOverlap(Collider2D* _other);
 
 public:
     void SetOffsetPos(Vec2 _pos) { m_vOffsetPos = Vec3(_pos.x, _pos.y, 0.f); }
@@ -43,6 +45,9 @@ public:
     bool GetDebugDraw() { return m_bDebugDraw; }
 
     const Matrix& GetColliderWorldMat() { return m_matColWorld; }
+
+    virtual void SaveToFile(FILE* _file) override;
+    virtual void LoadFromFile(FILE* _file) override;
 
     CLONE(Collider2D)
 public:

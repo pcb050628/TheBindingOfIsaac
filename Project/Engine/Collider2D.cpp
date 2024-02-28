@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "Transform.h"
 
+
 Collider2D::Collider2D() : Component(COMPONENT_TYPE::COLLIDER2D)
 	, m_bAbsolute(false)
 	, m_Type(COLLIDER2D_TYPE::BOX)
@@ -42,4 +43,36 @@ void Collider2D::LateUpdate()
 	{
 		DrawDebugRect(m_matColWorld, Vec3(0, 1, 0), false);
 	}
+}
+
+
+void Collider2D::BeginOverlap(Collider2D* _other)
+{
+	m_iCollisionCount++;
+	GetOwner()->BeginOverlap(_other);
+}
+
+void Collider2D::Overlap(Collider2D* _other)
+{
+	GetOwner()->Overlap(_other);
+}
+
+void Collider2D::EndOverlap(Collider2D* _other)
+{
+	m_iCollisionCount--;
+	GetOwner()->EndOverlap(_other);
+}
+
+void Collider2D::SaveToFile(FILE* _file)
+{
+	fwrite(&m_vOffsetPos, sizeof(Vec3), 1, _file);
+	fwrite(&m_vOffsetScale, sizeof(Vec3), 1, _file);
+	fwrite(&m_bAbsolute, sizeof(bool), 1, _file);
+}
+
+void Collider2D::LoadFromFile(FILE* _file)
+{
+	fread(&m_vOffsetPos, sizeof(Vec3), 1, _file);
+	fread(&m_vOffsetScale, sizeof(Vec3), 1, _file);
+	fread(&m_bAbsolute, sizeof(bool), 1, _file);
 }

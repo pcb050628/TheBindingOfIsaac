@@ -13,11 +13,21 @@
 #include "imgui_impl_win32.h"
 #include "imgui_impl_dx11.h"
 
+#include "SaveLoadManager.h"
+
 #ifdef _DEBUG
-#pragma comment(lib, "Engine\\02_Engine_d")
+#pragma comment(lib, "Engine\\02_Engine_d.lib")
 #else
-#pragma comment(lib, "Engine\\02_Engine")
+#pragma comment(lib, "Engine\\02_Engine.lib")
 #endif
+
+#ifdef _DEBUG
+#pragma comment(lib, "Scripts\\Scripts_d.lib")
+#else
+#pragma comment(lib, "Scripts\\Scripts.lib")
+#endif
+
+#include <Engine\Prefab.h>
 
 #define MAX_LOADSTRING 100
 
@@ -59,7 +69,11 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_THEBINDINGOFISAACENGINE));
 
+    Prefab::m_SaveFunc = &SaveLoadManager::SaveGameObject;
+    Prefab::m_LoadFunc = &SaveLoadManager::LoadGameObject;
+
     Engine::GetInst()->Init(g_hWnd, RECT{ 0, 0, 1500, 900 });
+
     ImGuiManager::GetInst()->Init(g_hWnd, Device::GetInst()->GetDevice(), Device::GetInst()->GetContext());
 
     MSG msg;

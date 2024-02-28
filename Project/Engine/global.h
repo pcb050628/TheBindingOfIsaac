@@ -8,6 +8,7 @@
 #include <iostream>
 #include <fstream>
 #include <iomanip>
+#include <stdlib.h>
 
 #include "wrl.h"
 #include <d3d11.h>

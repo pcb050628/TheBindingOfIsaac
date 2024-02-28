@@ -71,6 +71,7 @@ void RoomEditorRenderGUI::RenderUpdate()
 		
 		m_bLeft = ImGui::InvisibleButton("##RoomEditorRenderGUIInvisibleButton", ImGui::GetWindowSize() + ImVec2(0, 20), ImGuiButtonFlags_MouseButtonLeft | ImGuiButtonFlags_MouseButtonRight);
 
+		//GameObject Instantiate
 		if (m_bLeft && m_Target->m_SelectObject != L"")
 		{
 			ImVec2 mouse_pos(io.MousePos.x, io.MousePos.y);
@@ -81,11 +82,11 @@ void RoomEditorRenderGUI::RenderUpdate()
 
 			Vec2 tile(row, col);
 
-			GameObject* gobj = new GameObject;
-			gobj->Load(m_Target->m_SelectObject);
-			m_Target->m_EditRoom->AddObjectByTile(gobj, m_Target->m_SelectLayer, tile, true);
-			m_Target->m_EditRoom->m_Info.TileObjectInfo[col][row] = m_Target->m_SelectObject;
-			m_Target->m_EditRoom->m_Info.TileLayerInfo[col][row] = m_Target->m_SelectLayer;
+			//GameObject* gobj = new GameObject;
+			//gobj->Load(m_Target->m_SelectObject);
+			//m_Target->m_EditRoom->AddObjectByTile(gobj, m_Target->m_SelectLayer, tile, true);
+			//m_Target->m_EditRoom->m_Info.TileObjectInfo[col][row] = m_Target->m_SelectObject;
+			//m_Target->m_EditRoom->m_Info.TileLayerInfo[col][row] = m_Target->m_SelectLayer;
 		}
 	}
 	else if (m_Target)

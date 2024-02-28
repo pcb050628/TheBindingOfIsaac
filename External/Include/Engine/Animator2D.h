@@ -33,6 +33,9 @@ public:
     void Pause(bool _reset);
     void SetRepeat(bool _repeat);
 
+    virtual void SaveToFile(FILE* _file) override;
+    virtual void LoadFromFile(FILE* _file) override;
+
     CLONE(Animator2D)
 public:
     //void CreateAnim(Texture* _atlas, );

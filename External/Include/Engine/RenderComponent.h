@@ -25,6 +25,9 @@ public:
     Material* GetMaterial() { return m_CurMaterial; }
     Material* GetDynamicMaterial();
 
+    virtual void SaveToFile(FILE* _file) override;
+    virtual void LoadFromFile(FILE* _file) override;
+
     virtual RenderComponent* Clone() = 0;
 public:
     RenderComponent(COMPONENT_TYPE _type);
