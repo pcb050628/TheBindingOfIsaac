@@ -4,5 +4,11 @@
 
 동시에 두곳을 렌더하는건 일단 하지 않기로 하고 editmode 일 경우에는 roomeditor에 렌더링을 하도록 변경
 
+현재 동시에 두곳이 렌더링되고 있음
+하지만 EditRoom 렌더 테스트를 아직 하지않음
+
+2.1- EditRoom 렌더 테스트
+2.2- 디버그로 빌드, 실행 시 Editor만 렌더하게 변경
+
 3- Inspector 에 Chapter, Room 정보 띄우기
 
